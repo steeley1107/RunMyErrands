@@ -1,0 +1,731 @@
+
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wptx1="http://www.garmin.com/xmlschemas/WaypointExtension/v1" xmlns:gpxtrx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:trp="http://www.garmin.com/xmlschemas/TripExtensions/v1" xmlns:adv="http://www.garmin.com/xmlschemas/AdventuresExtensions/v1" xmlns:prs="http://www.garmin.com/xmlschemas/PressureExtension/v1" xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="Adze - http://kobotsw.com/apps/adze" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <metadata>
+        <name>Untitled Document</name>
+        <link href="http://www.javawa.nl"></link>
+        <time>2014-11-25T23:44:30.475Z</time>
+    </metadata>
+    <wpt lon="-123.119550" lat="49.283420">
+        <ele>61.900000</ele>
+        <name>Track 001 000</name>
+        <sym>Flag, Blue</sym>
+        <speed>4.23</speed>
+    </wpt>
+    <wpt lon="-123.119795" lat="49.283578">
+        <ele>71.900000</ele>
+        <name>Track 001 001</name>
+        <sym>Flag, Blue</sym>
+        <speed>4.23</speed>
+    </wpt>
+    <wpt lon="-123.120040" lat="49.283736">
+        <ele>81.900000</ele>
+        <name>Track 001 002</name>
+        <sym>Flag, Blue</sym>
+        <speed>4.23</speed>
+    </wpt>
+    <wpt lon="-123.120285" lat="49.283894">
+        <ele>91.900000</ele>
+        <name>Track 001 003</name>
+        <sym>Flag, Blue</sym>
+        <speed>4.23</speed>
+    </wpt>
+    <wpt lon="-123.120530" lat="49.284052">
+        <ele>71.900000</ele>
+        <name>Track 001 004</name>
+        <sym>Flag, Blue</sym>
+        <speed>4.23</speed>
+    </wpt>
+    <wpt lon="-123.120775" lat="49.284211">
+        <ele>71.900000</ele>
+        <name>Track 001 005</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121020" lat="49.284369">
+        <ele>71.900000</ele>
+        <name>Track 001 006</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120936" lat="49.284528">
+        <ele>91.900000</ele>
+        <name>Track 001 007</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120693" lat="49.284687">
+        <ele>101.900000</ele>
+        <name>Track 001 008</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120450" lat="49.284846">
+        <ele>71.900000</ele>
+        <name>Track 001 009</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120207" lat="49.285006">
+        <name>Track 001 010</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119964" lat="49.285165">
+        <ele>71.900000</ele>
+        <name>Track 001 011</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119720" lat="49.285324">
+        <ele>71.900000</ele>
+        <name>Track 001 012</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119477" lat="49.285484">
+        <ele>71.900000</ele>
+        <name>Track 001 013</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119234" lat="49.285643">
+        <name>Track 001 014</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.118991" lat="49.285803">
+        <ele>61.900000</ele>
+        <name>Track 001 015</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.118748" lat="49.285962">
+        <ele>51.900000</ele>
+        <name>Track 001 016</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.118505" lat="49.286121">
+        <ele>41.900000</ele>
+        <name>Track 001 017</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.118262" lat="49.286281">
+        <ele>42.900000</ele>
+        <name>Track 001 018</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.118019" lat="49.286440">
+        <ele>43.900000</ele>
+        <name>Track 001 019</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.117776" lat="49.286600">
+        <ele>44.900000</ele>
+        <name>Track 001 020</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.117536" lat="49.286761">
+        <ele>41.900000</ele>
+        <name>Track 001 021</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.117296" lat="49.286923">
+        <ele>49.900000</ele>
+        <name>Track 001 022</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.117057" lat="49.287084">
+        <ele>51.900000</ele>
+        <name>Track 001 023</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.116817" lat="49.287246">
+        <ele>61.900000</ele>
+        <name>Track 001 024</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.116577" lat="49.287407">
+        <ele>71.900000</ele>
+        <name>Track 001 025</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.116337" lat="49.287569">
+        <ele>71.900000</ele>
+        <name>Track 001 026</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.116098" lat="49.287730">
+        <ele>71.900000</ele>
+        <name>Track 001 027</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.115858" lat="49.287892">
+        <ele>81.900000</ele>
+        <name>Track 001 028</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.115618" lat="49.288054">
+        <ele>81.900000</ele>
+        <name>Track 001 029</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.115388" lat="49.288210">
+        <name>Track 001 030</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.115161" lat="49.288357">
+        <ele>81.900000</ele>
+        <name>Track 001 031</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.114979" lat="49.288548">
+        <ele>71.900000</ele>
+        <name>Track 001 032</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.114785" lat="49.288733">
+        <ele>61.900000</ele>
+        <name>Track 001 033</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.114590" lat="49.288919">
+        <ele>51.900000</ele>
+        <name>Track 001 034</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.114396" lat="49.289105">
+        <ele>71.900000</ele>
+        <name>Track 001 035</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.114212" lat="49.289295">
+        <ele>71.900000</ele>
+        <name>Track 001 036</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.114223" lat="49.289450">
+        <ele>71.900000</ele>
+        <name>Track 001 037</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.114553" lat="49.289513">
+        <ele>71.900000</ele>
+        <name>Track 001 038</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.114882" lat="49.289581">
+        <ele>71.900000</ele>
+        <name>Track 001 039</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.115202" lat="49.289663">
+        <ele>71.900000</ele>
+        <name>Track 001 040</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.115523" lat="49.289746">
+        <ele>71.900000</ele>
+        <name>Track 001 041</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.115844" lat="49.289828">
+        <ele>81.900000</ele>
+        <name>Track 001 042</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.116165" lat="49.289910">
+        <ele>91.900000</ele>
+        <name>Track 001 043</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.116478" lat="49.290004">
+        <ele>111.900000</ele>
+        <name>Track 001 044</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.116783" lat="49.290108">
+        <ele>121.900000</ele>
+        <name>Track 001 045</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.117077" lat="49.290225">
+        <name>Track 001 046</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.117368" lat="49.290345">
+        <ele>131.900000</ele>
+        <name>Track 001 047</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.117658" lat="49.290435">
+        <ele>121.900000</ele>
+        <name>Track 001 048</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.117879" lat="49.290263">
+        <ele>111.900000</ele>
+        <name>Track 001 049</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.118143" lat="49.290119">
+        <name>Track 001 050</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.118428" lat="49.289994">
+        <name>Track 001 051</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.118732" lat="49.289890">
+        <name>Track 001 052</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119068" lat="49.289856">
+        <name>Track 001 053</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119412" lat="49.289873">
+        <name>Track 001 054</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119750" lat="49.289913">
+        <name>Track 001 055</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120084" lat="49.289967">
+        <name>Track 001 056</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120407" lat="49.290045">
+        <name>Track 001 057</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120725" lat="49.290132">
+        <name>Track 001 058</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121032" lat="49.290234">
+        <name>Track 001 059</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121331" lat="49.290345">
+        <name>Track 001 060</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121615" lat="49.290473">
+        <name>Track 001 061</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121896" lat="49.290602">
+        <name>Track 001 062</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.122172" lat="49.290737">
+        <name>Track 001 063</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.122434" lat="49.290883">
+        <name>Track 001 064</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.122685" lat="49.291037">
+        <name>Track 001 065</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.122933" lat="49.291193">
+        <name>Track 001 066</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.123223" lat="49.291304">
+        <name>Track 001 067</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.123515" lat="49.291214">
+        <name>Track 001 068</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.123757" lat="49.291054">
+        <name>Track 001 069</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.123995" lat="49.290892">
+        <name>Track 001 070</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.124257" lat="49.290746">
+        <name>Track 001 071</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.124537" lat="49.290618">
+        <name>Track 001 072</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.124854" lat="49.290530">
+        <name>Track 001 073</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125191" lat="49.290487">
+        <name>Track 001 074</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125535" lat="49.290480">
+        <name>Track 001 075</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125878" lat="49.290497">
+        <name>Track 001 076</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125975" lat="49.290513">
+        <name>Track 001 077</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126063" lat="49.290363">
+        <name>Track 001 078</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126334" lat="49.290266">
+        <name>Track 001 079</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126581" lat="49.290109">
+        <name>Track 001 080</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126828" lat="49.289952">
+        <name>Track 001 081</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127075" lat="49.289796">
+        <name>Track 001 082</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127322" lat="49.289639">
+        <name>Track 001 083</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127565" lat="49.289480">
+        <name>Track 001 084</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127791" lat="49.289308">
+        <name>Track 001 085</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128016" lat="49.289166">
+        <name>Track 001 086</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128227" lat="49.289017">
+        <name>Track 001 087</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128009" lat="49.288899">
+        <name>Track 001 088</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127769" lat="49.288723">
+        <name>Track 001 089</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127486" lat="49.288563">
+        <name>Track 001 090</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127135" lat="49.288332">
+        <name>Track 001 091</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126827" lat="49.288146">
+        <name>Track 001 092</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126647" lat="49.288015">
+        <name>Track 001 093</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126447" lat="49.287870">
+        <name>Track 001 094</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126267" lat="49.287739">
+        <name>Track 001 095</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126045" lat="49.287635">
+        <name>Track 001 096</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125788" lat="49.287463">
+        <name>Track 001 097</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125519" lat="49.287291">
+        <name>Track 001 098</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125334" lat="49.287091">
+        <name>Track 001 099</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125579" lat="49.286933">
+        <name>Track 001 100</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125825" lat="49.286774">
+        <name>Track 001 101</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126068" lat="49.286615">
+        <name>Track 001 102</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126309" lat="49.286455">
+        <name>Track 001 103</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126551" lat="49.286295">
+        <name>Track 001 104</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126793" lat="49.286134">
+        <name>Track 001 105</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127032" lat="49.285973">
+        <name>Track 001 106</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127264" lat="49.285806">
+        <name>Track 001 107</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127496" lat="49.285640">
+        <name>Track 001 108</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127749" lat="49.285487">
+        <name>Track 001 109</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128001" lat="49.285334">
+        <name>Track 001 110</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128245" lat="49.285175">
+        <name>Track 001 111</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128488" lat="49.285016">
+        <name>Track 001 112</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128731" lat="49.284856">
+        <name>Track 001 113</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128973" lat="49.284696">
+        <name>Track 001 114</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.129215" lat="49.284536">
+        <name>Track 001 115</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.129455" lat="49.284375">
+        <name>Track 001 116</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.129696" lat="49.284214">
+        <name>Track 001 117</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.129936" lat="49.284053">
+        <name>Track 001 118</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.130176" lat="49.283891">
+        <name>Track 001 119</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.130417" lat="49.283730">
+        <name>Track 001 120</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.130657" lat="49.283569">
+        <name>Track 001 121</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.130544" lat="49.283389">
+        <name>Track 001 122</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.130355" lat="49.283206">
+        <name>Track 001 123</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.130108" lat="49.283049">
+        <name>Track 001 124</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.129862" lat="49.282892">
+        <name>Track 001 125</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.129621" lat="49.282731">
+        <name>Track 001 126</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.129380" lat="49.282570">
+        <name>Track 001 127</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.129063" lat="49.282510">
+        <name>Track 001 128</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128719" lat="49.282505">
+        <name>Track 001 129</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128374" lat="49.282500">
+        <name>Track 001 130</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.128030" lat="49.282500">
+        <name>Track 001 131</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127780" lat="49.282351">
+        <name>Track 001 132</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127535" lat="49.282192">
+        <name>Track 001 133</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127291" lat="49.282034">
+        <name>Track 001 134</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.127046" lat="49.281875">
+        <name>Track 001 135</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126802" lat="49.281717">
+        <name>Track 001 136</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126557" lat="49.281558">
+        <name>Track 001 137</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126313" lat="49.281399">
+        <name>Track 001 138</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.126069" lat="49.281241">
+        <name>Track 001 139</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125824" lat="49.281083">
+        <name>Track 001 140</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125579" lat="49.280924">
+        <name>Track 001 141</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125334" lat="49.280766">
+        <name>Track 001 142</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.125090" lat="49.280608">
+        <name>Track 001 143</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.124847" lat="49.280572">
+        <name>Track 001 144</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.124605" lat="49.280732">
+        <name>Track 001 145</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.124364" lat="49.280892">
+        <name>Track 001 146</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.124122" lat="49.281053">
+        <name>Track 001 147</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.123880" lat="49.281213">
+        <name>Track 001 148</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.123639" lat="49.281373">
+        <name>Track 001 149</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.123397" lat="49.281534">
+        <name>Track 001 150</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.123156" lat="49.281694">
+        <name>Track 001 151</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.122914" lat="49.281854">
+        <name>Track 001 152</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.122672" lat="49.282015">
+        <name>Track 001 153</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.122431" lat="49.282175">
+        <name>Track 001 154</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.122189" lat="49.282335">
+        <name>Track 001 155</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121947" lat="49.282496">
+        <name>Track 001 156</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121741" lat="49.282629">
+        <name>Track 001 157</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121598" lat="49.282772">
+        <name>Track 001 158</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121359" lat="49.282933">
+        <name>Track 001 159</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.121116" lat="49.283093">
+        <name>Track 001 160</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120873" lat="49.283252">
+        <name>Track 001 161</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120631" lat="49.283412">
+        <name>Track 001 162</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120388" lat="49.283572">
+        <name>Track 001 163</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.120147" lat="49.283732">
+        <name>Track 001 164</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119905" lat="49.283647">
+        <name>Track 001 165</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119660" lat="49.283490">
+        <name>Track 001 166</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lon="-123.119498" lat="49.283413">
+        <name>Track 001 167</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+</gpx>

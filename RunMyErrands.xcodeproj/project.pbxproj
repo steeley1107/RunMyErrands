@@ -1,0 +1,866 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2AC4C1E9615497F582A7E517 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98ED86A0F03E7320C46D3917 /* libPods.a */; };
+		520B47211C0E7DB7006F1FDA /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47201C0E7DB7006F1FDA /* FBSDKCoreKit.framework */; };
+		520B47231C0E7DBF006F1FDA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47221C0E7DBF006F1FDA /* FBSDKLoginKit.framework */; };
+		520B47251C0E7E26006F1FDA /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47241C0E7E26006F1FDA /* ParseFacebookUtilsV4.framework */; };
+		520B47281C0E7FF3006F1FDA /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47261C0E7FF3006F1FDA /* Bolts.framework */; };
+		520B47291C0E7FF3006F1FDA /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47271C0E7FF3006F1FDA /* Parse.framework */; };
+		520B472B1C0E8026006F1FDA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B472A1C0E8026006F1FDA /* AudioToolbox.framework */; };
+		520B472D1C0E802D006F1FDA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B472C1C0E802D006F1FDA /* CFNetwork.framework */; };
+		520B472F1C0E803D006F1FDA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B472E1C0E803D006F1FDA /* CoreGraphics.framework */; };
+		520B47311C0E8054006F1FDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47301C0E8054006F1FDA /* QuartzCore.framework */; };
+		520B47331C0E805C006F1FDA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47321C0E805C006F1FDA /* Security.framework */; };
+		520B47351C0E8067006F1FDA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47341C0E8067006F1FDA /* StoreKit.framework */; };
+		520B47371C0E8074006F1FDA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47361C0E8074006F1FDA /* SystemConfiguration.framework */; };
+		520B47391C0E8082006F1FDA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B47381C0E8082006F1FDA /* libz.tbd */; };
+		520B473B1C0E808A006F1FDA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B473A1C0E808A006F1FDA /* libsqlite3.tbd */; };
+		520B473D1C0F7562006F1FDA /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520B473C1C0F7562006F1FDA /* SignupViewController.swift */; };
+		520B473F1C0FCE51006F1FDA /* CreateNewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520B473E1C0FCE51006F1FDA /* CreateNewGroupViewController.swift */; };
+		520B47411C0FEA81006F1FDA /* JoinGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520B47401C0FEA81006F1FDA /* JoinGroupViewController.swift */; };
+		523E40FF1BF843A900AFBEB7 /* ErrandListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E40FE1BF843A900AFBEB7 /* ErrandListViewController.m */; };
+		523E41021BF843D300AFBEB7 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E41011BF843D300AFBEB7 /* DetailViewController.m */; };
+		5257FBBF1BF809CE005CC88D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5257FBBE1BF809CE005CC88D /* main.m */; };
+		5257FBC21BF809CE005CC88D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5257FBC11BF809CE005CC88D /* AppDelegate.m */; };
+		5257FBC81BF809CE005CC88D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5257FBC61BF809CE005CC88D /* Main.storyboard */; };
+		5257FBCD1BF809CE005CC88D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5257FBCC1BF809CE005CC88D /* Assets.xcassets */; };
+		5257FBD01BF809CE005CC88D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5257FBCE1BF809CE005CC88D /* LaunchScreen.storyboard */; };
+		5257FBDB1BF809CE005CC88D /* RunMyErrandsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5257FBDA1BF809CE005CC88D /* RunMyErrandsTests.m */; };
+		5257FBE61BF809CE005CC88D /* RunMyErrandsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5257FBE51BF809CE005CC88D /* RunMyErrandsUITests.m */; };
+		5270A7E91C14072700F8A814 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5270A7E81C14072700F8A814 /* Social.framework */; };
+		5270A7EB1C14074D00F8A814 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5270A7EA1C14074D00F8A814 /* Accounts.framework */; };
+		5270A7ED1C14092000F8A814 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5270A7EC1C14092000F8A814 /* Twitter.framework */; };
+		529890491BFBD97C00B82D76 /* GeoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 529890441BFBD97C00B82D76 /* GeoManager.m */; };
+		5298904B1BFBD97C00B82D76 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 529890481BFBD97C00B82D76 /* Task.m */; };
+		5298904D1BFBDBDE00B82D76 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5298904C1BFBDBDE00B82D76 /* CoreLocation.framework */; };
+		5298904F1BFBDBE500B82D76 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5298904E1BFBDBE500B82D76 /* MapKit.framework */; };
+		52AA1A091BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AA1A081BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift */; };
+		52ABCF1A1C0CE6E400110C8A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52ABCF191C0CE6E400110C8A /* Login.storyboard */; };
+		52ABCF1D1C0CF39800110C8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ABCF1C1C0CF39800110C8A /* LoginViewController.swift */; };
+		52CA6F0F1BFF963A003E3437 /* TeamListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CA6F0E1BFF963A003E3437 /* TeamListTableViewController.m */; };
+		52CE28701C125F6100046BF2 /* ErrandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CE286F1C125F6100046BF2 /* ErrandManager.swift */; };
+		52D6CD6E1BF96CE600CBBBAD /* AddNewTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D6CD6D1BF96CE600CBBBAD /* AddNewTaskViewController.m */; };
+		DA0D86021C15605600402054 /* Callout_rounded_rectangle_center.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0D86011C15605600402054 /* Callout_rounded_rectangle_center.png */; };
+		DA34E8461C15035A006C7B05 /* ErrandsManagerMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E8451C15035A006C7B05 /* ErrandsManagerMapViewController.swift */; };
+		DA34E8481C15037D006C7B05 /* DirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E8471C15037D006C7B05 /* DirectionManager.swift */; };
+		DA34E84A1C15048D006C7B05 /* CustomInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA34E8491C15048D006C7B05 /* CustomInfoWindow.xib */; };
+		DA34E84C1C1504CC006C7B05 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E84B1C1504CC006C7B05 /* CustomInfoWindow.swift */; };
+		DA34E84E1C150581006C7B05 /* ErrandsManagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E84D1C150581006C7B05 /* ErrandsManagerTableViewCell.swift */; };
+		DA34E8501C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E84F1C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift */; };
+		DA34E8521C153763006C7B05 /* AddTaskOnMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E8511C153763006C7B05 /* AddTaskOnMapViewController.swift */; };
+		DA8B6FF31BFEAEF600834D78 /* briefcase.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FEF1BFEAEF600834D78 /* briefcase.png */; };
+		DA8B6FF41BFEAEF600834D78 /* cart.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FF01BFEAEF600834D78 /* cart.png */; };
+		DA8B6FF51BFEAEF600834D78 /* die.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FF11BFEAEF600834D78 /* die.png */; };
+		DA8B6FF61BFEAEF600834D78 /* running-128.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FF21BFEAEF600834D78 /* running-128.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5257FBD71BF809CE005CC88D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5257FBB21BF809CD005CC88D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5257FBB91BF809CE005CC88D;
+			remoteInfo = RunMyErrands;
+		};
+		5257FBE21BF809CE005CC88D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5257FBB21BF809CD005CC88D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5257FBB91BF809CE005CC88D;
+			remoteInfo = RunMyErrands;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		370358A6CB9E12705AE1B3CD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		48F94D27776E71DB6E115CCB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		504342781871F1A0EFAE0716 /* libPods-RunMyErrands.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RunMyErrands.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		520B47201C0E7DB7006F1FDA /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		520B47221C0E7DBF006F1FDA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		520B47241C0E7E26006F1FDA /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		520B47261C0E7FF3006F1FDA /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		520B47271C0E7FF3006F1FDA /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		520B472A1C0E8026006F1FDA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		520B472C1C0E802D006F1FDA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		520B472E1C0E803D006F1FDA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		520B47301C0E8054006F1FDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		520B47321C0E805C006F1FDA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		520B47341C0E8067006F1FDA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		520B47361C0E8074006F1FDA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		520B47381C0E8082006F1FDA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		520B473A1C0E808A006F1FDA /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		520B473C1C0F7562006F1FDA /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		520B473E1C0FCE51006F1FDA /* CreateNewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewGroupViewController.swift; sourceTree = "<group>"; };
+		520B47401C0FEA81006F1FDA /* JoinGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinGroupViewController.swift; sourceTree = "<group>"; };
+		523E40FD1BF843A900AFBEB7 /* ErrandListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrandListViewController.h; sourceTree = "<group>"; };
+		523E40FE1BF843A900AFBEB7 /* ErrandListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrandListViewController.m; sourceTree = "<group>"; };
+		523E41001BF843D300AFBEB7 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		523E41011BF843D300AFBEB7 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		5257FBBA1BF809CE005CC88D /* RunMyErrands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunMyErrands.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5257FBBE1BF809CE005CC88D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5257FBC01BF809CE005CC88D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5257FBC11BF809CE005CC88D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5257FBC71BF809CE005CC88D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5257FBCC1BF809CE005CC88D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5257FBCF1BF809CE005CC88D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5257FBD11BF809CE005CC88D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5257FBD61BF809CE005CC88D /* RunMyErrandsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunMyErrandsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5257FBDA1BF809CE005CC88D /* RunMyErrandsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RunMyErrandsTests.m; sourceTree = "<group>"; };
+		5257FBDC1BF809CE005CC88D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5257FBE11BF809CE005CC88D /* RunMyErrandsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunMyErrandsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5257FBE51BF809CE005CC88D /* RunMyErrandsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RunMyErrandsUITests.m; sourceTree = "<group>"; };
+		5257FBE71BF809CE005CC88D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5270A7E81C14072700F8A814 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		5270A7EA1C14074D00F8A814 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		5270A7EC1C14092000F8A814 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		529890431BFBD97C00B82D76 /* GeoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoManager.h; sourceTree = "<group>"; };
+		529890441BFBD97C00B82D76 /* GeoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoManager.m; sourceTree = "<group>"; };
+		529890471BFBD97C00B82D76 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		529890481BFBD97C00B82D76 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		5298904C1BFBDBDE00B82D76 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5298904E1BFBDBE500B82D76 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		52AA1A081BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsListTableViewCell.swift; sourceTree = "<group>"; };
+		52ABCF191C0CE6E400110C8A /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		52ABCF1C1C0CF39800110C8A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		52CA6F0D1BFF963A003E3437 /* TeamListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamListTableViewController.h; sourceTree = "<group>"; };
+		52CA6F0E1BFF963A003E3437 /* TeamListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamListTableViewController.m; sourceTree = "<group>"; };
+		52CE286F1C125F6100046BF2 /* ErrandManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandManager.swift; sourceTree = "<group>"; };
+		52D6CD6C1BF96CE600CBBBAD /* AddNewTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewTaskViewController.h; sourceTree = "<group>"; };
+		52D6CD6D1BF96CE600CBBBAD /* AddNewTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewTaskViewController.m; sourceTree = "<group>"; };
+		98ED86A0F03E7320C46D3917 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA0D86011C15605600402054 /* Callout_rounded_rectangle_center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Callout_rounded_rectangle_center.png; sourceTree = "<group>"; };
+		DA216A361BFD7FD200797C24 /* RunMyErrands-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RunMyErrands-Bridging-Header.h"; sourceTree = "<group>"; };
+		DA34E8401C14FC93006C7B05 /* API_key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API_key.h; sourceTree = "<group>"; };
+		DA34E8451C15035A006C7B05 /* ErrandsManagerMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsManagerMapViewController.swift; sourceTree = "<group>"; };
+		DA34E8471C15037D006C7B05 /* DirectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionManager.swift; sourceTree = "<group>"; };
+		DA34E8491C15048D006C7B05 /* CustomInfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInfoWindow.xib; sourceTree = "<group>"; };
+		DA34E84B1C1504CC006C7B05 /* CustomInfoWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
+		DA34E84D1C150581006C7B05 /* ErrandsManagerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsManagerTableViewCell.swift; sourceTree = "<group>"; };
+		DA34E84F1C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsMapOverviewViewController.swift; sourceTree = "<group>"; };
+		DA34E8511C153763006C7B05 /* AddTaskOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskOnMapViewController.swift; sourceTree = "<group>"; };
+		DA8B6FEF1BFEAEF600834D78 /* briefcase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = briefcase.png; sourceTree = "<group>"; };
+		DA8B6FF01BFEAEF600834D78 /* cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart.png; sourceTree = "<group>"; };
+		DA8B6FF11BFEAEF600834D78 /* die.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = die.png; sourceTree = "<group>"; };
+		DA8B6FF21BFEAEF600834D78 /* running-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "running-128.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5257FBB71BF809CE005CC88D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5270A7ED1C14092000F8A814 /* Twitter.framework in Frameworks */,
+				5270A7EB1C14074D00F8A814 /* Accounts.framework in Frameworks */,
+				5270A7E91C14072700F8A814 /* Social.framework in Frameworks */,
+				520B473B1C0E808A006F1FDA /* libsqlite3.tbd in Frameworks */,
+				520B47391C0E8082006F1FDA /* libz.tbd in Frameworks */,
+				520B47371C0E8074006F1FDA /* SystemConfiguration.framework in Frameworks */,
+				520B47351C0E8067006F1FDA /* StoreKit.framework in Frameworks */,
+				520B47331C0E805C006F1FDA /* Security.framework in Frameworks */,
+				520B47311C0E8054006F1FDA /* QuartzCore.framework in Frameworks */,
+				520B472F1C0E803D006F1FDA /* CoreGraphics.framework in Frameworks */,
+				520B472D1C0E802D006F1FDA /* CFNetwork.framework in Frameworks */,
+				520B472B1C0E8026006F1FDA /* AudioToolbox.framework in Frameworks */,
+				5298904F1BFBDBE500B82D76 /* MapKit.framework in Frameworks */,
+				520B47211C0E7DB7006F1FDA /* FBSDKCoreKit.framework in Frameworks */,
+				520B47251C0E7E26006F1FDA /* ParseFacebookUtilsV4.framework in Frameworks */,
+				520B47231C0E7DBF006F1FDA /* FBSDKLoginKit.framework in Frameworks */,
+				5298904D1BFBDBDE00B82D76 /* CoreLocation.framework in Frameworks */,
+				520B47291C0E7FF3006F1FDA /* Parse.framework in Frameworks */,
+				520B47281C0E7FF3006F1FDA /* Bolts.framework in Frameworks */,
+				2AC4C1E9615497F582A7E517 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5257FBD31BF809CE005CC88D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5257FBDE1BF809CE005CC88D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5257FBB11BF809CD005CC88D = {
+			isa = PBXGroup;
+			children = (
+				5257FBBC1BF809CE005CC88D /* RunMyErrands */,
+				5257FBD91BF809CE005CC88D /* RunMyErrandsTests */,
+				5257FBE41BF809CE005CC88D /* RunMyErrandsUITests */,
+				5257FBBB1BF809CE005CC88D /* Products */,
+				D671CC1A1730522650B8A93F /* Frameworks */,
+				70FB2850ABE1E8224CF69491 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		5257FBBB1BF809CE005CC88D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5257FBBA1BF809CE005CC88D /* RunMyErrands.app */,
+				5257FBD61BF809CE005CC88D /* RunMyErrandsTests.xctest */,
+				5257FBE11BF809CE005CC88D /* RunMyErrandsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5257FBBC1BF809CE005CC88D /* RunMyErrands */ = {
+			isa = PBXGroup;
+			children = (
+				5257FBC01BF809CE005CC88D /* AppDelegate.h */,
+				5257FBC11BF809CE005CC88D /* AppDelegate.m */,
+				5257FBC61BF809CE005CC88D /* Main.storyboard */,
+				52ABCF191C0CE6E400110C8A /* Login.storyboard */,
+				DA34E8441C15026C006C7B05 /* TableViewCells */,
+				DA34E8431C15024E006C7B05 /* Models */,
+				52ABCF1B1C0CF36F00110C8A /* LoginFiles */,
+				DA34E8411C1501EF006C7B05 /* GeoMapping */,
+				DA34E8421C1501FC006C7B05 /* ViewControllers */,
+				5257FBCC1BF809CE005CC88D /* Assets.xcassets */,
+				5257FBCE1BF809CE005CC88D /* LaunchScreen.storyboard */,
+				5257FBD11BF809CE005CC88D /* Info.plist */,
+				5257FBBD1BF809CE005CC88D /* Supporting Files */,
+				DA34E8401C14FC93006C7B05 /* API_key.h */,
+				DA216A361BFD7FD200797C24 /* RunMyErrands-Bridging-Header.h */,
+			);
+			path = RunMyErrands;
+			sourceTree = "<group>";
+		};
+		5257FBBD1BF809CE005CC88D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA8B6FF71BFEAF0000834D78 /* Images */,
+				5257FBBE1BF809CE005CC88D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5257FBD91BF809CE005CC88D /* RunMyErrandsTests */ = {
+			isa = PBXGroup;
+			children = (
+				5257FBDA1BF809CE005CC88D /* RunMyErrandsTests.m */,
+				5257FBDC1BF809CE005CC88D /* Info.plist */,
+			);
+			path = RunMyErrandsTests;
+			sourceTree = "<group>";
+		};
+		5257FBE41BF809CE005CC88D /* RunMyErrandsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5257FBE51BF809CE005CC88D /* RunMyErrandsUITests.m */,
+				5257FBE71BF809CE005CC88D /* Info.plist */,
+			);
+			path = RunMyErrandsUITests;
+			sourceTree = "<group>";
+		};
+		52ABCF1B1C0CF36F00110C8A /* LoginFiles */ = {
+			isa = PBXGroup;
+			children = (
+				52ABCF1C1C0CF39800110C8A /* LoginViewController.swift */,
+				520B473C1C0F7562006F1FDA /* SignupViewController.swift */,
+			);
+			name = LoginFiles;
+			sourceTree = "<group>";
+		};
+		70FB2850ABE1E8224CF69491 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				370358A6CB9E12705AE1B3CD /* Pods.debug.xcconfig */,
+				48F94D27776E71DB6E115CCB /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D671CC1A1730522650B8A93F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5270A7EC1C14092000F8A814 /* Twitter.framework */,
+				5270A7EA1C14074D00F8A814 /* Accounts.framework */,
+				5270A7E81C14072700F8A814 /* Social.framework */,
+				520B473A1C0E808A006F1FDA /* libsqlite3.tbd */,
+				520B47381C0E8082006F1FDA /* libz.tbd */,
+				520B47361C0E8074006F1FDA /* SystemConfiguration.framework */,
+				520B47341C0E8067006F1FDA /* StoreKit.framework */,
+				520B47321C0E805C006F1FDA /* Security.framework */,
+				520B47301C0E8054006F1FDA /* QuartzCore.framework */,
+				520B472E1C0E803D006F1FDA /* CoreGraphics.framework */,
+				520B472C1C0E802D006F1FDA /* CFNetwork.framework */,
+				520B472A1C0E8026006F1FDA /* AudioToolbox.framework */,
+				520B47261C0E7FF3006F1FDA /* Bolts.framework */,
+				520B47271C0E7FF3006F1FDA /* Parse.framework */,
+				520B47241C0E7E26006F1FDA /* ParseFacebookUtilsV4.framework */,
+				520B47221C0E7DBF006F1FDA /* FBSDKLoginKit.framework */,
+				520B47201C0E7DB7006F1FDA /* FBSDKCoreKit.framework */,
+				5298904E1BFBDBE500B82D76 /* MapKit.framework */,
+				5298904C1BFBDBDE00B82D76 /* CoreLocation.framework */,
+				504342781871F1A0EFAE0716 /* libPods-RunMyErrands.a */,
+				98ED86A0F03E7320C46D3917 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DA34E8411C1501EF006C7B05 /* GeoMapping */ = {
+			isa = PBXGroup;
+			children = (
+				DA34E8491C15048D006C7B05 /* CustomInfoWindow.xib */,
+				DA34E84B1C1504CC006C7B05 /* CustomInfoWindow.swift */,
+				DA34E8471C15037D006C7B05 /* DirectionManager.swift */,
+				529890431BFBD97C00B82D76 /* GeoManager.h */,
+				529890441BFBD97C00B82D76 /* GeoManager.m */,
+			);
+			name = GeoMapping;
+			sourceTree = "<group>";
+		};
+		DA34E8421C1501FC006C7B05 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DA34E8451C15035A006C7B05 /* ErrandsManagerMapViewController.swift */,
+				DA34E84F1C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift */,
+				DA34E8511C153763006C7B05 /* AddTaskOnMapViewController.swift */,
+				520B473E1C0FCE51006F1FDA /* CreateNewGroupViewController.swift */,
+				520B47401C0FEA81006F1FDA /* JoinGroupViewController.swift */,
+				523E40FD1BF843A900AFBEB7 /* ErrandListViewController.h */,
+				523E40FE1BF843A900AFBEB7 /* ErrandListViewController.m */,
+				523E41001BF843D300AFBEB7 /* DetailViewController.h */,
+				523E41011BF843D300AFBEB7 /* DetailViewController.m */,
+				52D6CD6C1BF96CE600CBBBAD /* AddNewTaskViewController.h */,
+				52D6CD6D1BF96CE600CBBBAD /* AddNewTaskViewController.m */,
+				52CA6F0D1BFF963A003E3437 /* TeamListTableViewController.h */,
+				52CA6F0E1BFF963A003E3437 /* TeamListTableViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DA34E8431C15024E006C7B05 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				52CE286F1C125F6100046BF2 /* ErrandManager.swift */,
+				529890471BFBD97C00B82D76 /* Task.h */,
+				529890481BFBD97C00B82D76 /* Task.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		DA34E8441C15026C006C7B05 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				52AA1A081BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift */,
+				DA34E84D1C150581006C7B05 /* ErrandsManagerTableViewCell.swift */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		DA8B6FF71BFEAF0000834D78 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DA8B6FEF1BFEAEF600834D78 /* briefcase.png */,
+				DA0D86011C15605600402054 /* Callout_rounded_rectangle_center.png */,
+				DA8B6FF21BFEAEF600834D78 /* running-128.png */,
+				DA8B6FF01BFEAEF600834D78 /* cart.png */,
+				DA8B6FF11BFEAEF600834D78 /* die.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5257FBB91BF809CE005CC88D /* RunMyErrands */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5257FBEA1BF809CE005CC88D /* Build configuration list for PBXNativeTarget "RunMyErrands" */;
+			buildPhases = (
+				D95D213C2308D44FDCC8573F /* Check Pods Manifest.lock */,
+				5257FBB61BF809CE005CC88D /* Sources */,
+				5257FBB71BF809CE005CC88D /* Frameworks */,
+				5257FBB81BF809CE005CC88D /* Resources */,
+				ABCA538DB7FDD6F33807E232 /* Embed Pods Frameworks */,
+				7532F5BC6E824ECC5667C01B /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RunMyErrands;
+			productName = RunMyErrands;
+			productReference = 5257FBBA1BF809CE005CC88D /* RunMyErrands.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5257FBD51BF809CE005CC88D /* RunMyErrandsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5257FBED1BF809CE005CC88D /* Build configuration list for PBXNativeTarget "RunMyErrandsTests" */;
+			buildPhases = (
+				5257FBD21BF809CE005CC88D /* Sources */,
+				5257FBD31BF809CE005CC88D /* Frameworks */,
+				5257FBD41BF809CE005CC88D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5257FBD81BF809CE005CC88D /* PBXTargetDependency */,
+			);
+			name = RunMyErrandsTests;
+			productName = RunMyErrandsTests;
+			productReference = 5257FBD61BF809CE005CC88D /* RunMyErrandsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5257FBE01BF809CE005CC88D /* RunMyErrandsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5257FBF01BF809CE005CC88D /* Build configuration list for PBXNativeTarget "RunMyErrandsUITests" */;
+			buildPhases = (
+				5257FBDD1BF809CE005CC88D /* Sources */,
+				5257FBDE1BF809CE005CC88D /* Frameworks */,
+				5257FBDF1BF809CE005CC88D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5257FBE31BF809CE005CC88D /* PBXTargetDependency */,
+			);
+			name = RunMyErrandsUITests;
+			productName = RunMyErrandsUITests;
+			productReference = 5257FBE11BF809CE005CC88D /* RunMyErrandsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5257FBB21BF809CD005CC88D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Jeff Mew";
+				TargetAttributes = {
+					5257FBB91BF809CE005CC88D = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					5257FBD51BF809CE005CC88D = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 5257FBB91BF809CE005CC88D;
+					};
+					5257FBE01BF809CE005CC88D = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 5257FBB91BF809CE005CC88D;
+					};
+				};
+			};
+			buildConfigurationList = 5257FBB51BF809CD005CC88D /* Build configuration list for PBXProject "RunMyErrands" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5257FBB11BF809CD005CC88D;
+			productRefGroup = 5257FBBB1BF809CE005CC88D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5257FBB91BF809CE005CC88D /* RunMyErrands */,
+				5257FBD51BF809CE005CC88D /* RunMyErrandsTests */,
+				5257FBE01BF809CE005CC88D /* RunMyErrandsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5257FBB81BF809CE005CC88D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA8B6FF51BFEAEF600834D78 /* die.png in Resources */,
+				DA8B6FF31BFEAEF600834D78 /* briefcase.png in Resources */,
+				52ABCF1A1C0CE6E400110C8A /* Login.storyboard in Resources */,
+				DA8B6FF61BFEAEF600834D78 /* running-128.png in Resources */,
+				DA8B6FF41BFEAEF600834D78 /* cart.png in Resources */,
+				DA0D86021C15605600402054 /* Callout_rounded_rectangle_center.png in Resources */,
+				5257FBD01BF809CE005CC88D /* LaunchScreen.storyboard in Resources */,
+				5257FBCD1BF809CE005CC88D /* Assets.xcassets in Resources */,
+				5257FBC81BF809CE005CC88D /* Main.storyboard in Resources */,
+				DA34E84A1C15048D006C7B05 /* CustomInfoWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5257FBD41BF809CE005CC88D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5257FBDF1BF809CE005CC88D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7532F5BC6E824ECC5667C01B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ABCA538DB7FDD6F33807E232 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D95D213C2308D44FDCC8573F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5257FBB61BF809CE005CC88D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				520B473F1C0FCE51006F1FDA /* CreateNewGroupViewController.swift in Sources */,
+				523E41021BF843D300AFBEB7 /* DetailViewController.m in Sources */,
+				52CE28701C125F6100046BF2 /* ErrandManager.swift in Sources */,
+				DA34E84C1C1504CC006C7B05 /* CustomInfoWindow.swift in Sources */,
+				52D6CD6E1BF96CE600CBBBAD /* AddNewTaskViewController.m in Sources */,
+				DA34E8481C15037D006C7B05 /* DirectionManager.swift in Sources */,
+				520B47411C0FEA81006F1FDA /* JoinGroupViewController.swift in Sources */,
+				DA34E8521C153763006C7B05 /* AddTaskOnMapViewController.swift in Sources */,
+				5257FBC21BF809CE005CC88D /* AppDelegate.m in Sources */,
+				DA34E8461C15035A006C7B05 /* ErrandsManagerMapViewController.swift in Sources */,
+				DA34E8501C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift in Sources */,
+				529890491BFBD97C00B82D76 /* GeoManager.m in Sources */,
+				52AA1A091BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift in Sources */,
+				5298904B1BFBD97C00B82D76 /* Task.m in Sources */,
+				520B473D1C0F7562006F1FDA /* SignupViewController.swift in Sources */,
+				523E40FF1BF843A900AFBEB7 /* ErrandListViewController.m in Sources */,
+				5257FBBF1BF809CE005CC88D /* main.m in Sources */,
+				52CA6F0F1BFF963A003E3437 /* TeamListTableViewController.m in Sources */,
+				52ABCF1D1C0CF39800110C8A /* LoginViewController.swift in Sources */,
+				DA34E84E1C150581006C7B05 /* ErrandsManagerTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5257FBD21BF809CE005CC88D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5257FBDB1BF809CE005CC88D /* RunMyErrandsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5257FBDD1BF809CE005CC88D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5257FBE61BF809CE005CC88D /* RunMyErrandsUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5257FBD81BF809CE005CC88D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5257FBB91BF809CE005CC88D /* RunMyErrands */;
+			targetProxy = 5257FBD71BF809CE005CC88D /* PBXContainerItemProxy */;
+		};
+		5257FBE31BF809CE005CC88D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5257FBB91BF809CE005CC88D /* RunMyErrands */;
+			targetProxy = 5257FBE21BF809CE005CC88D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5257FBC61BF809CE005CC88D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5257FBC71BF809CE005CC88D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5257FBCE1BF809CE005CC88D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5257FBCF1BF809CE005CC88D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5257FBE81BF809CE005CC88D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5257FBE91BF809CE005CC88D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5257FBEB1BF809CE005CC88D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 370358A6CB9E12705AE1B3CD /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = RunMyErrands/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5257FBEC1BF809CE005CC88D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48F94D27776E71DB6E115CCB /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = RunMyErrands/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5257FBEE1BF809CE005CC88D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				INFOPLIST_FILE = RunMyErrandsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrandsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RunMyErrands.app/RunMyErrands";
+			};
+			name = Debug;
+		};
+		5257FBEF1BF809CE005CC88D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				INFOPLIST_FILE = RunMyErrandsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrandsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RunMyErrands.app/RunMyErrands";
+			};
+			name = Release;
+		};
+		5257FBF11BF809CE005CC88D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				INFOPLIST_FILE = RunMyErrandsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrandsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RunMyErrands;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		5257FBF21BF809CE005CC88D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				INFOPLIST_FILE = RunMyErrandsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrandsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RunMyErrands;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5257FBB51BF809CD005CC88D /* Build configuration list for PBXProject "RunMyErrands" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5257FBE81BF809CE005CC88D /* Debug */,
+				5257FBE91BF809CE005CC88D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5257FBEA1BF809CE005CC88D /* Build configuration list for PBXNativeTarget "RunMyErrands" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5257FBEB1BF809CE005CC88D /* Debug */,
+				5257FBEC1BF809CE005CC88D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5257FBED1BF809CE005CC88D /* Build configuration list for PBXNativeTarget "RunMyErrandsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5257FBEE1BF809CE005CC88D /* Debug */,
+				5257FBEF1BF809CE005CC88D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5257FBF01BF809CE005CC88D /* Build configuration list for PBXNativeTarget "RunMyErrandsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5257FBF11BF809CE005CC88D /* Debug */,
+				5257FBF21BF809CE005CC88D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5257FBB21BF809CD005CC88D /* Project object */;
+}
