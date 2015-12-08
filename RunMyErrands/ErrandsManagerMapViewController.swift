@@ -21,7 +21,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     
     //Mark: Properties
-    @IBOutlet weak var mapContainerView: UIView!
+    //@IBOutlet weak var mapContainerView: UIView!
     @IBOutlet var mapView: GMSMapView!
     
     @IBOutlet weak var directionsLabel: UILabel!
@@ -57,13 +57,6 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.layoutIfNeeded()
-        let mapFrame = CGRect(origin: CGPointZero, size: CGSize(width:self.view.frame.width , height: self.mapContainerView.frame.height))
-        let camera = GMSCameraPosition.cameraWithLatitude(0.0, longitude: 0.0, zoom: 14.0)
-        self.mapView = GMSMapView.mapWithFrame(mapFrame, camera: camera)
-        
-        self.mapContainerView.addSubview(self.mapView)
         
         self.errandsManager = ErrandManager()
         
