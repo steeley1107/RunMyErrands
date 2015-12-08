@@ -35,60 +35,65 @@ class DirectionManager: NSObject {
     
     //Request Directions from Google.
     
-    func requestDirections(origin: CLLocationCoordinate2D!, taskWaypoints: Array<Task>!, travelMode: TravelModes!, completionHandler: (sucess: Bool) ->()) {
+    func requestDirections(origin: CLLocationCoordinate2D!, destination: CLLocationCoordinate2D!, taskWaypoints: Array<GMSMarker>!, travelMode: TravelModes!, completionHandler: (sucess: Bool) ->()) {
         
         if let originLocation = origin {
             let originString = "\(originLocation.latitude),\(originLocation.longitude)"
             
-            var directionsURLString = baseURLDirections + "origin=" + originString + "&destination=" + originString
-            
-            if let routeWaypoints = taskWaypoints {
-                directionsURLString += "&waypoints=optimize:true"
+            if let destinationLocation = destination {
+                let destinationString = "\(destinationLocation.latitude),\(destinationLocation.longitude)"
                 
-                for waypoint in routeWaypoints {
-                    
-                    let waypointString = "\(waypoint.lattitude),\(waypoint.longitude)"
-                    
-                    directionsURLString += "|" + waypointString
-                }
-            }
-            
-            if let travel = travelMode {
-                var travelModeString = ""
                 
-                switch travel.rawValue {
-                case TravelModes.walking.rawValue:
-                    travelModeString = "walking"
+                var directionsURLString = baseURLDirections + "origin=" + originString + "&destination=" + destinationString
+                
+                if let routeWaypoints = taskWaypoints {
+                    directionsURLString += "&waypoints=optimize:true"
                     
-                case TravelModes.bicycling.rawValue:
-                    travelModeString = "bicycling"
-                    
-                default:
-                    travelModeString = "driving"
+                    for waypoint in routeWaypoints {
+                        
+                        let waypointString = "\(waypoint.position.latitude),\(waypoint.position.longitude)"
+                        
+                        directionsURLString += "|" + waypointString
+                    }
                 }
                 
-                directionsURLString += "&mode=" + travelModeString
-            }
-            
-            directionsURLString = directionsURLString.stringByAddingPercentEncodingWithAllowedCharacters( NSCharacterSet.URLQueryAllowedCharacterSet())!
-            
-            let directionsURL = NSURL(string: directionsURLString)
-            
-            let task = NSURLSession.sharedSession().dataTaskWithURL(directionsURL!) { (data, response, error) -> Void in
-                if(error != nil) {
-                    print(error)
+                if let travel = travelMode {
+                    var travelModeString = ""
+                    
+                    switch travel.rawValue {
+                    case TravelModes.walking.rawValue:
+                        travelModeString = "walking"
+                        
+                    case TravelModes.bicycling.rawValue:
+                        travelModeString = "bicycling"
+                        
+                    default:
+                        travelModeString = "driving"
+                    }
+                    
+                    directionsURLString += "&mode=" + travelModeString
                 }
                 
-                let dictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as? [String : AnyObject]
+                directionsURLString = directionsURLString.stringByAddingPercentEncodingWithAllowedCharacters( NSCharacterSet.URLQueryAllowedCharacterSet())!
                 
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    print("dict \(dictionary)")
-                    self.processDirections(dictionary!)
-                    self.calculateTotalDistanceAndDuration(dictionary!)
-                    completionHandler(sucess: true)
-                })
+                let directionsURL = NSURL(string: directionsURLString)
+                
+                let task = NSURLSession.sharedSession().dataTaskWithURL(directionsURL!) { (data, response, error) -> Void in
+                    if(error != nil) {
+                        print(error)
+                    }
+                    
+                    let dictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as? [String : AnyObject]
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        print("dict \(dictionary)")
+                        self.processDirections(dictionary!)
+                        self.calculateTotalDistanceAndDuration(dictionary!)
+                        completionHandler(sucess: true)
+                    })
+                }
+                task.resume()
             }
-            task.resume()
         }
     }
     
@@ -138,24 +143,75 @@ class DirectionManager: NSObject {
         let travelMins = totalTravelDurationInSeconds / 60
         let travelHours = travelMins / 60
         let remainingTravelMins = travelMins % 60
-        let remainingTravelSecs = totalTravelDurationInSeconds % 60
         
-        totalTravelDuration = "Travel Duration: \(travelHours) h, \(remainingTravelMins) mins, \(remainingTravelSecs) secs"
+        totalTravelDuration = "Travel Duration: \(travelHours) hours, \(remainingTravelMins) mins"
         
         let errandsMins = totalErrandsInSeconds / 60
         let errandsHours = errandsMins / 60
         let remainingErrandsMins = errandsMins % 60
-        let remainingErrandsSecs = totalErrandsInSeconds % 60
         
-        totalErrandDuration = "Errands Duration: \(errandsHours) h, \(remainingErrandsMins) mins, \(remainingErrandsSecs) secs"
+        totalErrandDuration = "Errands Duration: \(errandsHours) hours, \(remainingErrandsMins) mins"
         
-        let hours = travelHours + errandsHours
-        let mins =  remainingTravelMins + remainingErrandsMins
-        let secs = remainingTravelSecs + remainingErrandsSecs
+        let totalMins = travelMins + errandsMins
+        let hours = totalMins / 60
+        let mins =  totalMins % 60
         
-        totalDuration = "Approx. Total Duration: \(hours) h, \(mins) mins, \(secs) secs"
-        
+        totalDuration = "Approx. Total Duration: \(hours) hours, \(mins) mins"
     }
+    
+    
+    //zoom the map to the limits of the tasks
+    func zoomMapLimits(markerArray: [GMSMarker]) -> GMSCoordinateBounds {
+        
+        var minLat = 0.0
+        var minLong = 0.0
+        var maxLat = 0.0
+        var maxLong = 0.0
+        
+        var northEast = CLLocationCoordinate2DMake(maxLat, maxLong)
+        var southWest = CLLocationCoordinate2DMake(minLat, minLong)
+        
+        minLat = markerArray[0].position.latitude
+        maxLat = markerArray[0].position.latitude
+        
+        minLong = markerArray[0].position.longitude
+        maxLong = markerArray[0].position.longitude
+        
+        
+        for marker in markerArray {
+            
+            if marker.position.latitude < minLat {
+                minLat = marker.position.latitude
+            }
+            
+            if marker.position.latitude > maxLat {
+                maxLat = marker.position.latitude
+            }
+            
+            if marker.position.longitude < minLong {
+                minLong = marker.position.longitude
+            }
+            
+            if marker.position.longitude > maxLong {
+                maxLong = marker.position.longitude
+            }
+            
+            northEast = CLLocationCoordinate2DMake(maxLat, maxLong)
+            southWest = CLLocationCoordinate2DMake(minLat, minLong)
+            
+        }
+        
+        let bounds = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
+        
+        return bounds
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
 }

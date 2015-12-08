@@ -248,12 +248,6 @@
         <!--Pick a Location-->
         <scene sceneID="Azb-PP-5Vg">
             <objects>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="ZgO-Uk-UnF">
-                    <connections>
-                        <action selector="dropPinGesture:" destination="JJb-YA-mfc" id="wBM-Eg-hMG"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wqY-04-POT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="JJb-YA-mfc" customClass="AddTaskOnMapViewController" customModule="RunMyErrands" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tMj-AY-vfW"/>
@@ -283,6 +277,12 @@
                         <outlet property="mapView" destination="jy1-8o-VVH" id="0J0-UW-HSv"/>
                     </connections>
                 </viewController>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="ZgO-Uk-UnF">
+                    <connections>
+                        <action selector="dropPinGesture:" destination="JJb-YA-mfc" id="wBM-Eg-hMG"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wqY-04-POT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2538" y="-258"/>
         </scene>
@@ -1078,7 +1078,7 @@
                                     <outlet property="delegate" destination="zb2-gY-qQB" id="dj1-T3-eVQ"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1WU-JV-ijO" customClass="GMSMapView">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1WU-JV-ijO">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="422"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7m-3G-tyu">
@@ -1115,7 +1115,7 @@
                     <connections>
                         <outlet property="directionsLabel" destination="b7m-3G-tyu" id="E1J-nC-zrE"/>
                         <outlet property="errandsTableView" destination="d8N-F0-BXI" id="viB-Ic-Lpa"/>
-                        <outlet property="mapView" destination="1WU-JV-ijO" id="oY1-pY-nAl"/>
+                        <outlet property="mapContainerView" destination="1WU-JV-ijO" id="mma-Jj-WjM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHh-b5-05w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1149,6 +1149,6 @@
         <image name="users" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ond-hl-eUr"/>
+        <segue reference="2IR-W8-EJg"/>
     </inferredMetricsTieBreakers>
 </document>
