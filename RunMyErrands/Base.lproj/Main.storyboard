@@ -1063,6 +1063,7 @@
                         <outlet property="directionsLabel" destination="b7m-3G-tyu" id="E1J-nC-zrE"/>
                         <outlet property="errandsTableView" destination="d8N-F0-BXI" id="viB-Ic-Lpa"/>
                         <outlet property="mapView" destination="1WU-JV-ijO" id="oY1-pY-nAl"/>
+                        <segue destination="2iD-bb-EcH" kind="show" identifier="showDetailFromEMan" id="taR-UF-3jZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHh-b5-05w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1271,6 +1272,6 @@
         <image name="users" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZHF-4v-WAZ"/>
+        <segue reference="taR-UF-3jZ"/>
     </inferredMetricsTieBreakers>
 </document>
