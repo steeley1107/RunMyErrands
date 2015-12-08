@@ -14,7 +14,6 @@
 @interface TeamListTableViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic) NSArray *groups; //list of Groups
 @property (nonatomic) NSMutableDictionary *groupMembers;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -35,7 +34,6 @@
     NSLog(@"User: %@", user.username);
     self.usernameLabel.text = [user[@"name"] capitalizedString];
     self.userDetailLabel.text = [NSString stringWithFormat:@"Total Number of Errands Completed: %i", [user[@"totalErrandsCompleted"] intValue]];
-    
     
     PFFile *image = user[@"profile_Picture"];
     
@@ -146,6 +144,10 @@
     }
     
     return cell;
+}
+
+- (IBAction)changeProfilePicture:(UITapGestureRecognizer *)sender {
+    NSLog(@"asdfelijliase");
 }
 
 /*

@@ -686,11 +686,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfx-Ow-iZg">
                                 <rect key="frame" x="0.0" y="64" width="600" height="176"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ma6-xG-h57">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ma6-xG-h57">
                                         <rect key="frame" x="20" y="44" width="88" height="88"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ma6-xG-h57" secondAttribute="height" multiplier="1:1" id="wau-Ls-eW0"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="0m1-S5-ENl" appends="YES" id="rXz-4D-bP7"/>
+                                        </connections>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fht-Wf-IVD">
                                         <rect key="frame" x="176" y="57" width="442" height="62"/>
@@ -829,6 +833,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rc7-3O-aXe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="0m1-S5-ENl">
+                    <connections>
+                        <action selector="changeProfilePicture:" destination="cpI-cL-buf" id="OFo-SI-9eg"/>
+                        <outlet property="delegate" destination="cpI-cL-buf" id="lBO-mV-nEv"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1099" y="1202"/>
         </scene>
