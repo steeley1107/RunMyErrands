@@ -272,8 +272,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     func populateTaskArray() {
         
-        errandsManager.fetchDataNew { (sucess) -> () in
-            if sucess {
+        errandsManager.fetchData { (success) -> () in
+            if success {
                 
                 self.taskArray.removeAll()
                 

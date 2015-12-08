@@ -24,6 +24,7 @@
 @property (nonatomic) NSArray *taskArray;
 @property (nonatomic) GeoManager *locationManager;
 @property (nonatomic) ErrandManager *errandManager;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitySpinner;
 @end
 
 
@@ -33,16 +34,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableview.tableFooterView = [[UIView alloc] init];
+    [self.activitySpinner setHidesWhenStopped:YES];
     
     self.locationManager = [GeoManager sharedManager];
     [self.locationManager startLocationManager];
 
     self.errandManager = [ErrandManager new];
-    //[self.errandManager fetchData:self.tableview];
-    [self.errandManager fetchDataNew:^(BOOL sucess) {
-        if (sucess) {
+    [self.activitySpinner startAnimating];
+    [self.errandManager fetchData:^(BOOL success) {
+        if (success) {
             [self.tableview reloadData];
+            [self updatePushChannels];
         }
+        
+        [self.activitySpinner stopAnimating];
     }];
     
 }
@@ -50,9 +55,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [self setGreeting];
-    //[self.errandManager fetchData:self.tableview];
-    [self.errandManager fetchDataNew:^(BOOL sucess) {
-        if (sucess) {
+
+    [self.errandManager fetchData:^(BOOL success) {
+        if (success) {
             [self.tableview reloadData];
         }
     }];
@@ -67,6 +72,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) updatePushChannels {
+    //    self.errandManager.fetch
+}
+
 -(void) setGreeting {
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
@@ -77,12 +86,13 @@
     }
 }
 
-- (IBAction)logout:(UIButton *)sender {
+- (IBAction)logout:(UIBarButtonItem *)sender {
     [PFUser logOut];
     [[FBSDKLoginManager new] logOut];
-    
+
     [self.navigationController.navigationController popToRootViewControllerAnimated:YES];
 }
+
 
 -(NSString*) randHello {
     int rand = arc4random() % 5;

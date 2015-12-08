@@ -39,6 +39,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if (PFUser.currentUser() != nil) {
+            self.performSegueWithIdentifier("showErrandList", sender: nil)
+        }        
     }
     
     override func viewWillAppear(animated: Bool) {

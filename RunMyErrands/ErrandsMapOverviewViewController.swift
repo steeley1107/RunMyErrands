@@ -55,8 +55,8 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     func addMarkersToMap() {
         
-        errandsManager.fetchDataNew { (sucess) -> () in
-            if sucess {
+        errandsManager.fetchData { (success) -> () in
+            if success {
                 
                 let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
                 
@@ -106,8 +106,8 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     func populateTaskArray() {
         
-        errandsManager.fetchDataNew { (sucess) -> () in
-            if sucess {
+        errandsManager.fetchData { (success) -> () in
+            if success {
                 
                 let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
                 

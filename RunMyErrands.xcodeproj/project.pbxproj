@@ -37,6 +37,7 @@
 		5270A7E91C14072700F8A814 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5270A7E81C14072700F8A814 /* Social.framework */; };
 		5270A7EB1C14074D00F8A814 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5270A7EA1C14074D00F8A814 /* Accounts.framework */; };
 		5270A7ED1C14092000F8A814 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5270A7EC1C14092000F8A814 /* Twitter.framework */; };
+		528EC12C1C16535C00CCF376 /* GroupListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528EC12B1C16535C00CCF376 /* GroupListTableViewCell.swift */; };
 		529890491BFBD97C00B82D76 /* GeoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 529890441BFBD97C00B82D76 /* GeoManager.m */; };
 		5298904B1BFBD97C00B82D76 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 529890481BFBD97C00B82D76 /* Task.m */; };
 		5298904D1BFBDBDE00B82D76 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5298904C1BFBDBDE00B82D76 /* CoreLocation.framework */; };
@@ -120,6 +121,7 @@
 		5270A7E81C14072700F8A814 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		5270A7EA1C14074D00F8A814 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		5270A7EC1C14092000F8A814 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		528EC12B1C16535C00CCF376 /* GroupListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListTableViewCell.swift; sourceTree = "<group>"; };
 		529890431BFBD97C00B82D76 /* GeoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoManager.h; sourceTree = "<group>"; };
 		529890441BFBD97C00B82D76 /* GeoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoManager.m; sourceTree = "<group>"; };
 		529890471BFBD97C00B82D76 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 			children = (
 				52AA1A081BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift */,
 				DA34E84D1C150581006C7B05 /* ErrandsManagerTableViewCell.swift */,
+				528EC12B1C16535C00CCF376 /* GroupListTableViewCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -446,6 +449,12 @@
 				TargetAttributes = {
 					5257FBB91BF809CE005CC88D = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = H9VG62MSLG;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					5257FBD51BF809CE005CC88D = {
 						CreatedOnToolsVersion = 7.1;
@@ -576,6 +585,7 @@
 				DA34E8461C15035A006C7B05 /* ErrandsManagerMapViewController.swift in Sources */,
 				DA34E8501C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift in Sources */,
 				529890491BFBD97C00B82D76 /* GeoManager.m in Sources */,
+				528EC12C1C16535C00CCF376 /* GroupListTableViewCell.swift in Sources */,
 				52AA1A091BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift in Sources */,
 				5298904B1BFBD97C00B82D76 /* Task.m in Sources */,
 				520B473D1C0F7562006F1FDA /* SignupViewController.swift in Sources */,
@@ -731,7 +741,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jeffrey Mew (764SYX93PK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -741,6 +751,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "84093f94-cd65-421e-a142-df6a43a9f205";
 				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -754,7 +765,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jeffrey Mew (764SYX93PK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -764,6 +775,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "84093f94-cd65-421e-a142-df6a43a9f205";
 				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

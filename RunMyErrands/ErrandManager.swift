@@ -23,34 +23,7 @@ import Parse
         user = PFUser.currentUser()
         objectIDtoNameDictionary = NSMutableDictionary()
     }
-    
-    func fetchData(tableView: UITableView) {
-        let relation = self.user.relationForKey("memberOfTheseGroups")
-        
-        relation.query().orderByAscending("name").findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error: NSError?) -> Void in
-            
-            if let objects = objects {
-                
-                for group in objects {
-                    print(group["name"])
-                    
-                    //self.groupNameToObjectIDDictionary.setValue(group.objectId, forKey: group["name"] as! String)
-                    //self.groupNames.insert(group["name"] as! String, atIndex: self.groupNames.endIndex)
-                    self.objectIDtoNameDictionary.setValue(group["name"] as! String, forKey: group.objectId!)
-                    
-                    let errandsForGroupRelation = group.relationForKey("errands")
-                    errandsForGroupRelation.query().findObjectsInBackgroundWithBlock({ (errands:[PFObject]?, error:NSError?) -> Void in
-                        let errandsArray = errands as! [Task]
-                        
-                        self.errandsDictionary.setValue(errandsArray, forKey: group.objectId!)
-                        tableView.reloadData()
-                    })
-                }
-                
-            }
-        }
-    }
-    
+
     func fetchNumberOfGroups() -> Int {
         return self.errandsDictionary.allKeys.count
     }
@@ -94,7 +67,7 @@ import Parse
     }
     
     
-    func fetchDataNew(completionHandler: (sucess: Bool) ->() ) {
+    func fetchData(completionHandler: (success: Bool) ->() ) {
         let relation = self.user.relationForKey("memberOfTheseGroups")
         
         relation.query().orderByAscending("name").findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error: NSError?) -> Void in
@@ -113,13 +86,13 @@ import Parse
                         let errandsArray = errands as! [Task]
                         
                         self.errandsDictionary.setValue(errandsArray, forKey: group.objectId!)
-                        completionHandler(sucess: true)
+                        completionHandler(success: true)
                     })
                 }
                 
             } else {
                 
-                completionHandler(sucess: true)
+                completionHandler(success: true)
             }
         }
     }

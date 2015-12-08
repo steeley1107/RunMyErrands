@@ -43,6 +43,9 @@
     //allow persmission for local notifications
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    
     
     //Use 'Login-signup' storyboard
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
@@ -106,15 +109,10 @@
     [alert addAction:cancel];
     
     [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
-    
-    
-    
-    //    UINavigationController *navVC = (UINavigationController*) self.window.rootViewController;
-    
-    //    [navVC.topViewController presentViewController:alert animated:YES completion:nil];
-    
-    //[navVC.topViewController presentViewController:alert animated:YES completion:nil];
-    //    [navVC pushViewController:alert animated:YES];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
 }
 
 @end
