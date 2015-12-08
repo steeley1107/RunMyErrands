@@ -21,7 +21,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     
     //Mark: Properties
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var mapContainerView: UIView!
+    @IBOutlet var mapView: GMSMapView!
     
     @IBOutlet weak var directionsLabel: UILabel!
     
@@ -57,7 +58,12 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapView.frame = mapView.bounds
+        self.view.layoutIfNeeded()
+        let mapFrame = CGRect(origin: CGPointZero, size: CGSize(width:self.view.frame.width , height: self.mapContainerView.frame.height))
+        let camera = GMSCameraPosition.cameraWithLatitude(0.0, longitude: 0.0, zoom: 14.0)
+        self.mapView = GMSMapView.mapWithFrame(mapFrame, camera: camera)
+        
+        self.mapContainerView.addSubview(self.mapView)
         
         self.errandsManager = ErrandManager()
         
@@ -80,24 +86,16 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     }
     
     
-//    override func viewWillAppear(animated: Bool) {
-//        addMarkersToMap()
-//    }
-    
-    
-    
     //Update map with users current location;
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
             mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
             mapView.settings.myLocationButton = true
-            //mapView.animateToViewingAngle(45)
+            mapView.animateToViewingAngle(45)
             origin = myLocation.coordinate
             didFindMyLocation = true
-            //createRoute()
             self.populateTaskArray()
-            
         }
     }
     
@@ -105,35 +103,43 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     func configureMapAndMarkersForRoute() {
         //self.mapView.camera = GMSCameraPosition.cameraWithTarget(self.directionTask.originCoordinate, zoom: 14.0)
         
-        originMarker = GMSMarker(position: self.directionTask.originCoordinate)
+        originMarker = GMSMarker(position: self.origin)
         originMarker.map = self.mapView
         originMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
         originMarker.title = self.directionTask.originAddress
         originMarker.snippet = "Location"
         
         if taskArray.count > 0 {
+            
+            markerArray.removeAll()
             for task in taskArray {
-                
                 let marker = task.makeMarker()
                 marker.userData = task
-                marker.map = mapView
-                marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
                 markerArray += [marker]
             }
         }
+        createRoute()
     }
     
     
     func createRoute() {
         
-        self.directionTask.requestDirections(origin, taskWaypoints: taskArray, travelMode: self.travelMode, completionHandler: { (success) -> Void in
+        let destination = origin
+        
+        self.directionTask.requestDirections(origin, destination: destination, taskWaypoints: markerArray, travelMode: self.travelMode, completionHandler: { (success) -> Void in
             if success {
-                self.configureMapAndMarkersForRoute()
                 self.drawRoute()
                 self.displayRouteInfo()
-                
+                //self.orderedMarkerArray.removeAll()
                 self.orderedMarkerArray = self.reorderWaypoints()
                 self.errandsTableView.reloadData()
+                self.zoomMap()
+                
+                for marker in self.orderedMarkerArray {
+                    marker.map = self.mapView
+                    marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+                }
+                
             }
         })
     }
@@ -141,7 +147,6 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     func drawRoute() {
         let route = directionTask.overviewPolyline["points"] as! String
-        
         let path: GMSPath = GMSPath(fromEncodedPath: route)
         routePolyline = GMSPolyline(path: path)
         routePolyline.strokeWidth = 5.0
@@ -185,34 +190,29 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
             marker.icon = GMSMarker.markerImageWithColor(UIColor.cyanColor())
             
         }
-        
-        //mapView.animateWithCameraUpdate(GMSCameraUpdate.setTarget(marker.position))
-        
-        
-        // camera = GMSCameraPosition.cameraWithTarget(marker.position, zoom: 14.0)
-        //mapView.camera = GMSCameraPosition.cameraWithLatitude(marker.position.latitude - 1.11, longitude: marker.position.longitude - 1.1, zoom: 14.0)
-        
-        
         return infoWindow
     }
     
     
-    
-    
+    func zoomMap() {
+        
+        let bounds =  self.directionTask.zoomMapLimits(markerArray)
+        self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
+        mapView.animateToViewingAngle(45)
+    }
     
     
     
     //Mark: - Navigation
     
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        
-        performSegueWithIdentifier("GMapDetails", sender: marker.userData as! Task)
+        performSegueWithIdentifier("showDetailFromMap", sender: marker.userData as! Task)
     }
     
     
     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
         
-        if (segue.identifier == "GMapDetails") {
+        if (segue.identifier == "showDetailFromMap") {
             let detailVC:DetailViewController = segue!.destinationViewController as! DetailViewController
             detailVC.task = sender as! Task
         }
@@ -234,7 +234,6 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         let cell:ErrandsManagerTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ErrandsManagerTableViewCell
         
         let task:Task = orderedMarkerArray[indexPath.row].userData as! Task
-        print("Task \(task)")
         
         cell.titleLabel.text = task.title
         cell.subtitleLabel.text = task.subtitle
@@ -251,13 +250,15 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         let marker = orderedMarkerArray[indexPath.row]
         
         for eachMarker in orderedMarkerArray {
-            eachMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+            if eachMarker != marker {
+                eachMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+            }
         }
-        
         marker.icon = GMSMarker.markerImageWithColor(UIColor.cyanColor())
+        
     }
     
-    
+    //Reorder the waypoints based off google directions.
     func reorderWaypoints() -> [GMSMarker] {
         
         var orderedMarkerArray:[GMSMarker] = [GMSMarker]()
@@ -288,7 +289,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
                         }
                     }
                 }
-                self.createRoute()
+                self.configureMapAndMarkersForRoute()
+                print("task array \(self.taskArray.count)")
             }
         }
     }

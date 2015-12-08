@@ -15,11 +15,13 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     //Mark: Properties
     @IBOutlet weak var mapView: GMSMapView!
     var locationManager: GeoManager!
+    var directionTask = DirectionManager()
     var errandsManager: ErrandManager!
     var didFindMyLocation = false
     var taskArray:[Task] = []
     
     
+    //Mark: ViewController Display
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,8 +40,6 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         addMarkersToMap()
         populateTaskArray()
     }
-    
-    
     
     
     //Update map with users current location;
@@ -80,6 +80,21 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         }
     }
     
+    func zoomMap() {
+        
+        var markerArray:[GMSMarker] = [GMSMarker]()
+        
+        for task in taskArray {
+            if task.isComplete == false {
+                let marker = task.makeMarker()
+                markerArray += [marker]
+            }
+        }
+        
+        
+        let bounds =  self.directionTask.zoomMapLimits(markerArray)
+        self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -121,10 +136,28 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
                     }
                 }
             }
+            self.zoomMap()
             self.trackGeoRegions()
         }
     }
     
+    
+    
+    //Mark: - Navigation
+    
+    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+        
+        performSegueWithIdentifier("showDetailFromMap", sender: marker.userData as! Task)
+    }
+    
+    
+    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
+        
+        if (segue.identifier == "showDetailFromMap") {
+            let detailVC:DetailViewController = segue!.destinationViewController as! DetailViewController
+            detailVC.task = sender as! Task
+        }
+    }
     
     
     
