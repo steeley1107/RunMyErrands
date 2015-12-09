@@ -11,7 +11,7 @@
 #import "RunMyErrands-Swift.h"
 #import <Parse/Parse.h>
 
-@interface TeamListTableViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface TeamListTableViewController () <UITableViewDelegate,UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic) NSArray *groups; //list of Groups
 @property (nonatomic) NSMutableDictionary *groupMembers;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -60,6 +60,11 @@
     [super viewWillAppear:YES];
     
     [self loadGroups];
+}
+
+- (void)setProfilePicture {
+    
+    
 }
 
 - (void)loadGroups {
@@ -114,6 +119,7 @@
     GroupListTableViewCell *cell = (GroupListTableViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"groupListCell" forIndexPath:indexPath];
     cell.nameLabel.text = @"";
     cell.leaderLabel.text = @"";
+    cell.profilePicture.image = [UIImage imageNamed:@"runmyerrands-grey"];
     
     PFObject *group = self.groups[indexPath.section];
     NSArray *membersArray = [self.groupMembers objectForKey:group.objectId];
@@ -126,7 +132,9 @@
     PFFile *image = user[@"profile_Picture"];
     
     if (!image) {
-        cell.profilePicture.image = [UIImage imageNamed:@"runmyerrands-grey"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.profilePicture.image = [UIImage imageNamed:@"runmyerrands-grey"];
+        });
     } else {
         [image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
 
@@ -146,9 +154,74 @@
     return cell;
 }
 
+#pragma mark - ImagePicker
+
 - (IBAction)changeProfilePicture:(UITapGestureRecognizer *)sender {
-    NSLog(@"asdfelijliase");
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    imagePickerController.delegate = self;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
 }
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    UIImage *selectedImage = info[UIImagePickerControllerOriginalImage];
+
+    self.profileImageView.layer.masksToBounds = YES;
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2;
+    self.profileImageView.image = selectedImage;
+    
+    NSData *imageData = UIImageJPEGRepresentation(selectedImage, 0.25);
+    PFFile *imageFile = [PFFile fileWithData:imageData];
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        PFUser *user = [PFUser currentUser];
+        if (succeeded) {
+            user[@"profile_Picture"] = imageFile;
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                
+            }];
+        } else {
+            NSLog(@"Error: %@", error);
+        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    
+
+}
+
+
+/*
+
+ func saveImage(user: PFUser) {
+ 
+ if let image = self.profileImage.image,
+ let imageData = UIImageJPEGRepresentation(image, 0.25),
+ let imageFile = PFFile(name:"profile.jpg", data:imageData) {
+ 
+ imageFile.saveInBackgroundWithBlock({ (bool: Bool, error:NSError?) -> Void in
+ 
+ if bool {
+ user["profile_Picture"] = imageFile
+ user.saveInBackgroundWithBlock({ (Bool, ErrorType) -> Void in
+ if (Bool) {
+ print("save")
+ } else {
+ print("failed saving profile picture")
+ }
+ self.performSegueWithIdentifier("showSignupToTabBar", sender: nil)
+ })
+ }
+ })
+ }
+ }
+
+*/
 
 /*
 // Override to support conditional editing of the table view.

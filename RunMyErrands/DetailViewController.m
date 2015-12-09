@@ -52,6 +52,14 @@
     [self initiateMap];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    if (self.task.isComplete) {
+        //turn off button
+    }
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -66,7 +74,19 @@
         self.task.isComplete = @(YES);
         [selectedTask saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self viewDidLoad];
+                
+                PFUser *user = [PFUser currentUser];
+                NSNumber *errandsCompleted = user[@"totalErrandsCompleted"];
+                errandsCompleted = @(errandsCompleted.intValue + 1);
+                user[@"totalErrandsCompleted"] = errandsCompleted;
+                
+                [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (succeeded) {
+                        [self viewDidLoad];
+                    } else {
+                        NSLog(@"Error: %@", error);
+                    }
+                }];
             }
         }];
         
