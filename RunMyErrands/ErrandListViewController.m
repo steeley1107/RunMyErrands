@@ -45,6 +45,23 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    
+//    NSString *recipients = @"message://jeffmew@gmail.com&subject=Join My Group!";
+//    
+//    NSString *body = @"&body=It is raining in sunny California!";
+//    
+//    NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
+//    
+//    email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
+//    
+    
+    
+    
+    
+    
+    
     [self setGreeting];
 
     [self.activitySpinner startAnimating];
@@ -60,7 +77,6 @@
         
         [self.activitySpinner stopAnimating];
     }];
-
     
     PFUser *user = [PFUser currentUser];
     NSLog(@"%@", user.username);

@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import <Parse/Parse.h>
 
 @interface DetailViewController () <MKMapViewDelegate>
 
@@ -82,6 +83,10 @@
                 
                 [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
+                        PFPush *push = [[PFPush alloc] init];
+                        [push setChannel:self.task.group];
+                        [push setMessage:[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.task.taskDescription]];
+                        [push sendPushInBackground];
                         [self viewDidLoad];
                     } else {
                         NSLog(@"Error: %@", error);

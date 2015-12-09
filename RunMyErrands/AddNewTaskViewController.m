@@ -100,6 +100,10 @@
         self.task.subtitle = [self.locationName.text capitalizedString];
         self.task.category = @([self.categoryPickerView selectedRowInComponent:0]);
         
+        NSNumber *groupChoice = @([self.groupPickerView selectedRowInComponent:0]);
+        PFObject *group = self.groups[[groupChoice intValue]];
+        self.task.group = group.objectId;
+                
         if (self.addressTextField.text.length != 0) {
             self.task.address = self.addressTextField.text;
             [self geoCodeAddress:self.task.address];

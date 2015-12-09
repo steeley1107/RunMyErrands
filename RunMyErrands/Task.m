@@ -20,6 +20,7 @@
 @dynamic longitude;
 @dynamic isComplete;
 @dynamic category;
+@dynamic group;
 
 + (void)load {
     [self registerSubclass];

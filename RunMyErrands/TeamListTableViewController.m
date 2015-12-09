@@ -62,11 +62,6 @@
     [self loadGroups];
 }
 
-- (void)setProfilePicture {
-    
-    
-}
-
 - (void)loadGroups {
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
@@ -194,34 +189,6 @@
     
 
 }
-
-
-/*
-
- func saveImage(user: PFUser) {
- 
- if let image = self.profileImage.image,
- let imageData = UIImageJPEGRepresentation(image, 0.25),
- let imageFile = PFFile(name:"profile.jpg", data:imageData) {
- 
- imageFile.saveInBackgroundWithBlock({ (bool: Bool, error:NSError?) -> Void in
- 
- if bool {
- user["profile_Picture"] = imageFile
- user.saveInBackgroundWithBlock({ (Bool, ErrorType) -> Void in
- if (Bool) {
- print("save")
- } else {
- print("failed saving profile picture")
- }
- self.performSegueWithIdentifier("showSignupToTabBar", sender: nil)
- })
- }
- })
- }
- }
-
-*/
 
 /*
 // Override to support conditional editing of the table view.

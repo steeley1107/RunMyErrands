@@ -24,6 +24,7 @@
 @property (nonatomic) NSNumber *lattitude;
 @property (nonatomic) NSNumber *isComplete;
 @property (nonatomic) NSNumber *category;
+@property (nonatomic) NSString *group;
 
 + (NSString*)parseClassName;
 + (void)load;

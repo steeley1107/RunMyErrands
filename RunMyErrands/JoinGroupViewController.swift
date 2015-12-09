@@ -43,6 +43,11 @@ class JoinGroupViewController: UIViewController {
                                 let groupRelation = currentUser.relationForKey("memberOfTheseGroups")
                                 groupRelation.addObject(object)
                                 currentUser.saveInBackgroundWithBlock({ (bool:Bool, error: NSError?) -> Void in
+                                    
+                                    let push = PFPush()
+                                    push.setChannel(groupID)
+                                    push.setMessage("\(currentUser["name"].capitalizedString) has joined your '\(object["name"].capitalizedString)' group.")
+                                    push.sendPushInBackground()
                                     self.dismissViewControllerAnimated(true, completion: nil)
                                 })
                         })
