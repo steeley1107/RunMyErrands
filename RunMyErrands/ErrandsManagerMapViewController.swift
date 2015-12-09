@@ -228,7 +228,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:ErrandsManagerTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ErrandsManagerTableViewCell
+        let cell:ErrandsManagerMapTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ErrandsManagerMapTableViewCell
         
         let task:Task = orderedMarkerArray[indexPath.row].userData as! Task
         

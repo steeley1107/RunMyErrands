@@ -100,6 +100,8 @@
         self.task.subtitle = [self.locationName.text capitalizedString];
         self.task.category = @([self.categoryPickerView selectedRowInComponent:0]);
         
+        self.task.isActive = @NO;
+        
         if (self.addressTextField.text.length != 0) {
             self.task.address = self.addressTextField.text;
             [self geoCodeAddress:self.task.address];

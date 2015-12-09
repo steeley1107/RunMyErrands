@@ -101,4 +101,45 @@ import Parse
         return self.objectIDtoNameDictionary.allKeys as! [String]
     }
 
+    
+    func fetchIncompleteTask(completionHandler: (success: Bool) ->() ) {
+        let relation = self.user.relationForKey("memberOfTheseGroups")
+        
+        relation.query().orderByAscending("name").findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error: NSError?) -> Void in
+            
+            if let objects = objects {
+                
+                for group in objects {
+                    print(group["name"])
+                    
+                    self.objectIDtoNameDictionary.setValue(group["name"] as! String, forKey: group.objectId!)
+                    
+                    let errandsForGroupRelation = group.relationForKey("errands")
+                    
+                    errandsForGroupRelation.query().whereKey("isComplete", equalTo:false).findObjectsInBackgroundWithBlock({ (errands:[PFObject]?, error:NSError?) -> Void in
+                        let errandsArray = errands as? [Task]
+                        
+                        self.errandsDictionary.setValue(errandsArray, forKey: group.objectId!)
+                        
+                        completionHandler(success: true)
+                    })
+                    
+                }
+                
+            } else {
+                
+                completionHandler(success: false)
+            }
+        }
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
 }

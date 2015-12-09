@@ -21,6 +21,8 @@
 @dynamic isComplete;
 @dynamic category;
 
+@dynamic isActive;
+
 + (void)load {
     [self registerSubclass];
 }

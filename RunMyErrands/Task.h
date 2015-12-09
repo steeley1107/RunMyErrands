@@ -25,6 +25,8 @@
 @property (nonatomic) NSNumber *isComplete;
 @property (nonatomic) NSNumber *category;
 
+@property (nonatomic) NSNumber *isActive;
+
 + (NSString*)parseClassName;
 + (void)load;
 -(CLLocationCoordinate2D) coordinate;
