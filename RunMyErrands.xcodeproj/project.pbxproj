@@ -60,6 +60,12 @@
 		DA8B6FF41BFEAEF600834D78 /* cart.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FF01BFEAEF600834D78 /* cart.png */; };
 		DA8B6FF51BFEAEF600834D78 /* die.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FF11BFEAEF600834D78 /* die.png */; };
 		DA8B6FF61BFEAEF600834D78 /* running-128.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FF21BFEAEF600834D78 /* running-128.png */; };
+		DAA57FBB1C17709B00AEC00F /* bubble_left.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA57FB81C17709B00AEC00F /* bubble_left.png */; };
+		DAA57FBC1C17709B00AEC00F /* bubble_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA57FB91C17709B00AEC00F /* bubble_left@2x.png */; };
+		DAA57FBD1C17709B00AEC00F /* bubble_left@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA57FBA1C17709B00AEC00F /* bubble_left@3x.png */; };
+		DAA57FC11C1770A100AEC00F /* bubble_right.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA57FBE1C1770A100AEC00F /* bubble_right.png */; };
+		DAA57FC21C1770A100AEC00F /* bubble_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA57FBF1C1770A100AEC00F /* bubble_right@2x.png */; };
+		DAA57FC31C1770A100AEC00F /* bubble_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA57FC01C1770A100AEC00F /* bubble_right@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +157,12 @@
 		DA8B6FF01BFEAEF600834D78 /* cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart.png; sourceTree = "<group>"; };
 		DA8B6FF11BFEAEF600834D78 /* die.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = die.png; sourceTree = "<group>"; };
 		DA8B6FF21BFEAEF600834D78 /* running-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "running-128.png"; sourceTree = "<group>"; };
+		DAA57FB81C17709B00AEC00F /* bubble_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_left.png; sourceTree = "<group>"; };
+		DAA57FB91C17709B00AEC00F /* bubble_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_left@2x.png"; sourceTree = "<group>"; };
+		DAA57FBA1C17709B00AEC00F /* bubble_left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_left@3x.png"; sourceTree = "<group>"; };
+		DAA57FBE1C1770A100AEC00F /* bubble_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_right.png; sourceTree = "<group>"; };
+		DAA57FBF1C1770A100AEC00F /* bubble_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_right@2x.png"; sourceTree = "<group>"; };
+		DAA57FC01C1770A100AEC00F /* bubble_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_right@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +385,12 @@
 				DA8B6FEF1BFEAEF600834D78 /* briefcase.png */,
 				DA0D86011C15605600402054 /* Callout_rounded_rectangle_center.png */,
 				DA8B6FF21BFEAEF600834D78 /* running-128.png */,
+				DAA57FB91C17709B00AEC00F /* bubble_left@2x.png */,
+				DAA57FB81C17709B00AEC00F /* bubble_left.png */,
+				DAA57FBA1C17709B00AEC00F /* bubble_left@3x.png */,
+				DAA57FBE1C1770A100AEC00F /* bubble_right.png */,
+				DAA57FBF1C1770A100AEC00F /* bubble_right@2x.png */,
+				DAA57FC01C1770A100AEC00F /* bubble_right@3x.png */,
 				DA8B6FF01BFEAEF600834D78 /* cart.png */,
 				DA8B6FF11BFEAEF600834D78 /* die.png */,
 			);
@@ -449,7 +467,7 @@
 				TargetAttributes = {
 					5257FBB91BF809CE005CC88D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = H9VG62MSLG;
+						DevelopmentTeam = KL92959M88;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -493,14 +511,20 @@
 			files = (
 				DA8B6FF51BFEAEF600834D78 /* die.png in Resources */,
 				DA8B6FF31BFEAEF600834D78 /* briefcase.png in Resources */,
+				DAA57FBD1C17709B00AEC00F /* bubble_left@3x.png in Resources */,
 				52ABCF1A1C0CE6E400110C8A /* Login.storyboard in Resources */,
+				DAA57FC11C1770A100AEC00F /* bubble_right.png in Resources */,
 				DA8B6FF61BFEAEF600834D78 /* running-128.png in Resources */,
 				DA8B6FF41BFEAEF600834D78 /* cart.png in Resources */,
 				DA0D86021C15605600402054 /* Callout_rounded_rectangle_center.png in Resources */,
+				DAA57FC21C1770A100AEC00F /* bubble_right@2x.png in Resources */,
 				5257FBD01BF809CE005CC88D /* LaunchScreen.storyboard in Resources */,
+				DAA57FC31C1770A100AEC00F /* bubble_right@3x.png in Resources */,
 				5257FBCD1BF809CE005CC88D /* Assets.xcassets in Resources */,
 				5257FBC81BF809CE005CC88D /* Main.storyboard in Resources */,
+				DAA57FBC1C17709B00AEC00F /* bubble_left@2x.png in Resources */,
 				DA34E84A1C15048D006C7B05 /* CustomInfoWindow.xib in Resources */,
+				DAA57FBB1C17709B00AEC00F /* bubble_left.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,7 +765,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jeffrey Mew (764SYX93PK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -749,9 +774,9 @@
 				INFOPLIST_FILE = RunMyErrands/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
+				PRODUCT_BUNDLE_IDENTIFIER = lhl.RunMyErrands;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "84093f94-cd65-421e-a142-df6a43a9f205";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -765,7 +790,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jeffrey Mew (764SYX93PK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -773,9 +799,9 @@
 				INFOPLIST_FILE = RunMyErrands/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
+				PRODUCT_BUNDLE_IDENTIFIER = lhl.RunMyErrands;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "84093f94-cd65-421e-a142-df6a43a9f205";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

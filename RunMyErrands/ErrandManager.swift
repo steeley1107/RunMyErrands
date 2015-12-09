@@ -83,7 +83,7 @@ import Parse
                     
                     let errandsForGroupRelation = group.relationForKey("errands")
                     errandsForGroupRelation.query().findObjectsInBackgroundWithBlock({ (errands:[PFObject]?, error:NSError?) -> Void in
-                        let errandsArray = errands as! [Task]
+                        let errandsArray = errands as? [Task]
                         
                         self.errandsDictionary.setValue(errandsArray, forKey: group.objectId!)
                         completionHandler(success: true)

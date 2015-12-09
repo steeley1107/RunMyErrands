@@ -100,8 +100,13 @@ class DirectionManager: NSObject {
     
     //convert JSON to directions
     func processDirections(directions: Dictionary<NSObject, AnyObject>) {
+        guard let selected = (directions["routes"] as? Array<Dictionary<NSObject, AnyObject>>)?.first else {
+            print("no first directions object")
+            return
+        }
         
-        self.selectedRoute = (directions["routes"] as! Array<Dictionary<NSObject, AnyObject>>)[0]
+        self.selectedRoute = selected
+        
         self.overviewPolyline = self.selectedRoute["overview_polyline"] as! Dictionary<NSObject, AnyObject>
         
         let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
