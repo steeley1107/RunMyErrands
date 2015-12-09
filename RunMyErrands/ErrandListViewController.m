@@ -40,26 +40,25 @@
     [self.locationManager startLocationManager];
 
     self.errandManager = [ErrandManager new];
-    [self.activitySpinner startAnimating];
-    [self.errandManager fetchData:^(BOOL success) {
-        if (success) {
-            [self.tableview reloadData];
-            [self updatePushChannels];
-        }
-        
-        [self.activitySpinner stopAnimating];
-    }];
-    
+ 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [self setGreeting];
 
+    [self.activitySpinner startAnimating];
+    
+    NSLog(@"BEFORE:  %@", [self.errandManager fetchKeys]);
+    
     [self.errandManager fetchData:^(BOOL success) {
         if (success) {
+            NSLog(@"AFTER:  %@", [self.errandManager fetchKeys]);
             [self.tableview reloadData];
+            [self updatePushChannels];
         }
+        
+        [self.activitySpinner stopAnimating];
     }];
 
     
@@ -73,7 +72,10 @@
 }
 
 - (void) updatePushChannels {
-    //    self.errandManager.fetch
+    NSArray *channels = [self.errandManager fetchKeys];
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    currentInstallation.channels = channels;
+    [currentInstallation saveInBackground];
 }
 
 -(void) setGreeting {

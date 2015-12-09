@@ -65,8 +65,7 @@ import Parse
             return nil
         }
     }
-    
-    
+
     func fetchData(completionHandler: (success: Bool) ->() ) {
         let relation = self.user.relationForKey("memberOfTheseGroups")
         
@@ -77,45 +76,29 @@ import Parse
                 for group in objects {
                     print(group["name"])
                     
-                    //self.groupNameToObjectIDDictionary.setValue(group.objectId, forKey: group["name"] as! String)
-                    //self.groupNames.insert(group["name"] as! String, atIndex: self.groupNames.endIndex)
                     self.objectIDtoNameDictionary.setValue(group["name"] as! String, forKey: group.objectId!)
                     
                     let errandsForGroupRelation = group.relationForKey("errands")
-                    errandsForGroupRelation.query().findObjectsInBackgroundWithBlock({ (errands:[PFObject]?, error:NSError?) -> Void in
+                    
+                    errandsForGroupRelation.query().orderByAscending("isComplete").findObjectsInBackgroundWithBlock({ (errands:[PFObject]?, error:NSError?) -> Void in
                         let errandsArray = errands as! [Task]
                         
                         self.errandsDictionary.setValue(errandsArray, forKey: group.objectId!)
+                        
                         completionHandler(success: true)
                     })
+                    
                 }
-                
+
             } else {
                 
-                completionHandler(success: true)
+                completionHandler(success: false)
             }
         }
     }
     
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    func fetchKeys() -> [String] {
+        return self.objectIDtoNameDictionary.allKeys as! [String]
+    }
 
 }
