@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userDetailLabel;
+@property NSCache *imageCache;
 @end
 
 @implementation TeamListTableViewController
@@ -27,8 +28,8 @@
 
     self.tableView.allowsSelection = false;
     self.tableView.tableFooterView = [[UIView alloc] init];
-    
     self.groupMembers = [NSMutableDictionary new];
+
 
     PFUser *user = [PFUser currentUser];
     NSLog(@"User: %@", user.username);
@@ -109,6 +110,107 @@
     return [NSString stringWithFormat:@"%@ (id: %@)", [group[@"name"] capitalizedString], group.objectId];
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectZero];
+    sectionView.backgroundColor = [UIColor colorWithRed:86.0/255.0 green:113.0/255.0 blue:141.0/255.0f alpha:1.0f];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    button.tag = section;
+    [sectionView addSubview:button];
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.textColor = [UIColor whiteColor];
+    PFObject *sectionGroup = self.groups[section];
+    label.text = [sectionGroup[@"name"] capitalizedString];
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [sectionView addSubview:label];
+    
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:label
+                                                            attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+    
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:label
+                                                            attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:10.0]];
+
+    
+    button.hidden = NO;
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [button setTitle:@"Invite" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(openMailClientForInvite:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [button setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:127.0/255.0 blue:0.0/255.0 alpha:1.0]];
+    
+    
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:sectionView
+                                                            attribute:NSLayoutAttributeTop
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:button
+                                                            attribute:NSLayoutAttributeTop
+                                                           multiplier:1.0 constant:10.0]];
+
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:sectionView
+                                                            attribute:NSLayoutAttributeBottom
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:button
+                                                            attribute:NSLayoutAttributeBottom
+                                                           multiplier:1.0 constant:10.0]];
+
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
+                                                            attribute:NSLayoutAttributeTrailingMargin
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:sectionView attribute:NSLayoutAttributeTrailingMargin
+                                                           multiplier:1.0 constant:-10.0]];
+    
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
+                                                            attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+    
+    NSLayoutConstraint *buttonHeight = [NSLayoutConstraint constraintWithItem:button
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:nil
+                                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                                        multiplier:1.0
+                                                                          constant:20.0];
+    
+    NSLayoutConstraint *buttonWidth = [NSLayoutConstraint constraintWithItem:button
+                                                                    attribute:NSLayoutAttributeWidth
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:nil
+                                                                    attribute:NSLayoutAttributeNotAnAttribute
+                                                                   multiplier:1.0
+                                                                     constant:60.0];
+    
+    [sectionView addConstraint:buttonHeight];
+    [sectionView addConstraint:buttonWidth];
+    
+    return sectionView;
+}
+
+-(void) openMailClientForInvite:(id)sender {
+    UIButton *button = (UIButton*)sender;
+    
+    PFUser *user = [PFUser currentUser];
+    NSLog(@"%@", user.username);
+
+    NSString *recipients = @"mailto:?subject=Join a 'Run My Errands Group'";
+    PFObject *sectionGroup = self.groups[button.tag];
+    
+    NSString *body = [NSString stringWithFormat:@"&body=Hi,\n\n You've been invited to join my 'Run My Errands' group.  If you haven't heard of it, 'Run My Errands' is an errands manager that you can share with your friends, co-workers or whoever!\nYou can download it for free in the App Store.  When you're set up and logged in, go to 'groups' tab -> 'join' (top left button) and input the  Group ID# below:\n\n\nGroup ID# %@\n\n\n See you soon!\n\n-Run My Errands", sectionGroup.objectId];
+
+    NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
+
+    email = [email stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+
+    NSURL* mailURL = [NSURL URLWithString:email];
+
+    if ([[UIApplication sharedApplication] canOpenURL:mailURL]) {
+        [[UIApplication sharedApplication] openURL:mailURL];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     GroupListTableViewCell *cell = (GroupListTableViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"groupListCell" forIndexPath:indexPath];
@@ -172,7 +274,7 @@
     self.profileImageView.image = selectedImage;
     
     NSData *imageData = UIImageJPEGRepresentation(selectedImage, 0.25);
-    PFFile *imageFile = [PFFile fileWithData:imageData];
+    PFFile *imageFile = [PFFile fileWithName:@"profile.jpg" data:imageData];
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         PFUser *user = [PFUser currentUser];
         if (succeeded) {

@@ -46,21 +46,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
-//    NSString *recipients = @"message://jeffmew@gmail.com&subject=Join My Group!";
-//    
-//    NSString *body = @"&body=It is raining in sunny California!";
-//    
-//    NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
-//    
-//    email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
-//    
-    
-    
-    
-    
-    
+
+
     
     [self setGreeting];
 
@@ -78,8 +65,6 @@
         [self.activitySpinner stopAnimating];
     }];
     
-    PFUser *user = [PFUser currentUser];
-    NSLog(@"%@", user.username);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -129,7 +114,7 @@
              @"Here are your tasks.",
              @"Today is a good day to finish a task.",
              @"Get it done.",
-             @"Yesterday you said tomorrow.",
+             @"Because yesterday you said tomorrow.",
              @"Just do it."][rand];
 }
 

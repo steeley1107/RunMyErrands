@@ -89,6 +89,8 @@ import Parse
                     })
                     
                 }
+                
+                completionHandler(success: true)
 
             } else {
                 
