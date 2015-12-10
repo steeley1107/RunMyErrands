@@ -45,6 +45,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    
+
+
+    
     [self setGreeting];
 
     [self.activitySpinner startAnimating];
@@ -60,10 +64,7 @@
         
         [self.activitySpinner stopAnimating];
     }];
-
     
-    PFUser *user = [PFUser currentUser];
-    NSLog(@"%@", user.username);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,7 +114,7 @@
              @"Here are your tasks.",
              @"Today is a good day to finish a task.",
              @"Get it done.",
-             @"Yesterday you said tomorrow.",
+             @"Because yesterday you said tomorrow.",
              @"Just do it."][rand];
 }
 
