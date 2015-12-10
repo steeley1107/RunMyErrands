@@ -15,4 +15,7 @@ class ErrandsManagerTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var subtitleLabel: UILabel!
+    
+    @IBOutlet weak var ActiveLabel: UIView!
+    
 }

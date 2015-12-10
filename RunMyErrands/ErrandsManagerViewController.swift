@@ -22,15 +22,14 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     var travelMode = TravelModes.driving
     
-    //var task: Task!
-    var taskArray:[Task] = []
+    //var taskArray:[Task] = []
     
     var orderedMarkerArray: [GMSMarker] = []
     var markerArray: [GMSMarker] = []
     
     var errandsManager: ErrandManager!
     
-    var activeErrandArray:[Task] = []
+    var activeErrandArray:[Task]!
     
     //var activeErrandSet: Set<String> = Set()
     var direction = Direction()
@@ -41,6 +40,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         
         self.errandsManager = ErrandManager()
+        self.activeErrandArray = []
         
         self.locationManager = GeoManager.sharedManager()
         self.locationManager.startLocationManager()
@@ -55,7 +55,6 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        errandsTableView.reloadData()
         
         errandsManager.fetchIncompleteTask() { (success) -> () in
             if success {
@@ -107,10 +106,11 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         if task.isActive == false {
             cell.accessoryType = .None
+            cell.ActiveLabel.hidden = true
         }
         else if task.isActive == true {
             cell.accessoryType = .Checkmark
-            activeErrandArray.append(task)
+            cell.hidden = false
         }
         
         return cell
@@ -135,8 +135,10 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             if task.isActive == false {
                 task.isActive = true
                 cell.accessoryType = .Checkmark
-                activeErrandArray.append(task)
                 
+                if !ContainsTask(activeErrandArray, task: task) {
+                    activeErrandArray.append(task)
+                }
                 
             }else {
                 task.isActive = false
@@ -173,9 +175,9 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             direction.markerArray.removeAll()
             for activeTask in self.activeErrandArray {
                 
-                    let marker = activeTask.makeMarker()
-                    marker.userData = activeTask
-                    direction.markerArray += [marker]
+                let marker = activeTask.makeMarker()
+                marker.userData = activeTask
+                direction.markerArray += [marker]
             }
             
             errandsManagerMapVC.direction = direction
@@ -227,13 +229,23 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
                 task.isActive = false
                 task.saveInBackground()
                 activeErrandArray.removeAtIndex(index)
-                
             }
         }
         errandsTableView.reloadData()
     }
     
     
+    func ContainsTask(array: [Task], task: Task) -> Bool {
+        
+        for activeTask in array {
+            
+            if task.objectId == activeTask.objectId {
+                return true
+            }
+        }
+        return false
+        
+    }
     
     
     
