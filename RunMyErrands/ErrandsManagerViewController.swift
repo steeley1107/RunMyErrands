@@ -14,6 +14,10 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var errandsTableView: UITableView!
     
+    @IBOutlet weak var transportationSegment: UISegmentedControl!
+    @IBOutlet weak var finalDestinationSegment: UISegmentedControl!
+    
+    
     var origin: CLLocationCoordinate2D!
     var destination: CLLocationCoordinate2D!
     
@@ -38,6 +42,11 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //clean up corners on segments
+        finalDestinationSegment.layer.cornerRadius = 5
+        finalDestinationSegment.layer.masksToBounds = true
+        transportationSegment.layer.cornerRadius = 5
+        transportationSegment.layer.masksToBounds = true
         
         self.errandsManager = ErrandManager()
         self.activeErrandArray = []
@@ -105,13 +114,26 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         
         if task.isActive == false {
-            cell.accessoryType = .None
-            cell.ActiveLabel.hidden = true
+            cell.activeLabel.hidden = true
         }
         else if task.isActive == true {
-            cell.accessoryType = .Checkmark
-            cell.hidden = false
+            cell.activeLabel.hidden = false
         }
+        
+        
+        if ContainsTask(activeErrandArray, task: task) {
+            cell.accessoryType = .Checkmark
+        }else {
+            cell.accessoryType = .None
+        }
+        
+        
+        
+        
+        
+        
+
+        
         
         return cell
     }
@@ -133,22 +155,23 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             let task:Task = errandsManager.fetchErrand(indexPath)!
             
             if task.isActive == false {
+                
                 task.isActive = true
                 cell.accessoryType = .Checkmark
-                
                 if !ContainsTask(activeErrandArray, task: task) {
                     activeErrandArray.append(task)
                 }
                 
             }else {
                 task.isActive = false
+                cell.accessoryType = .None
                 
                 if let index = activeErrandArray.indexOf(task) {
                     activeErrandArray.removeAtIndex(index)
-                    cell.accessoryType = .None
-                    
                 }
+                
             }
+            
         }
         errandsTableView.reloadData()
     }
@@ -231,6 +254,16 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
                 activeErrandArray.removeAtIndex(index)
             }
         }
+        
+//        .saveInBackgroundWithBlock{(success: Bool, error: NSError?) ->Void in
+//            if (success) {
+//                print("no problem")
+//            }
+//            else
+//            {
+//                print("problem")
+//            }}
+
         errandsTableView.reloadData()
     }
     
