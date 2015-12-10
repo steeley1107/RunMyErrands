@@ -306,7 +306,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="skH-RC-Zcv">
-                                <rect key="frame" x="0.0" y="300" width="600" height="280"/>
+                                <rect key="frame" x="0.0" y="300" width="600" height="248"/>
                                 <animations/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.78000000000000003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qP-WW-aaU">
@@ -386,7 +386,7 @@
                             <constraint firstItem="TtP-Ta-U3S" firstAttribute="centerX" secondItem="emo-jb-WYZ" secondAttribute="centerX" id="WAE-0z-0BA"/>
                             <constraint firstItem="7qP-WW-aaU" firstAttribute="centerX" secondItem="TtP-Ta-U3S" secondAttribute="centerX" id="WVr-aW-q2n"/>
                             <constraint firstItem="NRA-II-JkY" firstAttribute="centerY" secondItem="7qP-WW-aaU" secondAttribute="centerY" multiplier="0.8" id="X4z-DP-sIC"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="skH-RC-Zcv" secondAttribute="bottom" constant="20" id="YY0-8j-0fD"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="skH-RC-Zcv" secondAttribute="bottom" constant="52" id="YY0-8j-0fD"/>
                             <constraint firstItem="skH-RC-Zcv" firstAttribute="leading" secondItem="emo-jb-WYZ" secondAttribute="leadingMargin" constant="20" id="dmT-Za-OWH"/>
                             <constraint firstItem="TtP-Ta-U3S" firstAttribute="top" secondItem="8ag-Jg-EHL" secondAttribute="bottom" constant="10" id="f0j-hD-xUB"/>
                             <constraint firstItem="rEe-gV-E2O" firstAttribute="centerX" secondItem="7qP-WW-aaU" secondAttribute="centerX" id="f6b-SR-yIQ"/>
@@ -729,13 +729,13 @@
                                     <constraint firstItem="fht-Wf-IVD" firstAttribute="centerY" secondItem="ma6-xG-h57" secondAttribute="centerY" id="qJz-Yh-Jsz"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LAS-QD-NDc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="40" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LAS-QD-NDc">
                                 <rect key="frame" x="0.0" y="240" width="600" height="311"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupListCell" id="keX-kU-F34" customClass="GroupListTableViewCell" customModule="RunMyErrands" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="58"/>
+                                        <rect key="frame" x="0.0" y="40" width="600" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="keX-kU-F34" id="l3u-Db-x80">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="57.5"/>
@@ -1025,11 +1025,11 @@
                                     <outlet property="delegate" destination="zb2-gY-qQB" id="dj1-T3-eVQ"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1WU-JV-ijO" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="420"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1WU-JV-ijO" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="421"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7m-3G-tyu">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7m-3G-tyu">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="80"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1043,7 +1043,7 @@
                                 <animations/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.92941176469999998" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="b7m-3G-tyu" firstAttribute="top" secondItem="1WU-JV-ijO" secondAttribute="top" id="dq3-DZ-VoR"/>
+                                    <constraint firstItem="b7m-3G-tyu" firstAttribute="top" secondItem="1WU-JV-ijO" secondAttribute="top" constant="60" id="dq3-DZ-VoR"/>
                                     <constraint firstItem="b7m-3G-tyu" firstAttribute="leading" secondItem="1WU-JV-ijO" secondAttribute="leading" id="mX1-7B-unf"/>
                                     <constraint firstAttribute="trailing" secondItem="b7m-3G-tyu" secondAttribute="trailing" id="uWR-db-P3K"/>
                                 </constraints>
@@ -1053,7 +1053,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="d8N-F0-BXI" firstAttribute="height" secondItem="NWk-qC-Uex" secondAttribute="height" multiplier="0.4" constant="-60" id="9UK-JD-Fa4"/>
-                            <constraint firstItem="1WU-JV-ijO" firstAttribute="height" secondItem="NWk-qC-Uex" secondAttribute="height" multiplier="0.6" constant="50" id="EEC-H2-Omr"/>
+                            <constraint firstItem="1WU-JV-ijO" firstAttribute="height" secondItem="NWk-qC-Uex" secondAttribute="height" multiplier="0.7" constant="1" id="EEC-H2-Omr"/>
                             <constraint firstAttribute="bottom" secondItem="d8N-F0-BXI" secondAttribute="bottom" id="Kjl-Mm-n4C"/>
                             <constraint firstItem="1WU-JV-ijO" firstAttribute="centerX" secondItem="NWk-qC-Uex" secondAttribute="centerX" id="QCb-Kf-eC7"/>
                             <constraint firstItem="d8N-F0-BXI" firstAttribute="leading" secondItem="NWk-qC-Uex" secondAttribute="leading" id="RWn-OE-URG"/>
@@ -1316,13 +1316,8 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BzG-BT-fFq">
-                                <rect key="frame" x="0.0" y="64" width="600" height="355"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="367"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTp-EM-eV9">
-                                        <rect key="frame" x="7" y="259" width="86" height="30"/>
-                                        <animations/>
-                                        <state key="normal" title="Pick Errands"/>
-                                    </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Che-Xe-8HH">
                                         <rect key="frame" x="160" y="121" width="281" height="29"/>
                                         <animations/>
@@ -1331,6 +1326,9 @@
                                             <segment title="Walking"/>
                                             <segment title="Bicycling"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="travelMode:" destination="5a4-E8-l30" eventType="valueChanged" id="lAo-oz-vqi"/>
+                                        </connections>
                                     </segmentedControl>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ilK-Oh-vxL">
                                         <rect key="frame" x="184" y="219" width="233" height="29"/>
@@ -1339,6 +1337,9 @@
                                             <segment title="Current Location"/>
                                             <segment title="Home"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="finalDestination:" destination="5a4-E8-l30" eventType="valueChanged" id="ifr-bA-8zI"/>
+                                        </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Final Destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMh-HR-6Da">
                                         <rect key="frame" x="237" y="190" width="127" height="21"/>
@@ -1348,11 +1349,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1V-nF-PJT">
-                                        <rect key="frame" x="508" y="259" width="84" height="30"/>
+                                        <rect key="frame" x="508" y="317" width="84" height="30"/>
                                         <animations/>
                                         <state key="normal" title="Run Errands"/>
                                         <connections>
-                                            <segue destination="zb2-gY-qQB" kind="show" id="pgW-pl-mmq"/>
+                                            <action selector="runErrnadsButton:" destination="5a4-E8-l30" eventType="touchUpInside" id="edT-AT-pOh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTp-EM-eV9">
+                                        <rect key="frame" x="8" y="329" width="98" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Finish Errands"/>
+                                        <connections>
+                                            <action selector="FinishErrands:" destination="5a4-E8-l30" eventType="touchUpInside" id="Rjo-FI-PTn"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1362,13 +1371,13 @@
                                     <constraint firstItem="Che-Xe-8HH" firstAttribute="centerX" secondItem="BzG-BT-fFq" secondAttribute="centerX" id="4GT-6d-hPA"/>
                                     <constraint firstAttribute="trailing" secondItem="B1V-nF-PJT" secondAttribute="trailing" constant="8" id="A5r-vR-Kbw"/>
                                     <constraint firstItem="Che-Xe-8HH" firstAttribute="top" secondItem="BzG-BT-fFq" secondAttribute="top" constant="121" id="AHn-fE-dd1"/>
-                                    <constraint firstAttribute="bottom" secondItem="B1V-nF-PJT" secondAttribute="bottom" constant="66" id="B9K-qI-WKI"/>
+                                    <constraint firstAttribute="bottom" secondItem="B1V-nF-PJT" secondAttribute="bottom" constant="8" id="B9K-qI-WKI"/>
                                     <constraint firstItem="EMh-HR-6Da" firstAttribute="top" secondItem="Che-Xe-8HH" secondAttribute="bottom" constant="41" id="NqO-4N-6Wf"/>
                                     <constraint firstItem="ilK-Oh-vxL" firstAttribute="top" secondItem="EMh-HR-6Da" secondAttribute="bottom" constant="8" id="PRH-21-KW5"/>
-                                    <constraint firstItem="hTp-EM-eV9" firstAttribute="leading" secondItem="BzG-BT-fFq" secondAttribute="leading" constant="7" id="TzD-ru-Def"/>
+                                    <constraint firstItem="hTp-EM-eV9" firstAttribute="leading" secondItem="BzG-BT-fFq" secondAttribute="leading" constant="8" id="TzD-ru-Def"/>
                                     <constraint firstItem="ilK-Oh-vxL" firstAttribute="centerX" secondItem="BzG-BT-fFq" secondAttribute="centerX" id="Yiq-ot-XLd"/>
                                     <constraint firstItem="EMh-HR-6Da" firstAttribute="centerX" secondItem="BzG-BT-fFq" secondAttribute="centerX" id="b8t-3X-Bho"/>
-                                    <constraint firstAttribute="bottom" secondItem="hTp-EM-eV9" secondAttribute="bottom" constant="66" id="gco-1r-m3p"/>
+                                    <constraint firstAttribute="bottom" secondItem="hTp-EM-eV9" secondAttribute="bottom" constant="8" id="gco-1r-m3p"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1390,6 +1399,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="errandsTableView" destination="zRb-nV-VHr" id="pK1-Pg-E4j"/>
+                        <segue destination="zb2-gY-qQB" kind="show" identifier="ErrandsManagerMap" id="dha-HC-L6P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZxU-LJ-LXg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1425,6 +1435,6 @@
         <image name="users" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2IR-W8-EJg"/>
+        <segue reference="taR-UF-3jZ"/>
     </inferredMetricsTieBreakers>
 </document>

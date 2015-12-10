@@ -9,6 +9,12 @@
 import UIKit
 import GoogleMaps
 
+enum TravelModes: Int {
+    case driving
+    case walking
+    case bicycling
+}
+
 class DirectionManager: NSObject {
     
     
@@ -86,10 +92,17 @@ class DirectionManager: NSObject {
                     let dictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as? [String : AnyObject]
                     
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        
+                        let status = dictionary!["status"] as! String
+                        
+                        //Cheak to see if google returned good data.
+                        if status == "OK" {
+                            self.processDirections(dictionary!)
+                            self.calculateTotalDistanceAndDuration(dictionary!)
+                            completionHandler(sucess: true)
+                        }
+                        
                         print("dict \(dictionary)")
-                        self.processDirections(dictionary!)
-                        self.calculateTotalDistanceAndDuration(dictionary!)
-                        completionHandler(sucess: true)
                     })
                 }
                 task.resume()
@@ -166,7 +179,7 @@ class DirectionManager: NSObject {
     
     
     //zoom the map to the limits of the tasks
-    func zoomMapLimits(markerArray: [GMSMarker]) -> GMSCoordinateBounds {
+    func zoomMapLimits(origin: CLLocationCoordinate2D,markerArray: [GMSMarker]) -> GMSCoordinateBounds {
         
         var minLat = 0.0
         var minLong = 0.0
@@ -176,11 +189,11 @@ class DirectionManager: NSObject {
         var northEast = CLLocationCoordinate2DMake(maxLat, maxLong)
         var southWest = CLLocationCoordinate2DMake(minLat, minLong)
         
-        minLat = markerArray[0].position.latitude
-        maxLat = markerArray[0].position.latitude
+        minLat = origin.latitude
+        maxLat = origin.latitude
         
-        minLong = markerArray[0].position.longitude
-        maxLong = markerArray[0].position.longitude
+        minLong = origin.longitude
+        maxLong = origin.longitude
         
         
         for marker in markerArray {

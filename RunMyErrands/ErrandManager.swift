@@ -10,6 +10,7 @@
 import Foundation
 import Parse
 
+
 @objc class ErrandManager: NSObject {
     
     private var errandsDictionary:NSMutableDictionary!

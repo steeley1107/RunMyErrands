@@ -22,17 +22,6 @@ class CustomInfoWindow: UIView {
     
     
     override func awakeFromNib() {
-        
-        
-        
-//        let insetsLeft = UIEdgeInsetsMake(0, 0, 55, 30)
-//        let insetsRight = UIEdgeInsetsMake(0, 30, 55, 0)
-//
-//        
-//        
-//        bubbleLeft.image = bubbleLeft.image?.resizableImageWithCapInsets(insetsLeft)
-//
-//        bubbleRight.image = bubbleRight.image?.resizableImageWithCapInsets(insetsRight)
 
     }
 }

@@ -12,9 +12,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     //Mark: Properties
     
-    
     @IBOutlet weak var errandsTableView: UITableView!
-    
     
     var origin: CLLocationCoordinate2D!
     var destination: CLLocationCoordinate2D!
@@ -24,7 +22,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     var travelMode = TravelModes.driving
     
-    var task: Task!
+    //var task: Task!
     var taskArray:[Task] = []
     
     var orderedMarkerArray: [GMSMarker] = []
@@ -32,7 +30,10 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     var errandsManager: ErrandManager!
     
+    var activeErrandArray:[Task] = []
     
+    //var activeErrandSet: Set<String> = Set()
+    var direction = Direction()
     
     //Mark:  Load ViewController
     override func viewDidLoad() {
@@ -44,16 +45,17 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         self.locationManager = GeoManager.sharedManager()
         self.locationManager.startLocationManager()
         
-        
         self.errandsTableView.delegate = self
         self.errandsTableView.dataSource = self
         
+        self.direction = Direction()
         
     }
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        errandsTableView.reloadData()
         
         errandsManager.fetchIncompleteTask() { (success) -> () in
             if success {
@@ -96,8 +98,6 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         let task:Task = errandsManager.fetchErrand(indexPath)!
         
-        
-        
         cell.titleLabel.text = task.title
         cell.subtitleLabel.text = task.subtitle
         
@@ -110,12 +110,10 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         }
         else if task.isActive == true {
             cell.accessoryType = .Checkmark
+            activeErrandArray.append(task)
         }
         
-        
-        
         return cell
-        
     }
     
     
@@ -124,17 +122,10 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    
-    
-    
-    
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //After tapping highlight doesn't linger
         errandsTableView.deselectRowAtIndexPath(indexPath, animated: false)
-        
-        let activeErrandsArray = NSMutableArray()
         
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
@@ -144,21 +135,107 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             if task.isActive == false {
                 task.isActive = true
                 cell.accessoryType = .Checkmark
-                activeErrandsArray.addObject(task)
+                activeErrandArray.append(task)
+                
                 
             }else {
                 task.isActive = false
-                cell.accessoryType = .None
-                activeErrandsArray.removeObject(task)
+                
+                if let index = activeErrandArray.indexOf(task) {
+                    activeErrandArray.removeAtIndex(index)
+                    cell.accessoryType = .None
+                    
+                }
             }
-            
-            
+        }
+        errandsTableView.reloadData()
+    }
+    
+    
+    //Mark: - Navigation
+    
+    @IBAction func runErrnadsButton(sender: AnyObject) {
+        
+        for task in activeErrandArray {
+            task.saveInBackground()
         }
         
+        
+        performSegueWithIdentifier("ErrandsManagerMap", sender: nil)
     }
+    
+    
+    
+    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
         
+        if (segue.identifier == "ErrandsManagerMap") {
+            let errandsManagerMapVC:ErrandsManagerMapViewController = segue!.destinationViewController as! ErrandsManagerMapViewController
+            direction.markerArray.removeAll()
+            for activeTask in self.activeErrandArray {
+                
+                    let marker = activeTask.makeMarker()
+                    marker.userData = activeTask
+                    direction.markerArray += [marker]
+            }
+            
+            errandsManagerMapVC.direction = direction
+        }
+    }
+    
+    
+    @IBAction func travelMode(sender: UISegmentedControl) {
         
+        switch sender.selectedSegmentIndex {
+        case 0:
+            direction.travelMode = .driving
+            break
+        case 1:
+            direction.travelMode = .walking
+            break
+        case 2:
+            direction.travelMode = .bicycling
+            break
+        default:
+            direction.travelMode = .driving
+            break;
+        }
+    }
+    
+    
+    @IBAction func finalDestination(sender: UISegmentedControl) {
         
+        switch sender.selectedSegmentIndex {
+        case 0:
+            direction.destinationHome = false
+            break
+        case 1:
+            direction.destinationHome = true
+            break
+        default:
+            direction.destinationHome = false
+            break;
+        }
+    }
+    
+    
+    @IBAction func FinishErrands(sender: AnyObject) {
         
-        
+        direction.markerArray.removeAll()
+        for task in activeErrandArray {
+            
+            if let index = activeErrandArray.indexOf(task) {
+                task.isActive = false
+                task.saveInBackground()
+                activeErrandArray.removeAtIndex(index)
+                
+            }
+        }
+        errandsTableView.reloadData()
+    }
+    
+    
+    
+    
+    
+    
 }

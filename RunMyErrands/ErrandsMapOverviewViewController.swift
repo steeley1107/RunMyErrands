@@ -19,6 +19,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     var errandsManager: ErrandManager!
     var didFindMyLocation = false
     var taskArray:[Task] = []
+    var origin: CLLocationCoordinate2D!
     
     
     //Mark: ViewController Display
@@ -47,6 +48,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         if !didFindMyLocation {
             let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
             mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
+            origin = myLocation.coordinate
             mapView.settings.myLocationButton = true
             didFindMyLocation = true
         }
@@ -106,7 +108,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         }
         
         
-        let bounds =  self.directionTask.zoomMapLimits(markerArray)
+        let bounds =  self.directionTask.zoomMapLimits(origin, markerArray: markerArray)
         self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
     }
     
