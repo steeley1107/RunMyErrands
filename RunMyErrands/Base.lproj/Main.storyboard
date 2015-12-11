@@ -713,7 +713,7 @@
                                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <size key="shadowOffset" width="0.0" height="1"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Killin It All the Time&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ab0-un-ZKq">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ab0-un-ZKq">
                                                 <rect key="frame" x="0.0" y="45" width="442" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -857,6 +857,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="profileImageView" destination="ma6-xG-h57" id="x3m-OI-I2U"/>
+                        <outlet property="statusLabel" destination="Ab0-un-ZKq" id="da8-8z-etc"/>
                         <outlet property="tableView" destination="LAS-QD-NDc" id="K5G-Kl-FKe"/>
                         <outlet property="userDetailLabel" destination="cEu-fp-1LQ" id="6Kp-Ei-BJh"/>
                         <outlet property="usernameLabel" destination="uSY-1J-S6T" id="NSG-kC-zeJ"/>
@@ -1521,7 +1522,7 @@
                                         </connections>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8v-vy-kKc">
-                                        <rect key="frame" x="250" y="231" width="100" height="30"/>
+                                        <rect key="frame" x="250" y="246" width="100" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="H9L-hg-zXb"/>
@@ -1530,8 +1531,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="editProfile:" destination="rKX-s6-iea" eventType="touchUpInside" id="geP-Uq-c2a"/>
-                                            <segue destination="fF1-8m-bHb" kind="show" id="Pt7-xZ-tbO"/>
+                                            <segue destination="fF1-8m-bHb" kind="show" id="9OT-GC-CcJ"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NP-Fl-EyF">
@@ -1577,7 +1577,7 @@
                                     <constraint firstItem="c7z-oK-zx6" firstAttribute="bottom" secondItem="4NP-Fl-EyF" secondAttribute="top" constant="-10" id="5mU-fn-fG6"/>
                                     <constraint firstItem="6WP-j2-t4y" firstAttribute="leading" secondItem="4NP-Fl-EyF" secondAttribute="leading" id="7dQ-1e-BQl"/>
                                     <constraint firstItem="4NP-Fl-EyF" firstAttribute="bottom" secondItem="3uj-ru-fig" secondAttribute="bottom" id="7w8-fZ-gBH"/>
-                                    <constraint firstItem="I8v-vy-kKc" firstAttribute="top" secondItem="ViS-0t-TJO" secondAttribute="bottom" constant="10" id="Ayl-do-avt"/>
+                                    <constraint firstItem="I8v-vy-kKc" firstAttribute="top" secondItem="ViS-0t-TJO" secondAttribute="bottom" constant="25" id="Ayl-do-avt"/>
                                     <constraint firstItem="N9R-Xl-nt5" firstAttribute="trailing" secondItem="3uj-ru-fig" secondAttribute="trailing" id="GTT-3H-tih"/>
                                     <constraint firstItem="ViS-0t-TJO" firstAttribute="leading" secondItem="VMF-Vt-ALd" secondAttribute="trailing" constant="15" id="Kfz-mb-s5b"/>
                                     <constraint firstItem="N9R-Xl-nt5" firstAttribute="top" secondItem="3uj-ru-fig" secondAttribute="bottom" constant="8" id="MBJ-q1-DWU"/>
@@ -1626,6 +1626,12 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufb-OH-dh3">
+                                        <rect key="frame" x="20" y="147" width="97" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1635,7 +1641,9 @@
                                     <constraint firstAttribute="trailing" secondItem="Cue-Pt-Lh1" secondAttribute="trailing" constant="20" id="6f4-bD-0qE"/>
                                     <constraint firstItem="Mi4-te-c3v" firstAttribute="centerY" secondItem="Q9g-yU-iwM" secondAttribute="centerY" id="Dbh-be-3LT"/>
                                     <constraint firstItem="MK7-St-MPo" firstAttribute="centerX" secondItem="Cue-Pt-Lh1" secondAttribute="centerX" id="EuR-7c-fPk"/>
+                                    <constraint firstItem="ufb-OH-dh3" firstAttribute="leading" secondItem="eS9-pE-C6e" secondAttribute="leading" id="RKu-GS-drv"/>
                                     <constraint firstItem="Mi4-te-c3v" firstAttribute="leading" secondItem="Q9g-yU-iwM" secondAttribute="leading" constant="20" id="WFm-3u-oqQ"/>
+                                    <constraint firstItem="ufb-OH-dh3" firstAttribute="top" secondItem="eS9-pE-C6e" secondAttribute="bottom" constant="4" id="ekE-Nd-h39"/>
                                     <constraint firstItem="Cue-Pt-Lh1" firstAttribute="centerY" secondItem="Mi4-te-c3v" secondAttribute="centerY" id="gf5-g1-MVd"/>
                                     <constraint firstItem="Cue-Pt-Lh1" firstAttribute="top" secondItem="MK7-St-MPo" secondAttribute="bottom" constant="8" id="p9B-hI-q0b"/>
                                     <constraint firstItem="fBy-2W-jbR" firstAttribute="centerX" secondItem="Cue-Pt-Lh1" secondAttribute="centerX" id="tP4-bi-sI6"/>
@@ -1673,7 +1681,7 @@
         <!--Edit Profile-->
         <scene sceneID="z9t-Kj-CoW">
             <objects>
-                <viewController id="fF1-8m-bHb" sceneMemberID="viewController">
+                <viewController id="fF1-8m-bHb" customClass="EditProfileViewController" customModule="RunMyErrands" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kbi-IA-boB"/>
                         <viewControllerLayoutGuide type="bottom" id="62L-tZ-Zf6"/>
@@ -1729,6 +1737,9 @@
                                         <exclude reference="rYl-d5-Lu5"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="editProfile:" destination="fF1-8m-bHb" eventType="touchUpInside" id="ywm-Zi-92M"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -1755,6 +1766,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Profile" id="nje-mX-Yd2"/>
+                    <connections>
+                        <outlet property="addressTextField" destination="6S3-nV-IOF" id="P2Y-xA-ORw"/>
+                        <outlet property="nameTextField" destination="ayD-j2-8lU" id="JXh-1r-so7"/>
+                        <outlet property="statusTextField" destination="WOC-yW-IbR" id="yd8-yJ-B0s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSX-u7-Q6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

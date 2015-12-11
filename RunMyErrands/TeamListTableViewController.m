@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userDetailLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
+
 @property NSCache *imageCache;
 @end
 
@@ -31,10 +34,18 @@
     self.groupMembers = [NSMutableDictionary new];
 
 
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
     PFUser *user = [PFUser currentUser];
     NSLog(@"User: %@", user.username);
     self.usernameLabel.text = [user[@"name"] capitalizedString];
     self.userDetailLabel.text = [NSString stringWithFormat:@"Total Number of Errands Completed: %i", [user[@"totalErrandsCompleted"] intValue]];
+    
+    self.statusLabel.text = user[@"status"];
     
     PFFile *image = user[@"profile_Picture"];
     
@@ -55,10 +66,6 @@
             });
         }];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
     
     [self loadGroups];
 }

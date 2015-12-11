@@ -27,6 +27,7 @@
 		520B47411C0FEA81006F1FDA /* JoinGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520B47401C0FEA81006F1FDA /* JoinGroupViewController.swift */; };
 		523E40FF1BF843A900AFBEB7 /* ErrandListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E40FE1BF843A900AFBEB7 /* ErrandListViewController.m */; };
 		523E41021BF843D300AFBEB7 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E41011BF843D300AFBEB7 /* DetailViewController.m */; };
+		525712771C1A866B005775B4 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525712761C1A866B005775B4 /* EditProfileViewController.swift */; };
 		5257FBBF1BF809CE005CC88D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5257FBBE1BF809CE005CC88D /* main.m */; };
 		5257FBC21BF809CE005CC88D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5257FBC11BF809CE005CC88D /* AppDelegate.m */; };
 		5257FBC81BF809CE005CC88D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5257FBC61BF809CE005CC88D /* Main.storyboard */; };
@@ -114,6 +115,7 @@
 		523E40FE1BF843A900AFBEB7 /* ErrandListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrandListViewController.m; sourceTree = "<group>"; };
 		523E41001BF843D300AFBEB7 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		523E41011BF843D300AFBEB7 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		525712761C1A866B005775B4 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		5257FBBA1BF809CE005CC88D /* RunMyErrands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunMyErrands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5257FBBE1BF809CE005CC88D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5257FBC01BF809CE005CC88D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				52CA6F0D1BFF963A003E3437 /* TeamListTableViewController.h */,
 				52CA6F0E1BFF963A003E3437 /* TeamListTableViewController.m */,
 				527023001C1A35F20034AD23 /* SettingsViewController.swift */,
+				525712761C1A866B005775B4 /* EditProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525712771C1A866B005775B4 /* EditProfileViewController.swift in Sources */,
 				520B473F1C0FCE51006F1FDA /* CreateNewGroupViewController.swift in Sources */,
 				523E41021BF843D300AFBEB7 /* DetailViewController.m in Sources */,
 				52CE28701C125F6100046BF2 /* ErrandManager.swift in Sources */,
