@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="veq-YI-bej">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -1737,6 +1736,7 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="6S3-nV-IOF" firstAttribute="width" secondItem="ayD-j2-8lU" secondAttribute="width" id="6JY-5W-XsF"/>
                             <constraint firstItem="d4U-5d-Xtc" firstAttribute="top" secondItem="ayD-j2-8lU" secondAttribute="bottom" constant="8" id="AE8-sh-iU2"/>
@@ -1758,6 +1758,9 @@
                             <constraint firstItem="6S3-nV-IOF" firstAttribute="top" secondItem="fxk-W2-zbJ" secondAttribute="bottom" constant="8" id="v8D-1S-VdB"/>
                             <constraint firstItem="lAZ-86-7qS" firstAttribute="centerX" secondItem="Pqt-7T-boW" secondAttribute="centerX" id="ziA-hJ-Y5b"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Qy2-DP-gaL" appends="YES" id="0FC-ND-d4G"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Profile" id="nje-mX-Yd2"/>
                     <connections>
@@ -1767,6 +1770,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSX-u7-Q6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Qy2-DP-gaL">
+                    <connections>
+                        <action selector="tapGesture:" destination="fF1-8m-bHb" id="Od1-Xa-ymf"/>
+                        <outlet property="delegate" destination="fF1-8m-bHb" id="s4l-HP-SkU"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1089" y="2638"/>
         </scene>

@@ -45,6 +45,13 @@ class EditProfileViewController: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
 
+    
+    @IBAction func tapGesture(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+
+    
+    
     /*
     // MARK: - Navigation
 
