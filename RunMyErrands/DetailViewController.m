@@ -8,10 +8,11 @@
 
 #import "DetailViewController.h"
 #import <Parse/Parse.h>
+#import "RunMyErrands-Swift.h"
 
-@interface DetailViewController () <MKMapViewDelegate>
+@interface DetailViewController () <GMSMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
 @end
 
@@ -19,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.taskNameLabel.text =  self.task.title;
     self.taskDescriptionLabel.text = [NSString stringWithFormat:@"DESCRIPTION: %@", self.task.taskDescription];
     self.locationNameLabel.text = [NSString stringWithFormat:@"WHERE: %@", self.task.subtitle];
@@ -100,34 +101,43 @@
 }
 
 
- #pragma mark - Geo
+#pragma mark - Geo
 
 - (void) initiateMap {
- 
-        MKCoordinateRegion mapRegion;
-        mapRegion.center = self.task.coordinate;
-        mapRegion.span.latitudeDelta = 0.005;
-        mapRegion.span.longitudeDelta = 0.005;
-        [self.mapView setRegion:mapRegion animated: YES];
-        [self.mapView addAnnotation:self.task];
+    
+    
+    GMSMarker *marker = [GMSMarker markerWithPosition:self.task.coordinate];
+    
+    marker.title = self.task.title;
+    marker.snippet = self.task.subtitle;
+    marker.userData = self.task;
+    marker.map = self.mapView;
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:(self.task.coordinate) zoom:14.0];
+    self.mapView.camera = camera;
+}
+
+- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker {
+    
+    CustomInfoWindow *infoWindow = [[[NSBundle mainBundle]loadNibNamed:@"CustomInfoWindow"
+                                                                 owner:self
+                                                               options:nil] objectAtIndex:0];
+    
+    infoWindow.title.text = marker.title;
+    infoWindow.snippit.text = marker.snippet;
+    
+    Task *task = marker.userData;
+    NSString *imageName = [task imageName:task.category.intValue];
+    infoWindow.icon.image = [UIImage imageNamed:imageName];
+    
+    [infoWindow layoutIfNeeded];
+
+    return infoWindow;
 }
 
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    
-    if (![annotation isKindOfClass:[Task class]]) {
-        return nil;
-    }
-    
-    Task *task = (Task *) annotation;
-    
-    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomDAnno"];
-    
-    if (!annotationView) {
-        annotationView = task.annoView;
-    }else {
-        annotationView.annotation = annotation;
-    }
-    return annotationView;
-}
+
+
+
+
 @end

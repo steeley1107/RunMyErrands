@@ -63,7 +63,13 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         infoWindow.title.text = marker.title
         infoWindow.snippit.text = marker.snippet
         
+        let task:Task = marker.userData as! Task
+        let imageName:String = task.imageName(task.category.intValue)
+        infoWindow.icon.image = UIImage(named:imageName)
+        
         infoWindow.layoutIfNeeded()
+        
+        
         
         return infoWindow
     }
