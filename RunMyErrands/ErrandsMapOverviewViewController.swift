@@ -139,7 +139,6 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         errandsManager.fetchData { (success) -> () in
             if success {
-                
                 let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
                 
                 for var index in 0..<numberOfGroups {

@@ -90,6 +90,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:ErrandsManagerTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ErrandsManagerTableViewCell
         
+        cell.selectionStyle = .None
+        
         cell.titleLabel.text = nil
         cell.subtitleLabel.text = nil
         cell.titleLabel.attributedText = nil
@@ -132,6 +134,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         //After tapping highlight doesn't linger
         errandsTableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             
@@ -250,6 +253,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
     }
+    
     
     func ContainsTask(array: [Task], task: Task) -> Bool {
         
