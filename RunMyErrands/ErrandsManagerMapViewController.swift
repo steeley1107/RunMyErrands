@@ -32,7 +32,10 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     var routePolyline: GMSPolyline!
     
+    var legPolyLines:[GMSPolyline] = []
+    
     var originMarker: GMSMarker!
+    var destinationMarker: GMSMarker!
     
     var didFindMyLocation = false
     
@@ -79,7 +82,6 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
             getHomeLocation()
             didFindMyLocation = true
             mapView.removeObserver(self, forKeyPath: "myLocation")
-            configureMapAndMarkersForRoute()
             
         }
     }
@@ -88,36 +90,50 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     func getHomeLocation() {
         
         let user = PFUser.currentUser()
-        let tempHome = "128 west hastings st. Vancouver On"
-        //if let homeAddress = user!["home"] {
-        
-        //let destinationAddress = homeAddress as! String
-        let  destinationAddress = tempHome
-        
-        let geocoder = CLGeocoder()
-        
-        geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-            if let placemark = placemarks?[0] {
-                
-                let location = placemark.location
-                self.destination = location!.coordinate
-            }
-        })
-    
-        //}
+        if let homeAddress = user!["home"] {
+            
+            let destinationAddress = homeAddress as! String
+            
+            let geocoder = CLGeocoder()
+            
+            geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+                if let placemark = placemarks?[0] {
+                    
+                    let location = placemark.location
+                    self.destination = location!.coordinate
+                    
+                    self.createRoute()
+                }
+            })
+            
+        }
     }
     
     
     func configureMapAndMarkersForRoute() {
-        //self.mapView.camera = GMSCameraPosition.cameraWithTarget(self.directionTask.originCoordinate, zoom: 14.0)
         
         originMarker = GMSMarker(position: self.origin)
         originMarker.map = self.mapView
         originMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
-        originMarker.title = self.directionTask.originAddress
-        originMarker.snippet = "Start Location"
+        originMarker.title = "Start Location"
+        let originString = self.directionTask.originAddress
+        if let range = originString.rangeOfString(",") {
+            let originAddress = originString[originString.startIndex..<range.startIndex]
+            originMarker.snippet = originAddress
+        }
         
-        createRoute()
+        if direction.destinationHome == true && destination != nil{
+            
+            destinationMarker = GMSMarker(position: self.destination)
+            destinationMarker.map = self.mapView
+            destinationMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
+            destinationMarker.title = "Home"
+            let destinationString = self.directionTask.destinationAddress
+            if let range = destinationString.rangeOfString(",") {
+                let destinationAddress = destinationString[destinationString.startIndex..<range.startIndex]
+                destinationMarker.snippet = destinationAddress
+            }
+        }
     }
     
     
@@ -140,6 +156,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
                     marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
                 }
                 
+                self.configureMapAndMarkersForRoute()
             }
         })
     }
@@ -181,6 +198,33 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         
         
+        //show path //
+        
+        for polyline in legPolyLines {
+            polyline.map = nil
+        }
+        
+        if marker.title == "Home" || (marker.title == "Start Location" && direction.destinationHome == false) {
+            
+            let legIndex = directionTask.waypointOrder.count
+            let routes = directionTask.legPolyline(legIndex)
+            
+            for aRoute in routes {
+                aRoute.map = mapView
+                legPolyLines += [aRoute]
+            }
+        }
+        
+        if let index = orderedMarkerArray.indexOf(marker) {
+            let routes = directionTask.legPolyline(index)
+            
+            for aRoute in routes {
+                aRoute.map = mapView
+                legPolyLines += [aRoute]
+            }
+        }
+        
+        
         if marker.userData != nil {
             
             let task:Task = marker.userData as! Task
@@ -190,9 +234,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
             for eachMarker in orderedMarkerArray {
                 eachMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
             }
-            
             marker.icon = GMSMarker.markerImageWithColor(UIColor.cyanColor())
-            
         }
         return infoWindow
     }
@@ -200,7 +242,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     func zoomMap() {
         
-        let bounds =  self.directionTask.zoomMapLimits(origin, markerArray: direction.markerArray)
+        let bounds =  self.directionTask.zoomMapLimits(origin, destination: destination, markerArray: direction.markerArray)
         self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
         mapView.animateToViewingAngle(45)
     }
@@ -210,7 +252,10 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     //Mark: - Navigation
     
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        performSegueWithIdentifier("showDetailFromEMan", sender: marker.userData as! Task)
+        
+        if marker.userData != nil {
+            performSegueWithIdentifier("showDetailFromEMan", sender: marker.userData as! Task)
+        }
     }
     
     
@@ -262,6 +307,18 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         }
         marker.icon = GMSMarker.markerImageWithColor(UIColor.cyanColor())
         mapView.selectedMarker = marker
+        
+        for polyline in legPolyLines {
+            polyline.map = nil
+        }
+        
+        let routes = directionTask.legPolyline(indexPath.row)
+        
+        for aRoute in routes {
+            aRoute.map = mapView
+            legPolyLines += [aRoute]
+        }
+        
     }
     
     //Reorder the waypoints based off google directions.
