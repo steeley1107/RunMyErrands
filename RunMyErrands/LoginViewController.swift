@@ -14,7 +14,19 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var stackView: UIStackView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if (PFUser.currentUser() != nil) {
+            self.performSegueWithIdentifier("showErrandList", sender: nil)
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+    }
     
     @IBAction func login(sender: UIButton) {
         
@@ -23,29 +35,22 @@ class LoginViewController: UIViewController {
                 PFUser.logInWithUsernameInBackground(username, password:password) {
                     (user: PFUser?, error: NSError?) -> Void in
                     if user != nil {
-                        // Do stuff after successful login.
+                        // Go to next storyboard
                         self.performSegueWithIdentifier("showErrandList", sender: nil)
                     } else {
-                        // The login failed. Check error to see why.
+                        // Shake screen to indicate invalid login
+                        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+                        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+                        animation.duration = 0.5
+                        animation.values = [-20,20,-20,20,-10,10,-5,5,0]                    
+                        self.stackView.layer.addAnimation(animation, forKey: "transform.translation.x")
                     }
                 }
         }
     }
-    
+
     @IBAction func twitterLogin(sender: UIButton) {
         
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if (PFUser.currentUser() != nil) {
-            self.performSegueWithIdentifier("showErrandList", sender: nil)
-        }        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
     }
     
     @IBAction func facebookLogin(sender: UIButton) {

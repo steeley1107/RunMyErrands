@@ -70,7 +70,15 @@
 }
 
 - (void) updatePushChannels {
-    NSArray *channels = [self.errandManager fetchKeys];
+    PFUser *user = [PFUser currentUser];
+    
+    NSArray *channels;
+    if ([user[@"pushNotify"] boolValue]) {
+        channels = [self.errandManager fetchKeys];
+    } else {
+        channels = @[];
+    }
+
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     currentInstallation.channels = channels;
     [currentInstallation saveInBackground];

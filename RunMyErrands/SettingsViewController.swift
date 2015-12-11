@@ -35,6 +35,25 @@ class SettingsViewController: UIViewController {
         user!["pushNotify"] = notifySwitch.on
         user!["geoRadius"] = NSNumber(float: slider.value)
         user?.saveInBackground()
+        
+        let pushNotify = user!["pushNotify"].boolValue
+        
+        if (pushNotify != nil) {
+
+            let currentInstallation = PFInstallation.currentInstallation()
+            let errandManager = ErrandManager()
+            errandManager.fetchData({ (success) -> () in
+                var channels:[String]
+                channels = errandManager.fetchKeys()
+                currentInstallation.channels = channels
+                currentInstallation.saveInBackground()
+            })
+            
+        } else {
+            let currentInstallation = PFInstallation.currentInstallation()
+            currentInstallation.channels = []
+            currentInstallation.saveInBackground()
+        }
     }
     
     func sliderValueChanged(sender: AnyObject) {
@@ -47,8 +66,26 @@ class SettingsViewController: UIViewController {
         user = PFUser.currentUser()
 
         userLabel.text = user!["name"].capitalizedString
-        statusLabel.text = user!["status"] as? String
-        addressLabel.text = user!["home"] as? String
+        
+        if let status = user!["status"] as? String {
+            if status == "" {
+                statusLabel.text = "N/A"
+            }else {
+                statusLabel.text = status
+            }
+        } else {
+            statusLabel.text = "N/A"
+        }
+        
+        if let home = user!["home"] as? String {
+            if home == "" {
+                addressLabel.text = "N/A"
+            }else {
+                addressLabel.text = home
+            }
+        } else {
+            addressLabel.text = "N/A"
+        }
         
         notifySwitch.on = user!["pushNotify"].boolValue
         
