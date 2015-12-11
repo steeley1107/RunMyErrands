@@ -38,6 +38,8 @@ class DirectionManager: NSObject {
     var totalDuration: String!
     var totalDurationInSeconds: UInt = 0
     
+    // var legPolylineArray: Array<AnyObject>!
+    
     
     //Request Directions from Google.
     
@@ -84,6 +86,8 @@ class DirectionManager: NSObject {
                 
                 let directionsURL = NSURL(string: directionsURLString)
                 
+                print("url \(directionsURL)")
+                
                 let task = NSURLSession.sharedSession().dataTaskWithURL(directionsURL!) { (data, response, error) -> Void in
                     if(error != nil) {
                         print(error)
@@ -97,6 +101,7 @@ class DirectionManager: NSObject {
                         
                         //Cheak to see if google returned good data.
                         if status == "OK" {
+                            
                             self.processDirections(dictionary!)
                             self.calculateTotalDistanceAndDuration(dictionary!)
                             completionHandler(sucess: true)
@@ -135,6 +140,32 @@ class DirectionManager: NSObject {
         
     }
     
+    func legPolyline(legNumber: Int) -> [GMSPolyline] {
+        
+        var routes:[GMSPolyline] = [GMSPolyline]()
+        let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
+        
+        print("legNumer \(legNumber)")
+        
+        if legNumber < legs.count {
+            
+            let steps = legs[legNumber]["steps"] as! Array<Dictionary<NSObject, AnyObject>>
+            
+            for step in steps {
+                
+                let polyline = step["polyline"] as! Dictionary<NSObject, AnyObject>
+                let points = polyline["points"] as! String
+                
+                let path: GMSPath = GMSPath(fromEncodedPath: points)
+                let routePolyline1 = GMSPolyline(path: path)
+                routePolyline1.strokeWidth = 2.0
+                routePolyline1.strokeColor = UIColor.greenColor()
+                
+                routes += [routePolyline1]
+            }
+        }
+        return routes
+    }
     
     //Calculate the duration and distance
     func calculateTotalDistanceAndDuration(directions: Dictionary<NSObject, AnyObject>) {
@@ -179,7 +210,7 @@ class DirectionManager: NSObject {
     
     
     //zoom the map to the limits of the tasks
-    func zoomMapLimits(origin: CLLocationCoordinate2D,markerArray: [GMSMarker]) -> GMSCoordinateBounds {
+    func zoomMapLimits(origin: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, markerArray: [GMSMarker]) -> GMSCoordinateBounds {
         
         var minLat = 0.0
         var minLong = 0.0
@@ -194,6 +225,20 @@ class DirectionManager: NSObject {
         
         minLong = origin.longitude
         maxLong = origin.longitude
+        
+        //add destination to bounds
+        if destination.latitude < minLat {
+            minLat = destination.latitude
+        }
+        if destination.latitude > maxLat {
+            maxLat = destination.latitude
+        }
+        if destination.longitude < minLong {
+            minLong = destination.longitude
+        }
+        if destination.longitude > maxLong {
+            maxLong = destination.longitude
+        }
         
         
         for marker in markerArray {

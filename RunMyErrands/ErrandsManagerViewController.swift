@@ -13,10 +13,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     //Mark: Properties
     
     @IBOutlet weak var errandsTableView: UITableView!
-    
     @IBOutlet weak var transportationSegment: UISegmentedControl!
     @IBOutlet weak var finalDestinationSegment: UISegmentedControl!
-    
     
     var origin: CLLocationCoordinate2D!
     var destination: CLLocationCoordinate2D!
@@ -26,8 +24,6 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     var travelMode = TravelModes.driving
     
-    //var taskArray:[Task] = []
-    
     var orderedMarkerArray: [GMSMarker] = []
     var markerArray: [GMSMarker] = []
     
@@ -35,8 +31,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     var activeErrandArray:[Task]!
     
-    //var activeErrandSet: Set<String> = Set()
     var direction = Direction()
+    
     
     //Mark:  Load ViewController
     override func viewDidLoad() {
@@ -58,7 +54,6 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         self.errandsTableView.dataSource = self
         
         self.direction = Direction()
-        
     }
     
     
@@ -83,16 +78,13 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         let count:Int = self.errandsManager.fetchNumberOfGroups() as Int
-        print("count \(count)")
         return count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count:Int = self.errandsManager.fetchNumberOfRowsInSection(section)
-        print("count \(count)")
         return count
     }
-    
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -120,20 +112,12 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             cell.activeLabel.hidden = false
         }
         
-        
-        if ContainsTask(activeErrandArray, task: task) {
+    
+        if ContainsTask(activeErrandArray, task: task) && task.isActive == false {
             cell.accessoryType = .Checkmark
         }else {
             cell.accessoryType = .None
         }
-        
-        
-        
-        
-        
-        
-
-        
         
         return cell
     }
@@ -147,29 +131,24 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //After tapping highlight doesn't linger
-        errandsTableView.deselectRowAtIndexPath(indexPath, animated: false)
-        
+        errandsTableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             
             let task:Task = errandsManager.fetchErrand(indexPath)!
             
-            if task.isActive == false {
+            if cell.accessoryType == .None {
                 
-                task.isActive = true
                 cell.accessoryType = .Checkmark
                 if !ContainsTask(activeErrandArray, task: task) {
                     activeErrandArray.append(task)
                 }
                 
-            }else {
-                task.isActive = false
-                cell.accessoryType = .None
-                
+            } else {
                 if let index = activeErrandArray.indexOf(task) {
+                    cell.accessoryType = .None
                     activeErrandArray.removeAtIndex(index)
                 }
-                
             }
             
         }
@@ -182,13 +161,12 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func runErrnadsButton(sender: AnyObject) {
         
         for task in activeErrandArray {
+            task.isActive = true
             task.saveInBackground()
         }
         
-        
         performSegueWithIdentifier("ErrandsManagerMap", sender: nil)
     }
-    
     
     
     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
@@ -196,8 +174,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         if (segue.identifier == "ErrandsManagerMap") {
             let errandsManagerMapVC:ErrandsManagerMapViewController = segue!.destinationViewController as! ErrandsManagerMapViewController
             direction.markerArray.removeAll()
+            
             for activeTask in self.activeErrandArray {
-                
                 let marker = activeTask.makeMarker()
                 marker.userData = activeTask
                 direction.markerArray += [marker]
@@ -208,6 +186,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
+    //Mark: Mode selections
     @IBAction func travelMode(sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
@@ -246,27 +225,31 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func FinishErrands(sender: AnyObject) {
         
         direction.markerArray.removeAll()
+        
         for task in activeErrandArray {
-            
-            if let index = activeErrandArray.indexOf(task) {
                 task.isActive = false
-                task.saveInBackground()
-                activeErrandArray.removeAtIndex(index)
-            }
         }
         
-//        .saveInBackgroundWithBlock{(success: Bool, error: NSError?) ->Void in
-//            if (success) {
-//                print("no problem")
-//            }
-//            else
-//            {
-//                print("problem")
-//            }}
-
-        errandsTableView.reloadData()
+        for task in activeErrandArray {
+            task.saveInBackgroundWithBlock{(success: Bool, error: NSError?) ->Void in
+                if (success) {
+                    if let index = self.activeErrandArray.indexOf(task) {
+                        self.activeErrandArray.removeAtIndex(index)
+                        
+                        self.errandsManager.fetchIncompleteTask() { (success) -> () in
+                            if success {
+                                self.errandsTableView.reloadData()
+                            }
+                        }
+                    }
+                    else
+                    {
+                        print("problem saving errands")
+                    }
+                }
+            }
+        }
     }
-    
     
     func ContainsTask(array: [Task], task: Task) -> Bool {
         
@@ -277,7 +260,6 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         return false
-        
     }
     
     

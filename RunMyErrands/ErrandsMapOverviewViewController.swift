@@ -108,7 +108,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         }
         
         
-        let bounds =  self.directionTask.zoomMapLimits(origin, markerArray: markerArray)
+        let bounds =  self.directionTask.zoomMapLimits(origin, destination: origin, markerArray: markerArray)
         self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
     }
     
