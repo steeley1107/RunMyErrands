@@ -72,8 +72,7 @@
     [query getObjectInBackgroundWithId:self.task.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
         Task *selectedTask = (Task*)object;
         selectedTask.isComplete = @(YES);
-        self.task.isComplete = @(YES);
-        self.task.isActive = @(NO);
+        selectedTask.isActive = @(NO);
         
         [selectedTask saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
