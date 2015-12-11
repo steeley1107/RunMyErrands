@@ -87,7 +87,14 @@
                         PFPush *push = [[PFPush alloc] init];
                         [push setChannel:self.task.group];
                         [push setMessage:[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.task.taskDescription]];
-                        [push sendPushInBackground];
+                        
+                        PFInstallation *installation = [PFInstallation currentInstallation];
+                        [installation removeObject:self.task.group forKey:@"channels"];
+                        [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                            [push sendPushInBackground];
+                            [installation addUniqueObject:self.task.group forKey:@"channels"];
+                        }];
+                        
                         [self viewDidLoad];
                     } else {
                         NSLog(@"Error: %@", error);

@@ -187,6 +187,7 @@
                     <navigationItem key="navigationItem" id="Scx-EV-12w"/>
                     <connections>
                         <outlet property="passwordTextField" destination="YG8-vq-MYB" id="v99-cM-Zef"/>
+                        <outlet property="stackView" destination="3DU-ev-b65" id="alq-Ho-1cQ"/>
                         <outlet property="usernameTextField" destination="3hY-FF-lzq" id="p1h-rt-wYQ"/>
                         <segue destination="MRA-Bf-no6" kind="show" identifier="showErrandList" id="sZy-BU-E7M"/>
                     </connections>

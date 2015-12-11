@@ -47,6 +47,10 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             user.username = usernameTextField.text
             user.password = passwordTextField.text
             user["name"] = usernameTextField.text
+            user["status"] = ""
+            user["pushNotify"] = true
+            user["totalErrandsCompleted"] = 0
+            user["geoRadius"] = 200
             
             user.signUpInBackgroundWithBlock {
                 (succeeded: Bool, error: NSError?) -> Void in
@@ -79,8 +83,12 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                                 }
                                 self.performSegueWithIdentifier("showSignupToTabBar", sender: nil)
                             })
+                        } else {
+                            self.performSegueWithIdentifier("showSignupToTabBar", sender: nil)
                         }
                     })
+            } else {
+              self.performSegueWithIdentifier("showSignupToTabBar", sender: nil)
             }
     }
     
