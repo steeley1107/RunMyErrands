@@ -63,6 +63,15 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         errandsManager.fetchIncompleteTask() { (success) -> () in
             if success {
+                
+                for task in self.activeErrandArray {
+                    if task.isComplete  == true {
+                    
+                        if let index = self.activeErrandArray.indexOf(task) {
+                            self.activeErrandArray.removeAtIndex(index)
+                        }
+                    }
+                }
                 self.errandsTableView.reloadData()
             }
         }

@@ -69,7 +69,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         directionsLabel.hidden = true
     }
-    
+
     
     //Update map with users current location;
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
