@@ -42,6 +42,9 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         populateTaskArray()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        populateTaskArray()
+    }
     
     //Update map with users current location;
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -51,6 +54,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
             origin = myLocation.coordinate
             mapView.settings.myLocationButton = true
             didFindMyLocation = true
+             mapView.removeObserver(self, forKeyPath: "myLocation")
         }
     }
     
@@ -159,6 +163,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
             }
             self.zoomMap()
             self.trackGeoRegions()
+            self.addMarkersToMap()
         }
     }
     
