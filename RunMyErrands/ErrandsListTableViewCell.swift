@@ -17,4 +17,5 @@ class ErrandsListTableViewCell:UITableViewCell {
 
     @IBOutlet weak var subtitleLabel: UILabel!
 
+    @IBOutlet weak var activeLabel: UILabel!
 }

@@ -73,6 +73,8 @@
         Task *selectedTask = (Task*)object;
         selectedTask.isComplete = @(YES);
         self.task.isComplete = @(YES);
+        self.task.isActive = @(NO);
+        
         [selectedTask saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 self.completeButton.enabled = false;

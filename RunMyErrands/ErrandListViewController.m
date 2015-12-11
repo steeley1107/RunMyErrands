@@ -145,6 +145,7 @@
     cell.titleLabel.attributedText = nil;
     cell.subtitleLabel.attributedText = nil;
     cell.categoryImage.image = nil;
+    cell.activeLabel.hidden = true;
     
     Task *taskAtCell = [self.errandManager fetchErrand:indexPath];
     
@@ -187,6 +188,10 @@
         cell.titleLabel.text = [taskAtCell.title capitalizedString];
         cell.subtitleLabel.text = [taskAtCell.subtitle capitalizedString];
         
+    }
+    
+    if ([taskAtCell.isActive boolValue]) {
+        cell.activeLabel.hidden = false;
     }
     
     cell.categoryImage.image = [UIImage imageNamed:imageName];

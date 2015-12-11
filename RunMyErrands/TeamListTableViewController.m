@@ -33,7 +33,8 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.groupMembers = [NSMutableDictionary new];
 
-
+    self.imageCache = [NSCache new];
+    self.imageCache.countLimit = 20;
 
 }
 
@@ -223,7 +224,7 @@
     GroupListTableViewCell *cell = (GroupListTableViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"groupListCell" forIndexPath:indexPath];
     cell.nameLabel.text = @"";
     cell.leaderLabel.text = @"";
-    cell.profilePicture.image = [UIImage imageNamed:@"runmyerrands-grey"];
+    //cell.profilePicture.image = [UIImage imageNamed:@"runmyerrands-grey"];
     
     PFObject *group = self.groups[indexPath.section];
     NSArray *membersArray = [self.groupMembers objectForKey:group.objectId];
@@ -233,30 +234,46 @@
         cell.leaderLabel.text = @"Lead";
     }
 
-    PFFile *image = user[@"profile_Picture"];
+    cell.profilePicture.layer.masksToBounds = YES;
+    cell.profilePicture.layer.cornerRadius = cell.profilePicture.layer.frame.size.width/2;
     
-    if (!image) {
+    UIImage *cachedImage = [self.imageCache objectForKey:user.objectId];
+    
+    //check cache first to see if an image exists in cache
+    if (cachedImage) {
+        //cached image exists
         dispatch_async(dispatch_get_main_queue(), ^{
-            cell.profilePicture.image = [UIImage imageNamed:@"runmyerrands-grey"];
+                cell.profilePicture.image = cachedImage;
         });
     } else {
-        [image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-
-            cell.profilePicture.layer.masksToBounds = YES;
-            cell.profilePicture.layer.cornerRadius = cell.profilePicture.layer.frame.size.width/2;
-            
+        //no cached image exists
+        
+        //check parse
+        PFFile *image = user[@"profile_Picture"];
+        
+        if (!image) {
+            //image doesn't exist in parse set it to placeholder
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (!error) {
-                    cell.profilePicture.image = [UIImage imageWithData:data];
-                } else {
-                    NSLog(@"Error: %@.", error);
-                }
+                cell.profilePicture.image = [UIImage imageNamed:@"runmyerrands-grey"];
             });
-        }];
+        } else {
+            //image exists in parse
+            [image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (!error) {
+                        cell.profilePicture.image = [UIImage imageWithData:data];
+                        [self.imageCache setObject:[UIImage imageWithData:data] forKey:user.objectId];
+                    } else {
+                        NSLog(@"Error: %@.", error);
+                    }
+                });
+            }];
+        }
     }
     
     return cell;
 }
+
 
 #pragma mark - ImagePicker
 
