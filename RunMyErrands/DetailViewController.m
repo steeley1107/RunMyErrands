@@ -89,7 +89,7 @@
                     if (succeeded) {
                         PFPush *push = [[PFPush alloc] init];
                         [push setChannel:self.task.group];
-                        [push setMessage:[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.task.taskDescription]];
+                        [push setMessage:[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.task.title]];
                         
                         PFInstallation *installation = [PFInstallation currentInstallation];
                         [installation removeObject:self.task.group forKey:@"channels"];
