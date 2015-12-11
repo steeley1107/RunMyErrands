@@ -48,17 +48,16 @@
     }
     
     self.imageView.image = [UIImage imageNamed:imageName];
-    
     self.mapView.delegate = self;
     [self initiateMap];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    if (self.task.isComplete) {
-        //turn off button
+    if ([self.task.isComplete boolValue]) {
+        self.completeButton.backgroundColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0];
+        self.completeButton.enabled = false;
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,6 +74,8 @@
         self.task.isComplete = @(YES);
         [selectedTask saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
+                self.completeButton.enabled = false;
+                self.completeButton.backgroundColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0];
                 
                 PFUser *user = [PFUser currentUser];
                 NSNumber *errandsCompleted = user[@"totalErrandsCompleted"];

@@ -31,31 +31,31 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RunMyErrands" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckp-b4-sSJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="RunMyErrands" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckp-b4-sSJ">
                                 <rect key="frame" x="159" y="382" width="283" height="48"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skateboard" translatesAutoresizingMaskIntoConstraints="NO" id="Dnt-qC-ynY">
-                                <rect key="frame" x="260" y="116" width="80" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="gaK-6n-3xH"/>
-                                    <constraint firstAttribute="width" constant="80" id="s3C-mS-SdN"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart" translatesAutoresizingMaskIntoConstraints="NO" id="V9b-F4-WWb">
-                                <rect key="frame" x="404" y="260" width="80" height="80"/>
+                                <rect key="frame" x="384" y="260" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="93Y-uF-zoe"/>
                                     <constraint firstAttribute="height" constant="80" id="VvT-B1-N0S"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radio" translatesAutoresizingMaskIntoConstraints="NO" id="1OX-c8-IXM">
-                                <rect key="frame" x="116" y="260" width="80" height="80"/>
+                                <rect key="frame" x="136" y="260" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="hXU-K6-WV8"/>
                                     <constraint firstAttribute="height" constant="80" id="lQR-fJ-7ac"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skateboard" translatesAutoresizingMaskIntoConstraints="NO" id="Dnt-qC-ynY">
+                                <rect key="frame" x="260" y="136" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="gaK-6n-3xH"/>
+                                    <constraint firstAttribute="width" constant="80" id="s3C-mS-SdN"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -66,10 +66,10 @@
                             <constraint firstItem="ckp-b4-sSJ" firstAttribute="centerX" secondItem="PKt-0c-9HD" secondAttribute="centerX" id="7aZ-NX-iow"/>
                             <constraint firstItem="PKt-0c-9HD" firstAttribute="centerY" secondItem="1OX-c8-IXM" secondAttribute="centerY" id="8xc-o5-zcc"/>
                             <constraint firstItem="ckp-b4-sSJ" firstAttribute="top" secondItem="PKt-0c-9HD" secondAttribute="bottom" constant="18" id="DfJ-GJ-oMi"/>
-                            <constraint firstItem="PKt-0c-9HD" firstAttribute="top" secondItem="Dnt-qC-ynY" secondAttribute="bottom" constant="40" id="E5l-fI-bgv"/>
+                            <constraint firstItem="PKt-0c-9HD" firstAttribute="top" secondItem="Dnt-qC-ynY" secondAttribute="bottom" constant="20" id="E5l-fI-bgv"/>
                             <constraint firstItem="V9b-F4-WWb" firstAttribute="centerY" secondItem="PKt-0c-9HD" secondAttribute="centerY" id="ENV-SV-5d5"/>
-                            <constraint firstItem="PKt-0c-9HD" firstAttribute="leading" secondItem="1OX-c8-IXM" secondAttribute="trailing" constant="40" id="LHO-lu-qkc"/>
-                            <constraint firstItem="V9b-F4-WWb" firstAttribute="leading" secondItem="PKt-0c-9HD" secondAttribute="trailing" constant="40" id="NfH-cQ-K43"/>
+                            <constraint firstItem="PKt-0c-9HD" firstAttribute="leading" secondItem="1OX-c8-IXM" secondAttribute="trailing" constant="20" id="LHO-lu-qkc"/>
+                            <constraint firstItem="V9b-F4-WWb" firstAttribute="leading" secondItem="PKt-0c-9HD" secondAttribute="trailing" constant="20" id="NfH-cQ-K43"/>
                             <constraint firstItem="PKt-0c-9HD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ecx-3S-TRx"/>
                             <constraint firstItem="PKt-0c-9HD" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="iri-aV-Y1u"/>
                         </constraints>

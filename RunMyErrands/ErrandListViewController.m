@@ -46,9 +46,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
-
-
-    
     [self setGreeting];
 
     [self.activitySpinner startAnimating];

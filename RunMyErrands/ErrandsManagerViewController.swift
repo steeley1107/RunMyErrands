@@ -54,6 +54,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         self.locationManager = GeoManager.sharedManager()
         self.locationManager.startLocationManager()
         
+        self.errandsTableView.tableFooterView = UIView()
         self.errandsTableView.delegate = self
         self.errandsTableView.dataSource = self
         

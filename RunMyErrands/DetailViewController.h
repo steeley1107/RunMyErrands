@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (nonatomic) Task *task;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIButton *completeButton;
 
 
 @end
