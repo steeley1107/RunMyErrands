@@ -70,9 +70,11 @@
 - (IBAction)markAsComplete:(UIButton *)sender {
     PFQuery *query = [PFQuery queryWithClassName:@"Task"];
     [query getObjectInBackgroundWithId:self.task.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+ 
         Task *selectedTask = (Task*)object;
         selectedTask.isComplete = @(YES);
         selectedTask.isActive = @(NO);
+
         
         [selectedTask saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
