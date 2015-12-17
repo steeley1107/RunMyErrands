@@ -137,6 +137,7 @@
     for (CLRegion *region in self.locationManager.monitoredRegions) {
         [self.locationManager stopMonitoringForRegion:region];
     }
+    NSLog(@"monitored regions %@", [self.locationManager monitoredRegions]);
 }
 
 

@@ -39,7 +39,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
         addMarkersToMap()
-        populateTaskArray()
+        //populateTaskArray()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -54,7 +54,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
             origin = myLocation.coordinate
             mapView.settings.myLocationButton = true
             didFindMyLocation = true
-             mapView.removeObserver(self, forKeyPath: "myLocation")
+            mapView.removeObserver(self, forKeyPath: "myLocation")
         }
     }
     
@@ -77,7 +77,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         return infoWindow
     }
-
+    
     
     func addMarkersToMap() {
         
@@ -117,7 +117,6 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
             }
         }
         
-        
         let bounds =  self.directionTask.zoomMapLimits(origin, destination: origin, markerArray: markerArray)
         self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
     }
@@ -133,11 +132,11 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         locationManager.removeAllTaskLocation()
         for task in taskArray {
-            let center = task.coordinate()
-            let taskRegion = CLCircularRegion.init(center: center, radius: 200.0, identifier: "\(task.title) \n \(task.subtitle)")
-            
-            taskRegion.notifyOnEntry = true
             if task.isComplete.boolValue == false {
+                
+                let center = task.coordinate()
+                let taskRegion = CLCircularRegion.init(center: center, radius: 200.0, identifier: "\(task.title) \n \(task.subtitle)")
+                taskRegion.notifyOnEntry = true
                 locationManager.addTaskLocation(taskRegion)
             }
         }
@@ -149,11 +148,14 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         errandsManager.fetchData { (success) -> () in
             if success {
+                
                 let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
                 
                 for var index in 0..<numberOfGroups {
                     
                     if let groupTaskArray = self.errandsManager.fetchErrandsForGroup(index) {
+                        
+                        self.taskArray.removeAll()
                         
                         for task in groupTaskArray {
                             self.taskArray += [task]
@@ -164,6 +166,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
             self.zoomMap()
             self.trackGeoRegions()
             self.addMarkersToMap()
+            
         }
     }
     
@@ -172,7 +175,6 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     //Mark: - Navigation
     
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        
         performSegueWithIdentifier("showDetailFromMap", sender: marker.userData as! Task)
     }
     
