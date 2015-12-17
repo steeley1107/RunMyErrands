@@ -33,8 +33,8 @@
 -(CLLocationCoordinate2D) coordinate;
 -(void) setCoordinate:(CLLocationCoordinate2D)newCoordinate;
 -(void) updateCoordinate;
--(MKAnnotationView*)annoView;
--(MKAnnotationView*)annoDetailView;
+//-(MKAnnotationView*)annoView;
+//-(MKAnnotationView*)annoDetailView;
 
 -(GMSMarker*) makeMarker;
 -(NSString*)imageName:(int)catagoryNumber;

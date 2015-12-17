@@ -47,39 +47,39 @@
 }
 
 
--(MKAnnotationView*)annoView {
-    
-    MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:self reuseIdentifier:@"CustomAnno"];
-    
-    NSString *imageName;
-    switch ([self.category intValue]) {
-        case 0:
-            imageName = @"runmyerrands";
-            break;
-        case 1:
-            imageName = @"die";
-            break;
-        case 2:
-            imageName = @"briefcase";
-            break;
-        case 3:
-            imageName = @"cart";
-            break;
-        default:
-            break;
-    }
-    
-    CGSize size = CGSizeMake(40, 40);
-    UIImage *image = [UIImage imageNamed:imageName];
-    UIImage *annoIcon = [self imageWithImage:image scaledToSize:size];
-    annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:annoIcon];
-    
-    annotationView.enabled = YES;
-    annotationView.canShowCallout = YES;
-    annotationView.animatesDrop = YES;
-    
-    return annotationView;
-}
+//-(MKAnnotationView*)annoView {
+//    
+//    MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:self reuseIdentifier:@"CustomAnno"];
+//    
+//    NSString *imageName;
+//    switch ([self.category intValue]) {
+//        case 0:
+//            imageName = @"runmyerrands";
+//            break;
+//        case 1:
+//            imageName = @"die";
+//            break;
+//        case 2:
+//            imageName = @"briefcase";
+//            break;
+//        case 3:
+//            imageName = @"cart";
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    CGSize size = CGSizeMake(40, 40);
+//    UIImage *image = [UIImage imageNamed:imageName];
+//    UIImage *annoIcon = [self imageWithImage:image scaledToSize:size];
+//    annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:annoIcon];
+//    
+//    annotationView.enabled = YES;
+//    annotationView.canShowCallout = YES;
+//    annotationView.animatesDrop = YES;
+//    
+//    return annotationView;
+//}
 
 
 -(GMSMarker*) makeMarker {
@@ -110,50 +110,50 @@
 }
 
 
--(MKAnnotationView*)annoDetailView {
-    
-    MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:self reuseIdentifier:@"CustomDetailAnno"];
-    
-    NSString *imageName;
-    switch ([self.category intValue]) {
-        case 0:
-            imageName = @"runmyerrands";
-            break;
-        case 1:
-            imageName = @"die";
-            break;
-        case 2:
-            imageName = @"briefcase";
-            break;
-        case 3:
-            imageName = @"cart";
-            break;
-        default:
-            break;
-    }
-    
-    CGSize size = CGSizeMake(40, 40);
-    UIImage *image = [UIImage imageNamed:imageName];
-    UIImage *annoIcon = [self imageWithImage:image scaledToSize:size];
-    annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:annoIcon];
-    
-    annotationView.enabled = YES;
-    annotationView.canShowCallout = YES;
-    annotationView.animatesDrop = YES;
-    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    
-    return annotationView;
-    
-}
+//-(MKAnnotationView*)annoDetailView {
+//    
+//    MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:self reuseIdentifier:@"CustomDetailAnno"];
+//    
+//    NSString *imageName;
+//    switch ([self.category intValue]) {
+//        case 0:
+//            imageName = @"runmyerrands";
+//            break;
+//        case 1:
+//            imageName = @"die";
+//            break;
+//        case 2:
+//            imageName = @"briefcase";
+//            break;
+//        case 3:
+//            imageName = @"cart";
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    CGSize size = CGSizeMake(40, 40);
+//    UIImage *image = [UIImage imageNamed:imageName];
+//    UIImage *annoIcon = [self imageWithImage:image scaledToSize:size];
+//    annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:annoIcon];
+//    
+//    annotationView.enabled = YES;
+//    annotationView.canShowCallout = YES;
+//    annotationView.animatesDrop = YES;
+//    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeInfoLight];
+//    
+//    return annotationView;
+//    
+//}
 
 
--(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
+//-(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
+//    UIGraphicsBeginImageContext(newSize);
+//    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return newImage;
+//}
 
 
 @end
