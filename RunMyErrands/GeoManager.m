@@ -154,7 +154,22 @@
 }
 
 
+-(void)checkForErrandsInZone {
 
+    //self.locationManager.distan
+
+
+}
+
+
+- (CLLocationDistance)distanceFromLocation:(const CLLocation *)location {
+
+    CLLocationDistance distance = 5.0;
+    
+    
+
+    return distance;
+}
 
 
 

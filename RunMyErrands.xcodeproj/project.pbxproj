@@ -70,6 +70,7 @@
 		DAA57FC31C1770A100AEC00F /* bubble_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA57FC01C1770A100AEC00F /* bubble_right@3x.png */; };
 		DAA9C8381C17D53E00AF99DA /* ErrandsManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9C8371C17D53E00AF99DA /* ErrandsManagerViewController.swift */; };
 		DAA9C83A1C17E25700AF99DA /* ErrandsManagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9C8391C17E25700AF99DA /* ErrandsManagerTableViewCell.swift */; };
+		DAE308E11C248CCA00534D61 /* GeoFenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE308E01C248CCA00534D61 /* GeoFenceManager.swift */; };
 		DAE753011C18BDC700AFF06F /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE753001C18BDC700AFF06F /* Direction.swift */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +173,7 @@
 		DAA57FC01C1770A100AEC00F /* bubble_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_right@3x.png"; sourceTree = "<group>"; };
 		DAA9C8371C17D53E00AF99DA /* ErrandsManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsManagerViewController.swift; sourceTree = "<group>"; };
 		DAA9C8391C17E25700AF99DA /* ErrandsManagerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsManagerTableViewCell.swift; sourceTree = "<group>"; };
+		DAE308E01C248CCA00534D61 /* GeoFenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoFenceManager.swift; sourceTree = "<group>"; };
 		DAE753001C18BDC700AFF06F /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -344,6 +346,7 @@
 				DA34E84B1C1504CC006C7B05 /* CustomInfoWindow.swift */,
 				529890431BFBD97C00B82D76 /* GeoManager.h */,
 				529890441BFBD97C00B82D76 /* GeoManager.m */,
+				DAE308E01C248CCA00534D61 /* GeoFenceManager.swift */,
 				DA34E8471C15037D006C7B05 /* DirectionManager.swift */,
 				DAE753001C18BDC700AFF06F /* Direction.swift */,
 			);
@@ -626,6 +629,7 @@
 				DA34E8521C153763006C7B05 /* AddTaskOnMapViewController.swift in Sources */,
 				5257FBC21BF809CE005CC88D /* AppDelegate.m in Sources */,
 				DAE753011C18BDC700AFF06F /* Direction.swift in Sources */,
+				DAE308E11C248CCA00534D61 /* GeoFenceManager.swift in Sources */,
 				DA34E8461C15035A006C7B05 /* ErrandsManagerMapViewController.swift in Sources */,
 				DA34E8501C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift in Sources */,
 				529890491BFBD97C00B82D76 /* GeoManager.m in Sources */,
