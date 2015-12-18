@@ -38,8 +38,6 @@ class DirectionManager: NSObject {
     var totalDuration: String!
     var totalDurationInSeconds: UInt = 0
     
-    // var legPolylineArray: Array<AnyObject>!
-    
     
     //Request Directions from Google.
     
