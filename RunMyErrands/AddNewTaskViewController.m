@@ -11,7 +11,7 @@
 #import "Task.h"
 #import "RunMyErrands-Swift.h"
 
-@interface AddNewTaskViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface AddNewTaskViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *taskNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
@@ -198,6 +198,13 @@
     }
     
     return tView;
+}
+
+#pragma - UITextFieldDelegate Function
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma - AddTaskDelegate Function

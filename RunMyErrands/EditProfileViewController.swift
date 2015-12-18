@@ -50,7 +50,11 @@ class EditProfileViewController: UIViewController {
         self.view.endEditing(true)
     }
 
-    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        // Hide the keyboard.
+        textField.resignFirstResponder()
+        return true
+    }
     
     /*
     // MARK: - Navigation

@@ -19,6 +19,8 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
         // Do any additional setup after loading the view.
     }
 

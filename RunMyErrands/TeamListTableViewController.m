@@ -35,7 +35,6 @@
 
     self.imageCache = [NSCache new];
     self.imageCache.countLimit = 20;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class JoinGroupViewController: UIViewController {
+class JoinGroupViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var groupIDTextField: UITextField!
     
@@ -61,6 +61,13 @@ class JoinGroupViewController: UIViewController {
     @IBAction func cancel(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil);
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        // Hide the keyboard.
+        textField.resignFirstResponder()
+        return true
+    }
+    
     /*
     // MARK: - Navigation
 

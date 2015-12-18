@@ -10,7 +10,7 @@ import UIKit
 import ParseFacebookUtilsV4
 import FBSDKCoreKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -18,6 +18,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
         
         if (PFUser.currentUser() != nil) {
             self.performSegueWithIdentifier("showErrandList", sender: nil)

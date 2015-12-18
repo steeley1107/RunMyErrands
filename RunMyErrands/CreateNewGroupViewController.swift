@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class CreateNewGroupViewController: UIViewController {
+class CreateNewGroupViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var newGroupNameTextField: UITextField!
     
@@ -50,6 +50,11 @@ class CreateNewGroupViewController: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        // Hide the keyboard.
+        textField.resignFirstResponder()
+        return true
+    }
     
     @IBAction func cancel(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
