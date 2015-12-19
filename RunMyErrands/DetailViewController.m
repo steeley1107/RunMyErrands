@@ -26,29 +26,6 @@
     self.locationNameLabel.text = [NSString stringWithFormat:@"WHERE: %@", self.task.subtitle];
     self.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", self.task.address];
     
-    NSString *imageName;
-    switch ([self.task.category intValue]) {
-        case 0:
-            imageName = @"runmyerrands";
-            break;
-        case 1:
-            imageName = @"die";
-            break;
-        case 2:
-            imageName = @"briefcase";
-            break;
-        case 3:
-            imageName = @"cart";
-            break;
-        default:
-            break;
-    }
-    
-    if ([self.task.isComplete boolValue]) {
-        imageName = [imageName stringByAppendingString:@"-grey"];
-    }
-    
-    self.imageView.image = [UIImage imageNamed:imageName];
     self.mapView.delegate = self;
     [self initiateMap];
 }
@@ -59,6 +36,14 @@
         self.completeButton.backgroundColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0];
         self.completeButton.enabled = false;
     }
+    
+    NSString *imageName = [self.task imageName:[self.task.category intValue]];
+    
+    if ([self.task.isComplete boolValue]) {
+        imageName = [imageName stringByAppendingString:@"-grey"];
+    }
+    
+    self.imageView.image = [UIImage imageNamed:imageName];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,14 +55,14 @@
 - (IBAction)markAsComplete:(UIButton *)sender {
     PFQuery *query = [PFQuery queryWithClassName:@"Task"];
     [query getObjectInBackgroundWithId:self.task.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
- 
+        
         Task *selectedTask = (Task*)object;
         selectedTask.isComplete = @(YES);
         selectedTask.isActive = @(NO);
-
         
         [selectedTask saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
+                self.task = selectedTask;
                 self.completeButton.enabled = false;
                 self.completeButton.backgroundColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0];
                 
@@ -99,7 +84,7 @@
                             [installation addUniqueObject:self.task.group forKey:@"channels"];
                         }];
                         
-                        [self viewDidLoad];
+                        [self viewWillAppear:true];
                     } else {
                         NSLog(@"Error: %@", error);
                     }
