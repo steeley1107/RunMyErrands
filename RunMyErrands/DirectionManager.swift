@@ -143,8 +143,6 @@ class DirectionManager: NSObject {
         var routes:[GMSPolyline] = [GMSPolyline]()
         let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
         
-        print("legNumer \(legNumber)")
-        
         if legNumber < legs.count {
             
             let steps = legs[legNumber]["steps"] as! Array<Dictionary<NSObject, AnyObject>>

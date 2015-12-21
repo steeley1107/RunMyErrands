@@ -113,23 +113,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-//    func trackGeoRegions() {
-//        
-//        locationManager.removeAllTaskLocation()
-//        for task in taskArray {
-//            
-//            if task.isComplete.boolValue == false {
-//                
-//                let center = task.coordinate()
-//                let taskRegion = CLCircularRegion.init(center: center, radius: 200.0, identifier: "\(task.title) \n \(task.subtitle)")
-//                taskRegion.notifyOnEntry = true
-//                locationManager.addTaskLocation(taskRegion)
-//            }
-//        }
-//    }
-    
+
     
     func populateTaskArray() {
         
@@ -148,9 +132,6 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
                     }
                 }
             }
-            
-            self.geoFence.CreateGeoPoint()
-            self.geoFence.GetClosestErrands()
             
             self.zoomMap()
             self.addMarkersToMap()
@@ -176,6 +157,5 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     
     
-    
-    
+
 }

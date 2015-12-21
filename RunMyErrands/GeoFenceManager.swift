@@ -16,7 +16,7 @@ class GeoFenceManager: NSObject {
     var locationManager: GeoManager!
     var errandsManager = ErrandManager()
     
-    
+    //temp program
     func CreateGeoPoint() {
         
         errandsManager.fetchData { (success) -> () in
@@ -43,6 +43,21 @@ class GeoFenceManager: NSObject {
     }
     
     
+    func GetDataForFence() {
+        
+        errandsManager.fetchData { (success) -> () in
+            if success {
+                self.GetClosestErrands()
+                
+            } else {
+                print("problem creating geoPoints")
+            }
+        }
+    }
+
+    
+    
+    
     func GetClosestErrands() {
         
         PFGeoPoint.geoPointForCurrentLocationInBackground {
@@ -62,11 +77,13 @@ class GeoFenceManager: NSObject {
                     query.limit = 20
                     
                     query.findObjectsInBackgroundWithBlock({
-                        (objects, error) in
+                        (errands, error) in
                         if error == nil {
-                            print("objects \(objects)")
-                            closestErrandsArray = objects as! [Task]
-                            if closestErrandsArray.count != 0 {
+                            if let errands = errands as? [Task] {
+                                
+                                for errand in errands {
+                                    closestErrandsArray += [errand]
+                                }
                                 self.trackGeoRegions(closestErrandsArray)
                             }
                         }
@@ -79,7 +96,10 @@ class GeoFenceManager: NSObject {
     
     
     func trackGeoRegions(errandsArray: [Task]) {
-        
+
+        locationManager = GeoManager.sharedManager()
+        locationManager.startLocationManager()
+
         locationManager.removeAllTaskLocation()
         for task in errandsArray {
             
@@ -89,6 +109,7 @@ class GeoFenceManager: NSObject {
                 let taskRegion = CLCircularRegion.init(center: center, radius: 200.0, identifier: "\(task.title) \n \(task.subtitle)")
                 taskRegion.notifyOnEntry = true
                 locationManager.addTaskLocation(taskRegion)
+                print("task Regions \(taskRegion)");
             }
         }
     }

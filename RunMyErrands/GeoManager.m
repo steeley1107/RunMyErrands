@@ -7,6 +7,17 @@
 //
 
 #import "GeoManager.h"
+#import "RunMyErrands-Swift.h"
+
+int const kUpdateGeoFenceDistance = 1000;
+
+
+@interface GeoManager ()
+
+@property (nonatomic) BOOL updateInitialLocation;
+@property (nonatomic) CLLocation * initialLoc;
+@property (nonatomic) GeoFenceManager *fenceManager;
+@end
 
 
 @implementation GeoManager
@@ -22,7 +33,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        
+        self.updateInitialLocation = YES;
     }
     return self;
 }
@@ -38,8 +49,8 @@
         _locationManager.delegate = self;
         [_locationManager requestAlwaysAuthorization];
     }
-    
     [_locationManager startUpdatingLocation];
+    
 }
 
 
@@ -76,6 +87,7 @@
 -(void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
     CLLocation * loc = [locations objectAtIndex: [locations count] - 1];
     
+    
     NSTimeInterval locationAge = -[loc.timestamp timeIntervalSinceNow];
     if (locationAge > 10.0){
         //NSLog(@"locationAge is %1.2f",locationAge);
@@ -94,6 +106,19 @@
             //[self stopLocationManager];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"locationUpdated" object:nil];
+    }
+    
+    //Check for distance to reload geo fences.
+    CLLocationDistance distance = [self.initialLoc distanceFromLocation:loc];
+    
+    if (kUpdateGeoFenceDistance < distance) {
+        self.updateInitialLocation = YES;
+    }
+    if (self.updateInitialLocation) {
+        self.initialLoc = [locations objectAtIndex: [locations count] - 1];
+        self.fenceManager = [[GeoFenceManager alloc] init];
+        [self.fenceManager GetDataForFence];
+        self.updateInitialLocation = NO;
     }
 }
 
@@ -137,7 +162,6 @@
     for (CLRegion *region in self.locationManager.monitoredRegions) {
         [self.locationManager stopMonitoringForRegion:region];
     }
-    NSLog(@"monitored regions %@", [self.locationManager monitoredRegions]);
 }
 
 
@@ -151,24 +175,6 @@
     localNotification.soundName = UILocalNotificationDefaultSoundName;
     localNotification.applicationIconBadgeNumber = 1;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-}
-
-
--(void)checkForErrandsInZone {
-
-    //self.locationManager.distan
-
-
-}
-
-
-- (CLLocationDistance)distanceFromLocation:(const CLLocation *)location {
-
-    CLLocationDistance distance = 5.0;
-    
-    
-
-    return distance;
 }
 
 
