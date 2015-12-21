@@ -73,7 +73,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         errandsManager.fetchIncompleteTask() { (success) -> () in
             if success {
                 
-
+                
                 self.errandsTableView.reloadData()
             }
         }
@@ -126,7 +126,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             cell.activeLabel.hidden = false
         }
         
-    
+        
         if ContainsTask(activeErrandArray, task: task) && task.isActive == false {
             cell.accessoryType = .Checkmark
         }else {
@@ -174,6 +174,11 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     //Mark: - Navigation
     
     @IBAction func runErrnadsButton(sender: AnyObject) {
+        
+        //check to see if any errands have been selected
+        if activeErrandArray.count == 0 {
+            showAlert("Error", message: "Please Select Errands to Run")
+        }
         
         for task in activeErrandArray {
             task.isActive = true
@@ -229,6 +234,14 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             break
         case 1:
             direction.destinationHome = true
+            let user = PFUser.currentUser()
+            if let homeAddress = user!["home"] {
+                if homeAddress.length < 5 {
+                    showAlert("No Home Address", message: "Please Set Home Address in Settings")
+                }
+                break
+            }
+            showAlert("No Home Address", message: "Please Set Home Address in Settings")
             break
         default:
             direction.destinationHome = false
@@ -242,7 +255,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         direction.markerArray.removeAll()
         
         for task in activeErrandArray {
-                task.isActive = false
+            task.isActive = false
         }
         
         for task in activeErrandArray {
@@ -276,6 +289,20 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         return false
+    }
+    
+    
+    
+    func showAlert(title: String, message: String) {
+        
+        // create the alert
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        
+        // show the alert
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     

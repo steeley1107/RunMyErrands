@@ -84,7 +84,7 @@ class DirectionManager: NSObject {
                 
                 let directionsURL = NSURL(string: directionsURLString)
                 
-                print("url \(directionsURL)")
+                //print("url \(directionsURL)")
                 
                 let task = NSURLSession.sharedSession().dataTaskWithURL(directionsURL!) { (data, response, error) -> Void in
                     if(error != nil) {
@@ -142,8 +142,6 @@ class DirectionManager: NSObject {
         
         var routes:[GMSPolyline] = [GMSPolyline]()
         let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
-        
-        print("legNumer \(legNumber)")
         
         if legNumber < legs.count {
             
@@ -256,11 +254,11 @@ class DirectionManager: NSObject {
             if marker.position.longitude > maxLong {
                 maxLong = marker.position.longitude
             }
-            
-            northEast = CLLocationCoordinate2DMake(maxLat, maxLong)
-            southWest = CLLocationCoordinate2DMake(minLat, minLong)
-            
         }
+        
+        northEast = CLLocationCoordinate2DMake(maxLat, maxLong)
+        southWest = CLLocationCoordinate2DMake(minLat, minLong)
+
         
         let bounds = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
         

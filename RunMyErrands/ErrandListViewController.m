@@ -222,24 +222,24 @@
 }
 
 
-#pragma mark - Geo
-
--(void)trackGeoRegions {
-    
-    [self.locationManager removeAllTaskLocation];
-    for (Task *task in self.taskArray) {
-        
-        NSLog(@"task %@", task);
-        
-        CLLocationCoordinate2D center = task.coordinate;
-        CLRegion *taskRegion = [[CLCircularRegion alloc]initWithCenter:center radius:200.0 identifier:[NSString stringWithFormat:@"%@\n%@",task.title,task.subtitle]];
-        taskRegion.notifyOnEntry = YES;
-        
-        //Determine if to track the task location.
-        if (![task.isComplete boolValue]) {
-            [self.locationManager addTaskLocation:taskRegion];
-        }
-    }
-}
+//#pragma mark - Geo
+//
+//-(void)trackGeoRegions {
+//    
+//    [self.locationManager removeAllTaskLocation];
+//    for (Task *task in self.taskArray) {
+//        
+//        NSLog(@"task %@", task);
+//        
+//        CLLocationCoordinate2D center = task.coordinate;
+//        CLRegion *taskRegion = [[CLCircularRegion alloc]initWithCenter:center radius:200.0 identifier:[NSString stringWithFormat:@"%@\n%@",task.title,task.subtitle]];
+//        taskRegion.notifyOnEntry = YES;
+//        
+//        //Determine if to track the task location.
+//        if (![task.isComplete boolValue]) {
+//            [self.locationManager addTaskLocation:taskRegion];
+//        }
+//    }
+//}
 
 @end

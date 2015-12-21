@@ -21,6 +21,8 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     var taskArray:[Task] = []
     var origin: CLLocationCoordinate2D!
     
+    var geoFence = GeoFenceManager()
+    
     
     //Mark: ViewController Display
     override func viewDidLoad() {
@@ -38,8 +40,6 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
-        addMarkersToMap()
-        //populateTaskArray()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -81,30 +81,17 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     func addMarkersToMap() {
         
-        errandsManager.fetchData { (success) -> () in
-            if success {
+        for task in taskArray {
+            if task.isComplete == false {
                 
-                let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
-                
-                for var index in 0..<numberOfGroups {
-                    
-                    if let taskArray = self.errandsManager.fetchErrandsForGroup(index) {
-                        
-                        for task in taskArray {
-                            
-                            if task.isComplete == false {
-                                
-                                let marker = task.makeMarker()
-                                marker.userData = task
-                                marker.map = self.mapView
-                                marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
-                            }
-                        }
-                    }
-                }
+                let marker = task.makeMarker()
+                marker.userData = task
+                marker.map = self.mapView
+                marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
             }
         }
     }
+    
     
     func zoomMap() {
         
@@ -126,23 +113,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    func trackGeoRegions() {
-        
-        locationManager.removeAllTaskLocation()
-        for task in taskArray {
-            if task.isComplete.boolValue == false {
-                
-                let center = task.coordinate()
-                let taskRegion = CLCircularRegion.init(center: center, radius: 200.0, identifier: "\(task.title) \n \(task.subtitle)")
-                taskRegion.notifyOnEntry = true
-                locationManager.addTaskLocation(taskRegion)
-            }
-        }
-    }
-    
-    
+
     
     func populateTaskArray() {
         
@@ -155,21 +126,17 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
                     
                     if let groupTaskArray = self.errandsManager.fetchErrandsForGroup(index) {
                         
-                        self.taskArray.removeAll()
-                        
                         for task in groupTaskArray {
                             self.taskArray += [task]
                         }
                     }
                 }
             }
-            self.zoomMap()
-            self.trackGeoRegions()
-            self.addMarkersToMap()
             
+            self.zoomMap()
+            self.addMarkersToMap()
         }
     }
-    
     
     
     //Mark: - Navigation
@@ -190,6 +157,5 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     
     
-    
-    
+
 }

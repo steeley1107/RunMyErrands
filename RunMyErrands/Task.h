@@ -13,7 +13,7 @@
 #import <Parse/PFObject+Subclass.h>
 @import GoogleMaps;
 
-@interface Task : PFObject <MKAnnotation,PFSubclassing>
+@interface Task : PFObject <PFSubclassing>
 
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *subtitle;
@@ -25,17 +25,17 @@
 @property (nonatomic) NSNumber *isComplete;
 @property (nonatomic) NSNumber *category;
 @property (nonatomic) NSString *group;
-
 @property (nonatomic) NSNumber *isActive;
+@property (nonatomic) PFGeoPoint *geoPoint;
+
 
 + (NSString*)parseClassName;
 + (void)load;
 -(CLLocationCoordinate2D) coordinate;
 -(void) setCoordinate:(CLLocationCoordinate2D)newCoordinate;
 -(void) updateCoordinate;
-//-(MKAnnotationView*)annoView;
-//-(MKAnnotationView*)annoDetailView;
-
 -(GMSMarker*) makeMarker;
 -(NSString*)imageName:(int)catagoryNumber;
+
+
 @end

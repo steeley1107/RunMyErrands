@@ -21,8 +21,6 @@
 -(void)setUpLocationManager;
 - (void)startLocationManager;
 -(void)stopLocationManager;
-//-(void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations;
-//- (void) initiateMap;
 -(void)addTaskLocation:(CLRegion*)region;
 -(void)removeTaskLocation:(CLRegion*)region;
 -(void)removeAllTaskLocation;

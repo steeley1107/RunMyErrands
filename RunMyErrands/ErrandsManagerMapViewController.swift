@@ -46,6 +46,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     var direction = Direction()
     
     
+    
     //Mark: Load ViewController
     
     override func viewDidLoad() {
