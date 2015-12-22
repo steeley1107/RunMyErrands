@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var userLabel: UILabel!
@@ -18,22 +20,29 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var pictureImageView: UIImageView!
     
-    @IBOutlet weak var radiusLabel: UILabel!
-    
-    @IBOutlet weak var slider: UISlider!
-    
     @IBOutlet weak var notifySwitch: UISwitch!
+    
+    @IBOutlet weak var geoFenceSegment: UISegmentedControl!
     
     var user: PFUser?
     
+    let kDrivingGeoRadius = 500
+    let kBicyclingGeoRadius = 200
+    let kWalkingGeoRadius = 100
+    
+    var geoRadius = 200;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        geoFenceSegment.layer.cornerRadius = 5
+        geoFenceSegment.layer.masksToBounds = true
+        
         
     }
     
     override func viewWillDisappear(animated: Bool) {
         user!["pushNotify"] = notifySwitch.on
-        user!["geoRadius"] = NSNumber(float: slider.value)
+        user!["geoRadius"] = geoRadius
         user?.saveInBackground()
         
         let pushNotify = user!["pushNotify"].boolValue
@@ -54,11 +63,6 @@ class SettingsViewController: UIViewController {
             currentInstallation.channels = []
             currentInstallation.saveInBackground()
         }
-    }
-    
-    func sliderValueChanged(sender: AnyObject) {
-        let slider = sender as! UISlider
-        radiusLabel.text = "\(Int(slider.value))"
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -89,13 +93,15 @@ class SettingsViewController: UIViewController {
         
         notifySwitch.on = user!["pushNotify"].boolValue
         
-        slider.maximumValue = 1000
-        slider.minimumValue = 100
-        let initSliderValue = user!["geoRadius"] as? NSNumber
-        slider.value = (initSliderValue?.floatValue)!
-        radiusLabel.text = "\(Int(slider.value))"
+        geoRadius = (user!["geoRadius"] as? Int)!
+        if geoRadius == kWalkingGeoRadius {
+            geoFenceSegment.selectedSegmentIndex = 1
+        }else if geoRadius == kBicyclingGeoRadius {
+            geoFenceSegment.selectedSegmentIndex = 2
+        }else {
+            geoFenceSegment.selectedSegmentIndex = 0
+        }
         
-        slider.addTarget(self, action: "sliderValueChanged:", forControlEvents: .ValueChanged)
         
         let image = user!["profile_Picture"] as? PFFile
 
@@ -116,6 +122,25 @@ class SettingsViewController: UIViewController {
         }
     }
 
+    @IBAction func geoFenceDistance(sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            geoRadius = kDrivingGeoRadius
+            break
+        case 1:
+            geoRadius = kWalkingGeoRadius
+            break
+        case 2:
+            geoRadius = kBicyclingGeoRadius
+            break
+        default:
+            geoRadius = kDrivingGeoRadius
+            break;
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
