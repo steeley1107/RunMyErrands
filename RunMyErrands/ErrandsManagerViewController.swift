@@ -33,6 +33,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     var direction = Direction()
     
+    var refreshControl:UIRefreshControl!
+    
     
     //Mark:  Load ViewController
     override func viewDidLoad() {
@@ -55,6 +57,14 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         self.errandsTableView.dataSource = self
         
         self.direction = Direction()
+        
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.errandsTableView.addSubview(refreshControl)
+
+        
     }
     
     
@@ -75,8 +85,14 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
                 
                 
                 self.errandsTableView.reloadData()
+                
             }
         }
+    }
+    
+    func refresh(sender:AnyObject) {
+        self.errandsTableView.reloadData()
+        self.refreshControl.endRefreshing()
     }
     
     
@@ -226,6 +242,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
+    //Select if the errands will be round trip or if the destination will be the users home.
     @IBAction func finalDestination(sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
@@ -234,14 +251,13 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             break
         case 1:
             direction.destinationHome = true
-            let user = PFUser.currentUser()
-            if let homeAddress = user!["home"] {
-                if homeAddress.length < 5 {
-                    showAlert("No Home Address", message: "Please Set Home Address in Settings")
+            
+            //Check to see if the home address is valid
+            directionTask.HomeAddressValid({ (result) -> Void in
+                if result == false {
+                    self.showAlert("Home Address Not Valid", message: "Please Set Home Address in Settings")
                 }
-                break
-            }
-            showAlert("No Home Address", message: "Please Set Home Address in Settings")
+            })
             break
         default:
             direction.destinationHome = false
@@ -250,14 +266,18 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
+    //Done running errands.  Stop errands from being active.
     @IBAction func FinishErrands(sender: AnyObject) {
         
+        //Remove all errands from Map.
         direction.markerArray.removeAll()
         
+        //Change all errands to not active.
         for task in activeErrandArray {
             task.isActive = false
         }
         
+        //Save all recenlty active errands in the background
         for task in activeErrandArray {
             task.saveInBackgroundWithBlock{(success: Bool, error: NSError?) ->Void in
                 if (success) {

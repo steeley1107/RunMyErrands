@@ -266,7 +266,26 @@ class DirectionManager: NSObject {
     }
     
     
-    
+    func HomeAddressValid(completion: (result: Bool) -> Void) {
+        
+        let user = PFUser.currentUser()
+        if let homeAddress = user!["home"] {
+            
+            let destinationAddress = homeAddress as! String
+            
+            let geocoder = CLGeocoder()
+            
+            geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+                
+                if let _ = placemarks?[0] {
+                    completion(result: true)
+                }else {
+                    completion(result: false)
+                }
+            })
+        }
+    }
+
     
     
     
