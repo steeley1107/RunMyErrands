@@ -3,73 +3,79 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "runningAppIcon2x-4.png",
+      "filename" : "runningAppIcon58-1.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "runningAppIcon3x-1.png",
+      "filename" : "runningAppIcon87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "runningAppIcon2x-5.png",
+      "filename" : "runningAppIcon80-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "runningAppIcon3x-2.png",
+      "filename" : "runningAppIcon120-1.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "runningAppIcon2x-3.png",
+      "filename" : "runningAppIcon120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "runningAppIcon3x.png",
+      "filename" : "runningAppIcon180.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "runningAppIcon1x-2.png",
+      "filename" : "runningAppIcon29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "runningAppIcon2x-1.png",
+      "filename" : "runningAppIcon58.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "runningAppIcon1x-1.png",
+      "filename" : "runningAppIcon40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "runningAppIcon2x-2.png",
+      "filename" : "runningAppIcon80.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "runningAppIcon1x.png",
+      "filename" : "runningAppIcon76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "runningAppIcon2x.png",
+      "filename" : "runningAppIcon152.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "83.5x83.5",
+      "idiom" : "ipad",
+      "filename" : "runningAppIcon167.png",
       "scale" : "2x"
     }
   ],
