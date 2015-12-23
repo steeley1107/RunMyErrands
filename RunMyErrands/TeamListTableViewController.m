@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userDetailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (nonatomic) UIRefreshControl *refreshControl;
 
 
 @property NSCache *imageCache;
@@ -35,6 +36,14 @@
 
     self.imageCache = [NSCache new];
     self.imageCache.countLimit = 20;
+    
+    
+    //Update tableView with pulldown
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(loadGroups) forControlEvents:UIControlEventValueChanged];
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,6 +79,7 @@
     [self loadGroups];
 }
 
+
 - (void)loadGroups {
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
@@ -90,6 +100,7 @@
                     }];
                 }
             }
+            [self.refreshControl endRefreshing];
         }];
     }
 }

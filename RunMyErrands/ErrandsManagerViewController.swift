@@ -58,9 +58,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         self.direction = Direction()
         
-        
+        //Update tableView with pulldown
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.errandsTableView.addSubview(refreshControl)
 
@@ -81,18 +80,31 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         errandsManager.fetchIncompleteTask() { (success) -> () in
+            
             if success {
-                
-                
                 self.errandsTableView.reloadData()
-                
             }
         }
     }
     
     func refresh(sender:AnyObject) {
-        self.errandsTableView.reloadData()
-        self.refreshControl.endRefreshing()
+        
+        for task in self.activeErrandArray {
+            if task.isComplete  == true {
+                
+                if let index = self.activeErrandArray.indexOf(task) {
+                    self.activeErrandArray.removeAtIndex(index)
+                }
+            }
+        }
+        
+        errandsManager.fetchIncompleteTask() { (success) -> () in
+            
+            if success {
+                self.errandsTableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
     }
     
     
@@ -283,23 +295,23 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
                 if (success) {
                     if let index = self.activeErrandArray.indexOf(task) {
                         self.activeErrandArray.removeAtIndex(index)
-                        
-                        self.errandsManager.fetchIncompleteTask() { (success) -> () in
-                            if success {
-                                self.errandsTableView.reloadData()
-                            }
-                        }
                     }
-                    else
-                    {
+                    else {
                         print("problem saving errands")
                     }
                 }
             }
         }
+        //Update table after all the active tasked are reset.
+        self.errandsManager.fetchIncompleteTask() { (success) -> () in
+            if success {
+                self.errandsTableView.reloadData()
+            }
+        }
     }
     
     
+    //Find active tasks in an array of tasks.
     func ContainsTask(array: [Task], task: Task) -> Bool {
         
         for activeTask in array {

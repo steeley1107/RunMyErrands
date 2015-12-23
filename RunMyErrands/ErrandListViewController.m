@@ -25,6 +25,7 @@
 @property (nonatomic) GeoManager *locationManager;
 @property (nonatomic) ErrandManager *errandManager;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitySpinner;
+@property (nonatomic) UIRefreshControl *refreshControl;
 @end
 
 
@@ -40,6 +41,15 @@
     [self.locationManager startLocationManager];
 
     self.errandManager = [ErrandManager new];
+    
+    
+    //Update tableView with pulldown
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableview addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+
+    
+    
  
 }
 
@@ -63,6 +73,20 @@
     }];
     
 }
+
+//Refresh table when pulled down.
+- (void)refreshTable {
+    [self.errandManager fetchData:^(BOOL success) {
+        if (success) {
+            [self.tableview reloadData];
+            [self updatePushChannels];
+            [self.refreshControl endRefreshing];
+        }
+    }];
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -221,25 +245,5 @@
     }
 }
 
-
-//#pragma mark - Geo
-//
-//-(void)trackGeoRegions {
-//    
-//    [self.locationManager removeAllTaskLocation];
-//    for (Task *task in self.taskArray) {
-//        
-//        NSLog(@"task %@", task);
-//        
-//        CLLocationCoordinate2D center = task.coordinate;
-//        CLRegion *taskRegion = [[CLCircularRegion alloc]initWithCenter:center radius:200.0 identifier:[NSString stringWithFormat:@"%@\n%@",task.title,task.subtitle]];
-//        taskRegion.notifyOnEntry = YES;
-//        
-//        //Determine if to track the task location.
-//        if (![task.isComplete boolValue]) {
-//            [self.locationManager addTaskLocation:taskRegion];
-//        }
-//    }
-//}
 
 @end
