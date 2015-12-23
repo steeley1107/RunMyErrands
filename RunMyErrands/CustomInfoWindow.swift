@@ -20,6 +20,8 @@ class CustomInfoWindow: UIView {
     @IBOutlet weak var bubbleLeft: UIImageView!
     @IBOutlet weak var bubbleRight: UIImageView!
     
+    @IBOutlet weak var view: UIView!
+    
     
     override func awakeFromNib() {
 

@@ -71,6 +71,13 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         let imageName:String = task.imageName(task.category.intValue)
         infoWindow.icon.image = UIImage(named:imageName)
         
+        //auto size the width depending on title size
+        let x = infoWindow.frame.origin.x
+        let y = infoWindow.frame.origin.y
+        let height = infoWindow.frame.size.height
+        let width:CGFloat = CGFloat(marker.title.characters.count) * 7.5 + 70.0
+        infoWindow.frame = CGRectMake(x, y, width, height)
+        
         infoWindow.layoutIfNeeded()
         
         

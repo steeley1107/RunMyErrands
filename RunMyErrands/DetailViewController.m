@@ -124,9 +124,17 @@
     Task *task = marker.userData;
     NSString *imageName = [task imageName:task.category.intValue];
     infoWindow.icon.image = [UIImage imageNamed:imageName];
+
+    //auto size the width depending on title size
+    float x = infoWindow.frame.origin.x;
+    float y = infoWindow.frame.origin.y;
+    float width = marker.title.length * 7.5 + 70;
+    float height = infoWindow.frame.size.height;
+    [infoWindow setFrame:CGRectMake(x, y, width, height)];
+    
     
     [infoWindow layoutIfNeeded];
-
+    
     return infoWindow;
 }
 
