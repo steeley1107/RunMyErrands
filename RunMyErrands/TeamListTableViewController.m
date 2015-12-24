@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userDetailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (nonatomic) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *listActivitySpinner;
 
 
 @property NSCache *imageCache;
@@ -42,8 +43,8 @@
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(loadGroups) forControlEvents:UIControlEventValueChanged];
-    
 
+    [self.listActivitySpinner setHidesWhenStopped:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,7 +84,7 @@
 - (void)loadGroups {
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
-        
+        [self.listActivitySpinner startAnimating];
         PFRelation *relation  = [currentUser relationForKey:@"memberOfTheseGroups"];
         [[relation query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
@@ -96,6 +97,7 @@
                     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
 
                         [self.groupMembers setObject:objects forKey:object.objectId];
+                        [self.listActivitySpinner stopAnimating];
                         [self.tableView reloadData];
                     }];
                 }
