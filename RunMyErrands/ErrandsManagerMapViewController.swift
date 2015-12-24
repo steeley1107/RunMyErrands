@@ -24,6 +24,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     @IBOutlet weak var errandsTableView: UITableView!
     
+    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
+    
     var origin: CLLocationCoordinate2D!
     var destination: CLLocationCoordinate2D!
     
@@ -67,6 +69,11 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         self.mapView.addSubview(directionsLabel)
         self.mapView.bringSubviewToFront(directionsLabel)
         
+        //Setup Activity Spinner
+        activitySpinner.hidesWhenStopped = true
+        self.mapView.addSubview(activitySpinner)
+        self.mapView.bringSubviewToFront(activitySpinner)
+        
         
         directionsLabel.hidden = true
     }
@@ -89,6 +96,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     
     func getHomeLocation() {
+        
+        activitySpinner.startAnimating()
         
         let user = PFUser.currentUser()
         if let homeAddress = user!["home"] {
@@ -159,6 +168,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
                 
                 self.configureMapAndMarkersForRoute()
             }
+            self.activitySpinner.stopAnimating()
         })
     }
     
@@ -316,6 +326,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         marker.icon = GMSMarker.markerImageWithColor(UIColor.cyanColor())
         mapView.selectedMarker = marker
         
+        //Draw polyline on map from errand to errand.
         for polyline in legPolyLines {
             polyline.map = nil
         }
@@ -329,7 +340,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
     }
     
-    //Reorder the waypoints based off google directions.
+    //Re-order the waypoints based off google directions.
     func reorderWaypoints() -> [GMSMarker] {
         
         var orderedMarkerArray:[GMSMarker] = [GMSMarker]()

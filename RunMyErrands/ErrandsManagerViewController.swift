@@ -324,7 +324,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    
+    //Alert Controller for the errand manager
     func showAlert(title: String, message: String) {
         
         // create the alert
