@@ -316,7 +316,7 @@
         if (succeeded) {
             user[@"profile_Picture"] = imageFile;
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                
+            [self.imageCache setObject:[UIImage imageWithData:imageData] forKey:user.objectId];
             }];
         } else {
             NSLog(@"Error: %@", error);
