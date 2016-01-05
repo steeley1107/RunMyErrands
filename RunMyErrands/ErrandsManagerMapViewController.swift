@@ -1,6 +1,6 @@
 //
-//  ViewController.swift
-//  RunMyErrands2Maps
+//  ErrandsManagerMapViewController.swift
+//  RunMyErrands
 //
 //  Created by Steele on 2015-11-30.
 //  Copyright © 2015 Steele. All rights reserved.
@@ -77,7 +77,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         directionsLabel.hidden = true
     }
-
+    
     
     //Update map with users current location;
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -99,27 +99,30 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         activitySpinner.startAnimating()
         
-        let user = PFUser.currentUser()
-        if let homeAddress = user!["home"] {
-            
-            let destinationAddress = homeAddress as! String
-            
-            let geocoder = CLGeocoder()
-            
-            geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-                if let placemark = placemarks?[0] {
+        //Check to see if the home address is valid
+        directionTask.HomeAddressValid({ (result) -> Void in
+            if result == true {
+                let user = PFUser.currentUser()
+                if let homeAddress = user!["home"] {
+                    let destinationAddress = homeAddress as! String
+                    let geocoder = CLGeocoder()
                     
-                    let location = placemark.location
-                    self.destination = location!.coordinate
-                    
-                    self.createRoute()
+                    geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+                        if let placemark = placemarks?[0] {
+                            let location = placemark.location
+                            self.destination = location!.coordinate
+                            self.createRoute()
+                        }
+                    })
                 }
-            })
-            
-        }
+                
+            }else {
+                self.createRoute()
+            }
+        })
     }
     
-    
+    //Add the start and destination markers for the route.
     func configureMapAndMarkersForRoute() {
         
         originMarker = GMSMarker(position: self.origin)
@@ -146,7 +149,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         }
     }
     
-    
+    //create route on map including zooming window to fit and polylines on screen
     func createRoute() {
         
         if direction.destinationHome == false || destination == nil {
