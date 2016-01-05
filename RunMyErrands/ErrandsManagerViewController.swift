@@ -70,6 +70,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
+        //Remove all completed errrands from active errands array.
         for task in self.activeErrandArray {
             if task.isComplete  == true {
                 
@@ -79,6 +80,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         
+        //Fetch all incomplete errands and reload the table array
         errandsManager.fetchIncompleteTask() { (success) -> () in
             
             if success {
@@ -87,6 +89,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    
+    //reload errands table from pulling down on errands
     func refresh(sender:AnyObject) {
         
         for task in self.activeErrandArray {
@@ -130,6 +134,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:ErrandsManagerTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ErrandsManagerTableViewCell
         
+        //reset each cell in table.
         cell.selectionStyle = .None
         
         cell.titleLabel.text = nil
@@ -297,7 +302,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
                         self.activeErrandArray.removeAtIndex(index)
                     }
                     else {
-                        print("problem saving errands")
+                        print("problem saving errands \(error)")
                     }
                 }
             }
@@ -311,7 +316,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    //Find active tasks in an array of tasks.
+    //Check for active tasks in an array of tasks.
     func ContainsTask(array: [Task], task: Task) -> Bool {
         
         for activeTask in array {

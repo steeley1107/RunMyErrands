@@ -80,8 +80,6 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         infoWindow.layoutIfNeeded()
         
-        
-        
         return infoWindow
     }
     
@@ -120,7 +118,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     
     func populateTaskArray() {
         
@@ -138,10 +136,9 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
                         }
                     }
                 }
+                self.zoomMap()
+                self.addMarkersToMap()
             }
-            
-            self.zoomMap()
-            self.addMarkersToMap()
         }
     }
     
@@ -164,5 +161,5 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     
     
-
+    
 }
