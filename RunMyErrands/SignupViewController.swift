@@ -43,10 +43,11 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     @IBAction func createNewUser(sender: UIButton) {
+        
         if usernameTextField.text != "" && passwordTextField.text != ""  {
             let user  = PFUser()
             
-            user.username = usernameTextField.text
+            user.username = usernameTextField.text?.lowercaseString
             user.password = passwordTextField.text
             user["name"] = usernameTextField.text
             user["status"] = ""
@@ -54,16 +55,47 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             user["totalErrandsCompleted"] = 0
             user["geoRadius"] = 200
             
-            user.signUpInBackgroundWithBlock {
-                (succeeded: Bool, error: NSError?) -> Void in
-                if let error = error {
-                    print("Error: \(error)")
-                } else {
-                    self.saveImage(user)
-                }
-            }
-        } else {
+            //check if username already exists
+            let query = PFUser.query()
             
+            query?.whereKey("username", equalTo: user.username!)
+            
+            query?.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) -> Void in
+                
+                if (error == nil) {
+                    
+                    if let objects = objects {
+                        print("object count = \(objects.count)")
+                        if objects.count > 0 {
+                            let alertController = UIAlertController(title: "Error", message: "Username Already Exists", preferredStyle: UIAlertControllerStyle.Alert)
+                            
+                            let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                            alertController.addAction(ok)
+                            
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        } else {
+                            user.signUpInBackgroundWithBlock {
+                                (succeeded: Bool, error: NSError?) -> Void in
+                                if let error = error {
+                                    print("Error: \(error)")
+                                } else {
+                                    self.saveImage(user)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    print("Error: \(error)")
+                }
+            })
+            
+        } else {
+            let alertController = UIAlertController(title: "Error", message: "Invalid Username/Password", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(ok)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
 
