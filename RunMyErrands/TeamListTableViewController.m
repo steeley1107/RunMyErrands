@@ -84,7 +84,7 @@
 - (void)loadGroups {
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
-        [self.listActivitySpinner startAnimating];
+
         PFRelation *relation  = [currentUser relationForKey:@"memberOfTheseGroups"];
         [[relation query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
@@ -92,6 +92,7 @@
                 self.groups = objects;
                 
                 for (PFObject *object in self.groups) {
+                    [self.listActivitySpinner startAnimating];
                     PFRelation *groupMembersRealtion = object[@"groupMembers"];
                     PFQuery *query = [groupMembersRealtion query];
                     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -102,6 +103,7 @@
                     }];
                 }
             }
+            
             [self.refreshControl endRefreshing];
         }];
     }

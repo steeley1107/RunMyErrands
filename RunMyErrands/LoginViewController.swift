@@ -34,7 +34,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         if let username = usernameTextField.text,
             password = passwordTextField.text {
-                PFUser.logInWithUsernameInBackground(username, password:password) {
+                PFUser.logInWithUsernameInBackground(username.lowercaseString, password:password) {
                     (user: PFUser?, error: NSError?) -> Void in
                     if user != nil {
                         // Go to next storyboard
