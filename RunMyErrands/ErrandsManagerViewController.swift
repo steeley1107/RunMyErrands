@@ -35,6 +35,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     var refreshControl:UIRefreshControl!
     
+    var scheduler = Scheduler()
+    
     
     //Mark:  Load ViewController
     override func viewDidLoad() {
@@ -87,6 +89,14 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
                 self.errandsTableView.reloadData()
             }
         }
+        
+        
+        //Test code for scheduler
+        self.scheduler.CreateActiveErrandsExpiryDate()
+        self.scheduler.CheckActiveErrandsExpiry()
+        self.scheduler.CreateCompletedErrandsExpiryDate()
+        self.scheduler.CheckCompletedErrandsExpiry()
+        
     }
     
     

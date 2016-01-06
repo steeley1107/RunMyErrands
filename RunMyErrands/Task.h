@@ -27,6 +27,8 @@
 @property (nonatomic) NSString *group;
 @property (nonatomic) NSNumber *isActive;
 @property (nonatomic) PFGeoPoint *geoPoint;
+@property (nonatomic) NSDate *activeDate;
+@property (nonatomic) NSDate *completedDate;
 
 
 + (NSString*)parseClassName;

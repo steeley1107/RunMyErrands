@@ -24,6 +24,8 @@
 
 @dynamic isActive;
 @dynamic geoPoint;
+@dynamic activeDate;
+@dynamic completedDate;
 
 + (void)load {
     [self registerSubclass];
