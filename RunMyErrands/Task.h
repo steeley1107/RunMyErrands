@@ -27,6 +27,8 @@
 @property (nonatomic) NSString *group;
 @property (nonatomic) NSNumber *isActive;
 @property (nonatomic) PFGeoPoint *geoPoint;
+@property (nonatomic) NSDate *activeDate;
+@property (nonatomic) NSDate *completedDate;
 
 
 + (NSString*)parseClassName;
@@ -35,7 +37,8 @@
 -(void) setCoordinate:(CLLocationCoordinate2D)newCoordinate;
 -(void) updateCoordinate;
 -(GMSMarker*) makeMarker;
--(NSString*)imageName:(int)catagoryNumber;
-
+-(NSString*) imageName:(int)catagoryNumber;
+-(NSDate*) setCompletedErrandExpiryDate;
+-(NSDate*) setActiveErrandExpiryDate;
 
 @end

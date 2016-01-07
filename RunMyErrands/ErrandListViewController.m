@@ -26,6 +26,7 @@
 @property (nonatomic) ErrandManager *errandManager;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitySpinner;
 @property (nonatomic) UIRefreshControl *refreshControl;
+@property (nonatomic) Scheduler *scheduler;
 @end
 
 
@@ -41,7 +42,7 @@
     [self.locationManager startLocationManager];
 
     self.errandManager = [ErrandManager new];
-    
+    self.scheduler = [Scheduler new];
     
     //Update tableView with pulldown
     self.refreshControl = [[UIRefreshControl alloc]init];
@@ -60,6 +61,10 @@
 
     [self.activitySpinner startAnimating];
     
+    //Check if any errands have expired.
+    [self.scheduler CheckActiveErrandsExpiry];
+    [self.scheduler CheckCompletedErrandsExpiry];
+    
     NSLog(@"BEFORE:  %@", [self.errandManager fetchKeys]);
     
     [self.errandManager fetchData:^(BOOL success) {
@@ -71,6 +76,7 @@
         
         [self.activitySpinner stopAnimating];
     }];
+    
     
 }
 

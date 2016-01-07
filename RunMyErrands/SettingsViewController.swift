@@ -31,6 +31,7 @@ class SettingsViewController: UIViewController {
     let kWalkingGeoRadius = 100
     
     var geoRadius = 200;
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

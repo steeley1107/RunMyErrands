@@ -70,6 +70,7 @@
 		DAA57FC31C1770A100AEC00F /* bubble_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA57FC01C1770A100AEC00F /* bubble_right@3x.png */; };
 		DAA9C8381C17D53E00AF99DA /* ErrandsManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9C8371C17D53E00AF99DA /* ErrandsManagerViewController.swift */; };
 		DAA9C83A1C17E25700AF99DA /* ErrandsManagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9C8391C17E25700AF99DA /* ErrandsManagerTableViewCell.swift */; };
+		DAAD920E1C3C3F5F0052B5C6 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAD920D1C3C3F5F0052B5C6 /* Scheduler.swift */; };
 		DAE308E11C248CCA00534D61 /* GeoFenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE308E01C248CCA00534D61 /* GeoFenceManager.swift */; };
 		DAE753011C18BDC700AFF06F /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE753001C18BDC700AFF06F /* Direction.swift */; };
 /* End PBXBuildFile section */
@@ -173,6 +174,7 @@
 		DAA57FC01C1770A100AEC00F /* bubble_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_right@3x.png"; sourceTree = "<group>"; };
 		DAA9C8371C17D53E00AF99DA /* ErrandsManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsManagerViewController.swift; sourceTree = "<group>"; };
 		DAA9C8391C17E25700AF99DA /* ErrandsManagerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsManagerTableViewCell.swift; sourceTree = "<group>"; };
+		DAAD920D1C3C3F5F0052B5C6 /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 		DAE308E01C248CCA00534D61 /* GeoFenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoFenceManager.swift; sourceTree = "<group>"; };
 		DAE753001C18BDC700AFF06F /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -382,6 +384,7 @@
 				52CE286F1C125F6100046BF2 /* ErrandManager.swift */,
 				529890471BFBD97C00B82D76 /* Task.h */,
 				529890481BFBD97C00B82D76 /* Task.m */,
+				DAAD920D1C3C3F5F0052B5C6 /* Scheduler.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -485,7 +488,7 @@
 				TargetAttributes = {
 					5257FBB91BF809CE005CC88D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = H9VG62MSLG;
+						DevelopmentTeam = KL92959M88;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -616,6 +619,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				525712771C1A866B005775B4 /* EditProfileViewController.swift in Sources */,
+				DAAD920E1C3C3F5F0052B5C6 /* Scheduler.swift in Sources */,
 				520B473F1C0FCE51006F1FDA /* CreateNewGroupViewController.swift in Sources */,
 				523E41021BF843D300AFBEB7 /* DetailViewController.m in Sources */,
 				52CE28701C125F6100046BF2 /* ErrandManager.swift in Sources */,
@@ -796,9 +800,9 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RunMyErrands/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
+				PRODUCT_BUNDLE_IDENTIFIER = lhl.RunMyErrands;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";
@@ -821,9 +825,9 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RunMyErrands/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
+				PRODUCT_BUNDLE_IDENTIFIER = lhl.RunMyErrands;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";
