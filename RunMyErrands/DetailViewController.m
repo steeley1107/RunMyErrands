@@ -59,6 +59,7 @@
         Task *selectedTask = (Task*)object;
         selectedTask.isComplete = @(YES);
         selectedTask.isActive = @(NO);
+        selectedTask.completedDate = [selectedTask setCompletedErrandExpiryDate];
         
         [selectedTask saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {

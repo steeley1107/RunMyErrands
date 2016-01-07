@@ -61,7 +61,7 @@
 }
 
 
--(NSString*)imageName:(int)catagoryNumber {
+-(NSString*) imageName:(int)catagoryNumber {
     
     switch (catagoryNumber) {
         case 0:
@@ -76,6 +76,32 @@
             return @"runmyerrands";
     }
 }
+
+
+//add erpiry time to completed errands.
+-(NSDate*) setCompletedErrandExpiryDate {
+
+    int completedErrandsExpiryDurationDays = 1;
+    NSDate *currenTime = [NSDate date];
+    NSDate *expiryCompletedDate = [currenTime dateByAddingTimeInterval:60*60*24*completedErrandsExpiryDurationDays];
+    
+    return expiryCompletedDate;
+
+}
+
+
+//add erpiry time to completed errands.
+-(NSDate*) setActiveErrandExpiryDate {
+    
+    int activeErrandsExpiryDurationHours = 12;
+    NSDate *currenTime = [NSDate date];
+    NSDate *expiryActiveDate = [currenTime dateByAddingTimeInterval:60*60*activeErrandsExpiryDurationHours];
+    
+    return expiryActiveDate;
+    
+}
+
+
 
 
 @end

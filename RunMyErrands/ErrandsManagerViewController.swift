@@ -92,9 +92,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         
         //Test code for scheduler
-        self.scheduler.CreateActiveErrandsExpiryDate()
         self.scheduler.CheckActiveErrandsExpiry()
-        self.scheduler.CreateCompletedErrandsExpiryDate()
         self.scheduler.CheckCompletedErrandsExpiry()
         
     }
@@ -225,6 +223,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         for task in activeErrandArray {
             task.isActive = true
+            task.activeDate = task.setActiveErrandExpiryDate()
             task.saveInBackground()
         }
         

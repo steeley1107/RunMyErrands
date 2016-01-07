@@ -14,42 +14,12 @@ class Scheduler: NSObject {
     var errandsManager = ErrandManager()
     var currentDateTime = NSDate()
     let calendar = NSCalendar.currentCalendar()
-    var activeErrandsExpiryDuration = 5
-    var completedErrandsExpiryDuration = 5
+    var activeErrandsExpiryDuration = 12
+    var completedErrandsExpiryDuration = 1
     
     
-    //add erpiry time to active errands.
-    func CreateActiveErrandsExpiryDate() {
-        
-        let expiryActiveDate = calendar.dateByAddingUnit(.Minute, value: activeErrandsExpiryDuration, toDate: currentDateTime, options: [])
-        
-        //fetch errands from Parse
-        errandsManager.fetchData { (success) -> () in
-            if success {
-                
-                let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
-                
-                for var index in 0..<numberOfGroups {
-                    
-                    if let groupErrandsArray = self.errandsManager.fetchErrandsForGroup(index) {
-                        
-                        for errand in groupErrandsArray {
-                            
-                            //add expiry time to active errands
-                            if errand.isActive == true && errand.activeDate == nil {
-                                
-                                errand.activeDate = expiryActiveDate
-                                errand.saveInBackground()
-                            }
-                        }
-                    }
-                }
-            } else {
-                print("problem creating active date")
-            }
-        }
-    }
     
+    //Mark: Functions
     
     //check errands to see if they have expired.
     func CheckActiveErrandsExpiry() {
@@ -83,13 +53,75 @@ class Scheduler: NSObject {
     }
     
     
+    //check errands to see if they have expired.
+    func CheckCompletedErrandsExpiry() {
+        
+        //fetch errands from Parse
+        errandsManager.fetchData { (success) -> () in
+            if success {
+                
+                let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
+                
+                for var index in 0..<numberOfGroups {
+                    
+                    if let groupErrandsArray = self.errandsManager.fetchErrandsForGroup(index) {
+                        
+                        for errand in groupErrandsArray {
+                            
+                            //reset expired errands.
+                            if errand.completedDate != nil && errand.completedDate.timeIntervalSinceNow < 0 {
+                                
+                                errand.deleteInBackground()
+                            }
+                        }
+                    }
+                }
+            } else {
+                print("problem reseting expired active errands")
+            }
+        }
+    }
+    
+    //functions not currenly being used. Might be required if errands are not being removed.
+    
+    //add erpiry time to active errands.
+    func CreateActiveErrandsExpiryDate() {
+        
+        let expiryActiveDate = calendar.dateByAddingUnit(.Hour, value: activeErrandsExpiryDuration, toDate: currentDateTime, options: [])
+        
+        //fetch errands from Parse
+        errandsManager.fetchData { (success) -> () in
+            if success {
+                
+                let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
+                
+                for var index in 0..<numberOfGroups {
+                    
+                    if let groupErrandsArray = self.errandsManager.fetchErrandsForGroup(index) {
+                        
+                        for errand in groupErrandsArray {
+                            
+                            //add expiry time to active errands
+                            if errand.isActive == true && errand.activeDate == nil {
+                                
+                                errand.activeDate = expiryActiveDate
+                                errand.saveInBackground()
+                            }
+                        }
+                    }
+                }
+            } else {
+                print("problem creating active date")
+            }
+        }
+    }
     
     
     //add erpiry time to active errands.
     func CreateCompletedErrandsExpiryDate() {
         
         
-        let expiryCompletedDate = calendar.dateByAddingUnit(.Hour, value: completedErrandsExpiryDuration, toDate: currentDateTime, options: [])
+        let expiryCompletedDate = calendar.dateByAddingUnit(.Day, value: completedErrandsExpiryDuration, toDate: currentDateTime, options: [])
         
         //fetch errands from Parse
         errandsManager.fetchData { (success) -> () in
@@ -117,39 +149,7 @@ class Scheduler: NSObject {
             }
         }
     }
-    
-    
-    //check errands to see if they have expired.
-    func CheckCompletedErrandsExpiry() {
-        
-        //fetch errands from Parse
-        errandsManager.fetchData { (success) -> () in
-            if success {
-                
-                let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
-                
-                for var index in 0..<numberOfGroups {
-                    
-                    if let groupErrandsArray = self.errandsManager.fetchErrandsForGroup(index) {
-                        
-                        for errand in groupErrandsArray {
-                            
-                            //reset expired errands.
-                            if errand.completedDate != nil && errand.completedDate.timeIntervalSinceNow < 0 {
 
-                                errand.deleteInBackground()
-                            }
-                        }
-                    }
-                }
-            } else {
-                print("problem reseting expired active errands")
-            }
-        }
-    }
-    
-    
-    
     
     
     
