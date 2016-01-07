@@ -91,7 +91,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         
-        //Test code for scheduler
+        //Check if any errands have expired.
         self.scheduler.CheckActiveErrandsExpiry()
         self.scheduler.CheckCompletedErrandsExpiry()
         
