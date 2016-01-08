@@ -800,9 +800,9 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RunMyErrands/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lhl.RunMyErrands;
+				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";
@@ -825,9 +825,9 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RunMyErrands/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lhl.RunMyErrands;
+				PRODUCT_BUNDLE_IDENTIFIER = mew.jeff.RunMyErrands;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RunMyErrands/RunMyErrands-Bridging-Header.h";

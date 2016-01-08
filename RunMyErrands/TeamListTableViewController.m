@@ -45,6 +45,7 @@
     [self.refreshControl addTarget:self action:@selector(loadGroups) forControlEvents:UIControlEventValueChanged];
 
     [self.listActivitySpinner setHidesWhenStopped:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadGroups) name:@"pushUpdate" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
