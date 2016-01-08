@@ -49,35 +49,26 @@
     [self.tableview addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
 
-    
-    
- 
+    //subscribe to parse push notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushUpdate:) name:@"pushUpdate" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
     [self setGreeting];
-
+    
     [self.activitySpinner startAnimating];
     
     //Check if any errands have expired.
     [self.scheduler CheckActiveErrandsExpiry];
     [self.scheduler CheckCompletedErrandsExpiry];
-    
-    NSLog(@"BEFORE:  %@", [self.errandManager fetchKeys]);
-    
-    [self.errandManager fetchData:^(BOOL success) {
-        if (success) {
-            NSLog(@"AFTER:  %@", [self.errandManager fetchKeys]);
-            [self.tableview reloadData];
-            [self updatePushChannels];
-        }
-        
-        [self.activitySpinner stopAnimating];
-    }];
-    
-    
+    [self loadData];
+}
+
+//Refresh table on parse push notification
+- (void)pushUpdate:(NSNotification *)notification {
+    [self loadData];
 }
 
 //Refresh table when pulled down.
@@ -91,7 +82,19 @@
     }];
 }
 
+-(void)loadData {
+    NSLog(@"BEFORE:  %@", [self.errandManager fetchKeys]);
 
+    [self.errandManager fetchData:^(BOOL success) {
+        if (success) {
+            NSLog(@"AFTER:  %@", [self.errandManager fetchKeys]);
+            [self.tableview reloadData];
+            [self updatePushChannels];
+        }
+        
+        [self.activitySpinner stopAnimating];
+    }];
+}
 
 
 - (void)didReceiveMemoryWarning {

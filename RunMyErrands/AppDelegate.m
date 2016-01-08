@@ -120,6 +120,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"pushUpdate" object:nil];
 }
 
 @end
