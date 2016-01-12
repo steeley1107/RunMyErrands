@@ -34,6 +34,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //allow persmission for local notifications
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+
+    
     // Do any additional setup after loading the view.
     self.tableview.tableFooterView = [[UIView alloc] init];
     [self.activitySpinner setHidesWhenStopped:YES];

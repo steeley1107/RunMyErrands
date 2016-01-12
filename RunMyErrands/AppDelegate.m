@@ -40,12 +40,6 @@
     [GMSServices provideAPIKey:GOOGLE_MAPS_KEY];
     
     
-    //allow persmission for local notifications
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
-    
-    
     
     //Use 'Login-signup' storyboard
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];

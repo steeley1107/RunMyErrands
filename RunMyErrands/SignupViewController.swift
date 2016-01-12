@@ -22,27 +22,13 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         usernameTextField.delegate = self
         passwordTextField.delegate = self
-        // Do any additional setup after loading the view.
         
+        //Subscribe to events to move textfields up/down when keyboard appears/disappears
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidShow:"), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keybaordDidHide:"), name: UIKeyboardDidHideNotification, object: nil)
-    }
-
-    func keyboardDidShow(notification: NSNotification) {
-        let info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        
-        UIView.animateWithDuration(0.1, animations: { () -> Void in
-            self.stackHeight.constant = -(keyboardFrame.size.height + 20)
-        })
-    }
-    
-    func keybaordDidHide(notification: NSNotification) {        
-        UIView.animateWithDuration(0.1, animations: { () -> Void in
-            self.stackHeight.constant = 0
-        })
     }
         
     override func didReceiveMemoryWarning() {
@@ -194,6 +180,21 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.view.endEditing(true)
     }
     
+    
+    func keyboardDidShow(notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            self.stackHeight.constant = -(keyboardFrame.size.height + 20)
+        })
+    }
+    
+    func keybaordDidHide(notification: NSNotification) {
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            self.stackHeight.constant = 0
+        })
+    }
 
     
     /*
