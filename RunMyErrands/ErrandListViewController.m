@@ -58,6 +58,11 @@
 
     //subscribe to parse push notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushUpdate:) name:@"pushUpdate" object:nil];
+    
+    //Check if any errands were completed or active.
+    [self.scheduler CreateActiveErrandsExpiryDate];
+    [self.scheduler CreateCompletedErrandsExpiryDate];
+ 
 }
 
 - (void)viewWillAppear:(BOOL)animated {

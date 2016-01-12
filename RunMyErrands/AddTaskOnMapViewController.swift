@@ -59,6 +59,8 @@ class AddTaskOnMapViewController: UIViewController, CLLocationManagerDelegate, G
         mapView.clear()
         
         task.setCoordinate(coordinate)
+        task.geoPoint = PFGeoPoint(latitude:task.lattitude.doubleValue, longitude:task.longitude.doubleValue)
+        
         
         let marker = GMSMarker(position: coordinate)
         marker.map = self.mapView
