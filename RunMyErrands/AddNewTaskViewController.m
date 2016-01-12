@@ -237,6 +237,7 @@
             CLLocationCoordinate2D coordinate = location.coordinate;
             
             self.task.coordinate = coordinate;
+            self.task.geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
             [self saveTask];
         } else {
             NSLog(@"location error");

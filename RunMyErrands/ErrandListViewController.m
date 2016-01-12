@@ -48,9 +48,10 @@
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableview addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
-
     
-    
+    //Check if any errands were completed or active.
+    [self.scheduler CreateActiveErrandsExpiryDate];
+    [self.scheduler CreateCompletedErrandsExpiryDate];
  
 }
 
