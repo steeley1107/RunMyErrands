@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D57-pO-xRy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D57-pO-xRy">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -210,7 +210,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="7XV-Rv-q9z">
-                                <rect key="frame" x="120" y="86" width="360" height="428"/>
+                                <rect key="frame" x="120" y="63" width="360" height="475"/>
                                 <subviews>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j0i-CD-Ajm">
                                         <rect key="frame" x="60" y="0.0" width="240" height="240"/>
@@ -229,15 +229,20 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n9q-nT-c7n">
                                         <rect key="frame" x="0.0" y="257" width="360" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" spellCheckingType="no"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9z3-Rl-wip">
                                         <rect key="frame" x="0.0" y="304" width="360" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" spellCheckingType="no" secureTextEntry="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8eS-Kx-Pv3">
+                                        <rect key="frame" x="0.0" y="351" width="360" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01A-bh-PMb">
-                                        <rect key="frame" x="0.0" y="351" width="360" height="30"/>
+                                        <rect key="frame" x="0.0" y="398" width="360" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="CREATE NEW USER">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -247,7 +252,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46l-1h-A2h">
-                                        <rect key="frame" x="0.0" y="398" width="360" height="30"/>
+                                        <rect key="frame" x="0.0" y="445" width="360" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="CANCEL">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -258,35 +263,16 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="9z3-Rl-wip" firstAttribute="width" secondItem="n9q-nT-c7n" secondAttribute="width" id="9kJ-fG-BxA"/>
                                     <constraint firstAttribute="trailing" secondItem="n9q-nT-c7n" secondAttribute="trailing" id="C82-3a-TuJ"/>
-                                    <constraint firstItem="01A-bh-PMb" firstAttribute="width" secondItem="7XV-Rv-q9z" secondAttribute="width" multiplier="0.5" id="DmQ-jt-sRp"/>
+                                    <constraint firstItem="8eS-Kx-Pv3" firstAttribute="width" secondItem="n9q-nT-c7n" secondAttribute="width" id="F9r-0v-pET"/>
                                     <constraint firstItem="01A-bh-PMb" firstAttribute="width" secondItem="n9q-nT-c7n" secondAttribute="width" id="JQa-0v-UaN"/>
                                     <constraint firstItem="n9q-nT-c7n" firstAttribute="leading" secondItem="7XV-Rv-q9z" secondAttribute="leading" id="Prz-jL-w2m"/>
-                                    <constraint firstItem="46l-1h-A2h" firstAttribute="width" secondItem="7XV-Rv-q9z" secondAttribute="width" id="WYE-qD-C94"/>
                                     <constraint firstItem="46l-1h-A2h" firstAttribute="width" secondItem="n9q-nT-c7n" secondAttribute="width" id="Ztc-Qd-vNC"/>
-                                    <constraint firstItem="9z3-Rl-wip" firstAttribute="width" secondItem="7XV-Rv-q9z" secondAttribute="width" id="mPO-i6-whe"/>
                                     <constraint firstItem="9z3-Rl-wip" firstAttribute="width" secondItem="n9q-nT-c7n" secondAttribute="width" id="o3P-Be-C5f"/>
-                                    <constraint firstItem="n9q-nT-c7n" firstAttribute="width" secondItem="7XV-Rv-q9z" secondAttribute="width" id="qR5-wu-Kgl"/>
-                                    <constraint firstItem="01A-bh-PMb" firstAttribute="width" secondItem="7XV-Rv-q9z" secondAttribute="width" id="sD3-1J-fR6"/>
-                                    <constraint firstItem="46l-1h-A2h" firstAttribute="width" secondItem="01A-bh-PMb" secondAttribute="width" id="xvS-3r-2DN"/>
-                                    <constraint firstItem="n9q-nT-c7n" firstAttribute="width" secondItem="7XV-Rv-q9z" secondAttribute="width" multiplier="0.8" id="yJD-UL-VGx"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="qR5-wu-Kgl"/>
-                                        <exclude reference="yJD-UL-VGx"/>
-                                        <exclude reference="9kJ-fG-BxA"/>
-                                        <exclude reference="mPO-i6-whe"/>
-                                        <exclude reference="DmQ-jt-sRp"/>
-                                        <exclude reference="sD3-1J-fR6"/>
-                                        <exclude reference="WYE-qD-C94"/>
-                                        <exclude reference="xvS-3r-2DN"/>
-                                    </mask>
-                                </variation>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gds-4M-UKp">
-                                <rect key="frame" x="207" y="191" width="186" height="30"/>
+                                <rect key="frame" x="207" y="168" width="186" height="30"/>
                                 <state key="normal" title="Click To Add Profile Picture">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -312,8 +298,11 @@
                     </view>
                     <connections>
                         <outlet property="chooseProfilePicButton" destination="gds-4M-UKp" id="eHQ-6R-278"/>
+                        <outlet property="confirmPasswordTextField" destination="8eS-Kx-Pv3" id="Q00-1m-lZb"/>
                         <outlet property="passwordTextField" destination="9z3-Rl-wip" id="AO7-Ka-j3g"/>
                         <outlet property="profileImage" destination="j0i-CD-Ajm" id="W57-W4-A2L"/>
+                        <outlet property="stackHeight" destination="zgU-0r-rtw" id="621-vO-AMY"/>
+                        <outlet property="stackView" destination="7XV-Rv-q9z" id="e45-nl-4bx"/>
                         <outlet property="usernameTextField" destination="n9q-nT-c7n" id="1O9-hs-D6j"/>
                         <segue destination="MRA-Bf-no6" kind="show" identifier="showSignupToTabBar" id="IfC-nz-rgb"/>
                     </connections>
@@ -431,6 +420,6 @@
         <image name="runmyerrands" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sZy-BU-E7M"/>
+        <segue reference="IfC-nz-rgb"/>
     </inferredMetricsTieBreakers>
 </document>
