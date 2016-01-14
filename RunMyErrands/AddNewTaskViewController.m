@@ -52,15 +52,14 @@
     self.categoryTextField.inputView = self.categoryPickerView;
     
     self.groupPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 100, 100)];
-    [self.categoryPickerView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:47/255.0 blue:51/255.0f alpha:1.0f]];
+    [self.groupPickerView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:47/255.0 blue:51/255.0f alpha:1.0f]];
     [self.groupPickerView setDataSource: self];
     [self.groupPickerView setDelegate: self];
     self.groupPickerView.showsSelectionIndicator = YES;
     self.groupPickerView.tag = 2;
     self.groupTextField.inputView = self.groupPickerView;
- 
-    
 }
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
@@ -222,16 +221,6 @@
     }
 }
 
-//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-//{
-//    
-//
-//    NSString *title = @"sample title";
-//    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-//    
-//    return attString;
-//    
-//}
 
 #pragma - UITextFieldDelegate Function
 
