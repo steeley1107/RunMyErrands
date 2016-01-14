@@ -16,15 +16,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationName;
-@property (weak, nonatomic) IBOutlet UIPickerView *categoryPickerView;
-@property (weak, nonatomic) IBOutlet UIPickerView *groupPickerView;
 @property (nonatomic) NSArray *groups;
 @property (nonatomic) NSArray *categoryPickerData;
 @property (nonatomic) NSMutableArray *groupPickerData;
 @property (nonatomic) NSString *teamKey;
-@property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
-@property (weak, nonatomic) IBOutlet UILabel *groupLabel;
 @property (nonatomic) Task* task;
+@property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
+@property (weak, nonatomic) IBOutlet UITextField *groupTextField;
+@property (strong, nonatomic) UIPickerView *categoryPickerView;
+@property (strong, nonatomic) UIPickerView *groupPickerView;
 @end
 
 @implementation AddNewTaskViewController
@@ -42,17 +42,24 @@
     self.task = [Task object];
     self.task.isComplete = @NO;
     
-    NSMutableAttributedString *categoryAttributeString = [[NSMutableAttributedString alloc] initWithString:@"Category"];
-    [categoryAttributeString addAttribute:NSUnderlineStyleAttributeName
-                            value:[NSNumber numberWithInt:1]
-                            range:(NSRange){0,[categoryAttributeString length]}];
-    self.categoryLabel.attributedText = categoryAttributeString;
+    //code setup for picker view to popup when text is selected
+    self.categoryPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 100, 100)];
+    [self.categoryPickerView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:47/255.0 blue:51/255.0f alpha:1.0f]];
+    [self.categoryPickerView setDataSource: self];
+    [self.categoryPickerView setDelegate: self];
+    self.categoryPickerView.showsSelectionIndicator = YES;
+    self.categoryPickerView.tag = 1;
+    self.categoryTextField.inputView = self.categoryPickerView;
     
-    NSMutableAttributedString *groupAttributeString = [[NSMutableAttributedString alloc] initWithString:@"Group"];
-    [groupAttributeString addAttribute:NSUnderlineStyleAttributeName
-                            value:[NSNumber numberWithInt:1]
-                            range:(NSRange){0,[groupAttributeString length]}];
-    self.groupLabel.attributedText = groupAttributeString;
+    self.groupPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 100, 100)];
+    [self.categoryPickerView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:47/255.0 blue:51/255.0f alpha:1.0f]];
+    [self.groupPickerView setDataSource: self];
+    [self.groupPickerView setDelegate: self];
+    self.groupPickerView.showsSelectionIndicator = YES;
+    self.groupPickerView.tag = 2;
+    self.groupTextField.inputView = self.groupPickerView;
+ 
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -185,7 +192,10 @@
     {
         tView = [[UILabel alloc] init];
         [tView setFont:[UIFont fontWithName:@"Helvetica Neue" size:17.0]];
+        
         [tView setTextColor:[UIColor whiteColor]];
+        
+        [tView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:47/255.0 blue:51/255.0f alpha:1.0f]];
         tView.textAlignment = NSTextAlignmentCenter;
         //tView.numberOfLines=3;
     }
@@ -199,6 +209,29 @@
     
     return tView;
 }
+
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+
+    if (pickerView.tag == 1) {
+        self.categoryTextField.text = [self.categoryPickerData[row] capitalizedString];
+        [self.categoryTextField resignFirstResponder];
+    } else if (pickerView.tag == 2) {
+        self.groupTextField.text = [self.groupPickerData[row] capitalizedString];
+        [self.groupTextField resignFirstResponder];
+    }
+}
+
+//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+//{
+//    
+//
+//    NSString *title = @"sample title";
+//    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//    
+//    return attString;
+//    
+//}
 
 #pragma - UITextFieldDelegate Function
 
