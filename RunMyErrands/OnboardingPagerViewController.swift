@@ -60,9 +60,9 @@ class OnboardingPagerViewController: UIPageViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setViewControllers([getStepZero()], direction: .Forward, animated: false, completion: nil)
-        dataSource = self
         view.backgroundColor = .darkGrayColor()
+        dataSource = self
+        setViewControllers([getStepZero()], direction: .Forward, animated: false, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
