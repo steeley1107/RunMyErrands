@@ -36,6 +36,9 @@
 		5257FBDB1BF809CE005CC88D /* RunMyErrandsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5257FBDA1BF809CE005CC88D /* RunMyErrandsTests.m */; };
 		5257FBE61BF809CE005CC88D /* RunMyErrandsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5257FBE51BF809CE005CC88D /* RunMyErrandsUITests.m */; };
 		525F89431C4D668A00B50CB2 /* OnboardingPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F89421C4D668A00B50CB2 /* OnboardingPagerViewController.swift */; };
+		525F89451C4D895F00B50CB2 /* StepZero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F89441C4D895F00B50CB2 /* StepZero.swift */; };
+		525F89471C4D897000B50CB2 /* StepOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F89461C4D897000B50CB2 /* StepOne.swift */; };
+		525F89491C4D897E00B50CB2 /* StepTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F89481C4D897E00B50CB2 /* StepTwo.swift */; };
 		527023011C1A35F20034AD23 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527023001C1A35F20034AD23 /* SettingsViewController.swift */; };
 		5270A7E91C14072700F8A814 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5270A7E81C14072700F8A814 /* Social.framework */; };
 		5270A7EB1C14074D00F8A814 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5270A7EA1C14074D00F8A814 /* Accounts.framework */; };
@@ -134,6 +137,9 @@
 		5257FBE51BF809CE005CC88D /* RunMyErrandsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RunMyErrandsUITests.m; sourceTree = "<group>"; };
 		5257FBE71BF809CE005CC88D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		525F89421C4D668A00B50CB2 /* OnboardingPagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPagerViewController.swift; sourceTree = "<group>"; };
+		525F89441C4D895F00B50CB2 /* StepZero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepZero.swift; sourceTree = "<group>"; };
+		525F89461C4D897000B50CB2 /* StepOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepOne.swift; sourceTree = "<group>"; };
+		525F89481C4D897E00B50CB2 /* StepTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepTwo.swift; sourceTree = "<group>"; };
 		527023001C1A35F20034AD23 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5270A7E81C14072700F8A814 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		5270A7EA1C14074D00F8A814 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -303,6 +309,9 @@
 				52ABCF1C1C0CF39800110C8A /* LoginViewController.swift */,
 				520B473C1C0F7562006F1FDA /* SignupViewController.swift */,
 				525F89421C4D668A00B50CB2 /* OnboardingPagerViewController.swift */,
+				525F89441C4D895F00B50CB2 /* StepZero.swift */,
+				525F89461C4D897000B50CB2 /* StepOne.swift */,
+				525F89481C4D897E00B50CB2 /* StepTwo.swift */,
 			);
 			name = LoginFiles;
 			sourceTree = "<group>";
@@ -622,10 +631,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				525712771C1A866B005775B4 /* EditProfileViewController.swift in Sources */,
+				525F89471C4D897000B50CB2 /* StepOne.swift in Sources */,
 				DAAD920E1C3C3F5F0052B5C6 /* Scheduler.swift in Sources */,
 				520B473F1C0FCE51006F1FDA /* CreateNewGroupViewController.swift in Sources */,
 				523E41021BF843D300AFBEB7 /* DetailViewController.m in Sources */,
 				52CE28701C125F6100046BF2 /* ErrandManager.swift in Sources */,
+				525F89451C4D895F00B50CB2 /* StepZero.swift in Sources */,
 				DA34E84C1C1504CC006C7B05 /* CustomInfoWindow.swift in Sources */,
 				52D6CD6E1BF96CE600CBBBAD /* AddNewTaskViewController.m in Sources */,
 				DAA9C83A1C17E25700AF99DA /* ErrandsManagerTableViewCell.swift in Sources */,
@@ -649,6 +660,7 @@
 				5257FBBF1BF809CE005CC88D /* main.m in Sources */,
 				52CA6F0F1BFF963A003E3437 /* TeamListTableViewController.m in Sources */,
 				52ABCF1D1C0CF39800110C8A /* LoginViewController.swift in Sources */,
+				525F89491C4D897E00B50CB2 /* StepTwo.swift in Sources */,
 				DA34E84E1C150581006C7B05 /* ErrandsManagerMapTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

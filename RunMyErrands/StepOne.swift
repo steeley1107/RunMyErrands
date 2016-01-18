@@ -10,10 +10,13 @@ import UIKit
 
 class StepOne: UIViewController {
 
+    @IBOutlet weak var image: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        image.layer.cornerRadius = 2
     }
 
     override func didReceiveMemoryWarning() {

@@ -11,46 +11,33 @@ import UIKit
 extension OnboardingPagerViewController : UIPageViewControllerDataSource {
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        
-        if pageIndex == 0 {
-            return nil
+        if viewController.isKindOfClass(StepTwo) {
+            return getStepOne()
+        } else if viewController.isKindOfClass(StepOne) {
+            return getStepZero()
         } else {
-            pageIndex = pageIndex - 1
-            
-            if pageIndex == 0 {
-                return getStepZero()
-            } else {
-                return getStepOne()
-            }
+            return nil
         }
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-
-        if pageIndex == 2 {
-            return nil
+        if viewController.isKindOfClass(StepZero) {
+            return getStepOne()
+        } else if viewController.isKindOfClass(StepOne) {
+            return getStepTwo()
         } else {
-            
-            pageIndex = pageIndex + 1
-            
-            if pageIndex == 1 {
-                return getStepOne()
-            } else {
-                return getStepTwo()
-            }
+            return nil
         }
     }
-        
+    
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return pageIndex
+        return 0
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return 0
+        return 3
     }
 }
-
-
 
 class OnboardingPagerViewController: UIPageViewController {
     
@@ -70,16 +57,16 @@ class OnboardingPagerViewController: UIPageViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getStepZero() -> UIViewController {
-        return storyboard!.instantiateViewControllerWithIdentifier("StepZero")
+    func getStepZero() -> StepZero {
+        return storyboard!.instantiateViewControllerWithIdentifier("StepZero") as! StepZero
     }
 
-    func getStepOne() -> UIViewController {
-        return storyboard!.instantiateViewControllerWithIdentifier("StepOne")
+    func getStepOne() -> StepOne {
+        return storyboard!.instantiateViewControllerWithIdentifier("StepOne") as! StepOne
     }
     
-    func getStepTwo() -> UIViewController {
-        return storyboard!.instantiateViewControllerWithIdentifier("StepTwo")
+    func getStepTwo() -> StepTwo {
+        return storyboard!.instantiateViewControllerWithIdentifier("StepTwo") as! StepTwo
     }
 
     

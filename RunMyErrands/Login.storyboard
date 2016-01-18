@@ -396,10 +396,10 @@
             </objects>
             <point key="canvasLocation" x="1099" y="-1099"/>
         </scene>
-        <!--View Controller-->
+        <!--Step Zero-->
         <scene sceneID="Ibt-WF-wJc">
             <objects>
-                <viewController storyboardIdentifier="StepZero" id="Mqq-oA-edj" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StepZero" id="Mqq-oA-edj" customClass="StepZero" customModule="RunMyErrands" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pae-rQ-q4O"/>
                         <viewControllerLayoutGuide type="bottom" id="VsZ-ap-Nzq"/>
@@ -495,10 +495,10 @@
             </objects>
             <point key="canvasLocation" x="476" y="-168"/>
         </scene>
-        <!--View Controller-->
+        <!--Step One-->
         <scene sceneID="ACc-0X-ycj">
             <objects>
-                <viewController storyboardIdentifier="StepOne" id="cA4-vl-2X4" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StepOne" id="cA4-vl-2X4" customClass="StepOne" customModule="RunMyErrands" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nT7-Wa-IQr"/>
                         <viewControllerLayoutGuide type="bottom" id="unp-tf-fQM"/>
@@ -538,15 +538,18 @@
                             <constraint firstItem="V4Y-Vi-SY2" firstAttribute="centerY" secondItem="lsw-x9-qbp" secondAttribute="centerY" id="xvq-F5-3JG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="image" destination="z0O-Ue-51z" id="7Zz-oI-rwi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aMi-tO-uCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1290" y="108"/>
         </scene>
-        <!--View Controller-->
+        <!--Step Two-->
         <scene sceneID="mMh-LX-ugC">
             <objects>
-                <viewController storyboardIdentifier="StepTwo" id="sgs-NK-3vH" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StepTwo" id="sgs-NK-3vH" customClass="StepTwo" customModule="RunMyErrands" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HKo-6w-di2"/>
                         <viewControllerLayoutGuide type="bottom" id="DBt-hG-Ihm"/>
@@ -597,6 +600,9 @@
                             <constraint firstItem="Pes-O1-f0a" firstAttribute="centerY" secondItem="JEi-rM-Pwy" secondAttribute="centerY" multiplier="0.5" id="qZG-jz-RRm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="image" destination="Pes-O1-f0a" id="PsX-r8-N4p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wnh-dI-AJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
