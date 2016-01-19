@@ -1135,20 +1135,52 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Nbg-yf-Uif">
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 1.  Join a group or create your own." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7f-q2-gXz">
+                                <rect key="frame" x="162" y="425" width="276" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Have No Errands" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5E-WF-Za7">
+                                <rect key="frame" x="187" y="376" width="226" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 2.  (Press '+' At The Top Right, To Add Some)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OcE-nV-JLG">
+                                <rect key="frame" x="128" y="451" width="344" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="w4P-La-JU6" firstAttribute="leading" secondItem="8K8-4w-Ztt" secondAttribute="leading" id="3HI-rk-DLS"/>
+                            <constraint firstItem="OcE-nV-JLG" firstAttribute="top" secondItem="J7f-q2-gXz" secondAttribute="bottom" constant="8" id="4jm-Tw-eID"/>
                             <constraint firstItem="hGm-O6-ehE" firstAttribute="leading" secondItem="8K8-4w-Ztt" secondAttribute="leading" id="A7d-OP-c1S"/>
                             <constraint firstItem="w4P-La-JU6" firstAttribute="top" secondItem="hGm-O6-ehE" secondAttribute="bottom" id="DxN-1M-j5o"/>
+                            <constraint firstItem="J7f-q2-gXz" firstAttribute="centerX" secondItem="8K8-4w-Ztt" secondAttribute="centerX" id="EVd-Ej-KNc"/>
+                            <constraint firstItem="OcE-nV-JLG" firstAttribute="centerX" secondItem="8K8-4w-Ztt" secondAttribute="centerX" id="RoI-Kz-sXv"/>
+                            <constraint firstItem="j5E-WF-Za7" firstAttribute="centerY" secondItem="8K8-4w-Ztt" secondAttribute="centerY" multiplier="1.3" id="Tgh-yA-A27"/>
                             <constraint firstItem="Nbg-yf-Uif" firstAttribute="centerX" secondItem="8K8-4w-Ztt" secondAttribute="centerX" id="XTL-lZ-2nZ"/>
+                            <constraint firstItem="J7f-q2-gXz" firstAttribute="top" secondItem="j5E-WF-Za7" secondAttribute="bottom" constant="20" id="Y0a-MN-BGk"/>
+                            <constraint firstItem="w4P-La-JU6" firstAttribute="centerY" secondItem="J7f-q2-gXz" secondAttribute="centerY" multiplier="0.714286" id="Y44-uY-s1r"/>
                             <constraint firstAttribute="trailing" secondItem="hGm-O6-ehE" secondAttribute="trailing" id="Y5j-c1-Xf3"/>
                             <constraint firstItem="w4P-La-JU6" firstAttribute="top" secondItem="8K8-4w-Ztt" secondAttribute="centerY" multiplier="0.8" id="eiB-iR-cuE"/>
                             <constraint firstItem="Nbg-yf-Uif" firstAttribute="centerY" secondItem="8K8-4w-Ztt" secondAttribute="centerY" id="nJL-7b-b4C"/>
                             <constraint firstAttribute="trailing" secondItem="w4P-La-JU6" secondAttribute="trailing" id="nUt-BF-RDB"/>
+                            <constraint firstItem="j5E-WF-Za7" firstAttribute="centerX" secondItem="8K8-4w-Ztt" secondAttribute="centerX" id="sLS-Sj-ACG"/>
                             <constraint firstItem="xPy-0X-kKC" firstAttribute="top" secondItem="w4P-La-JU6" secondAttribute="bottom" id="scG-gr-AIB"/>
                             <constraint firstItem="hGm-O6-ehE" firstAttribute="top" secondItem="iAj-GL-Fc2" secondAttribute="bottom" id="tUx-nB-daA"/>
+                            <constraint firstItem="OcE-nV-JLG" firstAttribute="centerY" secondItem="8K8-4w-Ztt" secondAttribute="centerY" multiplier="1.6" id="xsR-oP-5xX"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Y44-uY-s1r"/>
+                                <exclude reference="xsR-oP-5xX"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Run My Errands" id="h0u-aR-vif">
                         <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="2IR-9v-Xlj">
@@ -1164,7 +1196,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activitySpinner" destination="Nbg-yf-Uif" id="G0V-H3-IoH"/>
+                        <outlet property="addButton" destination="juF-KW-2cL" id="gWd-5M-DhY"/>
                         <outlet property="helloUserLabel" destination="OkX-JY-xvk" id="bbX-Ba-ski"/>
+                        <outlet property="noErrandsMessage1" destination="j5E-WF-Za7" id="anK-Kh-S7x"/>
+                        <outlet property="noErrandsMessage2" destination="J7f-q2-gXz" id="Qsj-9L-pDs"/>
+                        <outlet property="noErrandsMessage3" destination="OcE-nV-JLG" id="fRH-m8-QET"/>
                         <outlet property="tableview" destination="w4P-La-JU6" id="STM-sU-Sex"/>
                         <outlet property="youHaveTasksLabel" destination="RuY-l3-g7x" id="ZNz-Ak-L05"/>
                         <segue destination="6KT-lj-tvg" kind="show" identifier="addNewTask" id="GMg-tY-912"/>

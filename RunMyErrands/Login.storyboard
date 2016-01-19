@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x6D-G0-MPJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D57-pO-xRy">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -306,7 +306,7 @@
                         <outlet property="stackHeight" destination="zgU-0r-rtw" id="621-vO-AMY"/>
                         <outlet property="stackView" destination="7XV-Rv-q9z" id="e45-nl-4bx"/>
                         <outlet property="usernameTextField" destination="n9q-nT-c7n" id="1O9-hs-D6j"/>
-                        <segue destination="MRA-Bf-no6" kind="show" identifier="showSignupToTabBar" id="IfC-nz-rgb"/>
+                        <segue destination="x6D-G0-MPJ" kind="show" identifier="onboard" id="i94-gC-LCI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vam-vx-zuq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -394,7 +394,7 @@
                     </variation>
                 </stackView>
             </objects>
-            <point key="canvasLocation" x="1099" y="-1099"/>
+            <point key="canvasLocation" x="1523" y="-1173"/>
         </scene>
         <!--Step Zero-->
         <scene sceneID="Ibt-WF-wJc">
@@ -466,7 +466,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0e-D6-8GN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342" y="-640"/>
+            <point key="canvasLocation" x="2606" y="-1776"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tre-8w-i2w">
@@ -493,7 +493,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="x6D-G0-MPJ" customClass="OnboardingPagerViewController" customModule="RunMyErrands" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFN-hl-bU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="-168"/>
+            <point key="canvasLocation" x="1894" y="-1783"/>
         </scene>
         <!--Step One-->
         <scene sceneID="ACc-0X-ycj">
@@ -544,7 +544,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aMi-tO-uCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1290" y="108"/>
+            <point key="canvasLocation" x="2626" y="-1092"/>
         </scene>
         <!--Step Two-->
         <scene sceneID="mMh-LX-ugC">
@@ -583,6 +583,9 @@
                                 <state key="normal" title="GOT IT">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="MRA-Bf-no6" kind="show" id="3tZ-hZ-dmr"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -606,7 +609,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wnh-dI-AJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1290" y="816"/>
+            <point key="canvasLocation" x="2634" y="-376"/>
         </scene>
     </scenes>
     <resources>
@@ -617,6 +620,6 @@
         <image name="runmyerrands" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IfC-nz-rgb"/>
+        <segue reference="sZy-BU-E7M"/>
     </inferredMetricsTieBreakers>
 </document>

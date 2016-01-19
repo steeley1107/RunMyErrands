@@ -27,6 +27,12 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitySpinner;
 @property (nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic) Scheduler *scheduler;
+@property (weak, nonatomic) IBOutlet UILabel *noErrandsMessage1;
+@property (weak, nonatomic) IBOutlet UILabel *noErrandsMessage2;
+@property (weak, nonatomic) IBOutlet UILabel *noErrandsMessage3;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+
 @end
 
 
@@ -90,21 +96,32 @@
             [self.tableview reloadData];
             [self updatePushChannels];
             [self.refreshControl endRefreshing];
+            
         }
     }];
 }
 
 -(void)loadData {
-    NSLog(@"BEFORE:  %@", [self.errandManager fetchKeys]);
-
     [self.errandManager fetchData:^(BOOL success) {
         if (success) {
-            NSLog(@"AFTER:  %@", [self.errandManager fetchKeys]);
             [self.tableview reloadData];
             [self updatePushChannels];
         }
         
         [self.activitySpinner stopAnimating];
+        
+        if ([self.errandManager isEmpty]) {
+            self.addButton.enabled = NO;
+            self.noErrandsMessage1.hidden = NO;
+            self.noErrandsMessage2.hidden = NO;
+            self.noErrandsMessage3.hidden = NO;
+        } else {
+            self.addButton.enabled = YES;
+            self.noErrandsMessage1.hidden = YES;
+            self.noErrandsMessage2.hidden = YES;
+            self.noErrandsMessage3.hidden = YES;
+        }
+        
     }];
 }
 

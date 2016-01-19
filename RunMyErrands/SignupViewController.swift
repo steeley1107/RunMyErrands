@@ -132,14 +132,14 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                                 } else {
                                     print("failed saving profile picture")
                                 }
-                                self.performSegueWithIdentifier("showSignupToTabBar", sender: nil)
+                                self.performSegueWithIdentifier("onboard", sender: nil)
                             })
                         } else {
-                            self.performSegueWithIdentifier("showSignupToTabBar", sender: nil)
+                            self.performSegueWithIdentifier("onboard", sender: nil)
                         }
                     })
             } else {
-              self.performSegueWithIdentifier("showSignupToTabBar", sender: nil)
+              self.performSegueWithIdentifier("onboard", sender: nil)
             }
     }
     

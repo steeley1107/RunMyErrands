@@ -102,6 +102,13 @@ import Parse
         return self.objectIDtoNameDictionary.allKeys as! [String]
     }
 
+    func isEmpty() -> Bool {
+        if self.errandsDictionary.count == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
     
     func fetchIncompleteTask(completionHandler: (success: Bool) ->() ) {
         let relation = self.user.relationForKey("memberOfTheseGroups")
