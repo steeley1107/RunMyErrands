@@ -28,16 +28,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="537"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SR8-Vm-IRy">
-                                                    <rect key="frame" x="205" y="371" width="191" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SR8-Vm-IRy">
+                                                    <rect key="frame" x="205" y="374" width="191" height="30"/>
                                                     <state key="normal" title="Or Choose Location on Map"/>
                                                     <connections>
                                                         <segue destination="JJb-YA-mfc" kind="show" identifier="mapSegue" id="Hgj-qB-p8c"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dR-XZ-GHF">
-                                                    <rect key="frame" x="150" y="475" width="300" height="30"/>
-                                                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dR-XZ-GHF">
+                                                    <rect key="frame" x="120" y="474" width="360" height="30"/>
+                                                    <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" title="SAVE NEW TASK">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -194,7 +194,7 @@
                                                 <constraint firstItem="4dR-XZ-GHF" firstAttribute="centerX" secondItem="qW5-kk-nts" secondAttribute="centerX" id="j5C-qK-9ot"/>
                                                 <constraint firstItem="JjS-6q-64s" firstAttribute="centerX" secondItem="qW5-kk-nts" secondAttribute="centerX" id="t5T-Vo-WaV"/>
                                                 <constraint firstItem="SR8-Vm-IRy" firstAttribute="centerX" secondItem="qW5-kk-nts" secondAttribute="centerX" id="uEn-IM-jgK"/>
-                                                <constraint firstItem="4dR-XZ-GHF" firstAttribute="width" secondItem="qW5-kk-nts" secondAttribute="width" multiplier="0.5" id="xtx-g6-dda"/>
+                                                <constraint firstItem="4dR-XZ-GHF" firstAttribute="width" secondItem="qW5-kk-nts" secondAttribute="width" multiplier="0.6" id="xtx-g6-dda"/>
                                                 <constraint firstItem="4dR-XZ-GHF" firstAttribute="bottom" secondItem="qW5-kk-nts" secondAttribute="bottomMargin" constant="-25" id="ypu-YF-Epc"/>
                                                 <constraint firstItem="JjS-6q-64s" firstAttribute="top" secondItem="qW5-kk-nts" secondAttribute="topMargin" id="zEM-ko-OJb"/>
                                             </constraints>
@@ -299,7 +299,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="vt9-L3-B44"/>
                                 </constraints>
-                                <state key="normal" title="Mark As Complete">
+                                <state key="normal" title="MARK AS COMPLETE">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -522,7 +522,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAj-By-L2G" userLabel="CREATE NEW GROUP">
                                 <rect key="frame" x="120" y="510" width="360" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="CANCEL">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -532,7 +532,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdS-Nu-aQk" userLabel="CREATE NEW GROUP">
                                 <rect key="frame" x="120" y="450" width="360" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="CREATE NEW GROUP">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -815,7 +815,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmX-Pv-wVa">
                                 <rect key="frame" x="120" y="510" width="360" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="CANCEL">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -825,7 +825,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KlU-gu-7Cj">
                                 <rect key="frame" x="120" y="450" width="360" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="JOIN GROUP">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -1293,12 +1293,12 @@
                                 <rect key="frame" x="0.0" y="505" width="600" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTp-EM-eV9">
-                                        <rect key="frame" x="15" y="10" width="95" height="30"/>
-                                        <color key="backgroundColor" red="0.99215686270000003" green="0.41960784309999999" blue="0.027450980390000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="15" y="10" width="120" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="95" id="Gas-Hy-z7t"/>
+                                            <constraint firstAttribute="width" constant="120" id="Gas-Hy-z7t"/>
                                         </constraints>
-                                        <state key="normal" title="Clear Active">
+                                        <state key="normal" title="CLEAR ACTIVE">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1306,12 +1306,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1V-nF-PJT">
-                                        <rect key="frame" x="490" y="10" width="95" height="30"/>
-                                        <color key="backgroundColor" red="0.99215686270000003" green="0.41960784309999999" blue="0.027450980390000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="465" y="10" width="120" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="95" id="z7E-EA-vfa"/>
+                                            <constraint firstAttribute="width" constant="120" id="z7E-EA-vfa"/>
                                         </constraints>
-                                        <state key="normal" title="Run Errands">
+                                        <state key="normal" title="RUN ERRANDS">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1473,11 +1473,8 @@
                                         </connections>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8v-vy-kKc">
-                                        <rect key="frame" x="250" y="246" width="100" height="30"/>
+                                        <rect key="frame" x="120" y="246" width="360" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="H9L-hg-zXb"/>
-                                        </constraints>
                                         <state key="normal" title="EDIT">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -1616,6 +1613,7 @@
                             <constraint firstAttribute="trailing" secondItem="88W-C0-2Jg" secondAttribute="trailing" id="h56-79-EN4"/>
                             <constraint firstItem="88W-C0-2Jg" firstAttribute="leading" secondItem="3Xh-0h-ZsF" secondAttribute="leading" id="hyZ-XZ-Ead"/>
                             <constraint firstAttribute="trailing" secondItem="Q9g-yU-iwM" secondAttribute="trailing" id="oRc-wU-bR5"/>
+                            <constraint firstItem="I8v-vy-kKc" firstAttribute="width" secondItem="3Xh-0h-ZsF" secondAttribute="width" multiplier="6/10" id="rwu-B9-H8U"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="xPS-HN-bZZ"/>
