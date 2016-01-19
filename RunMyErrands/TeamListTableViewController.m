@@ -160,7 +160,7 @@
     button.hidden = NO;
     button.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [button setTitle:@"Invite" forState:UIControlStateNormal];
+    [button setTitle:@"Send Invite" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(openMailClientForInvite:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -204,7 +204,7 @@
                                                                        toItem:nil
                                                                     attribute:NSLayoutAttributeNotAnAttribute
                                                                    multiplier:1.0
-                                                                     constant:60.0];
+                                                                     constant:100.0];
     
     [sectionView addConstraint:buttonHeight];
     [sectionView addConstraint:buttonWidth];
