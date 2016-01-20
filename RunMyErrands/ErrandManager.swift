@@ -66,9 +66,15 @@ import Parse
         }
     }
     
+    func clearData() {
+        self.errandsDictionary.removeAllObjects()
+        self.objectIDtoNameDictionary.removeAllObjects()
+    }
+    
     func fetchData(completionHandler: (success: Bool) ->() ) {
         let relation = self.user.relationForKey("memberOfTheseGroups")
         relation.query().orderByAscending("name").findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+            self.clearData()
             if let objects = objects {
                 for group in objects {
                     self.objectIDtoNameDictionary.setValue(group["name"] as! String, forKey: group.objectId!)

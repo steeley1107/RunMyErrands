@@ -138,6 +138,8 @@
     UIView *sectionView = [[UIView alloc] initWithFrame:CGRectZero];
     sectionView.backgroundColor = [UIColor colorWithRed:86.0/255.0 green:113.0/255.0 blue:141.0/255.0f alpha:1.0f];
     
+    //setup 'send invite' button
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.tag = section;
     [sectionView addSubview:button];
@@ -160,7 +162,7 @@
     button.hidden = NO;
     button.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [button setTitle:@"Send Invite" forState:UIControlStateNormal];
+    [button setTitle:@"SEND INVITE" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(openMailClientForInvite:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -204,12 +206,117 @@
                                                                        toItem:nil
                                                                     attribute:NSLayoutAttributeNotAnAttribute
                                                                    multiplier:1.0
-                                                                     constant:100.0];
+                                                                     constant:110.0];
     
     [sectionView addConstraint:buttonHeight];
     [sectionView addConstraint:buttonWidth];
     
+    //send 'leave group'
+    UIButton *leaveButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    leaveButton.tag = section;
+    [sectionView addSubview:leaveButton];
+    
+    leaveButton.hidden = NO;
+    leaveButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [leaveButton setTitle:@"LEAVE GROUP" forState:UIControlStateNormal];
+    [leaveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [leaveButton addTarget:self action:@selector(leaveGroup:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [leaveButton setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:127.0/255.0 blue:0.0/255.0 alpha:1.0]];
+    
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:sectionView
+                                                            attribute:NSLayoutAttributeTop
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:leaveButton
+                                                            attribute:NSLayoutAttributeTop
+                                                           multiplier:1.0 constant:-10.0]];
+    
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:sectionView
+                                                            attribute:NSLayoutAttributeBottom
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:leaveButton
+                                                            attribute:NSLayoutAttributeBottom
+                                                           multiplier:1.0 constant:10.0]];
+    
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:leaveButton
+                                                            attribute:NSLayoutAttributeTrailing
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:button attribute:NSLayoutAttributeLeading
+                                                           multiplier:1.0 constant:-20.0]];
+    
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:leaveButton
+                                                            attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+    
+    NSLayoutConstraint *leaveButtonHeight = [NSLayoutConstraint constraintWithItem:button
+                                                                    attribute:NSLayoutAttributeHeight
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:leaveButton
+                                                                    attribute:NSLayoutAttributeHeight
+                                                                   multiplier:1.0
+                                                                     constant:0.0];
+    
+    NSLayoutConstraint *leaveButtonWidth = [NSLayoutConstraint constraintWithItem:button
+                                                                   attribute:NSLayoutAttributeWidth
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:leaveButton
+                                                                   attribute:NSLayoutAttributeWidth
+                                                                  multiplier:1.0
+                                                                    constant:0.0];
+    
+    [sectionView addConstraint:leaveButtonHeight];
+    [sectionView addConstraint:leaveButtonWidth];
+    
     return sectionView;
+}
+
+-(void) leaveGroup:(id)sender {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Confirm" message:@"Are You Sure You Want To Leave This Group?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        UIButton *button = (UIButton*)sender;
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Group"];
+        [query getObjectInBackgroundWithId:[self.groups[button.tag] objectId] block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            
+            if (error != nil) {
+                NSLog(@"Error: %@", error);
+            } else {
+                PFUser *user = [PFUser currentUser];
+
+                PFRelation *groupRelation = [object relationForKey:@"groupMembers"];
+                [groupRelation removeObject:user];
+                
+                PFRelation *memberRelation = [user relationForKey:@"memberOfTheseGroups"];
+                [memberRelation removeObject:object];
+
+                [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error != nil) {
+                        NSLog(@"Error: %@", error);
+                    } else {
+                        [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                            if (error!= nil) {
+                                NSLog(@"Error: %@", error);
+                            } else {
+                                [self loadGroups];
+                            }
+                        }];
+                    }
+                }];   
+            }
+        }];
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //
+    }];
+    
+    [alertController addAction:ok];
+    [alertController addAction:cancel];
+    
+    [self presentViewController:alertController animated:true completion:nil];
+    
 }
 
 -(void) openMailClientForInvite:(id)sender {
