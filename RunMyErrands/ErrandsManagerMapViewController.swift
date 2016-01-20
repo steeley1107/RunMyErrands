@@ -122,6 +122,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         })
     }
     
+    
     //Add the start and destination markers for the route.
     func configureMapAndMarkersForRoute() {
         
