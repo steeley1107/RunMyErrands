@@ -283,6 +283,8 @@ class DirectionManager: NSObject {
                     completion(result: false)
                 }
             })
+        }else {
+            completion(result: false)
         }
     }
 
