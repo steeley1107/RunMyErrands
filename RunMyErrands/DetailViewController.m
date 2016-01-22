@@ -53,7 +53,7 @@
 
 
 - (IBAction)markAsComplete:(UIButton *)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"errand"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Errand"];
     [query getObjectInBackgroundWithId:self.errand.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
         
         Errand *selectederrand = (Errand*)object;
