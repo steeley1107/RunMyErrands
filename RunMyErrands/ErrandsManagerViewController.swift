@@ -19,7 +19,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     var origin: CLLocationCoordinate2D!
     var destination: CLLocationCoordinate2D!
     
-    var directionTask = DirectionManager()
+    var directionErrand = DirectionManager()
     var locationManager: GeoManager!
     
     var travelMode = TravelModes.driving
@@ -29,7 +29,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     var errandsManager: ErrandManager!
     
-    var activeErrandArray:[Task]!
+    var activeErrandArray:[Errand]!
     
     var direction = Direction()
     
@@ -73,17 +73,17 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         super.viewWillAppear(true)
         
         //Remove all completed errrands from active errands array.
-        for task in self.activeErrandArray {
-            if task.isComplete  == true {
+        for Errand in self.activeErrandArray {
+            if Errand.isComplete  == true {
                 
-                if let index = self.activeErrandArray.indexOf(task) {
+                if let index = self.activeErrandArray.indexOf(Errand) {
                     self.activeErrandArray.removeAtIndex(index)
                 }
             }
         }
         
         //Fetch all incomplete errands and reload the table array
-        errandsManager.fetchIncompleteTask() { (success) -> () in
+        errandsManager.fetchIncompleteErrand() { (success) -> () in
             
             if success {
                 self.errandsTableView.reloadData()
@@ -101,16 +101,16 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     //reload errands table from pulling down on errands
     func refresh(sender:AnyObject) {
         
-        for task in self.activeErrandArray {
-            if task.isComplete  == true {
+        for Errand in self.activeErrandArray {
+            if Errand.isComplete  == true {
                 
-                if let index = self.activeErrandArray.indexOf(task) {
+                if let index = self.activeErrandArray.indexOf(Errand) {
                     self.activeErrandArray.removeAtIndex(index)
                 }
             }
         }
         
-        errandsManager.fetchIncompleteTask() { (success) -> () in
+        errandsManager.fetchIncompleteErrand() { (success) -> () in
             
             if success {
                 self.errandsTableView.reloadData()
@@ -151,24 +151,24 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         cell.subtitleLabel.attributedText = nil
         cell.categoryImage.image = nil
         
-        let task:Task = errandsManager.fetchErrand(indexPath)!
+        let errand:Errand = errandsManager.fetchErrand(indexPath)!
         
-        cell.titleLabel.text = task.title
-        cell.subtitleLabel.text = task.subtitle
+        cell.titleLabel.text = errand.title
+        cell.subtitleLabel.text = errand.subtitle
         
-        let imageName = task.imageName(task.category.intValue)
+        let imageName = errand.imageName(errand.category.intValue)
         cell.categoryImage?.image = UIImage(named:imageName)
         
         
-        if task.isActive == false {
+        if errand.isActive == false {
             cell.activeLabel.hidden = true
         }
-        else if task.isActive == true {
+        else if errand.isActive == true {
             cell.activeLabel.hidden = false
         }
         
         
-        if ContainsTask(activeErrandArray, task: task) && task.isActive == false {
+        if ContainsErrand(activeErrandArray, errand: errand) && errand.isActive == false {
             cell.accessoryType = .Checkmark
         }else {
             cell.accessoryType = .None
@@ -191,17 +191,17 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             
-            let task:Task = errandsManager.fetchErrand(indexPath)!
+            let errand:Errand = errandsManager.fetchErrand(indexPath)!
             
             if cell.accessoryType == .None {
                 
                 cell.accessoryType = .Checkmark
-                if !ContainsTask(activeErrandArray, task: task) {
-                    activeErrandArray.append(task)
+                if !ContainsErrand(activeErrandArray, errand: errand) {
+                    activeErrandArray.append(errand)
                 }
                 
             } else {
-                if let index = activeErrandArray.indexOf(task) {
+                if let index = activeErrandArray.indexOf(errand) {
                     cell.accessoryType = .None
                     activeErrandArray.removeAtIndex(index)
                 }
@@ -221,10 +221,10 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             showAlert("Error", message: "Please Select Errands to Run")
         }
         
-        for task in activeErrandArray {
-            task.isActive = true
-            task.activeDate = task.setActiveErrandExpiryDate()
-            task.saveInBackground()
+        for Errand in activeErrandArray {
+            Errand.isActive = true
+            Errand.activeDate = Errand.setActiveErrandExpiryDate()
+            Errand.saveInBackground()
         }
         
         performSegueWithIdentifier("ErrandsManagerMap", sender: nil)
@@ -237,9 +237,9 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             let errandsManagerMapVC:ErrandsManagerMapViewController = segue!.destinationViewController as! ErrandsManagerMapViewController
             direction.markerArray.removeAll()
             
-            for activeTask in self.activeErrandArray {
-                let marker = activeTask.makeMarker()
-                marker.userData = activeTask
+            for activeErrand in self.activeErrandArray {
+                let marker = activeErrand.makeMarker()
+                marker.userData = activeErrand
                 direction.markerArray += [marker]
             }
             
@@ -279,7 +279,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             direction.destinationHome = true
             
             //Check to see if the home address is valid
-            directionTask.HomeAddressValid({ (result) -> Void in
+            directionErrand.HomeAddressValid({ (result) -> Void in
                 if result == false {
                     self.showAlert("Home Address Not Valid", message: "Please Set Home Address in Settings")
                 }
@@ -299,15 +299,15 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         direction.markerArray.removeAll()
         
         //Change all errands to not active.
-        for task in activeErrandArray {
-            task.isActive = false
+        for Errand in activeErrandArray {
+            Errand.isActive = false
         }
         
         //Save all recenlty active errands in the background
-        for task in activeErrandArray {
-            task.saveInBackgroundWithBlock{(success: Bool, error: NSError?) ->Void in
+        for Errand in activeErrandArray {
+            Errand.saveInBackgroundWithBlock{(success: Bool, error: NSError?) ->Void in
                 if (success) {
-                    if let index = self.activeErrandArray.indexOf(task) {
+                    if let index = self.activeErrandArray.indexOf(Errand) {
                         self.activeErrandArray.removeAtIndex(index)
                     }
                     else {
@@ -316,8 +316,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
                 }
             }
         }
-        //Update table after all the active tasked are reset.
-        self.errandsManager.fetchIncompleteTask() { (success) -> () in
+        //Update table after all the active Erranded are reset.
+        self.errandsManager.fetchIncompleteErrand() { (success) -> () in
             if success {
                 self.errandsTableView.reloadData()
             }
@@ -325,12 +325,12 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    //Check for active tasks in an array of tasks.
-    func ContainsTask(array: [Task], task: Task) -> Bool {
+    //Check for active Errands in an array of Errands.
+    func ContainsErrand(array: [Errand], errand: Errand) -> Bool {
         
-        for activeTask in array {
+        for activeErrand in array {
             
-            if task.objectId == activeTask.objectId {
+            if errand.objectId == activeErrand.objectId {
                 return true
             }
         }

@@ -8,10 +8,10 @@
 
 #import "ErrandListViewController.h"
 #import "RunMyErrands-Swift.h"
-#import "AddNewTaskViewController.h"
+#import "AddNewErrandViewController.h"
 #import "DetailViewController.h"
 #import <Parse/Parse.h>
-#import "Task.h"
+#import "Errand.h"
 #import "GeoManager.h"
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
@@ -20,8 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *helloUserLabel;
-@property (weak, nonatomic) IBOutlet UILabel *youHaveTasksLabel;
-@property (nonatomic) NSArray *taskArray;
+@property (weak, nonatomic) IBOutlet UILabel *youHaveErrandsLabel;
+@property (nonatomic) NSArray *errandArray;
 @property (nonatomic) GeoManager *locationManager;
 @property (nonatomic) ErrandManager *errandManager;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitySpinner;
@@ -150,7 +150,7 @@
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
         self.helloUserLabel.text = [NSString stringWithFormat:@"%@, %@...", [self randHello], [[currentUser valueForKey:@"name"] capitalizedString]];
-        self.youHaveTasksLabel.text = [NSString stringWithFormat:@"%@", [self randWelcomeMessage]];
+        self.youHaveErrandsLabel.text = [NSString stringWithFormat:@"%@", [self randWelcomeMessage]];
     } else {
     
     }
@@ -186,7 +186,7 @@
 }
 
 - (IBAction)addButton:(UIBarButtonItem *)sender {
-    [self performSegueWithIdentifier:@"addNewTask" sender:nil];
+    [self performSegueWithIdentifier:@"addNewErrand" sender:nil];
 }
 
 #pragma mark - TableView Delegates
@@ -200,7 +200,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ErrandsListTableViewCell *cell =(ErrandsListTableViewCell*)[self.tableview dequeueReusableCellWithIdentifier:@"tasklistCell" forIndexPath:indexPath];
+    ErrandsListTableViewCell *cell =(ErrandsListTableViewCell*)[self.tableview dequeueReusableCellWithIdentifier:@"errandListCell" forIndexPath:indexPath];
     
     cell.titleLabel.text = nil;
     cell.subtitleLabel.text = nil;
@@ -209,7 +209,7 @@
     cell.categoryImage.image = nil;
     cell.activeLabel.hidden = true;
     
-    Task *taskAtCell = [self.errandManager fetchErrand:indexPath];
+    Errand *taskAtCell = [self.errandManager fetchErrand:indexPath];
     
     NSString *imageName;
     switch ([taskAtCell.category intValue]) {
@@ -271,15 +271,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([[segue identifier] isEqualToString:@"addNewTask"]) {
-        AddNewTaskViewController *addNewTaskVC = (AddNewTaskViewController *)[segue destinationViewController];
-        addNewTaskVC.taskArray = self.taskArray;
+    if ([[segue identifier] isEqualToString:@"addNewErrand"]) {
+        AddNewErrandViewController *addNewErrandVC = (AddNewErrandViewController *)[segue destinationViewController];
+        addNewErrandVC.errandArray = self.errandArray;
         
     } else if ([[segue identifier] isEqualToString:@"showDetail"]) {
         DetailViewController *detailVC = (DetailViewController*)[segue destinationViewController];
         NSIndexPath *indexPath = [self.tableview indexPathForSelectedRow];
-        Task *selectedTask = [self.errandManager fetchErrand:indexPath]; //self.taskArray[indexPath.section];
-        detailVC.task = selectedTask;
+        Errand *selectedErrand = [self.errandManager fetchErrand:indexPath]; //self.taskArray[indexPath.section];
+        detailVC.errand = selectedErrand;
     }
 }
 

@@ -1,18 +1,18 @@
 //
-//  AddNewTaskViewController.m
+//  AddNewErrandViewController.m
 //  RunMyErrands
 //
 //  Created by Jeff Mew on 2015-11-15.
 //  Copyright © 2015 Jeff Mew. All rights reserved.
 //
 
-#import "AddNewTaskViewController.h"
+#import "AddNewErrandViewController.h"
 #import <Parse/Parse.h>
-#import "Task.h"
+#import "Errand.h"
 #import "RunMyErrands-Swift.h"
 
-@interface AddNewTaskViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *taskNameTextField;
+@interface AddNewErrandViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *errandNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationName;
@@ -20,14 +20,14 @@
 @property (nonatomic) NSArray *categoryPickerData;
 @property (nonatomic) NSMutableArray *groupPickerData;
 @property (nonatomic) NSString *teamKey;
-@property (nonatomic) Task* task;
+@property (nonatomic) Errand* errand;
 @property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
 @property (weak, nonatomic) IBOutlet UITextField *groupTextField;
 @property (strong, nonatomic) UIPickerView *categoryPickerView;
 @property (strong, nonatomic) UIPickerView *groupPickerView;
 @end
 
-@implementation AddNewTaskViewController
+@implementation AddNewErrandViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,8 +39,8 @@
     self.groupPickerData = [NSMutableArray new];
     [self fetchGroupPickerData];
 
-    self.task = [Task object];
-    self.task.isComplete = @NO;
+    self.errand = [Errand object];
+    self.errand.isComplete = @NO;
     
     //code setup for picker view to popup when text is selected
     self.categoryPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 100, 100)];
@@ -92,45 +92,45 @@
     __block NSString *alertControllerTitle;
     __block NSString *alertControllerMessage;
     
-    if (self.taskNameTextField.text.length == 0) {
+    if (self.errandNameTextField.text.length == 0) {
         alertControllerTitle = @"Enter a Name";
-        alertControllerMessage = @"Please Enter a Task Name";
+        alertControllerMessage = @"Please Enter a errand Name";
         [self presentAlertController:alertControllerTitle aMessage:alertControllerMessage];
-    } else if (self.addressTextField.text.length == 0 && !self.task.longitude) {
+    } else if (self.addressTextField.text.length == 0 && !self.errand.longitude) {
         alertControllerTitle = @"Enter an Address";
         alertControllerMessage = @"Please Enter an Address or Choose it on the Map";
         [self presentAlertController:alertControllerTitle aMessage:alertControllerMessage];
     } else {
-        self.task.title = [self.taskNameTextField.text capitalizedString];
-        self.task.taskDescription = [self.descriptionTextField.text capitalizedString];
-        self.task.subtitle = [self.locationName.text capitalizedString];
-        self.task.category = @([self.categoryPickerView selectedRowInComponent:0]);
+        self.errand.title = [self.errandNameTextField.text capitalizedString];
+        self.errand.errandDescription = [self.descriptionTextField.text capitalizedString];
+        self.errand.subtitle = [self.locationName.text capitalizedString];
+        self.errand.category = @([self.categoryPickerView selectedRowInComponent:0]);
         
-        self.task.isActive = @NO;
+        self.errand.isActive = @NO;
 
         NSNumber *groupChoice = @([self.groupPickerView selectedRowInComponent:0]);
         PFObject *group = self.groups[[groupChoice intValue]];
-        self.task.group = group.objectId;
+        self.errand.group = group.objectId;
                 
         if (self.addressTextField.text.length != 0) {
-            self.task.address = self.addressTextField.text;
-            [self geoCodeAddress:self.task.address];
-        }else if (self.task.coordinate.latitude) {
-            self.task.address = @"";
-            [self saveTask];
+            self.errand.address = self.addressTextField.text;
+            [self geoCodeAddress:self.errand.address];
+        }else if (self.errand.coordinate.latitude) {
+            self.errand.address = @"";
+            [self saveErrand];
         }
     }
 }
 
--(void)saveTask {
+-(void)saveErrand {
     
-    [self.task saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [self.errand saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             // The object has been saved.
             PFObject *group = self.groups[[self.groupPickerView selectedRowInComponent:0]];
             PFRelation *groupErrandsRelation = [group relationForKey:@"errands"];
 
-            [groupErrandsRelation addObject:self.task];
+            [groupErrandsRelation addObject:self.errand];
             [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (!succeeded) {
                     NSLog(@"Error: %@", error);
@@ -229,10 +229,10 @@
     return YES;
 }
 
-#pragma - AddTaskDelegate Function
+#pragma - AdderrandDelegate Function
 
--(void)addTasksArray:(NSMutableArray*)array {
-    self.taskArray = array;
+-(void)adderrandsArray:(NSMutableArray*)array {
+    self.errandArray = array;
 }
 
 #pragma mark - Segues
@@ -240,9 +240,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"mapSegue"]) {
-        AddTaskOnMapViewController *mapVC = (AddTaskOnMapViewController *)[segue destinationViewController];
-        mapVC.taskArray = self.taskArray;
-        mapVC.task = self.task;
+        AddErrandOnMapViewController *mapVC = (AddErrandOnMapViewController *)[segue destinationViewController];
+        mapVC.errandArray = self.errandArray;
+        mapVC.errand = self.errand;
     }
 }
 
@@ -258,9 +258,9 @@
             CLLocation *location = placemark.location;
             CLLocationCoordinate2D coordinate = location.coordinate;
             
-            self.task.coordinate = coordinate;
-            self.task.geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-            [self saveTask];
+            self.errand.coordinate = coordinate;
+            self.errand.geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+            [self saveErrand];
         } else {
             NSLog(@"location error");
             return;

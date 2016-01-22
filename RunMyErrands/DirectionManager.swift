@@ -1,5 +1,5 @@
 //
-//  MapTasks.swift
+//  Maperrands.swift
 //  RunMyErrands2Maps
 //
 //  Created by Steele on 2015-11-30.
@@ -41,7 +41,7 @@ class DirectionManager: NSObject {
     
     //Request Directions from Google.
     
-    func requestDirections(origin: CLLocationCoordinate2D!, destination: CLLocationCoordinate2D!, taskWaypoints: Array<GMSMarker>!, travelMode: TravelModes!, completionHandler: (sucess: Bool) ->()) {
+    func requestDirections(origin: CLLocationCoordinate2D!, destination: CLLocationCoordinate2D!, errandWaypoints: Array<GMSMarker>!, travelMode: TravelModes!, completionHandler: (sucess: Bool) ->()) {
         
         if let originLocation = origin {
             let originString = "\(originLocation.latitude),\(originLocation.longitude)"
@@ -52,7 +52,7 @@ class DirectionManager: NSObject {
                 
                 var directionsURLString = baseURLDirections + "origin=" + originString + "&destination=" + destinationString
                 
-                if let routeWaypoints = taskWaypoints {
+                if let routeWaypoints = errandWaypoints {
                     directionsURLString += "&waypoints=optimize:true"
                     
                     for waypoint in routeWaypoints {
@@ -86,7 +86,7 @@ class DirectionManager: NSObject {
                 
                 //print("url \(directionsURL)")
                 
-                let task = NSURLSession.sharedSession().dataTaskWithURL(directionsURL!) { (data, response, error) -> Void in
+                let errand = NSURLSession.sharedSession().dataTaskWithURL(directionsURL!) { (data, response, error) -> Void in
                     if(error != nil) {
                         print(error)
                     }
@@ -108,7 +108,7 @@ class DirectionManager: NSObject {
                         print("dict \(dictionary)")
                     })
                 }
-                task.resume()
+                errand.resume()
             }
         }
     }
@@ -205,7 +205,7 @@ class DirectionManager: NSObject {
     }
     
     
-    //zoom the map to the limits of the tasks
+    //zoom the map to the limits of the errands
     func zoomMapLimits(origin: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, markerArray: [GMSMarker]) -> GMSCoordinateBounds {
         
         var minLat = 0.0

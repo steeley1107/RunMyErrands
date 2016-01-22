@@ -29,7 +29,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     var origin: CLLocationCoordinate2D!
     var destination: CLLocationCoordinate2D!
     
-    var directionTask = DirectionManager()
+    var directionErrand = DirectionManager()
     var locationManager: GeoManager!
     
     var routePolyline: GMSPolyline!
@@ -100,7 +100,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         activitySpinner.startAnimating()
         
         //Check to see if the home address is valid
-        directionTask.HomeAddressValid({ (result) -> Void in
+        directionErrand.HomeAddressValid({ (result) -> Void in
             if result == true {
                 let user = PFUser.currentUser()
                 if let homeAddress = user!["home"] {
@@ -130,7 +130,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         originMarker.map = self.mapView
         originMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
         originMarker.title = "Start Location"
-        let originString = self.directionTask.originAddress
+        let originString = self.directionErrand.originAddress
         if let range = originString.rangeOfString(",") {
             let originAddress = originString[originString.startIndex..<range.startIndex]
             originMarker.snippet = originAddress
@@ -142,7 +142,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
             destinationMarker.map = self.mapView
             destinationMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
             destinationMarker.title = "Home"
-            let destinationString = self.directionTask.destinationAddress
+            let destinationString = self.directionErrand.destinationAddress
             if let range = destinationString.rangeOfString(",") {
                 let destinationAddress = destinationString[destinationString.startIndex..<range.startIndex]
                 destinationMarker.snippet = destinationAddress
@@ -157,7 +157,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
             destination = origin
         }
         
-        self.directionTask.requestDirections(origin, destination: destination, taskWaypoints: direction.markerArray, travelMode: direction.travelMode, completionHandler: { (success) -> Void in
+        self.directionErrand.requestDirections(origin, destination: destination, errandWaypoints: direction.markerArray, travelMode: direction.travelMode, completionHandler: { (success) -> Void in
             if success {
                 self.drawRoute()
                 self.displayRouteInfo()
@@ -178,7 +178,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     
     func drawRoute() {
-        let route = directionTask.overviewPolyline["points"] as! String
+        let route = directionErrand.overviewPolyline["points"] as! String
         let path: GMSPath = GMSPath(fromEncodedPath: route)
         routePolyline = GMSPolyline(path: path)
         routePolyline.strokeWidth = 5.0
@@ -196,7 +196,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     func displayRouteInfo() {
         directionsLabel.hidden = false
-        directionsLabel.text = directionTask.totalDistance + "\n" + directionTask.totalTravelDuration + "\n" + directionTask.totalDuration
+        directionsLabel.text = directionErrand.totalDistance + "\n" + directionErrand.totalTravelDuration + "\n" + directionErrand.totalDuration
     }
     
     
@@ -228,8 +228,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         if marker.title == "Home" || (marker.title == "Start Location" && direction.destinationHome == false) {
             
-            let legIndex = directionTask.waypointOrder.count
-            let routes = directionTask.legPolyline(legIndex)
+            let legIndex = directionErrand.waypointOrder.count
+            let routes = directionErrand.legPolyline(legIndex)
             
             for aRoute in routes {
                 aRoute.map = mapView
@@ -238,7 +238,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         }
         
         if let index = orderedMarkerArray.indexOf(marker) {
-            let routes = directionTask.legPolyline(index)
+            let routes = directionErrand.legPolyline(index)
             
             for aRoute in routes {
                 aRoute.map = mapView
@@ -249,8 +249,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         if marker.userData != nil {
             
-            let task:Task = marker.userData as! Task
-            let imageName:String = task.imageName(task.category.intValue)
+            let errand:Errand = marker.userData as! Errand
+            let imageName:String = errand.imageName(errand.category.intValue)
             infoWindow.icon.image = UIImage(named:imageName)
             
             for eachMarker in orderedMarkerArray {
@@ -264,7 +264,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     func zoomMap() {
         
-        let bounds =  self.directionTask.zoomMapLimits(origin, destination: destination, markerArray: direction.markerArray)
+        let bounds =  self.directionErrand.zoomMapLimits(origin, destination: destination, markerArray: direction.markerArray)
         self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
         mapView.animateToViewingAngle(45)
     }
@@ -276,7 +276,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
         
         if marker.userData != nil {
-            performSegueWithIdentifier("showDetailFromEMan", sender: marker.userData as! Task)
+            performSegueWithIdentifier("showDetailFromEMan", sender: marker.userData as! Errand)
         }
     }
     
@@ -285,7 +285,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         if (segue.identifier == "showDetailFromEMan") {
             let detailVC:DetailViewController = segue!.destinationViewController as! DetailViewController
-            detailVC.task = sender as! Task
+            detailVC.errand = sender as! Errand
         }
     }
     
@@ -304,12 +304,12 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:ErrandsManagerMapTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ErrandsManagerMapTableViewCell
         
-        let task:Task = orderedMarkerArray[indexPath.row].userData as! Task
+        let errand:Errand = orderedMarkerArray[indexPath.row].userData as! Errand
         
-        cell.titleLabel.text = task.title
-        cell.subtitleLabel.text = task.subtitle
+        cell.titleLabel.text = errand.title
+        cell.subtitleLabel.text = errand.subtitle
         
-        let imageName = task.imageName(task.category.intValue)
+        let imageName = errand.imageName(errand.category.intValue)
         cell.categoryImage?.image = UIImage(named:imageName)
         
         return cell
@@ -335,7 +335,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
             polyline.map = nil
         }
         
-        let routes = directionTask.legPolyline(indexPath.row)
+        let routes = directionErrand.legPolyline(indexPath.row)
         
         for aRoute in routes {
             aRoute.map = mapView
@@ -348,7 +348,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     func reorderWaypoints() -> [GMSMarker] {
         
         var orderedMarkerArray:[GMSMarker] = [GMSMarker]()
-        if let waypointOrder = directionTask.waypointOrder {
+        if let waypointOrder = directionErrand.waypointOrder {
             for indexNumber in waypointOrder {
                 orderedMarkerArray += [direction.markerArray[indexNumber]]
             }

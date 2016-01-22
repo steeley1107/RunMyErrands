@@ -12,7 +12,7 @@
 #import "RunMyErrands-Swift.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
-#import "Task.h"
+#import "Errand.h"
 //#import <ParseTwitterUtils/ParseTwitterUtils.h>
 
 @interface AppDelegate ()
@@ -24,7 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Parse
-    [Task registerSubclass];
+    [Errand registerSubclass];
     [Parse setApplicationId:PARSE_APP_ID
                   clientKey:PARSE_CLIENT_KEY];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

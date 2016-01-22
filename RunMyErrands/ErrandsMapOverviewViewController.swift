@@ -15,10 +15,10 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     //Mark: Properties
     @IBOutlet weak var mapView: GMSMapView!
     var locationManager: GeoManager!
-    var directionTask = DirectionManager()
+    var directionErrand = DirectionManager()
     var errandsManager: ErrandManager!
     var didFindMyLocation = false
-    var taskArray:[Task] = []
+    var ErrandArray:[Errand] = []
     var origin: CLLocationCoordinate2D!
     
     var geoFence = GeoFenceManager()
@@ -43,7 +43,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     }
     
     override func viewWillAppear(animated: Bool) {
-        populateTaskArray()
+        populateErrandArray()
     }
     
     //Update map with users current location;
@@ -67,8 +67,8 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         infoWindow.title.text = marker.title
         infoWindow.snippit.text = marker.snippet
         
-        let task:Task = marker.userData as! Task
-        let imageName:String = task.imageName(task.category.intValue)
+        let errand:Errand = marker.userData as! Errand
+        let imageName:String = errand.imageName(errand.category.intValue)
         infoWindow.icon.image = UIImage(named:imageName)
         
         //auto size the width depending on title size
@@ -86,11 +86,11 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     func addMarkersToMap() {
         
-        for task in taskArray {
-            if task.isComplete == false {
+        for Errand in ErrandArray {
+            if Errand.isComplete == false {
                 
-                let marker = task.makeMarker()
-                marker.userData = task
+                let marker = Errand.makeMarker()
+                marker.userData = Errand
                 marker.map = self.mapView
                 marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
             }
@@ -102,14 +102,14 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         var markerArray:[GMSMarker] = [GMSMarker]()
         
-        for task in taskArray {
-            if task.isComplete == false {
-                let marker = task.makeMarker()
+        for Errand in ErrandArray {
+            if Errand.isComplete == false {
+                let marker = Errand.makeMarker()
                 markerArray += [marker]
             }
         }
         
-        let bounds =  self.directionTask.zoomMapLimits(origin, destination: origin, markerArray: markerArray)
+        let bounds =  self.directionErrand.zoomMapLimits(origin, destination: origin, markerArray: markerArray)
         self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
     }
     
@@ -120,7 +120,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     }
     
     
-    func populateTaskArray() {
+    func populateErrandArray() {
         
         errandsManager.fetchData { (success) -> () in
             if success {
@@ -129,10 +129,10 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
                 
                 for var index in 0..<numberOfGroups {
                     
-                    if let groupTaskArray = self.errandsManager.fetchErrandsForGroup(index) {
+                    if let groupErrandArray = self.errandsManager.fetchErrandsForGroup(index) {
                         
-                        for task in groupTaskArray {
-                            self.taskArray += [task]
+                        for Errand in groupErrandArray {
+                            self.ErrandArray += [Errand]
                         }
                     }
                 }
@@ -146,7 +146,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     //Mark: - Navigation
     
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        performSegueWithIdentifier("showDetailFromMap", sender: marker.userData as! Task)
+        performSegueWithIdentifier("showDetailFromMap", sender: marker.userData as! Errand)
     }
     
     
@@ -154,7 +154,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         if (segue.identifier == "showDetailFromMap") {
             let detailVC:DetailViewController = segue!.destinationViewController as! DetailViewController
-            detailVC.task = sender as! Task
+            detailVC.errand = sender as! Errand
         }
     }
     

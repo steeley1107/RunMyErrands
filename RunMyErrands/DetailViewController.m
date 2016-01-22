@@ -21,10 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.taskNameLabel.text =  self.task.title;
-    self.taskDescriptionLabel.text = [NSString stringWithFormat:@"DESCRIPTION: %@", self.task.taskDescription];
-    self.locationNameLabel.text = [NSString stringWithFormat:@"WHERE: %@", self.task.subtitle];
-    self.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", self.task.address];
+    self.errandNameLabel.text =  self.errand.title;
+    self.errandDescriptionLabel.text = [NSString stringWithFormat:@"DESCRIPTION: %@", self.errand.errandDescription];
+    self.locationNameLabel.text = [NSString stringWithFormat:@"WHERE: %@", self.errand.subtitle];
+    self.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", self.errand.address];
     
     self.mapView.delegate = self;
     [self initiateMap];
@@ -32,14 +32,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    if ([self.task.isComplete boolValue]) {
+    if ([self.errand.isComplete boolValue]) {
         self.completeButton.backgroundColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0];
         self.completeButton.enabled = false;
     }
     
-    NSString *imageName = [self.task imageName:[self.task.category intValue]];
+    NSString *imageName = [self.errand imageName:[self.errand.category intValue]];
     
-    if ([self.task.isComplete boolValue]) {
+    if ([self.errand.isComplete boolValue]) {
         imageName = [imageName stringByAppendingString:@"-grey"];
     }
     
@@ -53,17 +53,17 @@
 
 
 - (IBAction)markAsComplete:(UIButton *)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"Task"];
-    [query getObjectInBackgroundWithId:self.task.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    PFQuery *query = [PFQuery queryWithClassName:@"errand"];
+    [query getObjectInBackgroundWithId:self.errand.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
         
-        Task *selectedTask = (Task*)object;
-        selectedTask.isComplete = @(YES);
-        selectedTask.isActive = @(NO);
-        selectedTask.completedDate = [selectedTask setCompletedErrandExpiryDate];
+        Errand *selectederrand = (Errand*)object;
+        selectederrand.isComplete = @(YES);
+        selectederrand.isActive = @(NO);
+        selectederrand.completedDate = [selectederrand setCompletedErrandExpiryDate];
         
-        [selectedTask saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [selectederrand saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                self.task = selectedTask;
+                self.errand = selectederrand;
                 self.completeButton.enabled = false;
                 self.completeButton.backgroundColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0];
                 
@@ -75,14 +75,14 @@
                 [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
                         PFPush *push = [[PFPush alloc] init];
-                        [push setChannel:self.task.group];
-                        [push setMessage:[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.task.title]];
+                        [push setChannel:self.errand.group];
+                        [push setMessage:[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.errand.title]];
                         
                         PFInstallation *installation = [PFInstallation currentInstallation];
-                        [installation removeObject:self.task.group forKey:@"channels"];
+                        [installation removeObject:self.errand.group forKey:@"channels"];
                         [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                             [push sendPushInBackground];
-                            [installation addUniqueObject:self.task.group forKey:@"channels"];
+                            [installation addUniqueObject:self.errand.group forKey:@"channels"];
                         }];
                         
                         [self viewWillAppear:true];
@@ -102,14 +102,14 @@
 - (void) initiateMap {
     
     
-    GMSMarker *marker = [GMSMarker markerWithPosition:self.task.coordinate];
+    GMSMarker *marker = [GMSMarker markerWithPosition:self.errand.coordinate];
     
-    marker.title = self.task.title;
-    marker.snippet = self.task.subtitle;
-    marker.userData = self.task;
+    marker.title = self.errand.title;
+    marker.snippet = self.errand.subtitle;
+    marker.userData = self.errand;
     marker.map = self.mapView;
     
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:(self.task.coordinate) zoom:14.0];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:(self.errand.coordinate) zoom:14.0];
     self.mapView.camera = camera;
 }
 
@@ -122,8 +122,8 @@
     infoWindow.title.text = marker.title;
     infoWindow.snippit.text = marker.snippet;
     
-    Task *task = marker.userData;
-    NSString *imageName = [task imageName:task.category.intValue];
+    Errand *errand = marker.userData;
+    NSString *imageName = [errand imageName:errand.category.intValue];
     infoWindow.icon.image = [UIImage imageNamed:imageName];
 
     //auto size the width depending on title size

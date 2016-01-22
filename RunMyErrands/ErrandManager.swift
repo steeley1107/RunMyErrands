@@ -28,11 +28,11 @@ import Parse
         return self.errandsDictionary.allKeys.count
     }
     
-    func fetchErrandsForGroup(section: NSInteger) -> [Task]? {
+    func fetchErrandsForGroup(section: NSInteger) -> [Errand]? {
         
         if let groups = self.errandsDictionary.allKeys as? [String] {
             let group = groups[section]
-            return self.errandsDictionary.valueForKey(group) as? [Task]
+            return self.errandsDictionary.valueForKey(group) as? [Errand]
         } else {
             return nil
         }
@@ -47,7 +47,7 @@ import Parse
     }
     
     
-    func fetchErrand(indexPath: NSIndexPath) -> Task? {
+    func fetchErrand(indexPath: NSIndexPath) -> Errand? {
         if let errands = fetchErrandsForGroup(indexPath.section) {
             return errands[indexPath.row]
         } else {
@@ -81,14 +81,14 @@ import Parse
                     self.errandsDictionary.setValue([], forKey: group.objectId!)
                 }
 
-                let errandsQuery = PFQuery(className: "Task")
+                let errandsQuery = PFQuery(className: "Errand")
                 errandsQuery.whereKey("group", containedIn: self.fetchKeys())
                 errandsQuery.orderByAscending("isComplete")
                 errandsQuery.findObjectsInBackgroundWithBlock({ (errands: [PFObject]?, error: NSError?) -> Void in
                     if error == nil {
-                        if let errands = errands as? [Task] {
+                        if let errands = errands as? [Errand] {
                             for errand in errands {
-                                var errandArray:Array = self.errandsDictionary.objectForKey(errand.group!) as! [Task]
+                                var errandArray:Array = self.errandsDictionary.objectForKey(errand.group!) as! [Errand]
                                 errandArray.append(errand)
                                 self.errandsDictionary.setValue(errandArray, forKey: errand.group!)
                             }
@@ -116,7 +116,7 @@ import Parse
         }
     }
     
-    func fetchIncompleteTask(completionHandler: (success: Bool) ->() ) {
+    func fetchIncompleteErrand(completionHandler: (success: Bool) ->() ) {
         let relation = self.user.relationForKey("memberOfTheseGroups")
         relation.query().orderByAscending("name").findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             if let objects = objects {
@@ -125,14 +125,14 @@ import Parse
                     self.errandsDictionary.setValue([], forKey: group.objectId!)
                 }
                 
-                let errandsQuery = PFQuery(className: "Task")
+                let errandsQuery = PFQuery(className: "Errand")
                 errandsQuery.whereKey("group", containedIn: self.fetchKeys())
                 errandsQuery.whereKey("isComplete", equalTo: false)
                 errandsQuery.findObjectsInBackgroundWithBlock({ (errands: [PFObject]?, error: NSError?) -> Void in
                     if error == nil {
-                        if let errands = errands as? [Task] {
+                        if let errands = errands as? [Errand] {
                             for errand in errands {
-                                var errandArray:Array = self.errandsDictionary.objectForKey(errand.group!) as! [Task]
+                                var errandArray:Array = self.errandsDictionary.objectForKey(errand.group!) as! [Errand]
                                 errandArray.append(errand)
                                 self.errandsDictionary.setValue(errandArray, forKey: errand.group!)
                             }

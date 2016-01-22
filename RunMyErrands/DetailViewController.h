@@ -8,16 +8,16 @@
 
 #import <UIKit/UIKit.h>
 //#import <MapKit/MapKit.h>
-#import "Task.h"
+#import "Errand.h"
 
 
 @interface DetailViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *taskNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *taskDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *errandNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *errandDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-@property (nonatomic) Task *task;
+@property (nonatomic) Errand *errand;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;
 

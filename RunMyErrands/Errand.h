@@ -13,11 +13,11 @@
 #import <Parse/PFObject+Subclass.h>
 @import GoogleMaps;
 
-@interface Task : PFObject <PFSubclassing>
+@interface Errand : PFObject <PFSubclassing>
 
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *subtitle;
-@property (nonatomic) NSString *taskDescription;
+@property (nonatomic) NSString *errandDescription;
 @property (nonatomic) NSString *address;
 @property (nonatomic) NSString *locationName;
 @property (nonatomic) NSNumber *longitude;

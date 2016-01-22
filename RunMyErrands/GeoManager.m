@@ -146,18 +146,18 @@ int const kUpdateGeoFenceDistance = 1000;
     }
 }
 
--(void)addTaskLocation:(CLRegion*)region {
+-(void)addErrandLocation:(CLRegion*)region {
     
     [_locationManager startMonitoringForRegion:region];
 }
 
--(void)removeTaskLocation:(CLRegion*)region {
+-(void)removeErrandLocation:(CLRegion*)region {
     
     [_locationManager stopMonitoringForRegion:region];
 }
 
 
--(void)removeAllTaskLocation {
+-(void)removeAllErrandLocation {
     
     for (CLRegion *region in self.locationManager.monitoredRegions) {
         [self.locationManager stopMonitoringForRegion:region];

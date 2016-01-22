@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "Task.h"
+#import "Errand.h"
 
-@interface AddNewTaskViewController : UITableViewController
-@property (nonatomic) NSArray *taskArray;
+@interface AddNewErrandViewController : UITableViewController
+@property (nonatomic) NSArray *errandArray;
 @end

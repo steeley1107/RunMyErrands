@@ -8,6 +8,6 @@
 //#import <ParseFacebookUtils/PFFacebookUtils.h>
 //#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "ErrandListViewController.h"
-#import "Task.h"
+#import "Errand.h"
 #import "GeoManager.h"
 #import "DetailViewController.h"

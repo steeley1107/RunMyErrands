@@ -45,7 +45,7 @@
 		5270A7ED1C14092000F8A814 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5270A7EC1C14092000F8A814 /* Twitter.framework */; };
 		528EC12C1C16535C00CCF376 /* GroupListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528EC12B1C16535C00CCF376 /* GroupListTableViewCell.swift */; };
 		529890491BFBD97C00B82D76 /* GeoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 529890441BFBD97C00B82D76 /* GeoManager.m */; };
-		5298904B1BFBD97C00B82D76 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 529890481BFBD97C00B82D76 /* Task.m */; };
+		5298904B1BFBD97C00B82D76 /* Errand.m in Sources */ = {isa = PBXBuildFile; fileRef = 529890481BFBD97C00B82D76 /* Errand.m */; };
 		5298904D1BFBDBDE00B82D76 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5298904C1BFBDBDE00B82D76 /* CoreLocation.framework */; };
 		5298904F1BFBDBE500B82D76 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5298904E1BFBDBE500B82D76 /* MapKit.framework */; };
 		52AA1A091BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AA1A081BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift */; };
@@ -53,7 +53,7 @@
 		52ABCF1D1C0CF39800110C8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ABCF1C1C0CF39800110C8A /* LoginViewController.swift */; };
 		52CA6F0F1BFF963A003E3437 /* TeamListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CA6F0E1BFF963A003E3437 /* TeamListTableViewController.m */; };
 		52CE28701C125F6100046BF2 /* ErrandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CE286F1C125F6100046BF2 /* ErrandManager.swift */; };
-		52D6CD6E1BF96CE600CBBBAD /* AddNewTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D6CD6D1BF96CE600CBBBAD /* AddNewTaskViewController.m */; };
+		52D6CD6E1BF96CE600CBBBAD /* AddNewErrandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D6CD6D1BF96CE600CBBBAD /* AddNewErrandViewController.m */; };
 		DA0D86021C15605600402054 /* Callout_rounded_rectangle_center.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0D86011C15605600402054 /* Callout_rounded_rectangle_center.png */; };
 		DA34E8461C15035A006C7B05 /* ErrandsManagerMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E8451C15035A006C7B05 /* ErrandsManagerMapViewController.swift */; };
 		DA34E8481C15037D006C7B05 /* DirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E8471C15037D006C7B05 /* DirectionManager.swift */; };
@@ -61,7 +61,7 @@
 		DA34E84C1C1504CC006C7B05 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E84B1C1504CC006C7B05 /* CustomInfoWindow.swift */; };
 		DA34E84E1C150581006C7B05 /* ErrandsManagerMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E84D1C150581006C7B05 /* ErrandsManagerMapTableViewCell.swift */; };
 		DA34E8501C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E84F1C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift */; };
-		DA34E8521C153763006C7B05 /* AddTaskOnMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E8511C153763006C7B05 /* AddTaskOnMapViewController.swift */; };
+		DA34E8521C153763006C7B05 /* AddErrandOnMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34E8511C153763006C7B05 /* AddErrandOnMapViewController.swift */; };
 		DA8B6FF31BFEAEF600834D78 /* briefcase.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FEF1BFEAEF600834D78 /* briefcase.png */; };
 		DA8B6FF41BFEAEF600834D78 /* cart.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FF01BFEAEF600834D78 /* cart.png */; };
 		DA8B6FF51BFEAEF600834D78 /* die.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8B6FF11BFEAEF600834D78 /* die.png */; };
@@ -147,8 +147,8 @@
 		528EC12B1C16535C00CCF376 /* GroupListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListTableViewCell.swift; sourceTree = "<group>"; };
 		529890431BFBD97C00B82D76 /* GeoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoManager.h; sourceTree = "<group>"; };
 		529890441BFBD97C00B82D76 /* GeoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoManager.m; sourceTree = "<group>"; };
-		529890471BFBD97C00B82D76 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
-		529890481BFBD97C00B82D76 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		529890471BFBD97C00B82D76 /* Errand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Errand.h; sourceTree = "<group>"; };
+		529890481BFBD97C00B82D76 /* Errand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Errand.m; sourceTree = "<group>"; };
 		5298904C1BFBDBDE00B82D76 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5298904E1BFBDBE500B82D76 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		52AA1A081BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsListTableViewCell.swift; sourceTree = "<group>"; };
@@ -157,8 +157,8 @@
 		52CA6F0D1BFF963A003E3437 /* TeamListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamListTableViewController.h; sourceTree = "<group>"; };
 		52CA6F0E1BFF963A003E3437 /* TeamListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamListTableViewController.m; sourceTree = "<group>"; };
 		52CE286F1C125F6100046BF2 /* ErrandManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandManager.swift; sourceTree = "<group>"; };
-		52D6CD6C1BF96CE600CBBBAD /* AddNewTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewTaskViewController.h; sourceTree = "<group>"; };
-		52D6CD6D1BF96CE600CBBBAD /* AddNewTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewTaskViewController.m; sourceTree = "<group>"; };
+		52D6CD6C1BF96CE600CBBBAD /* AddNewErrandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewErrandViewController.h; sourceTree = "<group>"; };
+		52D6CD6D1BF96CE600CBBBAD /* AddNewErrandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewErrandViewController.m; sourceTree = "<group>"; };
 		98ED86A0F03E7320C46D3917 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA0D86011C15605600402054 /* Callout_rounded_rectangle_center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Callout_rounded_rectangle_center.png; sourceTree = "<group>"; };
 		DA216A361BFD7FD200797C24 /* RunMyErrands-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RunMyErrands-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 		DA34E84B1C1504CC006C7B05 /* CustomInfoWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
 		DA34E84D1C150581006C7B05 /* ErrandsManagerMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsManagerMapTableViewCell.swift; sourceTree = "<group>"; };
 		DA34E84F1C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsMapOverviewViewController.swift; sourceTree = "<group>"; };
-		DA34E8511C153763006C7B05 /* AddTaskOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskOnMapViewController.swift; sourceTree = "<group>"; };
+		DA34E8511C153763006C7B05 /* AddErrandOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddErrandOnMapViewController.swift; sourceTree = "<group>"; };
 		DA8B6FEF1BFEAEF600834D78 /* briefcase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = briefcase.png; sourceTree = "<group>"; };
 		DA8B6FF01BFEAEF600834D78 /* cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart.png; sourceTree = "<group>"; };
 		DA8B6FF11BFEAEF600834D78 /* die.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = die.png; sourceTree = "<group>"; };
@@ -373,15 +373,15 @@
 				DAA9C8371C17D53E00AF99DA /* ErrandsManagerViewController.swift */,
 				DA34E8451C15035A006C7B05 /* ErrandsManagerMapViewController.swift */,
 				DA34E84F1C150EFA006C7B05 /* ErrandsMapOverviewViewController.swift */,
-				DA34E8511C153763006C7B05 /* AddTaskOnMapViewController.swift */,
+				DA34E8511C153763006C7B05 /* AddErrandOnMapViewController.swift */,
 				520B473E1C0FCE51006F1FDA /* CreateNewGroupViewController.swift */,
 				520B47401C0FEA81006F1FDA /* JoinGroupViewController.swift */,
 				523E40FD1BF843A900AFBEB7 /* ErrandListViewController.h */,
 				523E40FE1BF843A900AFBEB7 /* ErrandListViewController.m */,
 				523E41001BF843D300AFBEB7 /* DetailViewController.h */,
 				523E41011BF843D300AFBEB7 /* DetailViewController.m */,
-				52D6CD6C1BF96CE600CBBBAD /* AddNewTaskViewController.h */,
-				52D6CD6D1BF96CE600CBBBAD /* AddNewTaskViewController.m */,
+				52D6CD6C1BF96CE600CBBBAD /* AddNewErrandViewController.h */,
+				52D6CD6D1BF96CE600CBBBAD /* AddNewErrandViewController.m */,
 				52CA6F0D1BFF963A003E3437 /* TeamListTableViewController.h */,
 				52CA6F0E1BFF963A003E3437 /* TeamListTableViewController.m */,
 				527023001C1A35F20034AD23 /* SettingsViewController.swift */,
@@ -394,8 +394,8 @@
 			isa = PBXGroup;
 			children = (
 				52CE286F1C125F6100046BF2 /* ErrandManager.swift */,
-				529890471BFBD97C00B82D76 /* Task.h */,
-				529890481BFBD97C00B82D76 /* Task.m */,
+				529890471BFBD97C00B82D76 /* Errand.h */,
+				529890481BFBD97C00B82D76 /* Errand.m */,
 				DAAD920D1C3C3F5F0052B5C6 /* Scheduler.swift */,
 			);
 			name = Models;
@@ -638,13 +638,13 @@
 				52CE28701C125F6100046BF2 /* ErrandManager.swift in Sources */,
 				525F89451C4D895F00B50CB2 /* StepZero.swift in Sources */,
 				DA34E84C1C1504CC006C7B05 /* CustomInfoWindow.swift in Sources */,
-				52D6CD6E1BF96CE600CBBBAD /* AddNewTaskViewController.m in Sources */,
+				52D6CD6E1BF96CE600CBBBAD /* AddNewErrandViewController.m in Sources */,
 				DAA9C83A1C17E25700AF99DA /* ErrandsManagerTableViewCell.swift in Sources */,
 				DA34E8481C15037D006C7B05 /* DirectionManager.swift in Sources */,
 				DAA9C8381C17D53E00AF99DA /* ErrandsManagerViewController.swift in Sources */,
 				527023011C1A35F20034AD23 /* SettingsViewController.swift in Sources */,
 				520B47411C0FEA81006F1FDA /* JoinGroupViewController.swift in Sources */,
-				DA34E8521C153763006C7B05 /* AddTaskOnMapViewController.swift in Sources */,
+				DA34E8521C153763006C7B05 /* AddErrandOnMapViewController.swift in Sources */,
 				5257FBC21BF809CE005CC88D /* AppDelegate.m in Sources */,
 				DAE753011C18BDC700AFF06F /* Direction.swift in Sources */,
 				DAE308E11C248CCA00534D61 /* GeoFenceManager.swift in Sources */,
@@ -653,7 +653,7 @@
 				529890491BFBD97C00B82D76 /* GeoManager.m in Sources */,
 				528EC12C1C16535C00CCF376 /* GroupListTableViewCell.swift in Sources */,
 				52AA1A091BFD8F7D000FF2F0 /* ErrandsListTableViewCell.swift in Sources */,
-				5298904B1BFBD97C00B82D76 /* Task.m in Sources */,
+				5298904B1BFBD97C00B82D76 /* Errand.m in Sources */,
 				520B473D1C0F7562006F1FDA /* SignupViewController.swift in Sources */,
 				523E40FF1BF843A900AFBEB7 /* ErrandListViewController.m in Sources */,
 				525F89431C4D668A00B50CB2 /* OnboardingPagerViewController.swift in Sources */,

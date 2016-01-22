@@ -6,14 +6,14 @@
 //  Copyright © 2015 Steele. All rights reserved.
 //
 
-#import "Task.h"
+#import "Errand.h"
 
 
-@implementation Task
+@implementation Errand
 
 @dynamic title;
 @dynamic subtitle;
-@dynamic taskDescription;
+@dynamic errandDescription;
 @dynamic address;
 @dynamic locationName;
 @dynamic lattitude;
@@ -32,7 +32,7 @@
 }
 
 + (NSString*)parseClassName {
-    return @"Task";
+    return @"Errand";
 }
 
 -(CLLocationCoordinate2D) coordinate {

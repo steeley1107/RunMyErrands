@@ -1,5 +1,5 @@
 //
-//  AddTaskOnMapViewController.swift
+//  AddErrandOnMapViewController.swift
 //  RunMyErrands
 //
 //  Created by Steele on 2015-12-06.
@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class AddTaskOnMapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     
     //Mark: Properties
@@ -17,8 +17,8 @@ class AddTaskOnMapViewController: UIViewController, CLLocationManagerDelegate, G
     var locationManager: GeoManager!
     var errandsManager: ErrandManager!
     var didFindMyLocation = false
-    var taskArray:[Task] = []
-    var task: Task!
+    var errandArray:[Errand] = []
+    var errand: Errand!
     
     
     override func viewDidLoad() {
@@ -58,8 +58,8 @@ class AddTaskOnMapViewController: UIViewController, CLLocationManagerDelegate, G
         
         mapView.clear()
         
-        task.setCoordinate(coordinate)
-        task.geoPoint = PFGeoPoint(latitude:task.lattitude.doubleValue, longitude:task.longitude.doubleValue)
+        errand.setCoordinate(coordinate)
+        errand.geoPoint = PFGeoPoint(latitude:errand.lattitude.doubleValue, longitude:errand.longitude.doubleValue)
         
         
         let marker = GMSMarker(position: coordinate)

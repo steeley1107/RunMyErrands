@@ -26,12 +26,12 @@ class GeoFenceManager: NSObject {
                 
                 for var index in 0..<numberOfGroups {
                     
-                    if let groupTaskArray = self.errandsManager.fetchErrandsForGroup(index) {
+                    if let groupErrandArray = self.errandsManager.fetchErrandsForGroup(index) {
                         
-                        for task in groupTaskArray {
+                        for Errand in groupErrandArray {
                             
-                            task.geoPoint = PFGeoPoint(latitude:task.lattitude.doubleValue, longitude:task.longitude.doubleValue)
-                            task.saveInBackground()
+                            Errand.geoPoint = PFGeoPoint(latitude:Errand.lattitude.doubleValue, longitude:Errand.longitude.doubleValue)
+                            Errand.saveInBackground()
                         }
                     }
                 }
@@ -64,12 +64,12 @@ class GeoFenceManager: NSObject {
             (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
                 
-                var closestErrandsArray = [Task]()
+                var closestErrandsArray = [Errand]()
                 
                 // User's location
                 if let userGeoPoint = geoPoint {
                     // Create a query for places
-                    let query = PFQuery(className:"Task")
+                    let query = PFQuery(className:"Errand")
                     query.whereKey("group", containedIn: self.errandsManager.fetchKeys())
                     query.whereKey("isComplete", equalTo: false)
                     query.whereKey("geoPoint", nearGeoPoint:userGeoPoint)
@@ -79,7 +79,7 @@ class GeoFenceManager: NSObject {
                     query.findObjectsInBackgroundWithBlock({
                         (errands, error) in
                         if error == nil {
-                            if let errands = errands as? [Task] {
+                            if let errands = errands as? [Errand] {
                                 
                                 for errand in errands {
                                     closestErrandsArray += [errand]
@@ -95,21 +95,21 @@ class GeoFenceManager: NSObject {
     
     
     
-    func trackGeoRegions(errandsArray: [Task]) {
+    func trackGeoRegions(errandsArray: [Errand]) {
 
         locationManager = GeoManager.sharedManager()
         locationManager.startLocationManager()
 
-        locationManager.removeAllTaskLocation()
-        for task in errandsArray {
+        locationManager.removeAllErrandLocation()
+        for errand in errandsArray {
             
-            if task.isComplete.boolValue == false {
+            if errand.isComplete.boolValue == false {
                 
-                let center = task.coordinate()
-                let taskRegion = CLCircularRegion.init(center: center, radius: 200.0, identifier: "\(task.title) \n \(task.subtitle)")
-                taskRegion.notifyOnEntry = true
-                locationManager.addTaskLocation(taskRegion)
-                print("task Regions \(taskRegion)");
+                let center = errand.coordinate()
+                let ErrandRegion = CLCircularRegion.init(center: center, radius: 200.0, identifier: "\(errand.title) \n \(errand.subtitle)")
+                ErrandRegion.notifyOnEntry = true
+                locationManager.addErrandLocation(ErrandRegion)
+                print("Errand Regions \(ErrandRegion)");
             }
         }
     }

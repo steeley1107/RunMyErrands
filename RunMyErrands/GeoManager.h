@@ -21,8 +21,8 @@
 -(void)setUpLocationManager;
 - (void)startLocationManager;
 -(void)stopLocationManager;
--(void)addTaskLocation:(CLRegion*)region;
--(void)removeTaskLocation:(CLRegion*)region;
--(void)removeAllTaskLocation;
+-(void)addErrandLocation:(CLRegion*)region;
+-(void)removeErrandLocation:(CLRegion*)region;
+-(void)removeAllErrandLocation;
 
 @end
