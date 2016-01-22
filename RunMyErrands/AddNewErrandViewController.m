@@ -128,7 +128,7 @@
         if (succeeded) {
             // The object has been saved.
             PFObject *group = self.groups[[self.groupPickerView selectedRowInComponent:0]];
-            PFRelation *groupErrandsRelation = [group relationForKey:@"errands"];
+            PFRelation *groupErrandsRelation = [group relationForKey:@"Errand"];
 
             [groupErrandsRelation addObject:self.errand];
             [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
