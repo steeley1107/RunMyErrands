@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
@@ -11,22 +12,22 @@
             <rect key="frame" x="0.0" y="0.0" width="225" height="53"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="bubble_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="8QZ-gu-UcU">
-                    <rect key="frame" x="113" y="-2" width="88" height="60"/>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" image="bubble_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="8QZ-gu-UcU">
+                    <rect key="frame" x="113" y="-2" width="89" height="60"/>
                 </imageView>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="bubble_left.png" translatesAutoresizingMaskIntoConstraints="NO" id="ohQ-QX-yYp">
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" image="bubble_left.png" translatesAutoresizingMaskIntoConstraints="NO" id="ohQ-QX-yYp">
                     <rect key="frame" x="27" y="-2" width="86" height="60"/>
                 </imageView>
-                <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="PIo-Hi-FFo">
-                    <rect key="frame" x="35" y="3" width="156" height="40"/>
+                <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PIo-Hi-FFo">
+                    <rect key="frame" x="35" y="3" width="157" height="40"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Errand Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-bO-RNY">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" misplaced="YES" text="Errand Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecF-bO-RNY">
                             <rect key="frame" x="62" y="26" width="80" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" text="Title of Errand" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-ld-Fsz">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" misplaced="YES" text="Title of Errand" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-ld-Fsz">
                             <rect key="frame" x="48" y="0.0" width="109" height="26"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -43,13 +44,14 @@
                     <constraints>
                         <constraint firstItem="JCR-5k-ZbT" firstAttribute="centerY" secondItem="PIo-Hi-FFo" secondAttribute="centerY" id="0JS-Xc-2dh"/>
                         <constraint firstAttribute="height" constant="40" id="0PB-H1-Vez"/>
-                        <constraint firstItem="ecF-bO-RNY" firstAttribute="centerX" secondItem="Uny-ld-Fsz" secondAttribute="centerX" id="66L-MJ-AGg"/>
                         <constraint firstItem="Uny-ld-Fsz" firstAttribute="top" secondItem="PIo-Hi-FFo" secondAttribute="top" id="9oR-0f-4kw"/>
                         <constraint firstItem="ecF-bO-RNY" firstAttribute="top" secondItem="Uny-ld-Fsz" secondAttribute="bottom" id="DNH-xb-Vct"/>
                         <constraint firstItem="Uny-ld-Fsz" firstAttribute="leading" secondItem="JCR-5k-ZbT" secondAttribute="trailing" constant="8" id="O00-XL-dJP"/>
                         <constraint firstItem="ecF-bO-RNY" firstAttribute="bottom" secondItem="PIo-Hi-FFo" secondAttribute="bottom" id="WwW-Jk-VQa"/>
                         <constraint firstItem="JCR-5k-ZbT" firstAttribute="leading" secondItem="PIo-Hi-FFo" secondAttribute="leading" id="Yzi-ZZ-xT8"/>
                         <constraint firstItem="Uny-ld-Fsz" firstAttribute="trailing" secondItem="PIo-Hi-FFo" secondAttribute="trailing" id="hVV-F3-dRw"/>
+                        <constraint firstAttribute="trailing" secondItem="ecF-bO-RNY" secondAttribute="trailing" id="kgR-n2-KzM"/>
+                        <constraint firstItem="ecF-bO-RNY" firstAttribute="leading" secondItem="JCR-5k-ZbT" secondAttribute="trailing" constant="8" id="pm6-IV-T7I"/>
                     </constraints>
                 </view>
             </subviews>
