@@ -24,7 +24,7 @@ class GeoFenceManager: NSObject {
                 
                 let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
                 
-                for var index in 0..<numberOfGroups {
+                for index in 0..<numberOfGroups {
                     
                     if let groupErrandArray = self.errandsManager.fetchErrandsForGroup(index) {
                         

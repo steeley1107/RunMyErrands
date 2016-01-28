@@ -30,7 +30,7 @@ class Scheduler: NSObject {
                 
                 let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
                 
-                for var index in 0..<numberOfGroups {
+                for index in 0..<numberOfGroups {
                     
                     if let groupErrandsArray = self.errandsManager.fetchErrandsForGroup(index) {
                         
@@ -62,7 +62,7 @@ class Scheduler: NSObject {
                 
                 let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
                 
-                for var index in 0..<numberOfGroups {
+                for index in 0..<numberOfGroups {
                     
                     if let groupErrandsArray = self.errandsManager.fetchErrandsForGroup(index) {
                         
@@ -95,7 +95,7 @@ class Scheduler: NSObject {
                 
                 let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
                 
-                for var index in 0..<numberOfGroups {
+                for index in 0..<numberOfGroups {
                     
                     if let groupErrandsArray = self.errandsManager.fetchErrandsForGroup(index) {
                         
@@ -129,7 +129,7 @@ class Scheduler: NSObject {
                 
                 let numberOfGroups = self.errandsManager.fetchNumberOfGroups()
                 
-                for var index in 0..<numberOfGroups {
+                for index in 0..<numberOfGroups {
                     
                     if let groupErrandsArray = self.errandsManager.fetchErrandsForGroup(index) {
                         
