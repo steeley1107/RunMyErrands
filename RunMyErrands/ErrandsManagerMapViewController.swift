@@ -210,7 +210,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         infoWindow.snippit.text = marker.snippet
         var textWidth = 0
         
-        //auto size the width depending on title size
+        //auto size the width depending on title size or snippit.
         let x = infoWindow.frame.origin.x
         let y = infoWindow.frame.origin.y
         let height = infoWindow.frame.size.height

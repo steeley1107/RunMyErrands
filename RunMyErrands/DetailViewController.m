@@ -126,7 +126,7 @@
     NSString *imageName = [errand imageName:errand.category.intValue];
     infoWindow.icon.image = [UIImage imageNamed:imageName];
 
-    //auto size the width depending on title size
+    //auto size the width depending on title size or snippit.
     float x = infoWindow.frame.origin.x;
     float y = infoWindow.frame.origin.y;
     float textWidth = 0;
@@ -134,18 +134,15 @@
     float titleWidth = marker.title.length;
     float snippitWidth = marker.snippet.length;
 
-    
     if (titleWidth > snippitWidth) {
         textWidth = titleWidth;
     }else {
         textWidth = snippitWidth;
     }
     
-    
     float width = textWidth * 7.5 + 70;
     float height = infoWindow.frame.size.height;
     [infoWindow setFrame:CGRectMake(x, y, width, height)];
-    
     
     [infoWindow layoutIfNeeded];
     
