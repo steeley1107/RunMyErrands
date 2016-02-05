@@ -91,7 +91,7 @@
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
     UIAlertController * alert=   [UIAlertController
-                                  alertControllerWithTitle:@"You are in the Area"
+                                  alertControllerWithTitle: [NSString stringWithFormat:@"%@", notification.alertTitle]
                                   message:[NSString stringWithFormat:@"%@",notification.alertBody]
                                   preferredStyle:UIAlertControllerStyleAlert];
     

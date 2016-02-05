@@ -1689,14 +1689,34 @@
                                             <constraint firstAttribute="trailing" secondItem="KDd-IE-RxC" secondAttribute="trailing" id="iEQ-T5-G3x"/>
                                         </constraints>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hsa-kH-NrA">
+                                        <rect key="frame" x="8" y="87" width="584" height="21"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GeoFence" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCX-6m-rzb">
+                                                <rect key="frame" x="0.0" y="0.0" width="292" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2l2-Yo-qgu">
+                                                <rect key="frame" x="292" y="0.0" width="292" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="VaA-j6-19L" firstAttribute="leading" secondItem="Q9g-yU-iwM" secondAttribute="leading" constant="8" id="1Gz-zB-HJA"/>
                                     <constraint firstAttribute="trailing" secondItem="VaA-j6-19L" secondAttribute="trailing" constant="8" id="1eD-UN-AGe"/>
+                                    <constraint firstItem="hsa-kH-NrA" firstAttribute="top" secondItem="VaA-j6-19L" secondAttribute="bottom" constant="8" id="Ek9-zx-Xa3"/>
+                                    <constraint firstAttribute="trailing" secondItem="hsa-kH-NrA" secondAttribute="trailing" constant="8" id="FOP-GV-dmo"/>
                                     <constraint firstItem="44M-VY-us6" firstAttribute="leading" secondItem="Q9g-yU-iwM" secondAttribute="leading" constant="8" id="H8x-gH-Rqr"/>
                                     <constraint firstItem="44M-VY-us6" firstAttribute="top" secondItem="Q9g-yU-iwM" secondAttribute="top" constant="8" id="S5O-7D-YL1"/>
                                     <constraint firstItem="VaA-j6-19L" firstAttribute="top" secondItem="44M-VY-us6" secondAttribute="bottom" constant="12" id="Zha-X8-EPW"/>
+                                    <constraint firstItem="hsa-kH-NrA" firstAttribute="leading" secondItem="Q9g-yU-iwM" secondAttribute="leading" constant="8" id="bGr-Gc-jfW"/>
                                     <constraint firstAttribute="trailing" secondItem="44M-VY-us6" secondAttribute="trailing" constant="8" id="dNM-yP-Zk7"/>
                                 </constraints>
                             </view>
@@ -1717,6 +1737,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="xPS-HN-bZZ"/>
                     <connections>
                         <outlet property="addressLabel" destination="ViS-0t-TJO" id="TTS-Mm-NXm"/>
+                        <outlet property="geoFenceCount" destination="2l2-Yo-qgu" id="BEq-YU-rnB"/>
                         <outlet property="geoFenceSegment" destination="Dev-ZS-hDZ" id="f5z-xy-V90"/>
                         <outlet property="notifySwitch" destination="fBy-2W-jbR" id="ZAP-Zu-4oV"/>
                         <outlet property="pictureImageView" destination="c7z-oK-zx6" id="PLh-kI-k5u"/>

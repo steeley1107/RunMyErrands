@@ -101,12 +101,15 @@ class GeoFenceManager: NSObject {
         locationManager.startLocationManager()
 
         locationManager.removeAllErrandLocation()
+        
+        let user = PFUser.currentUser()
+        let geoRadius:Double = user!["geoRadius"] as! Double
         for errand in errandsArray {
             
             if errand.isComplete.boolValue == false {
                 
                 let center = errand.coordinate()
-                let ErrandRegion = CLCircularRegion.init(center: center, radius: 200.0, identifier: "\(errand.title) \n \(errand.subtitle)")
+                let ErrandRegion = CLCircularRegion.init(center: center, radius: geoRadius, identifier: "\(errand.title) \n \(errand.subtitle)")
                 ErrandRegion.notifyOnEntry = true
                 locationManager.addErrandLocation(ErrandRegion)
                 print("Errand Regions \(ErrandRegion)");

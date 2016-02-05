@@ -9,7 +9,7 @@
 #import "GeoManager.h"
 #import "RunMyErrands-Swift.h"
 
-int const kUpdateGeoFenceDistance = 1000;
+int const kUpdateGeoFenceDistance = 500;
 
 
 @interface GeoManager ()
@@ -65,13 +65,7 @@ int const kUpdateGeoFenceDistance = 1000;
             
         }else{
             
-            UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"Location services are disabled, Please go into Settings > Privacy > Location to enable them for Play"  message:nil  preferredStyle:UIAlertControllerStyleAlert];
-            
-            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            }]];
-            
-            //      [self presentViewController:alertController animated:YES completion:nil];
-            
+            [self inLocationErrorNotification];
         }
     }
 }
@@ -111,6 +105,9 @@ int const kUpdateGeoFenceDistance = 1000;
     //Check for distance to reload geo fences.
     CLLocationDistance distance = [self.initialLoc distanceFromLocation:loc];
     
+    NSLog(@"distance %f", distance);
+    NSLog(@"monitored regions %lu", (unsigned long)self.locationManager.monitoredRegions.count);
+    
     if (kUpdateGeoFenceDistance < distance) {
         self.updateInitialLocation = YES;
     }
@@ -125,11 +122,12 @@ int const kUpdateGeoFenceDistance = 1000;
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
     [_locationManager requestStateForRegion:region];
+     NSLog(@"didStartMonitoring %@",region);
 }
 
 
 - (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
-    //NSLog(@"monitoringDidFailForRegion %@",error);
+    NSLog(@"monitoringDidFailForRegion %@",error);
 }
 
 
@@ -142,9 +140,11 @@ int const kUpdateGeoFenceDistance = 1000;
 -(void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region {
     
     if (state == 1) {
-        //   [self inLocationNotificationForRegion:region];
+           [self inLocationNotificationForRegion:region];
     }
 }
+
+
 
 -(void)addErrandLocation:(CLRegion*)region {
     
@@ -165,6 +165,7 @@ int const kUpdateGeoFenceDistance = 1000;
 }
 
 
+// Notify user that they are in the area
 -(void)inLocationNotificationForRegion:(CLRegion *)region {
     
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
@@ -177,7 +178,27 @@ int const kUpdateGeoFenceDistance = 1000;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
+// Notify user that there is something wrong
+-(void)inLocationErrorNotification {
+    
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.regionTriggersOnce = YES;
+    localNotification.alertTitle = @"Location services are disabled, Please go into Settings > Privacy > Location to enable map functions";
+    localNotification.fireDate = [NSDate date];
+    localNotification.alertBody = @"";
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.applicationIconBadgeNumber = 1;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+}
 
+
+
+
+
+-(long)monitoredRegions {
+
+    return self.locationManager.monitoredRegions.count;
+}
 
 
 

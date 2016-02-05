@@ -24,7 +24,10 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var geoFenceSegment: UISegmentedControl!
     
+    @IBOutlet weak var geoFenceCount: UILabel!
     var user: PFUser?
+    
+    var locationManager: GeoManager!
     
     let kDrivingGeoRadius = 500
     let kBicyclingGeoRadius = 200
@@ -35,8 +38,13 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //round corners on segment display
         geoFenceSegment.layer.cornerRadius = 5
         geoFenceSegment.layer.masksToBounds = true
+        
+        self.locationManager = GeoManager.sharedManager()
+        self.locationManager.startLocationManager()
+
         
         
     }
@@ -121,6 +129,8 @@ class SettingsViewController: UIViewController {
                 })
             })
         }
+        //display the number of regions are being monitored
+        geoFenceCount.text = "\(locationManager.monitoredRegions())"
     }
 
     @IBAction func geoFenceDistance(sender: UISegmentedControl) {

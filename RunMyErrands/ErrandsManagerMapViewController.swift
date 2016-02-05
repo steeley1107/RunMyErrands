@@ -271,11 +271,12 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     func zoomMap() {
         
-        let bounds =  self.directionErrand.zoomMapLimits(origin, destination: destination, markerArray: direction.markerArray)
-        self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
-        mapView.animateToViewingAngle(45)
+        if let origin = origin {
+            let bounds =  self.directionErrand.zoomMapLimits(origin, destination: destination, markerArray: direction.markerArray)
+            self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
+            mapView.animateToViewingAngle(45)
+        }
     }
-    
     
     
     //Mark: - Navigation
@@ -350,6 +351,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         }
         
     }
+    
     
     //Re-order the waypoints based off google directions.
     func reorderWaypoints() -> [GMSMarker] {

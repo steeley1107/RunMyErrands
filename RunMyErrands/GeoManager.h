@@ -24,5 +24,6 @@
 -(void)addErrandLocation:(CLRegion*)region;
 -(void)removeErrandLocation:(CLRegion*)region;
 -(void)removeAllErrandLocation;
+-(long)monitoredRegions;
 
 @end

@@ -119,9 +119,10 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
                 markerArray += [marker]
             }
         }
-        
-        let bounds =  self.directionErrand.zoomMapLimits(origin, destination: origin, markerArray: markerArray)
-        self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
+        if let origin = origin {
+            let bounds =  self.directionErrand.zoomMapLimits(origin, destination: origin, markerArray: markerArray)
+            self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
+        }
     }
     
     
