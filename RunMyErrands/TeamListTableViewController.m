@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (nonatomic) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *listActivitySpinner;
+@property (weak, nonatomic) IBOutlet UILabel *noGroupsMessage;
 
 
 @property NSCache *imageCache;
@@ -81,8 +82,13 @@
     [self loadGroups];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)loadGroups {
+    self.groups = [NSArray new];
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
 
@@ -92,16 +98,28 @@
                 
                 self.groups = objects;
                 
-                for (PFObject *object in self.groups) {
-                    [self.listActivitySpinner startAnimating];
-                    PFRelation *groupMembersRealtion = object[@"groupMembers"];
-                    PFQuery *query = [groupMembersRealtion query];
-                    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-
-                        [self.groupMembers setObject:objects forKey:object.objectId];
-                        [self.listActivitySpinner stopAnimating];
-                        [self.tableView reloadData];
-                    }];
+                if (self.groups.count == 0)
+                {
+                    self.noGroupsMessage.hidden = NO;
+                    [self.tableView reloadData];
+                }
+                else
+                {
+                    self.noGroupsMessage.hidden = YES;
+                    
+                    for (PFObject *object in self.groups)
+                    {
+                        [self.listActivitySpinner startAnimating];
+                        PFRelation *groupMembersRealtion = object[@"groupMembers"];
+                        PFQuery *query = [groupMembersRealtion query];
+                        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                            
+                            [self.groupMembers setObject:objects forKey:object.objectId];
+                            [self.listActivitySpinner stopAnimating];
+                            [self.tableView reloadData];
+                        }];
+                    }
+                   // [self.tableView reloadData];
                 }
             }
             

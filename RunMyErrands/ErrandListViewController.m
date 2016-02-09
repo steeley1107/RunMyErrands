@@ -45,7 +45,6 @@
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
-
     
     // Do any additional setup after loading the view.
     self.tableview.tableFooterView = [[UIView alloc] init];
@@ -81,7 +80,13 @@
     //Check if any errands have expired.
     [self.scheduler CheckActiveErrandsExpiry];
     [self.scheduler CheckCompletedErrandsExpiry];
+    self.addButton.enabled = NO;
     [self loadData];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];    
 }
 
 //Refresh table on parse push notification
@@ -109,14 +114,12 @@
         }
         
         [self.activitySpinner stopAnimating];
-        
+        self.addButton.enabled = YES;
         if ([self.errandManager isEmpty]) {
-            self.addButton.enabled = NO;
             self.noErrandsMessage1.hidden = NO;
             self.noErrandsMessage2.hidden = NO;
             self.noErrandsMessage3.hidden = NO;
         } else {
-            self.addButton.enabled = YES;
             self.noErrandsMessage1.hidden = YES;
             self.noErrandsMessage2.hidden = YES;
             self.noErrandsMessage3.hidden = YES;
@@ -186,7 +189,14 @@
 }
 
 - (IBAction)addButton:(UIBarButtonItem *)sender {
-    [self performSegueWithIdentifier:@"addNewErrand" sender:nil];
+    if ([self.errandManager isEmpty])
+    {
+        [self.tabBarController setSelectedIndex:3];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"addNewErrand" sender:nil];
+    }
 }
 
 #pragma mark - TableView Delegates
