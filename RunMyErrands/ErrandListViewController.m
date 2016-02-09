@@ -67,7 +67,8 @@
     //Check if any errands were completed or active.
     [self.scheduler CreateActiveErrandsExpiryDate];
     [self.scheduler CreateCompletedErrandsExpiryDate];
- 
+    
+    self.addButton.accessibilityLabel = @"Add New Errand";
 }
 
 - (void)viewWillAppear:(BOOL)animated {

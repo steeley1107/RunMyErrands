@@ -44,9 +44,7 @@ class SettingsViewController: UIViewController {
         
         self.locationManager = GeoManager.sharedManager()
         self.locationManager.startLocationManager()
-
-        
-        
+        self.notifySwitch.accessibilityLabel = "Receive Notification";
     }
     
     override func viewWillDisappear(animated: Bool) {
