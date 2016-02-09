@@ -81,6 +81,7 @@
     [self.scheduler CheckActiveErrandsExpiry];
     [self.scheduler CheckCompletedErrandsExpiry];
     self.addButton.enabled = NO;
+
     [self loadData];
 }
 

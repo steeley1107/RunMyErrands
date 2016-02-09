@@ -16,6 +16,7 @@
 //#import <ParseTwitterUtils/ParseTwitterUtils.h>
 
 @interface AppDelegate ()
+@property (nonatomic) Scheduler *scheduler;
 
 @end
 
@@ -39,6 +40,11 @@
     //Google Maps
     [GMSServices provideAPIKey:GOOGLE_MAPS_KEY];
     
+    //Check if any errands have expired.
+    self.scheduler = [Scheduler new];
+    [self.scheduler CheckActiveErrandsExpiry];
+    [self.scheduler CheckCompletedErrandsExpiry];
+
     
     
     //Use 'Login-signup' storyboard

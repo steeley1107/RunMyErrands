@@ -112,7 +112,6 @@ class GeoFenceManager: NSObject {
                 let ErrandRegion = CLCircularRegion.init(center: center, radius: geoRadius, identifier: "\(errand.title) \n \(errand.subtitle)")
                 ErrandRegion.notifyOnEntry = true
                 locationManager.addErrandLocation(ErrandRegion)
-                print("Errand Regions \(ErrandRegion)");
             }
         }
     }
