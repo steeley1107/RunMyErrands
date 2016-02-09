@@ -104,10 +104,7 @@ int const kUpdateGeoFenceDistance = 500;
     
     //Check for distance to reload geo fences.
     CLLocationDistance distance = [self.initialLoc distanceFromLocation:loc];
-    
-    NSLog(@"distance %f", distance);
-    NSLog(@"monitored regions %lu", (unsigned long)self.locationManager.monitoredRegions.count);
-    
+
     if (kUpdateGeoFenceDistance < distance) {
         self.updateInitialLocation = YES;
     }
@@ -122,12 +119,12 @@ int const kUpdateGeoFenceDistance = 500;
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
     [_locationManager requestStateForRegion:region];
-     NSLog(@"didStartMonitoring %@",region);
+     //NSLog(@"didStartMonitoring %@",region);
 }
 
 
 - (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
-    NSLog(@"monitoringDidFailForRegion %@",error);
+    //NSLog(@"monitoringDidFailForRegion %@ %@",error, region);
 }
 
 

@@ -78,9 +78,6 @@
     
     [self.activitySpinner startAnimating];
     
-    //Check if any errands have expired.
-    [self.scheduler CheckActiveErrandsExpiry];
-    [self.scheduler CheckCompletedErrandsExpiry];
     [self loadData];
 }
 
