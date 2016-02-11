@@ -63,14 +63,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
                 
-                if user.isNew {
-                    self.getNameAndPicture(user)
-                } else {
-                    print("User logged in through Facebook!")
-                    
+                if user.isNew
+                {
+                    user["status"] = ""
+                    user["pushNotify"] = true
+                    user["totalErrandsCompleted"] = 0
+                    user["geoRadius"] = 200
+                    self.getNameAndPicture(user)                    
+                }
+                else
+                {
                     self.performSegueWithIdentifier("showErrandList", sender: nil)
                 }
-            } else {
+            }
+            else
+            {
                 print("Uh oh. The user cancelled the Facebook login.")
             }
         }
