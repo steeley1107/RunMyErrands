@@ -45,6 +45,10 @@ class GeoFenceManager: NSObject {
     
     func GetDataForFence() {
         
+        guard PFUser.currentUser() != nil else {
+            return
+        }
+        
         errandsManager.fetchData { (success) -> () in
             if success {
                 self.GetClosestErrands()

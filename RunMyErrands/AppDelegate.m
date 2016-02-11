@@ -39,13 +39,7 @@
     
     //Google Maps
     [GMSServices provideAPIKey:GOOGLE_MAPS_KEY];
-    
-    //Check if any errands have expired.
-    self.scheduler = [Scheduler new];
-    [self.scheduler CheckActiveErrandsExpiry];
-    [self.scheduler CheckCompletedErrandsExpiry];
 
-    
     
     //Use 'Login-signup' storyboard
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
