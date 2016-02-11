@@ -58,8 +58,28 @@
     self.groupPickerView.showsSelectionIndicator = YES;
     self.groupPickerView.tag = 2;
     self.groupTextField.inputView = self.groupPickerView;
+    
+    UIToolbar *toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,30)];
+    [toolBar setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                      style:UIBarButtonItemStyleDone target:self action:@selector(changeDateFromLabel:)];
+    
+    toolBar.items = @[barButtonDone];
+    barButtonDone.tintColor=[UIColor blueColor];
+    [self.categoryPickerView addSubview:toolBar];
+    [self.groupPickerView addSubview:toolBar];
+
+   
+    
+    
+    
 }
 
+-(void)changeDateFromLabel:(id)sender
+{
+
+
+}
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
