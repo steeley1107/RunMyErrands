@@ -107,7 +107,14 @@ class GeoFenceManager: NSObject {
         locationManager.removeAllErrandLocation()
         
         let user = PFUser.currentUser()
-        let geoRadius:Double = user!["geoRadius"] as! Double
+        var geoRadius:Double
+        
+        if let parseGeoRadius:Double = user!["geoRadius"] as? Double {
+            geoRadius = parseGeoRadius
+        } else {
+            geoRadius = 200
+        }
+        
         for errand in errandsArray {
             
             if errand.isComplete.boolValue == false {
