@@ -38,9 +38,20 @@
     self.categoryPickerData = @[@"General",@"Entertainment",@"Business",@"Food"];
     self.groupPickerData = [NSMutableArray new];
     [self fetchGroupPickerData];
-
+    
     self.errand = [Errand object];
     self.errand.isComplete = @NO;
+    
+    //Add tool bar on top of the picker view
+    UIToolbar *toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,30)];
+    [toolBar setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                      style:UIBarButtonItemStylePlain target:self action:@selector(dismissPicker)];
+    toolBar.items = @[barButtonDone];
+    barButtonDone.tintColor=[UIColor blueColor];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [toolBar setItems:[NSArray arrayWithObjects:flexibleSpace, barButtonDone, nil]];
+    
     
     //code setup for picker view to popup when text is selected
     self.categoryPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 100, 100)];
@@ -50,6 +61,7 @@
     self.categoryPickerView.showsSelectionIndicator = YES;
     self.categoryPickerView.tag = 1;
     self.categoryTextField.inputView = self.categoryPickerView;
+    self.categoryTextField.inputAccessoryView = toolBar;
     
     self.groupPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 100, 100)];
     [self.groupPickerView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:47/255.0 blue:51/255.0f alpha:1.0f]];
@@ -58,32 +70,21 @@
     self.groupPickerView.showsSelectionIndicator = YES;
     self.groupPickerView.tag = 2;
     self.groupTextField.inputView = self.groupPickerView;
-    
-    UIToolbar *toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,30)];
-    [toolBar setBarStyle:UIBarStyleDefault];
-    UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                      style:UIBarButtonItemStyleDone target:self action:@selector(changeDateFromLabel:)];
-    
-    toolBar.items = @[barButtonDone];
-    barButtonDone.tintColor=[UIColor blueColor];
-    [self.categoryPickerView addSubview:toolBar];
-    [self.groupPickerView addSubview:toolBar];
-
-   
-    
-    
-    
+    self.groupTextField.inputAccessoryView = toolBar;
 }
 
--(void)changeDateFromLabel:(id)sender
-{
 
-
+-(void)dismissPicker {
+    
+    [self.categoryTextField resignFirstResponder];
+    [self.groupTextField resignFirstResponder];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
 }
+
 
 -(void)fetchGroupPickerData {
     PFUser *currentUser = [PFUser currentUser];
@@ -103,10 +104,12 @@
     }
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (IBAction)saveButtonPressed:(UIButton *)sender {
     __block NSString *alertControllerTitle;
@@ -127,11 +130,11 @@
         self.errand.category = @([self.categoryPickerView selectedRowInComponent:0]);
         
         self.errand.isActive = @NO;
-
+        
         NSNumber *groupChoice = @([self.groupPickerView selectedRowInComponent:0]);
         PFObject *group = self.groups[[groupChoice intValue]];
         self.errand.group = group.objectId;
-                
+        
         if (self.addressTextField.text.length != 0) {
             self.errand.address = self.addressTextField.text;
             [self geoCodeAddress:self.errand.address];
@@ -142,6 +145,7 @@
     }
 }
 
+
 -(void)saveErrand {
     
     [self.errand saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -149,7 +153,7 @@
             // The object has been saved.
             PFObject *group = self.groups[[self.groupPickerView selectedRowInComponent:0]];
             PFRelation *groupErrandsRelation = [group relationForKey:@"Errand"];
-
+            
             [groupErrandsRelation addObject:self.errand];
             [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (!succeeded) {
@@ -158,7 +162,7 @@
                     [self.navigationController popViewControllerAnimated:YES];
                 }
             }];
-
+            
         } else {
             // There was a problem, check error.description
             NSString *alertControllerTitle = @"Error";
@@ -216,7 +220,12 @@
         
         [tView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:47/255.0 blue:51/255.0f alpha:1.0f]];
         tView.textAlignment = NSTextAlignmentCenter;
-        //tView.numberOfLines=3;
+        
+        if (pickerView.tag == 1) {
+            self.categoryTextField.text = [self.categoryPickerData[row] capitalizedString];
+        } else if (pickerView.tag == 2) {
+            self.groupTextField.text = [self.groupPickerData[row] capitalizedString];
+        }
     }
     
     // Fill the label text here
@@ -231,13 +240,11 @@
 
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-
+    
     if (pickerView.tag == 1) {
         self.categoryTextField.text = [self.categoryPickerData[row] capitalizedString];
-        [self.categoryTextField resignFirstResponder];
     } else if (pickerView.tag == 2) {
         self.groupTextField.text = [self.groupPickerData[row] capitalizedString];
-        [self.groupTextField resignFirstResponder];
     }
 }
 
@@ -255,6 +262,7 @@
     self.errandArray = array;
 }
 
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -265,6 +273,7 @@
         mapVC.errand = self.errand;
     }
 }
+
 
 #pragma mark - Geo
 
