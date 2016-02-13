@@ -14,6 +14,7 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
     
     //Mark: Properties
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var mapTypeSegment: UISegmentedControl!
     var locationManager: GeoManager!
     var errandsManager: ErrandManager!
     var didFindMyLocation = false
@@ -24,6 +25,10 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //round corners on segment display
+        mapTypeSegment.layer.cornerRadius = 5
+        mapTypeSegment.layer.masksToBounds = true
+
         mapView.frame = mapView.bounds
         
         self.locationManager = GeoManager.sharedManager()
@@ -67,7 +72,27 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
         marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
     }
     
-    
+    @IBAction func mapTypeSelect(sender: UISegmentedControl) {
+        
+        // Available map types: kGMSTypeNormal, kGMSTypeSatellite, kGMSTypeHybrid,
+        // kGMSTypeTerrain, kGMSTypeNone
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            mapView.mapType = kGMSTypeNormal
+            break
+        case 1:
+            mapView.mapType = kGMSTypeSatellite
+            break
+        case 2:
+            mapView.mapType = kGMSTypeHybrid
+            break
+        default:
+            mapView.mapType = kGMSTypeNormal
+            break;
+        }
+    }
+
     
     
 }

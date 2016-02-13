@@ -23,10 +23,15 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     var geoFence = GeoFenceManager()
     
+    @IBOutlet weak var mapTypeSegment: UISegmentedControl!
     
     //Mark: ViewController Display
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //round corners on segment display
+        mapTypeSegment.layer.cornerRadius = 5
+        mapTypeSegment.layer.masksToBounds = true
         
         mapView.frame = mapView.bounds
         
@@ -170,6 +175,27 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         }
     }
     
+    
+    @IBAction func mapTypeSelect(sender: UISegmentedControl) {
+
+        // Available map types: kGMSTypeNormal, kGMSTypeSatellite, kGMSTypeHybrid,
+        // kGMSTypeTerrain, kGMSTypeNone
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            mapView.mapType = kGMSTypeNormal
+            break
+        case 1:
+            mapView.mapType = kGMSTypeSatellite
+            break
+        case 2:
+            mapView.mapType = kGMSTypeHybrid
+            break
+        default:
+            mapView.mapType = kGMSTypeNormal
+            break;
+        }
+    }
     
     
     

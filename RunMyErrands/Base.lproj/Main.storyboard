@@ -240,17 +240,39 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dlN-0z-CtE">
+                                <rect key="frame" x="15" y="74" width="191" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="191" id="Qck-6q-Pf0"/>
+                                    <constraint firstAttribute="height" constant="28" id="lvz-iG-QiI"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Normal"/>
+                                    <segment title="Satellite"/>
+                                    <segment title="Hybrid"/>
+                                </segments>
+                                <color key="tintColor" red="0.99215686270000003" green="0.41960784309999999" blue="0.027450980390000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="geoFenceDistance:" destination="rKX-s6-iea" eventType="valueChanged" id="5KS-9o-ERQ"/>
+                                    <action selector="mapTypeSelect:" destination="JJb-YA-mfc" eventType="valueChanged" id="BPo-Q6-6u9"/>
+                                    <action selector="travelMode:" destination="5a4-E8-l30" eventType="valueChanged" id="DKV-z2-1MH"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jy1-8o-VVH" firstAttribute="leading" secondItem="SE3-eH-cna" secondAttribute="leading" id="1Ev-RC-nFB"/>
                             <constraint firstAttribute="trailing" secondItem="jy1-8o-VVH" secondAttribute="trailing" id="65d-gF-Mam"/>
                             <constraint firstItem="4A3-Cv-rKb" firstAttribute="top" secondItem="jy1-8o-VVH" secondAttribute="bottom" id="gBK-HS-WoW"/>
+                            <constraint firstItem="dlN-0z-CtE" firstAttribute="leading" secondItem="SE3-eH-cna" secondAttribute="leadingMargin" constant="-5" id="heq-s2-y37"/>
                             <constraint firstItem="jy1-8o-VVH" firstAttribute="top" secondItem="tMj-AY-vfW" secondAttribute="bottom" id="mKQ-0o-bE4"/>
+                            <constraint firstItem="dlN-0z-CtE" firstAttribute="top" secondItem="tMj-AY-vfW" secondAttribute="bottom" constant="10" id="w5u-g5-K5u"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pick a Location" id="Nfd-BH-VgR"/>
                     <connections>
+                        <outlet property="mapTypeSegment" destination="dlN-0z-CtE" id="FVE-qF-T7t"/>
                         <outlet property="mapView" destination="jy1-8o-VVH" id="0J0-UW-HSv"/>
                     </connections>
                 </viewController>
@@ -420,17 +442,40 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Dme-7R-jbQ">
+                                <rect key="frame" x="10" y="74" width="191" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="191" id="SMY-qN-6ck"/>
+                                    <constraint firstAttribute="height" constant="28" id="YeO-4K-Rxt"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Normal"/>
+                                    <segment title="Satellite"/>
+                                    <segment title="Hybrid"/>
+                                </segments>
+                                <color key="tintColor" red="0.99215686270000003" green="0.41960784309999999" blue="0.027450980390000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="geoFenceDistance:" destination="rKX-s6-iea" eventType="valueChanged" id="bKZ-7r-AM0"/>
+                                    <action selector="mapTypeSelect:" destination="JJb-YA-mfc" eventType="valueChanged" id="sAO-Yu-fsS"/>
+                                    <action selector="mapTypeSelect:" destination="QaI-Zb-hUa" eventType="valueChanged" id="u7U-xZ-OkO"/>
+                                    <action selector="travelMode:" destination="5a4-E8-l30" eventType="valueChanged" id="jm1-J0-xlj"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jH4-7j-1gK" firstAttribute="leading" secondItem="9eG-Av-mMC" secondAttribute="leading" id="7V1-gc-8Wn"/>
                             <constraint firstAttribute="trailing" secondItem="jH4-7j-1gK" secondAttribute="trailing" id="BX2-wx-NJs"/>
+                            <constraint firstItem="Dme-7R-jbQ" firstAttribute="top" secondItem="iMq-8B-RD3" secondAttribute="bottom" constant="10" id="I5K-Mr-XjC"/>
+                            <constraint firstItem="Dme-7R-jbQ" firstAttribute="leading" secondItem="9eG-Av-mMC" secondAttribute="leadingMargin" constant="-10" id="W1f-AG-8aU"/>
                             <constraint firstItem="jH4-7j-1gK" firstAttribute="top" secondItem="iMq-8B-RD3" secondAttribute="bottom" id="cLa-zd-v6s"/>
                             <constraint firstItem="SOW-cO-QhR" firstAttribute="top" secondItem="jH4-7j-1gK" secondAttribute="bottom" id="eqw-gU-Qqm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="pnG-nc-8cK"/>
                     <connections>
+                        <outlet property="mapTypeSegment" destination="Dme-7R-jbQ" id="PNf-KC-27e"/>
                         <outlet property="mapView" destination="jH4-7j-1gK" id="hVa-hH-hAn"/>
                         <segue destination="2iD-bb-EcH" kind="show" identifier="showDetailFromMap" id="2IR-W8-EJg"/>
                     </connections>
@@ -660,7 +705,7 @@
                                         <rect key="frame" x="0.0" y="40" width="600" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="keX-kU-F34" id="l3u-Db-x80">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="58"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xEF-bC-akL">
@@ -929,7 +974,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="i6r-66-Qnh" id="Osf-0W-li6">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dfJ-38-2Ni">
@@ -1067,7 +1112,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tbd-f6-TDZ" id="Ebb-g5-h6T">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="58"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w2k-q2-tbp">
@@ -1231,7 +1276,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="nao-GJ-xJL" id="LuC-Ms-QjD">
-                                            <rect key="frame" x="0.0" y="0.0" width="561" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="561" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zcD-qP-3TM">
@@ -1899,6 +1944,6 @@
         <image name="wallpaper3" width="960" height="663"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZHF-4v-WAZ"/>
+        <segue reference="2IR-W8-EJg"/>
     </inferredMetricsTieBreakers>
 </document>
