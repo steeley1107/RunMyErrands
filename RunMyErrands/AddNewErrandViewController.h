@@ -10,6 +10,6 @@
 #import <MapKit/MapKit.h>
 #import "Errand.h"
 
-@interface AddNewErrandViewController : UITableViewController
+@interface AddNewErrandViewController : UIViewController
 @property (nonatomic) NSArray *errandArray;
 @end
