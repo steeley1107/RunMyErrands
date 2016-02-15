@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import <Parse/Parse.h>
 #import "RunMyErrands-Swift.h"
+#import "EditErrandViewController.h"
 
 @interface DetailViewController () <GMSMapViewDelegate>
 
@@ -38,6 +39,10 @@
     }
     
     NSString *imageName = [self.errand imageName:[self.errand.category intValue]];
+    
+    //reload mapview
+    [self.mapView clear];
+    [self initiateMap];
     
     if ([self.errand.isComplete boolValue]) {
         imageName = [imageName stringByAppendingString:@"-grey"];
@@ -125,7 +130,7 @@
     Errand *errand = marker.userData;
     NSString *imageName = [errand imageName:errand.category.intValue];
     infoWindow.icon.image = [UIImage imageNamed:imageName];
-
+    
     //auto size the width depending on title size or snippit.
     float x = infoWindow.frame.origin.x;
     float y = infoWindow.frame.origin.y;
@@ -133,7 +138,7 @@
     
     float titleWidth = marker.title.length;
     float snippitWidth = marker.snippet.length;
-
+    
     if (titleWidth > snippitWidth) {
         textWidth = titleWidth;
     }else {
@@ -147,6 +152,19 @@
     [infoWindow layoutIfNeeded];
     
     return infoWindow;
+}
+
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"editErrand"]) {
+        EditErrandViewController *editErrandVC = (EditErrandViewController *)[segue destinationViewController];
+        editErrandVC.errand = self.errand;
+    }
 }
 
 
