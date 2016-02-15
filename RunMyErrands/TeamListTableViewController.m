@@ -174,7 +174,7 @@
                                                             attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
     
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:label
-                                                            attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:10.0]];
+                                                            attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:   10.0]];
 
     
     button.hidden = NO;
@@ -192,21 +192,21 @@
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:button
                                                             attribute:NSLayoutAttributeTop
-                                                           multiplier:1.0 constant:10.0]];
+                                                           multiplier:1.0 constant:0.0]];
 
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:sectionView
                                                             attribute:NSLayoutAttributeBottom
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:button
                                                             attribute:NSLayoutAttributeBottom
-                                                           multiplier:1.0 constant:10.0]];
+                                                           multiplier:1.0 constant:0.0]];
 
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
                                                             attribute:NSLayoutAttributeTrailingMargin
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:sectionView attribute:NSLayoutAttributeTrailingMargin
                                                            multiplier:1.0 constant:-10.0]];
-    
+    /*
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
                                                             attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
     
@@ -217,6 +217,7 @@
                                                                          attribute:NSLayoutAttributeNotAnAttribute
                                                                         multiplier:1.0
                                                                           constant:20.0];
+    */
     
     NSLayoutConstraint *buttonWidth = [NSLayoutConstraint constraintWithItem:button
                                                                     attribute:NSLayoutAttributeWidth
@@ -226,10 +227,11 @@
                                                                    multiplier:1.0
                                                                      constant:110.0];
     
-    [sectionView addConstraint:buttonHeight];
+   // [sectionView addConstraint:buttonHeight];
     [sectionView addConstraint:buttonWidth];
     
     //send 'leave group'
+    
     UIButton *leaveButton = [UIButton buttonWithType:UIButtonTypeSystem];
     leaveButton.tag = section;
     [sectionView addSubview:leaveButton];
@@ -243,19 +245,19 @@
     
     [leaveButton setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:127.0/255.0 blue:0.0/255.0 alpha:1.0]];
     
-    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:sectionView
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
                                                             attribute:NSLayoutAttributeTop
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:leaveButton
                                                             attribute:NSLayoutAttributeTop
-                                                           multiplier:1.0 constant:-10.0]];
+                                                           multiplier:1.0 constant: 0.0]];
     
-    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:sectionView
+    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
                                                             attribute:NSLayoutAttributeBottom
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:leaveButton
                                                             attribute:NSLayoutAttributeBottom
-                                                           multiplier:1.0 constant:10.0]];
+                                                           multiplier:1.0 constant:0.0]];
     
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:leaveButton
                                                             attribute:NSLayoutAttributeTrailing
@@ -263,9 +265,9 @@
                                                                toItem:button attribute:NSLayoutAttributeLeading
                                                            multiplier:1.0 constant:-20.0]];
     
-    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:leaveButton
-                                                            attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
-    
+  /*  [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:leaveButton
+                                                            attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+   
     NSLayoutConstraint *leaveButtonHeight = [NSLayoutConstraint constraintWithItem:button
                                                                     attribute:NSLayoutAttributeHeight
                                                                     relatedBy:NSLayoutRelationEqual
@@ -273,7 +275,7 @@
                                                                     attribute:NSLayoutAttributeHeight
                                                                    multiplier:1.0
                                                                      constant:0.0];
-    
+   */
     NSLayoutConstraint *leaveButtonWidth = [NSLayoutConstraint constraintWithItem:button
                                                                    attribute:NSLayoutAttributeWidth
                                                                    relatedBy:NSLayoutRelationEqual
@@ -282,7 +284,7 @@
                                                                   multiplier:1.0
                                                                     constant:0.0];
     
-    [sectionView addConstraint:leaveButtonHeight];
+  //  [sectionView addConstraint:leaveButtonHeight];
     [sectionView addConstraint:leaveButtonWidth];
     
     return sectionView;
