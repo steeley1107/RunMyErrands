@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jason Steele. All rights reserved.
 //
 
+
 #import "EditErrandViewController.h"
 #import <Parse/Parse.h>
 #import "RunMyErrands-Swift.h"
@@ -108,13 +109,14 @@
                 for (PFObject *object in objects) {
                     [self.groupPickerData addObject: object[@"name"]];
                 }
+                [self.groupPickerView reloadAllComponents];
                 self.errandNameTextField.text = self.errand.title;
                 self.descriptionTextField.text = self.errand.errandDescription;
                 self.locationName.text = self.errand.subtitle;
                 self.categoryTextField.text = self.categoryPickerData[[self.errand.category intValue]];
                 self.groupTextField.text =  self.groupPickerData[[self.errand.group intValue]];
                 self.addressTextField.text = self.errand.address;
-                [self.groupPickerView reloadAllComponents];
+                
             }
         }];
     }
