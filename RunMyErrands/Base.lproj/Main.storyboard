@@ -371,7 +371,13 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="kwV-EY-vPE"/>
-                    <navigationItem key="navigationItem" title="Errand Detail" id="HaC-K2-doA"/>
+                    <navigationItem key="navigationItem" title="Errand Detail" id="HaC-K2-doA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="AG6-Q9-3Iy">
+                            <connections>
+                                <segue destination="Jbj-PN-49i" kind="show" identifier="editErrand" id="jDH-NQ-6mt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="7qP-WW-aaU" id="L5V-Ey-qZQ"/>
                         <outlet property="completeButton" destination="qji-LG-M3A" id="B9p-bq-pNu"/>
@@ -525,7 +531,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3NT-TE-mDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="393" y="1202"/>
+            <point key="canvasLocation" x="382" y="1426"/>
         </scene>
         <!--Create New Group-->
         <scene sceneID="Z4f-2w-Acm">
@@ -625,7 +631,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2601" y="904"/>
+            <point key="canvasLocation" x="2538" y="1172"/>
         </scene>
         <!--Group-->
         <scene sceneID="jmH-o5-nWg">
@@ -823,7 +829,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1099" y="1202"/>
+            <point key="canvasLocation" x="1057" y="1426"/>
         </scene>
         <!--Join Group-->
         <scene sceneID="doW-mo-sEq">
@@ -919,7 +925,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2601" y="1600"/>
+            <point key="canvasLocation" x="2538" y="1868"/>
         </scene>
         <!--Errands Manager Map View Controller-->
         <scene sceneID="pUh-8j-pYX">
@@ -1048,7 +1054,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHh-b5-05w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1790" y="1881"/>
+            <point key="canvasLocation" x="1833" y="2397"/>
         </scene>
         <!--Run My Errands-->
         <scene sceneID="H26-Ia-7E8">
@@ -1544,7 +1550,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZxU-LJ-LXg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1089" y="1881"/>
+            <point key="canvasLocation" x="1089" y="2397"/>
         </scene>
         <!--Run-->
         <scene sceneID="wQN-jO-0vQ">
@@ -1563,7 +1569,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkG-0F-Ovn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="382" y="1881"/>
+            <point key="canvasLocation" x="382" y="2397"/>
         </scene>
         <!--Settings-->
         <scene sceneID="rfb-D2-wmD">
@@ -1795,7 +1801,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oyc-ZB-p60" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="6TV-QM-X4Q"/>
             </objects>
-            <point key="canvasLocation" x="410" y="2638"/>
+            <point key="canvasLocation" x="1099" y="3118"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="z9t-Kj-CoW">
@@ -1912,7 +1918,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1089" y="2638"/>
+            <point key="canvasLocation" x="1833" y="3118"/>
         </scene>
         <!--Settings-->
         <scene sceneID="hZx-Uj-zUO">
@@ -1931,7 +1937,284 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uI4-M5-1K9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-247" y="2638"/>
+            <point key="canvasLocation" x="382" y="3118"/>
+        </scene>
+        <!--Edit Errand-->
+        <scene sceneID="mFB-M4-bze">
+            <objects>
+                <viewController id="Jbj-PN-49i" customClass="EditErrandViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MhJ-yG-Vue"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ruk-tQ-7S8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WOd-SJ-TFm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6r1-ny-oka">
+                                <rect key="frame" x="0.0" y="65" width="600" height="491"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o2b-0O-MVF">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="486"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="AJk-jg-hef">
+                                                <rect key="frame" x="60" y="0.0" width="480" height="363"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4mn-iG-aEh">
+                                                        <rect key="frame" x="0.0" y="0.0" width="480" height="51"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Errand Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yau-G2-Ld9">
+                                                                <rect key="frame" x="0.0" y="0.0" width="480" height="21"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="The name of the errand" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kk2-2J-kzN">
+                                                                <rect key="frame" x="0.0" y="20" width="480" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="K4J-vV-t3F">
+                                                        <rect key="frame" x="0.0" y="62" width="480" height="51"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhO-S8-6d0">
+                                                                <rect key="frame" x="0.0" y="0.0" width="480" height="21"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description of errand" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2q-1O-chi">
+                                                                <rect key="frame" x="0.0" y="20" width="480" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hkN-fq-unu">
+                                                        <rect key="frame" x="0.0" y="125" width="480" height="51"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6c-wQ-niV">
+                                                                <rect key="frame" x="0.0" y="0.0" width="480" height="21"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of the place where the errand takes place" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ig0-mA-saU">
+                                                                <rect key="frame" x="0.0" y="20" width="480" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AuU-Qm-Thc">
+                                                        <rect key="frame" x="0.0" y="187" width="480" height="51"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQx-fm-3Io">
+                                                                <rect key="frame" x="0.0" y="0.0" width="480" height="21"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category Select" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0hn-2F-Aof">
+                                                                <rect key="frame" x="0.0" y="20" width="480" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2P4-83-KY5">
+                                                        <rect key="frame" x="0.0" y="250" width="480" height="51"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pSm-yf-8YR">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="21"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JcJ-Zr-Z6O">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="21"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Group Select" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YHq-FL-RA0">
+                                                                <rect key="frame" x="0.0" y="20" width="480" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="YHq-FL-RA0" secondAttribute="trailing" id="FJk-ne-dVf"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0RC-Mp-J7a">
+                                                        <rect key="frame" x="0.0" y="312" width="480" height="51"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xs2-Qu-kuJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="480" height="21"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ie 123 Main St. Vancouver, BC V1A 1A1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rjZ-99-Bxu">
+                                                                <rect key="frame" x="0.0" y="20" width="480" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="hkN-fq-unu" firstAttribute="leading" secondItem="AJk-jg-hef" secondAttribute="leading" id="7Kp-f3-Eop"/>
+                                                    <constraint firstAttribute="trailing" secondItem="0RC-Mp-J7a" secondAttribute="trailing" id="D3H-k0-piH"/>
+                                                    <constraint firstAttribute="trailing" secondItem="K4J-vV-t3F" secondAttribute="trailing" id="Fg2-xL-qKN"/>
+                                                    <constraint firstItem="2P4-83-KY5" firstAttribute="leading" secondItem="AJk-jg-hef" secondAttribute="leading" id="K4O-Ip-oBq"/>
+                                                    <constraint firstItem="K4J-vV-t3F" firstAttribute="leading" secondItem="AJk-jg-hef" secondAttribute="leading" id="Vz9-SC-ENY"/>
+                                                    <constraint firstAttribute="trailing" secondItem="AuU-Qm-Thc" secondAttribute="trailing" id="dum-jH-Pso"/>
+                                                    <constraint firstAttribute="trailing" secondItem="hkN-fq-unu" secondAttribute="trailing" id="eyR-ah-ziH"/>
+                                                    <constraint firstAttribute="trailing" secondItem="4mn-iG-aEh" secondAttribute="trailing" id="mRB-tj-uIH"/>
+                                                    <constraint firstItem="AuU-Qm-Thc" firstAttribute="leading" secondItem="AJk-jg-hef" secondAttribute="leading" id="oAq-bD-mgd"/>
+                                                    <constraint firstItem="0RC-Mp-J7a" firstAttribute="leading" secondItem="AJk-jg-hef" secondAttribute="leading" id="tmK-CR-EfG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2P4-83-KY5" secondAttribute="trailing" id="tpu-Mh-lcX"/>
+                                                    <constraint firstItem="4mn-iG-aEh" firstAttribute="leading" secondItem="AJk-jg-hef" secondAttribute="leading" id="yVH-JV-dvY"/>
+                                                </constraints>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXN-1g-Zxv">
+                                                <rect key="frame" x="205" y="371" width="191" height="30"/>
+                                                <state key="normal" title="Or Choose Location on Map"/>
+                                                <connections>
+                                                    <segue destination="txX-Bc-MnR" kind="show" identifier="mapSegue" id="ces-5c-daK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4e-0j-vU1">
+                                                <rect key="frame" x="120" y="429" width="360" height="30"/>
+                                                <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="SAVE NEW ERRAND">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="saveButtonPressed:" destination="Jbj-PN-49i" eventType="touchUpInside" id="Q8g-9U-uva"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.073614901610000005" green="0.18244942289999999" blue="0.37204071970000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="s4e-0j-vU1" firstAttribute="centerX" secondItem="o2b-0O-MVF" secondAttribute="centerX" id="7mx-Si-J7L"/>
+                                            <constraint firstItem="rXN-1g-Zxv" firstAttribute="centerX" secondItem="o2b-0O-MVF" secondAttribute="centerX" id="Bik-mM-wiJ"/>
+                                            <constraint firstItem="AJk-jg-hef" firstAttribute="centerX" secondItem="o2b-0O-MVF" secondAttribute="centerX" id="Jvu-7N-COW"/>
+                                            <constraint firstItem="s4e-0j-vU1" firstAttribute="top" secondItem="rXN-1g-Zxv" secondAttribute="bottom" constant="28" id="Rc4-8w-AMQ"/>
+                                            <constraint firstItem="s4e-0j-vU1" firstAttribute="width" secondItem="o2b-0O-MVF" secondAttribute="width" multiplier="0.6" id="edp-hP-9Xs"/>
+                                            <constraint firstItem="AJk-jg-hef" firstAttribute="top" secondItem="o2b-0O-MVF" secondAttribute="top" id="hhc-Ql-Ynl"/>
+                                            <constraint firstItem="AJk-jg-hef" firstAttribute="width" secondItem="o2b-0O-MVF" secondAttribute="width" multiplier="0.8" id="kqf-ap-lTi"/>
+                                            <constraint firstItem="rXN-1g-Zxv" firstAttribute="top" secondItem="AJk-jg-hef" secondAttribute="bottom" constant="8" id="pVg-8e-btX"/>
+                                            <constraint firstAttribute="height" constant="486" id="s1S-RN-oYP"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="TWe-mx-pDe" appends="YES" id="KN8-Sm-5qX"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.073614901610000005" green="0.18244942289999999" blue="0.37204071970000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="o2b-0O-MVF" firstAttribute="leading" secondItem="6r1-ny-oka" secondAttribute="leading" id="2A5-WB-Gwx"/>
+                                    <constraint firstItem="o2b-0O-MVF" firstAttribute="bottom" secondItem="6r1-ny-oka" secondAttribute="bottom" id="3tC-w0-wfL"/>
+                                    <constraint firstItem="o2b-0O-MVF" firstAttribute="top" secondItem="6r1-ny-oka" secondAttribute="top" id="BZU-uz-mOn"/>
+                                    <constraint firstItem="o2b-0O-MVF" firstAttribute="trailing" secondItem="6r1-ny-oka" secondAttribute="trailing" id="cHW-r6-1Ao"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.075394962849999997" green="0.1868611811" blue="0.38103693179999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="6r1-ny-oka" firstAttribute="bottom" secondItem="Ruk-tQ-7S8" secondAttribute="top" id="DWA-NH-xPb"/>
+                            <constraint firstItem="6r1-ny-oka" firstAttribute="trailing" secondItem="WOd-SJ-TFm" secondAttribute="trailingMargin" constant="20" id="Fzn-PH-sRw"/>
+                            <constraint firstAttribute="width" secondItem="o2b-0O-MVF" secondAttribute="width" id="ZtP-Cf-iPJ"/>
+                            <constraint firstItem="6r1-ny-oka" firstAttribute="leading" secondItem="WOd-SJ-TFm" secondAttribute="leadingMargin" constant="-20" id="uBd-bM-tBW"/>
+                            <constraint firstItem="6r1-ny-oka" firstAttribute="top" secondItem="WOd-SJ-TFm" secondAttribute="topMargin" constant="65" id="yB5-V5-wcK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Errand" id="dES-gT-H0a" userLabel="Edit Errand"/>
+                    <connections>
+                        <outlet property="addressTextField" destination="rjZ-99-Bxu" id="5Sq-mo-H2Y"/>
+                        <outlet property="categoryTextField" destination="0hn-2F-Aof" id="MnV-8K-hnx"/>
+                        <outlet property="descriptionTextField" destination="A2q-1O-chi" id="e76-kJ-Opo"/>
+                        <outlet property="errandNameTextField" destination="kk2-2J-kzN" id="1ZM-5N-n93"/>
+                        <outlet property="groupTextField" destination="YHq-FL-RA0" id="8Ao-Nu-toX"/>
+                        <outlet property="locationName" destination="Ig0-mA-saU" id="ZFK-9j-OkF"/>
+                        <outlet property="scrollView" destination="6r1-ny-oka" id="Syd-Rk-Ckt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Z3-Vs-ZHH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="TWe-mx-pDe">
+                    <connections>
+                        <action selector="tapDetected:" destination="Jbj-PN-49i" id="IV2-wd-I4Q"/>
+                        <outlet property="delegate" destination="Jbj-PN-49i" id="vHs-6A-sUo"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="2524" y="452"/>
+        </scene>
+        <!--Pick a Location-->
+        <scene sceneID="DJT-bI-FqY">
+            <objects>
+                <viewController id="txX-Bc-MnR" customClass="EditErrandOnMapViewController" customModule="RunMyErrands" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xOd-yC-pDX"/>
+                        <viewControllerLayoutGuide type="bottom" id="BOg-ZA-9ze"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="esf-02-l2u">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2O-6W-jsi" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MqU-c9-PY8">
+                                <rect key="frame" x="15" y="74" width="191" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="191" id="OJh-9M-7Bn"/>
+                                    <constraint firstAttribute="height" constant="28" id="nPL-hv-v0I"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Normal"/>
+                                    <segment title="Satellite"/>
+                                    <segment title="Hybrid"/>
+                                </segments>
+                                <color key="tintColor" red="0.99215686270000003" green="0.41960784309999999" blue="0.027450980390000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="geoFenceDistance:" destination="rKX-s6-iea" eventType="valueChanged" id="Zq4-Id-f6S"/>
+                                    <action selector="mapTypeSelect:" destination="txX-Bc-MnR" eventType="valueChanged" id="Rif-z6-r9y"/>
+                                    <action selector="travelMode:" destination="5a4-E8-l30" eventType="valueChanged" id="du5-WS-5Hb"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MqU-c9-PY8" firstAttribute="top" secondItem="xOd-yC-pDX" secondAttribute="bottom" constant="10" id="3RP-be-RS9"/>
+                            <constraint firstItem="MqU-c9-PY8" firstAttribute="leading" secondItem="esf-02-l2u" secondAttribute="leadingMargin" constant="-5" id="S6v-sU-Gcx"/>
+                            <constraint firstAttribute="trailing" secondItem="M2O-6W-jsi" secondAttribute="trailing" id="SLL-KC-ijx"/>
+                            <constraint firstItem="BOg-ZA-9ze" firstAttribute="top" secondItem="M2O-6W-jsi" secondAttribute="bottom" id="Xld-Sk-Wfc"/>
+                            <constraint firstItem="M2O-6W-jsi" firstAttribute="top" secondItem="xOd-yC-pDX" secondAttribute="bottom" id="jOU-nI-40C"/>
+                            <constraint firstItem="M2O-6W-jsi" firstAttribute="leading" secondItem="esf-02-l2u" secondAttribute="leading" id="pvL-zs-KwV"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pick a Location" id="k1x-8e-ic7"/>
+                    <connections>
+                        <outlet property="mapTypeSegment" destination="MqU-c9-PY8" id="XH2-gj-stu"/>
+                        <outlet property="mapView" destination="M2O-6W-jsi" id="49c-MO-1Z3"/>
+                    </connections>
+                </viewController>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="BDi-Un-eBJ">
+                    <connections>
+                        <action selector="dropPinGesture:" destination="txX-Bc-MnR" id="dBp-I5-TTE"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kTy-Gm-drI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3218" y="452"/>
         </scene>
     </scenes>
     <resources>
@@ -1944,6 +2227,6 @@
         <image name="wallpaper3" width="960" height="663"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2IR-W8-EJg"/>
+        <segue reference="taR-UF-3jZ"/>
     </inferredMetricsTieBreakers>
 </document>
