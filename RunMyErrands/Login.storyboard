@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D57-pO-xRy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D57-pO-xRy">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -51,7 +51,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3hY-FF-lzq">
                                         <rect key="frame" x="0.0" y="128" width="360" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" spellCheckingType="no"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YG8-vq-MYB">
                                         <rect key="frame" x="0.0" y="175" width="360" height="30"/>
@@ -381,7 +381,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Run My Errands" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDK-ZR-Y0m">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run My Errands" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDK-ZR-Y0m">
                                 <rect key="frame" x="239" y="394" width="122" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -391,7 +391,7 @@
                         <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Rns-om-syz" firstAttribute="centerX" secondItem="zOq-Mk-QLN" secondAttribute="centerX" id="Akh-fw-wlf"/>
-                            <constraint firstItem="GDK-ZR-Y0m" firstAttribute="top" secondItem="1AU-fl-xJ7" secondAttribute="bottom" constant="2" id="EpA-tZ-bw1"/>
+                            <constraint firstItem="GDK-ZR-Y0m" firstAttribute="top" secondItem="1AU-fl-xJ7" secondAttribute="bottom" constant="8" id="EpA-tZ-bw1"/>
                             <constraint firstItem="TO1-ad-H9Q" firstAttribute="centerX" secondItem="zOq-Mk-QLN" secondAttribute="centerX" id="JZo-hT-Okd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TO1-ad-H9Q" secondAttribute="trailing" constant="20" id="JfF-Yj-u6t"/>
                             <constraint firstItem="1AU-fl-xJ7" firstAttribute="centerY" secondItem="zOq-Mk-QLN" secondAttribute="centerY" multiplier="1.25" id="RLw-cG-LHM"/>
