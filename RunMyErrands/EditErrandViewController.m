@@ -84,9 +84,15 @@
 
 -(void)dismissPicker
 {
-    
-    [self.categoryTextField resignFirstResponder];
-    [self.groupTextField resignFirstResponder];
+    if (self.categoryTextField.editing == TRUE) {
+        self.errand.category = @([self.categoryPickerView selectedRowInComponent:0]);
+        [self.categoryTextField resignFirstResponder];
+    }else if (self.groupTextField.editing == TRUE) {
+        NSNumber *groupChoice = @([self.groupPickerView selectedRowInComponent:0]);
+        PFObject *group = self.groups[[groupChoice intValue]];
+        self.errand.group = group.objectId;
+        [self.groupTextField resignFirstResponder];
+    }
 }
 
 
@@ -108,13 +114,16 @@
                 
                 for (PFObject *object in objects) {
                     [self.groupPickerData addObject: object[@"name"]];
+                    if ([self.errand.group isEqualToString: object.objectId]) {
+                        self.groupTextField.text = object[@"name"];
+                    }
                 }
+                
                 [self.groupPickerView reloadAllComponents];
                 self.errandNameTextField.text = self.errand.title;
                 self.descriptionTextField.text = self.errand.errandDescription;
                 self.locationName.text = self.errand.subtitle;
                 self.categoryTextField.text = self.categoryPickerData[[self.errand.category intValue]];
-                self.groupTextField.text =  self.groupPickerData[[self.errand.group intValue]];
                 self.addressTextField.text = self.errand.address;
                 
             }
@@ -147,13 +156,10 @@
         self.errand.title = [self.errandNameTextField.text capitalizedString];
         self.errand.errandDescription = [self.descriptionTextField.text capitalizedString];
         self.errand.subtitle = [self.locationName.text capitalizedString];
-        self.errand.category = @([self.categoryPickerView selectedRowInComponent:0]);
-        
+        self.errand.category = self.errand.category;
         self.errand.isActive = @NO;
         
-        NSNumber *groupChoice = @([self.groupPickerView selectedRowInComponent:0]);
-        PFObject *group = self.groups[[groupChoice intValue]];
-        self.errand.group = group.objectId;
+        self.errand.group = self.errand.group;
         
         if (self.addressTextField.text.length != 0) {
             self.errand.address = self.addressTextField.text;
@@ -245,11 +251,6 @@
         [tView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:47/255.0 blue:51/255.0f alpha:1.0f]];
         tView.textAlignment = NSTextAlignmentCenter;
         
-        if (pickerView.tag == 1) {
-            self.categoryTextField.text = [self.categoryPickerData[row] capitalizedString];
-        } else if (pickerView.tag == 2) {
-            self.groupTextField.text = [self.groupPickerData[row] capitalizedString];
-        }
     }
     
     // Fill the label text here
