@@ -152,7 +152,7 @@ class DirectionManager: NSObject {
                 let polyline = step["polyline"] as! Dictionary<NSObject, AnyObject>
                 let points = polyline["points"] as! String
                 
-                let path: GMSPath = GMSPath(fromEncodedPath: points)
+                let path: GMSPath = GMSPath(fromEncodedPath: points)!
                 let routePolyline1 = GMSPolyline(path: path)
                 routePolyline1.strokeWidth = 2.0
                 routePolyline1.strokeColor = UIColor.greenColor()

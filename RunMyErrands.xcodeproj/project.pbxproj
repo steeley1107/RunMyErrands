@@ -77,6 +77,7 @@
 		DAA9C8381C17D53E00AF99DA /* ErrandsManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9C8371C17D53E00AF99DA /* ErrandsManagerViewController.swift */; };
 		DAA9C83A1C17E25700AF99DA /* ErrandsManagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9C8391C17E25700AF99DA /* ErrandsManagerTableViewCell.swift */; };
 		DAAD920E1C3C3F5F0052B5C6 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAD920D1C3C3F5F0052B5C6 /* Scheduler.swift */; };
+		DAB9004A1D5107AC00BBC1EA /* AddErrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB900491D5107AC00BBC1EA /* AddErrandViewController.swift */; };
 		DAE308E11C248CCA00534D61 /* GeoFenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE308E01C248CCA00534D61 /* GeoFenceManager.swift */; };
 		DAE753011C18BDC700AFF06F /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE753001C18BDC700AFF06F /* Direction.swift */; };
 /* End PBXBuildFile section */
@@ -188,6 +189,7 @@
 		DAA9C8371C17D53E00AF99DA /* ErrandsManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsManagerViewController.swift; sourceTree = "<group>"; };
 		DAA9C8391C17E25700AF99DA /* ErrandsManagerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandsManagerTableViewCell.swift; sourceTree = "<group>"; };
 		DAAD920D1C3C3F5F0052B5C6 /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
+		DAB900491D5107AC00BBC1EA /* AddErrandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddErrandViewController.swift; sourceTree = "<group>"; };
 		DAE308E01C248CCA00534D61 /* GeoFenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoFenceManager.swift; sourceTree = "<group>"; };
 		DAE753001C18BDC700AFF06F /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -394,6 +396,7 @@
 				52CA6F0E1BFF963A003E3437 /* TeamListTableViewController.m */,
 				527023001C1A35F20034AD23 /* SettingsViewController.swift */,
 				525712761C1A866B005775B4 /* EditProfileViewController.swift */,
+				DAB900491D5107AC00BBC1EA /* AddErrandViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				5298904B1BFBD97C00B82D76 /* Errand.m in Sources */,
 				520B473D1C0F7562006F1FDA /* SignupViewController.swift in Sources */,
 				523E40FF1BF843A900AFBEB7 /* ErrandListViewController.m in Sources */,
+				DAB9004A1D5107AC00BBC1EA /* AddErrandViewController.swift in Sources */,
 				525F89431C4D668A00B50CB2 /* OnboardingPagerViewController.swift in Sources */,
 				5257FBBF1BF809CE005CC88D /* main.m in Sources */,
 				52CA6F0F1BFF963A003E3437 /* TeamListTableViewController.m in Sources */,

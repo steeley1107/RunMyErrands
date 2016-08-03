@@ -179,7 +179,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     func drawRoute() {
         let route = directionErrand.overviewPolyline["points"] as! String
-        let path: GMSPath = GMSPath(fromEncodedPath: route)
+        let path: GMSPath = GMSPath(fromEncodedPath: route)!
         routePolyline = GMSPolyline(path: path)
         routePolyline.strokeWidth = 5.0
         routePolyline.map = mapView
@@ -214,8 +214,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         let x = infoWindow.frame.origin.x
         let y = infoWindow.frame.origin.y
         let height = infoWindow.frame.size.height
-        let titleWidth = marker.title.characters.count
-        let snippitWidth = marker.snippet.characters.count
+        let titleWidth = marker.title!.characters.count
+        let snippitWidth = marker.snippet!.characters.count
         
         if titleWidth > snippitWidth {
             textWidth = titleWidth

@@ -83,8 +83,8 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         let y = infoWindow.frame.origin.y
         let height = infoWindow.frame.size.height
         
-        let titleWidth = marker.title.characters.count
-        let snippitWidth = marker.snippet.characters.count
+        let titleWidth = marker.title!.characters.count
+        let snippitWidth = marker.snippet!.characters.count
         
         if titleWidth > snippitWidth {
             textWidth = titleWidth

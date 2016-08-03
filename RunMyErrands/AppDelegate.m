@@ -15,6 +15,8 @@
 #import "Errand.h"
 //#import <ParseTwitterUtils/ParseTwitterUtils.h>
 
+@import GooglePlaces;
+
 @interface AppDelegate ()
 @property (nonatomic) Scheduler *scheduler;
 
@@ -39,6 +41,7 @@
     
     //Google Maps
     [GMSServices provideAPIKey:GOOGLE_MAPS_KEY];
+    [GMSPlacesClient provideAPIKey:GOOGLE_MAPS_KEY];
 
     
     //Use 'Login-signup' storyboard
