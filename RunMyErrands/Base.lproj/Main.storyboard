@@ -18,12 +18,148 @@
                     <view key="view" contentMode="scaleToFill" id="1P7-QD-HwK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-K3-hOH" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="364" width="600" height="187"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="em1-M7-t7J" userLabel="Info View">
+                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="biN-qj-ZwH">
+                                        <rect key="frame" x="187" y="8" width="226" height="315"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aI5-2N-Sbk">
+                                                <rect key="frame" x="0.0" y="0.0" width="226" height="51"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Errand Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMQ-Fs-IeW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="226" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="The name of the errand" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf1-Yf-5Xa">
+                                                        <rect key="frame" x="0.0" y="21" width="226" height="30"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="b5X-tU-34O">
+                                                <rect key="frame" x="0.0" y="63" width="226" height="51"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GA0-Qb-wXw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="21"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Group" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lc4-S7-Dwe">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="21"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Group select" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h4T-ie-gqD">
+                                                        <rect key="frame" x="0.0" y="21" width="226" height="30"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="h4T-ie-gqD" secondAttribute="trailing" id="faH-B6-98Y"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8V3-mW-NmP">
+                                                <rect key="frame" x="0.0" y="125" width="226" height="51"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JM-pO-0cb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="226" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category select (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jGI-tg-v0E">
+                                                        <rect key="frame" x="0.0" y="21" width="226" height="30"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cxm-RL-cPn">
+                                                <rect key="frame" x="0.0" y="188" width="226" height="51"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap0-EP-8MA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="226" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description of errand (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xPm-BL-Z3M">
+                                                        <rect key="frame" x="0.0" y="21" width="226" height="30"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JnZ-Vh-JgP">
+                                                <rect key="frame" x="0.0" y="250" width="226" height="65"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9x-bD-xfs">
+                                                        <rect key="frame" x="0.0" y="0.0" width="226" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bi2-nv-JfG">
+                                                        <rect key="frame" x="0.0" y="21" width="226" height="44"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </searchBar>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="cxm-RL-cPn" secondAttribute="trailing" id="6Pr-Sq-wCJ"/>
+                                            <constraint firstItem="aI5-2N-Sbk" firstAttribute="leading" secondItem="biN-qj-ZwH" secondAttribute="leading" id="7vO-gZ-aPt"/>
+                                            <constraint firstItem="8V3-mW-NmP" firstAttribute="leading" secondItem="biN-qj-ZwH" secondAttribute="leading" id="HBI-ND-2AY"/>
+                                            <constraint firstAttribute="trailing" secondItem="aI5-2N-Sbk" secondAttribute="trailing" id="YO7-OL-61b"/>
+                                            <constraint firstAttribute="trailing" secondItem="8V3-mW-NmP" secondAttribute="trailing" id="hd0-lv-9e6"/>
+                                            <constraint firstItem="cxm-RL-cPn" firstAttribute="leading" secondItem="biN-qj-ZwH" secondAttribute="leading" id="oUh-KX-86j"/>
+                                            <constraint firstItem="b5X-tU-34O" firstAttribute="leading" secondItem="biN-qj-ZwH" secondAttribute="leading" id="sef-L4-xxa"/>
+                                            <constraint firstAttribute="trailing" secondItem="b5X-tU-34O" secondAttribute="trailing" id="u0b-bT-FWh"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="biN-qj-ZwH" firstAttribute="top" secondItem="em1-M7-t7J" secondAttribute="top" constant="8" id="SBl-hz-Tyf"/>
+                                    <constraint firstItem="biN-qj-ZwH" firstAttribute="centerX" secondItem="em1-M7-t7J" secondAttribute="centerX" id="dk2-Fj-HMa"/>
+                                    <constraint firstItem="biN-qj-ZwH" firstAttribute="top" secondItem="em1-M7-t7J" secondAttribute="top" constant="8" id="kXX-FM-teU"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5oU-K3-hOH" firstAttribute="leading" secondItem="1P7-QD-HwK" secondAttribute="leadingMargin" constant="-20" id="H7O-yA-378"/>
+                            <constraint firstItem="X1B-Jg-Ak7" firstAttribute="top" secondItem="5oU-K3-hOH" secondAttribute="bottom" id="HOU-ff-mfE"/>
+                            <constraint firstItem="em1-M7-t7J" firstAttribute="leading" secondItem="1P7-QD-HwK" secondAttribute="leadingMargin" constant="-20" id="SAt-kJ-wn1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5oU-K3-hOH" secondAttribute="trailing" constant="-20" id="T1e-nD-X55"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="em1-M7-t7J" secondAttribute="trailing" constant="-20" id="Vko-IA-qF0"/>
+                            <constraint firstItem="5oU-K3-hOH" firstAttribute="top" secondItem="em1-M7-t7J" secondAttribute="bottom" id="uUn-SX-HsZ"/>
+                            <constraint firstItem="em1-M7-t7J" firstAttribute="top" secondItem="fFd-gV-VUG" secondAttribute="bottom" id="vYe-Pk-J75"/>
+                            <constraint firstItem="em1-M7-t7J" firstAttribute="height" secondItem="1P7-QD-HwK" secondAttribute="height" multiplier="0.5" id="y8C-IP-Y8Z"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="categoryTextField" destination="jGI-tg-v0E" id="Tsc-vX-eMK"/>
+                        <outlet property="descriptionTextField" destination="xPm-BL-Z3M" id="HIw-UU-RIX"/>
+                        <outlet property="errandNameTextField" destination="tf1-Yf-5Xa" id="7m4-Ai-LmK"/>
+                        <outlet property="groupTextField" destination="h4T-ie-gqD" id="JtV-DL-jFo"/>
+                        <outlet property="mapView" destination="5oU-K3-hOH" id="4cR-HI-2w5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XS-MJ-E1l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1808" y="-931"/>
+            <point key="canvasLocation" x="1808" y="-930"/>
         </scene>
         <!--Add New Errand-->
         <scene sceneID="M2l-5k-zW8">
@@ -184,7 +320,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.073614901606609218" green="0.18244942286827578" blue="0.3720407196969695" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.062745098039215685" green="0.12941176470588237" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="dIe-ZK-L2o" firstAttribute="centerX" secondItem="Cll-gM-JBU" secondAttribute="centerX" id="6tv-Kf-vlH"/>
