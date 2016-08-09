@@ -19,6 +19,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     
+    @IBOutlet weak var searchView: UIView!
     var categoryPickerView = UIPickerView()
     var groupPickerView = UIPickerView()
     var categoryPickerData = ["General", "Entertainment", "Business", "Food"]
@@ -48,7 +49,10 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         
         // Put the search bar in the navigation bar.
         searchController?.searchBar.sizeToFit()
-        self.navigationItem.titleView = searchController?.searchBar
+        //self.navigationItem.titleView = searchController?.searchBar
+        
+        searchView.addSubview((searchController?.searchBar)!)
+        
         
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
@@ -94,6 +98,39 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         
     }
     
+    @IBAction func saveButton(sender: AnyObject) {
+        
+        var alertControllerTitle = ""
+        var alertControllerMessage = ""
+        
+        if self.errandNameTextField == nil
+        {
+            alertControllerTitle = "Enter a Name"
+            alertControllerMessage = "Please Enter a Errand Name"
+            showAlert(alertControllerTitle, message: alertControllerMessage)
+        }
+        else if errand.longitude == nil {
+            alertControllerTitle = "Enter an Address"
+            alertControllerMessage = "Please Select an Destination From The Search"
+            showAlert(alertControllerTitle, message: alertControllerMessage)
+        }
+        else
+        {
+            errand.title = errandNameTextField.text?.capitalizedString
+            errand.errandDescription = descriptionTextField.text?.capitalizedString
+            //                errand.subtitle = locationName.text.capitalizedString
+            errand.category = categoryPickerView.selectedRowInComponent(0)
+            
+            errand.isActive = false
+            
+            let groupChoice:NSNumber = groupPickerView.selectedRowInComponent(0)
+            //                group:PFObject = groups[[groupChoice intValue]];
+            //            errand.group = group.objectId;
+            
+        }
+        
+        
+    }
     
     
     
@@ -197,61 +234,8 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         }
     }
     
-}
-
-
-// Handle the user's selection.
-extension AddErrandViewController: GMSAutocompleteResultsViewControllerDelegate {
-    func resultsController(resultsController: GMSAutocompleteResultsViewController!,
-                           didAutocompleteWithPlace place: GMSPlace!) {
-        searchController?.active = false
-        // Do something with the selected place.
-        print("Place name: ", place.name)
-        print("Place address: ", place.formattedAddress)
-        print("Place attributions: ", place.attributions)
-        
-        if let locationName = place?.name
-        {
-            errand.locationName = locationName
-        }
-        if let formattedAddress = place?.formattedAddress
-        {
-            errand.address = formattedAddress
-        }
-        if let latitude = place?.coordinate.latitude
-        {
-            errand.lattitude = latitude
-        }
-        if let longitude = place?.coordinate.longitude
-        {
-            errand.longitude = longitude
-        }
-        
-        //errand.geoPoint = place.coordinate as PFGeoPoint
-        
-        mapView.clear()
-        
-        errand.setCoordinate(place.coordinate)
-        errand.geoPoint = PFGeoPoint(latitude:errand.lattitude.doubleValue, longitude:errand.longitude.doubleValue)
-        
-        let marker = errand.makeMarker()
-        marker.userData = errand
-        marker.map = self.mapView
-        marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
-        
-        marker.map = self.mapView
-        
-        //Centre the map around the map
-        let camera = GMSCameraPosition.cameraWithTarget(errand.coordinate(), zoom: 8)
-        mapView.camera = camera
-        
-        
-        
-        
-        
-        
-        
-    }
+    
+    
     
     func resultsController(resultsController: GMSAutocompleteResultsViewController!,
                            didFailAutocompleteWithError error: NSError!){
@@ -309,6 +293,144 @@ extension AddErrandViewController: GMSAutocompleteResultsViewControllerDelegate 
     
     
     
+    
+    //Alert Controller for the errand manager
+    func showAlert(title: String, message: String) {
+        
+        // create the alert
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        
+        // show the alert
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    //    //Check to see if there are user settings
+    //    func checkSettings()
+    //    {
+    //        let userSettings = Array(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys).count
+    //
+    //        print("")
+    //        if userSettings < 10
+    //        {
+    //            showAlert("Error", message: "Please add information in the settings")
+    //        }
+    //        else
+    //        {
+    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("userName") as? String
+    //            {
+    //                if userName.characters.count == 0
+    //                {
+    //                    showAlert("Error", message: "Missing Username")
+    //                }
+    //            }
+    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("password") as? String
+    //            {
+    //                if userName.characters.count == 0
+    //                {
+    //                    showAlert("Error", message: "Missing Password")
+    //                }
+    //            }
+    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("localIP") as? String
+    //            {
+    //                if userName.characters.count == 0
+    //                {
+    //                    showAlert("Error", message: "Missing local IP")
+    //                }
+    //            }
+    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("localPort") as? String
+    //            {
+    //                if userName.characters.count == 0
+    //                {
+    //                    showAlert("Error", message: "Missing Local Port")
+    //                }
+    //            }
+    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("secureIP") as? String
+    //            {
+    //                if userName.characters.count == 0
+    //                {
+    //                    showAlert("Error", message: "Missing Secure IP")
+    //                }
+    //            }
+    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("securePort") as? String
+    //            {
+    //                if userName.characters.count == 0
+    //                {
+    //                    showAlert("Error", message: "Missing Secure Port")
+    //                }
+    //            }
+    //        }
+    //    }
+    //
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// Handle the user's selection.
+extension AddErrandViewController: GMSAutocompleteResultsViewControllerDelegate {
+    
+    func resultsController(resultsController: GMSAutocompleteResultsViewController!,
+                           didAutocompleteWithPlace place: GMSPlace!) {
+        searchController?.active = false
+        // Do something with the selected place.
+        print("Place name: ", place.name)
+        print("Place address: ", place.formattedAddress)
+        print("Place attributions: ", place.attributions)
+        
+        if let locationName = place?.name
+        {
+            errand.locationName = locationName
+        }
+        if let formattedAddress = place?.formattedAddress
+        {
+            errand.address = formattedAddress
+        }
+        if let latitude = place?.coordinate.latitude
+        {
+            errand.lattitude = latitude
+        }
+        if let longitude = place?.coordinate.longitude
+        {
+            errand.longitude = longitude
+        }
+        
+        //errand.geoPoint = place.coordinate as PFGeoPoint
+        
+        mapView.clear()
+        
+        errand.setCoordinate(place.coordinate)
+        errand.geoPoint = PFGeoPoint(latitude:errand.lattitude.doubleValue, longitude:errand.longitude.doubleValue)
+        
+        let marker = errand.makeMarker()
+        marker.userData = errand
+        marker.map = self.mapView
+        marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+        
+        marker.map = self.mapView
+        
+        //Centre the map around the map
+        let camera = GMSCameraPosition.cameraWithTarget(errand.coordinate(), zoom: 8)
+        mapView.camera = camera
+    }
     
     
     
