@@ -14,6 +14,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     
     @IBOutlet weak var mapView: GMSMapView!
     
+    @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var errandNameTextField: UITextField!
     @IBOutlet weak var groupTextField: UITextField!
     @IBOutlet weak var categoryTextField: UITextField!
@@ -31,6 +32,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     
     var errand = Errand()
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,16 +49,43 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         
+        searchController?.searchBar = self.searchBar
+        
         // Put the search bar in the navigation bar.
         searchController?.searchBar.sizeToFit()
+        searchController?.searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        
         //self.navigationItem.titleView = searchController?.searchBar
         
-        searchView.addSubview((searchController?.searchBar)!)
-        
+//        let subView = UIView(frame: CGRectMake(0, 64.0, view.frame.width, 45.0))
+//        subView.addSubview((searchController?.searchBar)!)
+//        
+//        mapView.addSubview(subView)
+//        mapView.bringSubviewToFront(subView)
+//        
         
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
-        self.definesPresentationContext = true
+        self.definesPresentationContext = false
+        
+        //mapView.addSubview((searchController?.searchResultsUpdater.)!)
+        
+//        //search bar
+//
+//        let subView = UIView(frame: CGRectMake(0, 64.0, view.frame.width, 45.0))
+//        
+//        subView.addSubview((searchController?.searchBar)!)
+//        self.view.addSubview(subView)
+//        searchController?.searchBar.sizeToFit()
+//        searchController?.searchBar.barTintColor = UIColor.redColor()
+//        searchController?.hidesNavigationBarDuringPresentation = false
+//        
+//        // When UISearchController presents the results view, present it in
+//        // this view controller, not one further up the chain.
+//        self.definesPresentationContext = true
+        
+        
+        
         
         // Prevent the navigation bar from being hidden when searching.
         searchController?.hidesNavigationBarDuringPresentation = false
@@ -146,6 +175,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         return 1
     }
     
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1
         {
@@ -160,6 +190,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             return 0
         }
     }
+    
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         
@@ -194,6 +225,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         return tView;
     }
     
+    
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView.tag == 1
@@ -212,8 +244,6 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         categoryTextField.resignFirstResponder()
         groupTextField.resignFirstResponder()
     }
-    
-    
     
     
     func fetchGroupPickerData() {
@@ -235,18 +265,18 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     }
     
     
-    
-    
     func resultsController(resultsController: GMSAutocompleteResultsViewController!,
                            didFailAutocompleteWithError error: NSError!){
         // TODO: handle the error.
         print("Error: ", error.description)
     }
     
+    
     // Turn the network activity indicator on and off again.
     func didRequestAutocompletePredictionsForResultsController(resultsController: GMSAutocompleteResultsViewController!) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     }
+    
     
     func didUpdateAutocompletePredictionsForResultsController(resultsController: GMSAutocompleteResultsViewController!) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -288,12 +318,6 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     }
     
     
-    
-    
-    
-    
-    
-    
     //Alert Controller for the errand manager
     func showAlert(title: String, message: String) {
         
@@ -308,80 +332,8 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     }
     
     
-    //    //Check to see if there are user settings
-    //    func checkSettings()
-    //    {
-    //        let userSettings = Array(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys).count
-    //
-    //        print("")
-    //        if userSettings < 10
-    //        {
-    //            showAlert("Error", message: "Please add information in the settings")
-    //        }
-    //        else
-    //        {
-    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("userName") as? String
-    //            {
-    //                if userName.characters.count == 0
-    //                {
-    //                    showAlert("Error", message: "Missing Username")
-    //                }
-    //            }
-    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("password") as? String
-    //            {
-    //                if userName.characters.count == 0
-    //                {
-    //                    showAlert("Error", message: "Missing Password")
-    //                }
-    //            }
-    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("localIP") as? String
-    //            {
-    //                if userName.characters.count == 0
-    //                {
-    //                    showAlert("Error", message: "Missing local IP")
-    //                }
-    //            }
-    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("localPort") as? String
-    //            {
-    //                if userName.characters.count == 0
-    //                {
-    //                    showAlert("Error", message: "Missing Local Port")
-    //                }
-    //            }
-    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("secureIP") as? String
-    //            {
-    //                if userName.characters.count == 0
-    //                {
-    //                    showAlert("Error", message: "Missing Secure IP")
-    //                }
-    //            }
-    //            if let userName = NSUserDefaults.standardUserDefaults().objectForKey("securePort") as? String
-    //            {
-    //                if userName.characters.count == 0
-    //                {
-    //                    showAlert("Error", message: "Missing Secure Port")
-    //                }
-    //            }
-    //        }
-    //    }
-    //
-    
-    
-    
-    
-    
-    
     
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -396,6 +348,8 @@ extension AddErrandViewController: GMSAutocompleteResultsViewControllerDelegate 
         print("Place address: ", place.formattedAddress)
         print("Place attributions: ", place.attributions)
         
+        
+        //add GMSPlace to Errand
         if let locationName = place?.name
         {
             errand.locationName = locationName
@@ -414,6 +368,7 @@ extension AddErrandViewController: GMSAutocompleteResultsViewControllerDelegate 
         }
         
         //errand.geoPoint = place.coordinate as PFGeoPoint
+        
         
         mapView.clear()
         

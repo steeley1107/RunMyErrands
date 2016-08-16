@@ -27,26 +27,26 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="biN-qj-ZwH">
-                                        <rect key="frame" x="187" y="8" width="228" height="291"/>
+                                        <rect key="frame" x="187" y="8" width="226" height="238"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aI5-2N-Sbk">
-                                                <rect key="frame" x="0.0" y="0.0" width="228" height="51"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="226" height="51"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Errand Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMQ-Fs-IeW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="228" height="21"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="226" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="The name of the errand" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf1-Yf-5Xa">
-                                                        <rect key="frame" x="0.0" y="21" width="228" height="30"/>
+                                                        <rect key="frame" x="0.0" y="21" width="226" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="b5X-tU-34O">
-                                                <rect key="frame" x="0.0" y="63" width="228" height="51"/>
+                                                <rect key="frame" x="0.0" y="63" width="226" height="51"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GA0-Qb-wXw">
                                                         <rect key="frame" x="0.0" y="0.0" width="48" height="21"/>
@@ -60,7 +60,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Group select" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h4T-ie-gqD">
-                                                        <rect key="frame" x="0.0" y="21" width="228" height="30"/>
+                                                        <rect key="frame" x="0.0" y="21" width="226" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -70,53 +70,35 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8V3-mW-NmP">
-                                                <rect key="frame" x="0.0" y="125" width="228" height="51"/>
+                                                <rect key="frame" x="0.0" y="125" width="226" height="51"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JM-pO-0cb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="228" height="21"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="226" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category select (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jGI-tg-v0E">
-                                                        <rect key="frame" x="0.0" y="21" width="228" height="30"/>
+                                                        <rect key="frame" x="0.0" y="21" width="226" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cxm-RL-cPn">
-                                                <rect key="frame" x="0.0" y="188" width="228" height="51"/>
+                                                <rect key="frame" x="0.0" y="188" width="226" height="51"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap0-EP-8MA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="228" height="21"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="226" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description of errand (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xPm-BL-Z3M">
-                                                        <rect key="frame" x="0.0" y="21" width="228" height="30"/>
+                                                        <rect key="frame" x="0.0" y="21" width="226" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JnZ-Vh-JgP">
-                                                <rect key="frame" x="0.0" y="250" width="228" height="41"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9x-bD-xfs">
-                                                        <rect key="frame" x="0.0" y="0.0" width="228" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bHf-ub-IZi" userLabel="SearchView">
-                                                        <rect key="frame" x="0.0" y="21" width="228" height="20"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="3HF-0J-FS2"/>
-                                                        </constraints>
-                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -124,21 +106,26 @@
                                             <constraint firstAttribute="trailing" secondItem="cxm-RL-cPn" secondAttribute="trailing" id="6Pr-Sq-wCJ"/>
                                             <constraint firstItem="aI5-2N-Sbk" firstAttribute="leading" secondItem="biN-qj-ZwH" secondAttribute="leading" id="7vO-gZ-aPt"/>
                                             <constraint firstItem="8V3-mW-NmP" firstAttribute="leading" secondItem="biN-qj-ZwH" secondAttribute="leading" id="HBI-ND-2AY"/>
-                                            <constraint firstItem="JnZ-Vh-JgP" firstAttribute="leading" secondItem="biN-qj-ZwH" secondAttribute="leading" id="OdS-UR-KJn"/>
                                             <constraint firstAttribute="trailing" secondItem="aI5-2N-Sbk" secondAttribute="trailing" id="YO7-OL-61b"/>
                                             <constraint firstAttribute="trailing" secondItem="8V3-mW-NmP" secondAttribute="trailing" id="hd0-lv-9e6"/>
                                             <constraint firstItem="cxm-RL-cPn" firstAttribute="leading" secondItem="biN-qj-ZwH" secondAttribute="leading" id="oUh-KX-86j"/>
                                             <constraint firstItem="b5X-tU-34O" firstAttribute="leading" secondItem="biN-qj-ZwH" secondAttribute="leading" id="sef-L4-xxa"/>
-                                            <constraint firstAttribute="trailing" secondItem="JnZ-Vh-JgP" secondAttribute="trailing" id="swJ-7U-5vA"/>
                                             <constraint firstAttribute="trailing" secondItem="b5X-tU-34O" secondAttribute="trailing" id="u0b-bT-FWh"/>
                                         </constraints>
                                     </stackView>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dao-qm-5az">
+                                        <rect key="frame" x="0.0" y="256" width="600" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dao-qm-5az" secondAttribute="trailing" id="6bw-Uo-dbt"/>
                                     <constraint firstItem="biN-qj-ZwH" firstAttribute="top" secondItem="em1-M7-t7J" secondAttribute="top" constant="8" id="SBl-hz-Tyf"/>
+                                    <constraint firstAttribute="bottom" secondItem="dao-qm-5az" secondAttribute="bottom" id="aPu-O1-4WB"/>
                                     <constraint firstItem="biN-qj-ZwH" firstAttribute="centerX" secondItem="em1-M7-t7J" secondAttribute="centerX" id="dk2-Fj-HMa"/>
                                     <constraint firstItem="biN-qj-ZwH" firstAttribute="top" secondItem="em1-M7-t7J" secondAttribute="top" constant="8" id="kXX-FM-teU"/>
+                                    <constraint firstItem="dao-qm-5az" firstAttribute="leading" secondItem="em1-M7-t7J" secondAttribute="leading" id="vPj-vM-Vw5"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -166,8 +153,9 @@
                         <outlet property="descriptionTextField" destination="xPm-BL-Z3M" id="HIw-UU-RIX"/>
                         <outlet property="errandNameTextField" destination="tf1-Yf-5Xa" id="7m4-Ai-LmK"/>
                         <outlet property="groupTextField" destination="h4T-ie-gqD" id="JtV-DL-jFo"/>
+                        <outlet property="infoView" destination="em1-M7-t7J" id="tza-hH-gtb"/>
                         <outlet property="mapView" destination="5oU-K3-hOH" id="4cR-HI-2w5"/>
-                        <outlet property="searchView" destination="bHf-ub-IZi" id="be1-pS-i7A"/>
+                        <outlet property="searchBar" destination="dao-qm-5az" id="lBM-bz-6tb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XS-MJ-E1l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2384,6 +2372,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kTy-Gm-drI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3218" y="452"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="kLg-xW-NpQ">
+            <objects>
+                <viewController id="ECX-UW-3uV" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="agY-Yb-hfM"/>
+                        <viewControllerLayoutGuide type="bottom" id="U75-Zm-h3f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VCJ-NJ-YeT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KgJ-7k-OIL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>
