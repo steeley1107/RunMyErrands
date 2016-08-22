@@ -125,7 +125,7 @@
                                                                options:nil] objectAtIndex:0];
     
     infoWindow.title.text = marker.title;
-    infoWindow.snippit.text = marker.snippet;
+    infoWindow.snippet.text = marker.snippet;
     
     Errand *errand = marker.userData;
     NSString *imageName = [errand imageName:errand.category.intValue];

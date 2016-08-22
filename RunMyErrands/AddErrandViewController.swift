@@ -20,19 +20,12 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     
-    @IBOutlet weak var searchView: UIView!
     var categoryPickerView = UIPickerView()
     var groupPickerView = UIPickerView()
     var categoryPickerData = ["General", "Entertainment", "Business", "Food"]
     var groupPickerData = NSMutableArray()
-    
-    var resultsViewController: GMSAutocompleteResultsViewController?
-    var searchController: UISearchController?
-    var resultView: UITextView?
-    
     var errand = Errand()
-    
-    @IBOutlet weak var searchBar: UISearchBar!
+    var groups = NSArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,58 +35,12 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         self.mapView.myLocationEnabled = true
         mapView.frame = mapView.bounds
         
-        //Google Places setup
-        resultsViewController = GMSAutocompleteResultsViewController()
-        resultsViewController?.delegate = self
+        errand.category = 0
         
-        searchController = UISearchController(searchResultsController: resultsViewController)
-        searchController?.searchResultsUpdater = resultsViewController
-        
-        searchController?.searchBar = self.searchBar
-        
-        // Put the search bar in the navigation bar.
-        searchController?.searchBar.sizeToFit()
-        searchController?.searchBar.searchBarStyle = UISearchBarStyle.Minimal
-        
-        //self.navigationItem.titleView = searchController?.searchBar
-        
-//        let subView = UIView(frame: CGRectMake(0, 64.0, view.frame.width, 45.0))
-//        subView.addSubview((searchController?.searchBar)!)
-//        
-//        mapView.addSubview(subView)
-//        mapView.bringSubviewToFront(subView)
-//        
-        
-        // When UISearchController presents the results view, present it in
-        // this view controller, not one further up the chain.
-        self.definesPresentationContext = false
-        
-        //mapView.addSubview((searchController?.searchResultsUpdater.)!)
-        
-//        //search bar
-//
-//        let subView = UIView(frame: CGRectMake(0, 64.0, view.frame.width, 45.0))
-//        
-//        subView.addSubview((searchController?.searchBar)!)
-//        self.view.addSubview(subView)
-//        searchController?.searchBar.sizeToFit()
-//        searchController?.searchBar.barTintColor = UIColor.redColor()
-//        searchController?.hidesNavigationBarDuringPresentation = false
-//        
-//        // When UISearchController presents the results view, present it in
-//        // this view controller, not one further up the chain.
-//        self.definesPresentationContext = true
-        
-        
-        
-        
-        // Prevent the navigation bar from being hidden when searching.
-        searchController?.hidesNavigationBarDuringPresentation = false
         
         fetchGroupPickerData()
         
         //Add tool bar on top of the picker view
-        
         var toolBar = UIToolbar()
         toolBar.frame = CGRectMake(0,0,self.view.frame.size.width,50)
         toolBar.barStyle = UIBarStyle.Default
@@ -124,7 +71,6 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         groupTextField.inputAccessoryView = toolBar;
         
         
-        
     }
     
     @IBAction func saveButton(sender: AnyObject) {
@@ -151,16 +97,63 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             errand.category = categoryPickerView.selectedRowInComponent(0)
             
             errand.isActive = false
+            errand.isComplete = false
             
             let groupChoice:NSNumber = groupPickerView.selectedRowInComponent(0)
-            //                group:PFObject = groups[[groupChoice intValue]];
-            //            errand.group = group.objectId;
+            let group:PFObject = self.groups[self.groupPickerView.selectedRowInComponent(0)] as! PFObject
+            errand.group = group.objectId;
+            
+            saveErrand()
+        }
+    }
+    
+    
+    func saveErrand() {
+        errand.saveInBackgroundWithBlock { (succeeded, error) in
+            if succeeded
+            {
+                let group:PFObject = self.groups[self.groupPickerView.selectedRowInComponent(0)] as! PFObject
+                let groupErrandsRelation:PFRelation = group.relationForKey("Errand")
+                groupErrandsRelation.addObject(self.errand)
+                
+                self.errand.isActive = false
+                
+                group.saveInBackgroundWithBlock({ (succeeded, error) in
+                    if succeeded == false
+                    {
+                        print("Error \(error)")
+                    }
+                    else
+                    {
+                        self.navigationController?.popViewControllerAnimated(true)
+                    }
+                })
+                
+                
+            }
+            else
+            {
+                
+                //
+                //            // There was a problem, check error.description
+                //            NSString *alertControllerTitle = @"Error";
+                //            NSString *alertControllerMessage = @"Oops There Was a Problem in Adding The Errand";
+                //            [self presentAlertController:alertControllerTitle aMessage:alertControllerMessage];
+            }
             
         }
         
-        
     }
     
+    
+    
+    
+    @IBAction func searchLocationButton(sender: AnyObject) {
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        self.presentViewController(autocompleteController, animated: true, completion: nil)
+        
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -256,6 +249,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             if let error = error {
                 // There was an error
             } else {
+                self.groups = objects!
                 for object in objects!
                 {
                     self.groupPickerData.addObject(object["name"])
@@ -288,7 +282,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         
         marker.infoWindowAnchor = CGPointMake(0.5, -0.0)
         infoWindow.title.text = marker.title
-        infoWindow.snippit.text = marker.snippet
+        infoWindow.snippet.text = marker.snippet
         
         let errand:Errand = marker.userData as! Errand
         let imageName:String = errand.imageName(errand.category.intValue)
@@ -301,13 +295,13 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         let y = infoWindow.frame.origin.y
         let height = infoWindow.frame.size.height
         
-        let titleWidth = marker.title!.characters.count
-        let snippitWidth = marker.snippet!.characters.count
+        let titleWidth = infoWindow.title.text!.characters.count
+        let snippetWidth = infoWindow.snippet.text!.characters.count
         
-        if titleWidth > snippitWidth {
+        if titleWidth > snippetWidth {
             textWidth = titleWidth
         }else {
-            textWidth = snippitWidth
+            textWidth = snippetWidth
         }
         let width:CGFloat = CGFloat(textWidth) * 7.5 + 70.0
         infoWindow.frame = CGRectMake(x, y, width, height)
@@ -336,36 +330,28 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
 }
 
 
-
-// Handle the user's selection.
-extension AddErrandViewController: GMSAutocompleteResultsViewControllerDelegate {
+extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
     
-    func resultsController(resultsController: GMSAutocompleteResultsViewController!,
-                           didAutocompleteWithPlace place: GMSPlace!) {
-        searchController?.active = false
-        // Do something with the selected place.
+    // Handle the user's selection.
+    func viewController(viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
         print("Place name: ", place.name)
         print("Place address: ", place.formattedAddress)
         print("Place attributions: ", place.attributions)
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
         
         //add GMSPlace to Errand
-        if let locationName = place?.name
-        {
-            errand.locationName = locationName
-        }
-        if let formattedAddress = place?.formattedAddress
-        {
-            errand.address = formattedAddress
-        }
-        if let latitude = place?.coordinate.latitude
-        {
-            errand.lattitude = latitude
-        }
-        if let longitude = place?.coordinate.longitude
-        {
-            errand.longitude = longitude
-        }
+        
+        errand.locationName = place.name
+        errand.address = place.formattedAddress
+        errand.lattitude = place.coordinate.latitude
+        errand.longitude = place.coordinate.longitude
+        
+        //Place holders??
+        errand.title = place.name
+        
+        let formattedAddress = place.formattedAddress?.componentsSeparatedByString(",")
+        let simpleAddress: String = formattedAddress![0]
+        errand.subtitle = simpleAddress
         
         //errand.geoPoint = place.coordinate as PFGeoPoint
         
@@ -382,21 +368,53 @@ extension AddErrandViewController: GMSAutocompleteResultsViewControllerDelegate 
         
         marker.map = self.mapView
         
+        //Show info window
+        mapView.selectedMarker = marker
+        
         //Centre the map around the map
         let camera = GMSCameraPosition.cameraWithTarget(errand.coordinate(), zoom: 8)
         mapView.camera = camera
     }
     
+    func viewController(viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: NSError) {
+        // TODO: handle the error.
+        print("Error: ", error.description)
+    }
     
+    // User canceled the operation.
+    func wasCancelled(viewController: GMSAutocompleteViewController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(viewController: GMSAutocompleteViewController) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(viewController: GMSAutocompleteViewController) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
+
+

@@ -20,14 +20,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-K3-hOH" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="364" width="600" height="187"/>
+                                <rect key="frame" x="0.0" y="334" width="600" height="217"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="em1-M7-t7J" userLabel="Info View">
-                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="270"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="biN-qj-ZwH">
-                                        <rect key="frame" x="187" y="8" width="226" height="238"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="biN-qj-ZwH">
+                                        <rect key="frame" x="187" y="8" width="226" height="226"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aI5-2N-Sbk">
                                                 <rect key="frame" x="0.0" y="0.0" width="226" height="51"/>
@@ -46,7 +46,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="b5X-tU-34O">
-                                                <rect key="frame" x="0.0" y="63" width="226" height="51"/>
+                                                <rect key="frame" x="0.0" y="59" width="226" height="51"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GA0-Qb-wXw">
                                                         <rect key="frame" x="0.0" y="0.0" width="48" height="21"/>
@@ -70,7 +70,7 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8V3-mW-NmP">
-                                                <rect key="frame" x="0.0" y="125" width="226" height="51"/>
+                                                <rect key="frame" x="0.0" y="117" width="226" height="51"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JM-pO-0cb">
                                                         <rect key="frame" x="0.0" y="0.0" width="226" height="21"/>
@@ -86,7 +86,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cxm-RL-cPn">
-                                                <rect key="frame" x="0.0" y="188" width="226" height="51"/>
+                                                <rect key="frame" x="0.0" y="176" width="226" height="51"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap0-EP-8MA">
                                                         <rect key="frame" x="0.0" y="0.0" width="226" height="21"/>
@@ -113,19 +113,26 @@
                                             <constraint firstAttribute="trailing" secondItem="b5X-tU-34O" secondAttribute="trailing" id="u0b-bT-FWh"/>
                                         </constraints>
                                     </stackView>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dao-qm-5az">
-                                        <rect key="frame" x="0.0" y="256" width="600" height="44"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1OF-OE-USG">
+                                        <rect key="frame" x="0.0" y="240" width="600" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.67730988110000001" blue="0.31478111390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Seach Location">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveButtonPressed:" destination="Jbj-PN-49i" eventType="touchUpInside" id="4RN-OE-VNc"/>
+                                            <action selector="searchLocationButton:" destination="LAC-z9-HCn" eventType="touchUpInside" id="dVc-Od-txV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.01040836327" green="0.22929926980000001" blue="0.41199100379999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="dao-qm-5az" secondAttribute="trailing" id="6bw-Uo-dbt"/>
+                                    <constraint firstItem="1OF-OE-USG" firstAttribute="leading" secondItem="em1-M7-t7J" secondAttribute="leading" id="A8x-ng-JSy"/>
                                     <constraint firstItem="biN-qj-ZwH" firstAttribute="top" secondItem="em1-M7-t7J" secondAttribute="top" constant="8" id="SBl-hz-Tyf"/>
-                                    <constraint firstAttribute="bottom" secondItem="dao-qm-5az" secondAttribute="bottom" id="aPu-O1-4WB"/>
                                     <constraint firstItem="biN-qj-ZwH" firstAttribute="centerX" secondItem="em1-M7-t7J" secondAttribute="centerX" id="dk2-Fj-HMa"/>
+                                    <constraint firstAttribute="bottom" secondItem="1OF-OE-USG" secondAttribute="bottom" id="gX7-Tc-dvL"/>
                                     <constraint firstItem="biN-qj-ZwH" firstAttribute="top" secondItem="em1-M7-t7J" secondAttribute="top" constant="8" id="kXX-FM-teU"/>
-                                    <constraint firstItem="dao-qm-5az" firstAttribute="leading" secondItem="em1-M7-t7J" secondAttribute="leading" id="vPj-vM-Vw5"/>
+                                    <constraint firstAttribute="trailing" secondItem="1OF-OE-USG" secondAttribute="trailing" id="m8T-fT-XOU"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -138,7 +145,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="em1-M7-t7J" secondAttribute="trailing" constant="-20" id="Vko-IA-qF0"/>
                             <constraint firstItem="5oU-K3-hOH" firstAttribute="top" secondItem="em1-M7-t7J" secondAttribute="bottom" id="uUn-SX-HsZ"/>
                             <constraint firstItem="em1-M7-t7J" firstAttribute="top" secondItem="fFd-gV-VUG" secondAttribute="bottom" id="vYe-Pk-J75"/>
-                            <constraint firstItem="em1-M7-t7J" firstAttribute="height" secondItem="1P7-QD-HwK" secondAttribute="height" multiplier="0.5" id="y8C-IP-Y8Z"/>
+                            <constraint firstItem="em1-M7-t7J" firstAttribute="height" secondItem="1P7-QD-HwK" secondAttribute="height" multiplier="0.45" id="y8C-IP-Y8Z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Errand" id="ShZ-3P-w5l">
@@ -155,7 +162,6 @@
                         <outlet property="groupTextField" destination="h4T-ie-gqD" id="JtV-DL-jFo"/>
                         <outlet property="infoView" destination="em1-M7-t7J" id="tza-hH-gtb"/>
                         <outlet property="mapView" destination="5oU-K3-hOH" id="4cR-HI-2w5"/>
-                        <outlet property="searchBar" destination="dao-qm-5az" id="lBM-bz-6tb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XS-MJ-E1l" userLabel="First Responder" sceneMemberID="firstResponder"/>

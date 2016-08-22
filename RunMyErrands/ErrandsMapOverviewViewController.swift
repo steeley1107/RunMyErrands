@@ -70,7 +70,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         marker.infoWindowAnchor = CGPointMake(0.5, -0.0)
         infoWindow.title.text = marker.title
-        infoWindow.snippit.text = marker.snippet
+        infoWindow.snippet.text = marker.snippet
         
         let errand:Errand = marker.userData as! Errand
         let imageName:String = errand.imageName(errand.category.intValue)
