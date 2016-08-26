@@ -12,14 +12,15 @@ import GooglePlaces
 
 class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    //Mark: Properties
     @IBOutlet weak var mapView: GMSMapView!
-    
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var errandNameTextField: UITextField!
     @IBOutlet weak var groupTextField: UITextField!
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     
+    var didFindMyLocation = false
     var categoryPickerView = UIPickerView()
     var groupPickerView = UIPickerView()
     var categoryPickerData = ["General", "Entertainment", "Business", "Food"]
@@ -27,6 +28,8 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     var errand = Errand()
     var groups = NSArray()
     
+    
+    //Mark: ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,17 +38,19 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         self.mapView.myLocationEnabled = true
         mapView.frame = mapView.bounds
         
+        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+        
         errand.category = 0
         
         
         fetchGroupPickerData()
         
         //Add tool bar on top of the picker view
-        var toolBar = UIToolbar()
+        let toolBar = UIToolbar()
         toolBar.frame = CGRectMake(0,0,self.view.frame.size.width,50)
         toolBar.barStyle = UIBarStyle.Default
         //Create done button
-        let barButtonDone = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "dismissPicker")
+        let barButtonDone = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AddErrandViewController.dismissPicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         //Add button to toolbar
         toolBar.setItems([spaceButton, spaceButton, barButtonDone], animated: false)
@@ -68,10 +73,9 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         groupPickerView.showsSelectionIndicator = true
         groupPickerView.tag = 2;
         groupTextField.inputView = self.groupPickerView;
-        groupTextField.inputAccessoryView = toolBar;
-        
-        
+        groupTextField.inputAccessoryView = toolBar
     }
+    
     
     @IBAction func saveButton(sender: AnyObject) {
         
@@ -93,7 +97,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         {
             errand.title = errandNameTextField.text?.capitalizedString
             errand.errandDescription = descriptionTextField.text?.capitalizedString
-            //                errand.subtitle = locationName.text.capitalizedString
+            //errand.subtitle = locationName.text.capitalizedString
             errand.category = categoryPickerView.selectedRowInComponent(0)
             
             errand.isActive = false
@@ -145,14 +149,28 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         
     }
     
-    
+    //Update map with users current location;
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if !didFindMyLocation {
+            let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
+            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
+            mapView.settings.myLocationButton = true
+            didFindMyLocation = true
+            mapView.removeObserver(self, forKeyPath: "myLocation")
+        }
+    }
     
     
     @IBAction func searchLocationButton(sender: AnyObject) {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
-        self.presentViewController(autocompleteController, animated: true, completion: nil)
         
+        //Create Search Area
+        let visibleRegion : GMSVisibleRegion = mapView.projection.visibleRegion()
+        let bounds = GMSCoordinateBounds(coordinate: visibleRegion.nearLeft, coordinate: visibleRegion.farRight)
+        autocompleteController.autocompleteBounds = bounds
+        
+        self.presentViewController(autocompleteController, animated: true, completion: nil)
     }
     
     
@@ -334,6 +352,7 @@ extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
     func viewController(viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
+            
         print("Place name: ", place.name)
         print("Place address: ", place.formattedAddress)
         print("Place attributions: ", place.attributions)
@@ -349,12 +368,12 @@ extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
         //Place holders??
         errand.title = place.name
         
+        //Capture just the 1st part of the address
         let formattedAddress = place.formattedAddress?.componentsSeparatedByString(",")
         let simpleAddress: String = formattedAddress![0]
         errand.subtitle = simpleAddress
         
         //errand.geoPoint = place.coordinate as PFGeoPoint
-        
         
         mapView.clear()
         
@@ -396,25 +415,4 @@ extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
- // Get the new view controller using segue.destinationViewController.
- // Pass the selected object to the new view controller.
- }
- */
-
 
