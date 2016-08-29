@@ -1,8 +1,8 @@
 //
-//  AddErrandViewController.swift
+//  EditErrandViewController.swift
 //  RunMyErrands
 //
-//  Created by Steele on 2016-08-02.
+//  Created by Steele on 2016-08-27.
 //  Copyright © 2016 Jason Steele. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import GooglePlaces
 
 
-class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     //Mark: Properties
     @IBOutlet weak var mapView: GMSMapView!
@@ -35,13 +35,10 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         
         //Map View setup
         self.mapView.delegate = self
-        self.mapView.myLocationEnabled = true
         mapView.frame = mapView.bounds
         
-        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
-        
-        errand.category = 0
-        
+        //Fill in errand data
+        populateEdit()
         
         fetchGroupPickerData()
         
@@ -74,6 +71,32 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         groupPickerView.tag = 2;
         groupTextField.inputView = self.groupPickerView;
         groupTextField.inputAccessoryView = toolBar
+    }
+    
+    func populateEdit()
+    {
+        //Load Errand information
+        errandNameTextField.text = errand.title
+        categoryTextField.text = categoryPickerData[errand.category.integerValue]
+        descriptionTextField.text = errand.errandDescription
+
+        //Capture just the 1st part of the address
+        let formattedAddress = errand.address.componentsSeparatedByString(",")
+        let simpleAddress: String = formattedAddress[0]
+        errand.subtitle = simpleAddress
+        
+        //Load map with errand
+        let marker = errand.makeMarker()
+        marker.userData = errand
+        marker.map = self.mapView
+        marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+        marker.map = self.mapView
+        
+        //Show info window
+        mapView.selectedMarker = marker
+        //Centre the map around the map
+        let camera = GMSCameraPosition.cameraWithTarget(errand.coordinate(), zoom: 14)
+        mapView.camera = camera
     }
     
     
@@ -132,8 +155,6 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
                         self.navigationController?.popViewControllerAnimated(true)
                     }
                 })
-                
-                
             }
             else
             {
@@ -144,10 +165,9 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
                 //            NSString *alertControllerMessage = @"Oops There Was a Problem in Adding The Errand";
                 //            [self presentAlertController:alertControllerTitle aMessage:alertControllerMessage];
             }
-            
         }
-        
     }
+    
     
     //Update map with users current location;
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -271,6 +291,10 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
                 for object in objects!
                 {
                     self.groupPickerData.addObject(object["name"])
+                    if self.errand.group == object.objectId
+                    {
+                        self.groupTextField.text = object["name"] as! String
+                    }
                 }
             }
         }
@@ -348,11 +372,11 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
 }
 
 
-extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
+extension EditErrandViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
     func viewController(viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
-            
+        
         print("Place name: ", place.name)
         print("Place address: ", place.formattedAddress)
         print("Place attributions: ", place.attributions)

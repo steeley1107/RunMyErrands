@@ -182,26 +182,26 @@ class DirectionManager: NSObject {
         totalErrandsInSeconds = (errandDuration * UInt(waypointOrder.count))
         
         let distanceInKilometers: Double = Double(totalDistanceInMeters / 1000)
-        totalDistance = "Total Distance: \(distanceInKilometers) Km"
+        totalDistance = "  Total Distance: \(distanceInKilometers) Km"
         
         
         let travelMins = totalTravelDurationInSeconds / 60
         let travelHours = travelMins / 60
         let remainingTravelMins = travelMins % 60
         
-        totalTravelDuration = "Travel Duration: \(travelHours) hours, \(remainingTravelMins) mins"
+        totalTravelDuration = "  Travel Duration: \(travelHours) hours, \(remainingTravelMins) mins"
         
         let errandsMins = totalErrandsInSeconds / 60
         let errandsHours = errandsMins / 60
         let remainingErrandsMins = errandsMins % 60
         
-        totalErrandDuration = "Errands Duration: \(errandsHours) hours, \(remainingErrandsMins) mins"
+        totalErrandDuration = "  Errands Duration: \(errandsHours) hours, \(remainingErrandsMins) mins"
         
         let totalMins = travelMins + errandsMins
         let hours = totalMins / 60
         let mins =  totalMins % 60
         
-        totalDuration = "Approx. Total Duration: \(hours) hours, \(mins) mins"
+        totalDuration = "  Approx. Total Duration: \(hours) hours, \(mins) mins"
     }
     
     

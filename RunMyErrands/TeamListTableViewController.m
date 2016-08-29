@@ -184,7 +184,7 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(openMailClientForInvite:) forControlEvents:UIControlEventTouchUpInside];
     
-    [button setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:127.0/255.0 blue:0.0/255.0 alpha:1.0]];
+    [button setBackgroundColor:[UIColor colorWithRed:253.0/255.0 green:107.0/255.0 blue:7.0/255.0 alpha:1.0]];
     
     
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:sectionView
@@ -243,7 +243,7 @@
     [leaveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [leaveButton addTarget:self action:@selector(leaveGroup:) forControlEvents:UIControlEventTouchUpInside];
     
-    [leaveButton setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:127.0/255.0 blue:0.0/255.0 alpha:1.0]];
+    [leaveButton setBackgroundColor:[UIColor colorWithRed:253.0/255.0 green:107.0/255.0 blue:7.0/255.0 alpha:1.0]];
     
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
                                                             attribute:NSLayoutAttributeTop

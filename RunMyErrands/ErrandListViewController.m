@@ -8,7 +8,6 @@
 
 #import "ErrandListViewController.h"
 #import "RunMyErrands-Swift.h"
-#import "AddNewErrandViewController.h"
 #import "DetailViewController.h"
 #import <Parse/Parse.h>
 #import "Errand.h"
@@ -284,8 +283,8 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"addNewErrand"]) {
-        AddNewErrandViewController *addNewErrandVC = (AddNewErrandViewController *)[segue destinationViewController];
-        addNewErrandVC.errandArray = self.errandArray;
+//        AddErrandViewController *addNewErrandVC = (AddErrandViewController *)[segue destinationViewController];
+//        addNewErrandVC.errandArray = self.errandArray;
         
     } else if ([[segue identifier] isEqualToString:@"showDetail"]) {
         DetailViewController *detailVC = (DetailViewController*)[segue destinationViewController];
