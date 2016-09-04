@@ -74,8 +74,9 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         self.mapView.addSubview(activitySpinner)
         self.mapView.bringSubviewToFront(activitySpinner)
         
-        
         directionsLabel.hidden = true
+        
+        errandsTableView.tableFooterView = UIView()
     }
     
     
