@@ -259,8 +259,8 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     
     func fetchGroupPickerData() {
         
-        var user = PFUser.currentUser()
-        var relation = user!.relationForKey("memberOfTheseGroups")
+        let user = PFUser.currentUser()
+        let relation = user!.relationForKey("memberOfTheseGroups")
         
         relation.query().findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
