@@ -204,7 +204,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     //Mark: MarkerInfoWindow
     
     func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {
-        let infoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil).first! as! CustomInfoWindow
+        let infoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
         
         marker.infoWindowAnchor = CGPointMake(0.5, -0.0)
         infoWindow.title.text = marker.title

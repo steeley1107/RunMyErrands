@@ -19,6 +19,8 @@
 
 @interface AppDelegate ()
 @property (nonatomic) Scheduler *scheduler;
+@property (nonatomic) ErrandManager *errandManager;
+
 
 @end
 
@@ -32,6 +34,16 @@
                   clientKey:PARSE_CLIENT_KEY];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    
+    //Setup Notifications
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+    
     //Facebook
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     
@@ -42,7 +54,7 @@
     //Google Maps
     [GMSServices provideAPIKey:GOOGLE_MAPS_KEY];
     [GMSPlacesClient provideAPIKey:GOOGLE_MAPS_KEY];
-
+    
     
     //Use 'Login-signup' storyboard
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
@@ -52,6 +64,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
+    
+    self.errandManager = [ErrandManager new];
+    
     
     return YES;
 }
@@ -86,7 +101,6 @@
     [FBSDKAppEvents activateApp];
 }
 
-
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
@@ -115,10 +129,38 @@
     [currentInstallation saveInBackground];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"pushUpdate" object:nil];
-    
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    if (error.code == 3010) {
+        NSLog(@"Push notifications are not supported in the iOS Simulator.");
+    } else {
+        // show some alert or otherwise handle the failure to register.
+        NSLog(@"application:didFailToRegisterForRemoteNotificationsWithError: %@", error);
+    }
+}
+
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    if([userInfo[@"aps"][@"content-available"] intValue]== 1) //it's the silent notification
+    {
+        //update errands from Parse
+        [self.errandManager fetchData:^(BOOL success) {
+            if (success) {
+                
+            }
+        }];
+        
+        //bla bla bla put your code here
+        completionHandler(UIBackgroundFetchResultNewData);
+        return;
+    }
+    else
+    {
+        [PFPush handlePush:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"pushUpdate" object:nil];
+        completionHandler(UIBackgroundFetchResultNoData);
+        return;
+    }
 }
 
 

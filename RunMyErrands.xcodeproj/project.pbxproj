@@ -161,6 +161,7 @@
 		52CE286F1C125F6100046BF2 /* ErrandManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandManager.swift; sourceTree = "<group>"; };
 		98ED86A0F03E7320C46D3917 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA0D86011C15605600402054 /* Callout_rounded_rectangle_center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Callout_rounded_rectangle_center.png; sourceTree = "<group>"; };
+		DA13B5401D8F0DE20086E53C /* RunMyErrands.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunMyErrands.entitlements; sourceTree = "<group>"; };
 		DA216A361BFD7FD200797C24 /* RunMyErrands-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RunMyErrands-Bridging-Header.h"; sourceTree = "<group>"; };
 		DA21C51A1C7296D300F41A83 /* EditErrandOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditErrandOnMapViewController.swift; sourceTree = "<group>"; };
 		DA34E8401C14FC93006C7B05 /* API_key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API_key.h; sourceTree = "<group>"; };
@@ -260,6 +261,7 @@
 		5257FBBC1BF809CE005CC88D /* RunMyErrands */ = {
 			isa = PBXGroup;
 			children = (
+				DA13B5401D8F0DE20086E53C /* RunMyErrands.entitlements */,
 				5257FBC01BF809CE005CC88D /* AppDelegate.h */,
 				5257FBC11BF809CE005CC88D /* AppDelegate.m */,
 				5257FBC61BF809CE005CC88D /* Main.storyboard */,
@@ -819,6 +821,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RunMyErrands/RunMyErrands.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -845,6 +848,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RunMyErrands/RunMyErrands.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

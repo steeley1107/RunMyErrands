@@ -147,6 +147,38 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             
         }
         
+        let push = PFPush()
+        
+        push.setChannel(self.errand.group)
+        
+        
+        
+        //[user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+          //  if (succeeded) {
+            //PFPush *push = [[PFPush alloc] init];
+            //[push setChannel:self.errand.group];
+            //[push setMessage:[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.errand.title]];
+            
+            //PFInstallation *installation = [PFInstallation currentInstallation];
+            //[installation removeObject:self.errand.group forKey:@"channels"];
+            //[installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            //[push sendPushInBackground];
+            //[installation addUniqueObject:self.errand.group forKey:@"channels"];
+            //}];
+            
+           // [self viewWillAppear:true];
+            //} else {
+            //NSLog(@"Error: %@", error);
+            //}
+            //}];
+        
+        
+
+    
+        
+        
+        
+        
     }
     
     //Update map with users current location;
@@ -296,7 +328,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     
     
     func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {
-        let infoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil).first! as! CustomInfoWindow
+        let infoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
         
         marker.infoWindowAnchor = CGPointMake(0.5, -0.0)
         infoWindow.title.text = marker.title
@@ -352,7 +384,7 @@ extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
     func viewController(viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
-            
+        
         print("Place name: ", place.name)
         print("Place address: ", place.formattedAddress)
         print("Place attributions: ", place.attributions)
