@@ -147,36 +147,15 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             
         }
         
+        //Set silent push notification
         let push = PFPush()
-        
+        let data = [
+            "content-available" : 1,
+            "sounds" : ""
+        ]
         push.setChannel(self.errand.group)
-        
-        
-        
-        //[user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-          //  if (succeeded) {
-            //PFPush *push = [[PFPush alloc] init];
-            //[push setChannel:self.errand.group];
-            //[push setMessage:[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.errand.title]];
-            
-            //PFInstallation *installation = [PFInstallation currentInstallation];
-            //[installation removeObject:self.errand.group forKey:@"channels"];
-            //[installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            //[push sendPushInBackground];
-            //[installation addUniqueObject:self.errand.group forKey:@"channels"];
-            //}];
-            
-           // [self viewWillAppear:true];
-            //} else {
-            //NSLog(@"Error: %@", error);
-            //}
-            //}];
-        
-        
-
-    
-        
-        
+        push.setData(data)
+        push.sendPushInBackground()
         
         
     }

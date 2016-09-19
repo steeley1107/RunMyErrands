@@ -146,11 +146,10 @@
         //update errands from Parse
         [self.errandManager fetchData:^(BOOL success) {
             if (success) {
-                
+                NSLog(@"updated errands in background");
             }
         }];
         
-        //bla bla bla put your code here
         completionHandler(UIBackgroundFetchResultNewData);
         return;
     }
