@@ -120,7 +120,6 @@ class Scheduler: NSObject {
     //add erpiry time to active errands.
     func CreateCompletedErrandsExpiryDate() {
         
-        
         let expiryCompletedDate = calendar.dateByAddingUnit(.Day, value: completedErrandsExpiryDuration, toDate: currentDateTime, options: [])
         
         //fetch errands from Parse
