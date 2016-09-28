@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>4</string>
 	<key>FacebookAppID</key>
 	<string>916924508362902</string>
 	<key>FacebookDisplayName</key>
@@ -71,9 +71,11 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Run My Errands Wants To Use Your Location</string>
+	<string>To notify you when you are near an errand location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Run My Errands Wants To Use Your Location</string>
+	<string>To notify you when you are near an errand location.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Update Errands In The Background.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

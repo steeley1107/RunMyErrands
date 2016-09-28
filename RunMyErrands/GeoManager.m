@@ -130,13 +130,13 @@ int const kUpdateGeoFenceDistance = 500;
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     
-    [self inLocationNotificationForRegion:region];
+    //[self inLocationNotificationForRegion:region];
 }
 
 
 -(void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region {
     
-    if (state == 1) {
+    if (state == CLRegionStateInside) {
            [self inLocationNotificationForRegion:region];
     }
 }
