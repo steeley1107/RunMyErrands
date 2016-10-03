@@ -319,7 +319,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
     }
     
     
-    func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {
+    func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         let infoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
         
         marker.infoWindowAnchor = CGPointMake(0.5, -0.0)

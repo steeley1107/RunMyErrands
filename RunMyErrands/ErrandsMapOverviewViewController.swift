@@ -65,7 +65,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     //Mark: MarkerInfoWindow
     
-    func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {
+    func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         let infoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
         
         marker.infoWindowAnchor = CGPointMake(0.5, -0.0)
@@ -162,7 +162,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     //Mark: - Navigation
     
-    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+    func mapView(mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
         performSegueWithIdentifier("showDetailFromMap", sender: marker.userData as! Errand)
     }
     
