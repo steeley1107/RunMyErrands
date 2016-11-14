@@ -23,7 +23,7 @@ import Parse
         user = PFUser.currentUser()
         objectIDtoNameDictionary = NSMutableDictionary()
     }
-
+    
     func fetchNumberOfGroups() -> Int {
         return self.errandsDictionary.allKeys.count
     }
@@ -80,7 +80,7 @@ import Parse
                     self.objectIDtoNameDictionary.setValue(group["name"] as! String, forKey: group.objectId!)
                     self.errandsDictionary.setValue([], forKey: group.objectId!)
                 }
-
+                
                 let errandsQuery = PFQuery(className: "Errand")
                 errandsQuery.whereKey("group", containedIn: self.fetchKeys())
                 errandsQuery.orderByAscending("isComplete")
@@ -107,7 +107,7 @@ import Parse
     func fetchKeys() -> [String] {
         return self.objectIDtoNameDictionary.allKeys as! [String]
     }
-
+    
     func isEmpty() -> Bool {
         if self.errandsDictionary.count == 0 {
             return true
@@ -147,4 +147,16 @@ import Parse
             }
         }
     }
+    
+    
 }
+
+
+
+
+
+
+
+
+
+

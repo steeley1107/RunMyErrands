@@ -149,15 +149,12 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             
         }
         
-        //Set silent push notification
-        let push = PFPush()
-        let data = [
-            "content-available" : 1,
-            "sounds" : ""
-        ]
-        push.setChannel(self.errand.group)
-        push.setData(data)
-        push.sendPushInBackground()
+        //Set silent push notification        
+        //New Push Notifications with cloud code
+        var setChannel = self.errand.group
+        PFCloud.callFunctionInBackground("silentPush", withParameters: ["channels": setChannel,"deviceType":"ios"]) { (response, error) -> Void in
+        }
+        
         
         
     }

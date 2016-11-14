@@ -78,14 +78,15 @@
                 
                 [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
-                        PFPush *push = [[PFPush alloc] init];
-                        [push setChannel:self.errand.group];
-                        [push setMessage:[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.errand.title]];
+                        
+                        //New cloud push function
+                        NSString *channels = self.errand.group;
+                        NSString *message =[NSString stringWithFormat:@"%@ just completed Errand: %@", user[@"name"], self.errand.title];
                         
                         PFInstallation *installation = [PFInstallation currentInstallation];
                         [installation removeObject:self.errand.group forKey:@"channels"];
                         [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                            [push sendPushInBackground];
+                            [PFCloud callFunctionInBackground:@"iosPush" withParameters:@{@"channels":channels,@"deviceType":@"ios",@"text":message}];
                             [installation addUniqueObject:self.errand.group forKey:@"channels"];
                         }];
                         

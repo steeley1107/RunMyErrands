@@ -64,7 +64,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.errandsTableView.addSubview(refreshControl)
-
+        
+        
         
     }
     
@@ -94,6 +95,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         //Check if any errands have expired.
         self.scheduler.CheckActiveErrandsExpiry()
         self.scheduler.CheckCompletedErrandsExpiry()
+
         
     }
     
