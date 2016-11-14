@@ -284,7 +284,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
         
         relation.query().findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
-            if let error = error {
+            if error != nil {
                 // There was an error
             } else {
                 self.groups = objects!

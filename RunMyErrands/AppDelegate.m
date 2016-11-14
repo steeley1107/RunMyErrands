@@ -34,14 +34,9 @@
         configuration.applicationId = PARSE_APP_ID;
         configuration.clientKey = PARSE_CLIENT_KEY;
         configuration.server = @"https://runmyerrands.herokuapp.com/parse";
-
-//        configuration.server = @"http://localhost:1337/parse/";
-        
     }]];
     
     [Errand registerSubclass];
-//    [Parse setApplicationId:PARSE_APP_ID
-//                  clientKey:PARSE_CLIENT_KEY];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     

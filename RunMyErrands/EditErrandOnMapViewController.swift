@@ -62,7 +62,7 @@ class EditErrandOnMapViewController: UIViewController, CLLocationManagerDelegate
     }
     
     
-    func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D)
+    func mapView(mapView: GMSMapView, didTapAtCoordinate coordinate: CLLocationCoordinate2D)
     {
         mapView.clear()
         

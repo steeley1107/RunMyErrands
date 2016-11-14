@@ -151,7 +151,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         
         //Set silent push notification        
         //New Push Notifications with cloud code
-        var setChannel = self.errand.group
+        let setChannel = self.errand.group
         PFCloud.callFunctionInBackground("silentPush", withParameters: ["channels": setChannel,"deviceType":"ios"]) { (response, error) -> Void in
         }
         
@@ -274,7 +274,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         
         relation.query().findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
-            if let error = error {
+            if error != nil {
                 // There was an error
             } else {
                 self.groups = objects!
