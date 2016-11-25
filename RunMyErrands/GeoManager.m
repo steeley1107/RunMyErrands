@@ -81,6 +81,7 @@ int const kUpdateGeoFenceDistance = 500;
 -(void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
     CLLocation * loc = [locations objectAtIndex: [locations count] - 1];
     
+
     
     NSTimeInterval locationAge = -[loc.timestamp timeIntervalSinceNow];
     if (locationAge > 10.0){
@@ -95,6 +96,11 @@ int const kUpdateGeoFenceDistance = 500;
     
     if (_currentLocation == nil || _currentLocation.horizontalAccuracy >= loc.horizontalAccuracy){
         _currentLocation = loc;
+        
+        if (_currentLocation == self.currentLocation) {
+        
+           self.currentLocation = loc;
+        }
         
         if (loc.horizontalAccuracy <= _locationManager.desiredAccuracy) {
             //[self stopLocationManager];
@@ -159,6 +165,16 @@ int const kUpdateGeoFenceDistance = 500;
     for (CLRegion *region in self.locationManager.monitoredRegions) {
         [self.locationManager stopMonitoringForRegion:region];
     }
+}
+
+-(CLLocation*)getCurrentLocation {
+    
+    
+    //self.currentLocation = _currentLocation;
+    
+    NSLog(@"didStartMonitoring %@",self.currentLocation);
+    
+    return self.currentLocation;
 }
 
 

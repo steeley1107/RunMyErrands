@@ -32,8 +32,6 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     //Mark: ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
 
         //Map View setup
         self.mapView.delegate = self
@@ -43,7 +41,6 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
         errand.category = 0
-        
         
         fetchGroupPickerData()
         
@@ -154,10 +151,8 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         let setChannel = self.errand.group
         PFCloud.callFunctionInBackground("silentPush", withParameters: ["channels": setChannel,"deviceType":"ios"]) { (response, error) -> Void in
         }
-        
-        
-        
     }
+    
     
     //Update map with users current location;
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {

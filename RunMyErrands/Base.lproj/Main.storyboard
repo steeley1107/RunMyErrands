@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -484,9 +484,9 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="efI-55-Znu"/>
                                 <exclude reference="x91-1f-ZmQ"/>
                                 <exclude reference="8sf-Rv-oGn"/>
+                                <exclude reference="efI-55-Znu"/>
                                 <exclude reference="NIL-6o-B0C"/>
                             </mask>
                         </variation>
@@ -613,12 +613,12 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="JOq-AC-RZI"/>
-                                                    <exclude reference="ORE-fF-Jv0"/>
-                                                    <exclude reference="VsS-Rq-dIn"/>
                                                     <exclude reference="4Cn-KY-vLK"/>
                                                     <exclude reference="DWL-8Q-6Gt"/>
                                                     <exclude reference="Ovp-ei-ydX"/>
+                                                    <exclude reference="JOq-AC-RZI"/>
+                                                    <exclude reference="ORE-fF-Jv0"/>
+                                                    <exclude reference="VsS-Rq-dIn"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1063,8 +1063,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Y44-uY-s1r"/>
                                 <exclude reference="xsR-oP-5xX"/>
+                                <exclude reference="Y44-uY-s1r"/>
                             </mask>
                         </variation>
                     </view>
@@ -1321,16 +1321,16 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Eod-y4-cBo"/>
                                         <exclude reference="ps1-ra-awv"/>
                                         <exclude reference="y9Q-fo-Qfz"/>
+                                        <exclude reference="Eod-y4-cBo"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact">
                                     <mask key="constraints">
-                                        <include reference="Eod-y4-cBo"/>
                                         <include reference="ps1-ra-awv"/>
                                         <include reference="y9Q-fo-Qfz"/>
+                                        <include reference="Eod-y4-cBo"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1607,6 +1607,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="homeLookup:" destination="fF1-8m-bHb" eventType="touchDown" id="WzO-Lj-e02"/>
                                     <outlet property="delegate" destination="fF1-8m-bHb" id="40x-xh-agf"/>
                                 </connections>
                             </textField>
@@ -1688,6 +1689,7 @@
                     <connections>
                         <outlet property="addressTextField" destination="6S3-nV-IOF" id="P2Y-xA-ORw"/>
                         <outlet property="nameTextField" destination="ayD-j2-8lU" id="JXh-1r-so7"/>
+                        <outlet property="searchDisplayController" destination="Kfv-vF-iGM" id="yQC-zC-njg"/>
                         <outlet property="statusTextField" destination="WOC-yW-IbR" id="yd8-yJ-B0s"/>
                     </connections>
                 </viewController>
@@ -1698,6 +1700,14 @@
                         <outlet property="delegate" destination="fF1-8m-bHb" id="s4l-HP-SkU"/>
                     </connections>
                 </tapGestureRecognizer>
+                <searchDisplayController id="Kfv-vF-iGM">
+                    <connections>
+                        <outlet property="delegate" destination="fF1-8m-bHb" id="tvW-Xc-NVg"/>
+                        <outlet property="searchContentsController" destination="fF1-8m-bHb" id="49v-IM-gYw"/>
+                        <outlet property="searchResultsDataSource" destination="fF1-8m-bHb" id="eDm-cb-MRf"/>
+                        <outlet property="searchResultsDelegate" destination="fF1-8m-bHb" id="fF4-vU-wqV"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1833" y="3118"/>
         </scene>

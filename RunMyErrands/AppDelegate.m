@@ -72,7 +72,6 @@
     
     self.errandManager = [ErrandManager new];
     
-    
     return YES;
 }
 
