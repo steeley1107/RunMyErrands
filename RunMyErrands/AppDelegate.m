@@ -49,6 +49,7 @@
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
     
+    
     //Facebook
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     
@@ -74,6 +75,7 @@
     
     return YES;
 }
+
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -165,6 +167,10 @@
         return;
     }
 }
+
+
+
+
 
 
 @end
