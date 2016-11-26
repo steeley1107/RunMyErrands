@@ -28,13 +28,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Parse
     
-    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-        configuration.applicationId = PARSE_APP_ID;
-        configuration.clientKey = PARSE_CLIENT_KEY;
-        configuration.server = @"https://runmyerrands.herokuapp.com/parse";
-    }]];
+    // Parse
+    [Parse setApplicationId:PARSE_APP_ID
+                  clientKey:PARSE_CLIENT_KEY];
+    
+    
+//    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+//        configuration.applicationId = PARSE_APP_ID;
+//        configuration.clientKey = PARSE_CLIENT_KEY;
+//        configuration.server = @"https://runmyerrands.herokuapp.com/parse";
+//    }]];
     
     [Errand registerSubclass];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
