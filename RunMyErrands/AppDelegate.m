@@ -15,6 +15,12 @@
 #import "Errand.h"
 //#import <ParseTwitterUtils/ParseTwitterUtils.h>
 
+
+// define macro
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+
 @import GooglePlaces;
 
 @interface AppDelegate ()
@@ -30,28 +36,68 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // Parse
-    [Parse setApplicationId:PARSE_APP_ID
-                  clientKey:PARSE_CLIENT_KEY];
+//    [Parse setApplicationId:PARSE_APP_ID
+//                  clientKey:PARSE_CLIENT_KEY];
+//    
     
-    
-//    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-//        configuration.applicationId = PARSE_APP_ID;
-//        configuration.clientKey = PARSE_CLIENT_KEY;
-//        configuration.server = @"https://runmyerrands.herokuapp.com/parse";
-//    }]];
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = PARSE_APP_ID;
+        configuration.clientKey = PARSE_CLIENT_KEY;
+        configuration.server = @"https://runmyerrands.herokuapp.com/parse";
+    }]];
     
     [Errand registerSubclass];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     
     //Setup Notifications
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-                                                    UIUserNotificationTypeBadge |
-                                                    UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                             categories:nil];
-    [application registerUserNotificationSettings:settings];
-    [application registerForRemoteNotifications];
+//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+//                                                    UIUserNotificationTypeBadge |
+//                                                    UIUserNotificationTypeSound);
+//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+//                                                                             categories:nil];
+//    [application registerUserNotificationSettings:settings];
+//    [application registerForRemoteNotifications];
+//    
+    
+    
+    if( SYSTEM_VERSION_LESS_THAN( @"10.0" ) )
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound |    UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        
+        //if( option != nil )
+        //{
+        //    NSLog( @"registerForPushWithOptions:" );
+        //}
+    }
+    else
+    {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        
+        
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error)
+         {
+             if( !error )
+             {
+                 [[UIApplication sharedApplication] registerForRemoteNotifications];  // required to get the app to do anything at all about push notifications
+                 NSLog( @"Push registration success." );
+             }
+             else
+             {
+                 NSLog( @"Push registration FAILED" );
+                 NSLog( @"ERROR: %@ - %@", error.localizedFailureReason, error.localizedDescription );
+                 NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );  
+             }  
+         }];  
+    }
+    
+    
+    
+    
+    
+    
     
     
     //Facebook
@@ -136,6 +182,9 @@
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
+    
+    NSLog(@"device token: %@", deviceToken);
+    
     [currentInstallation saveInBackground];
 }
 
@@ -173,6 +222,30 @@
 }
 
 
+
+
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+       willPresentNotification:(UNNotification *)notification
+         withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
+{
+    NSLog( @"Handle push from foreground" );
+    // custom code to handle push while app is in the foreground
+    NSLog(@"%@", notification.request.content.userInfo);
+}
+
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void (^)())completionHandler
+{
+    NSLog( @"Handle push from background or closed" );
+    // if you set a member variable in didReceiveRemoteNotification, you  will know if this is from closed or background
+    NSLog(@"%@", response.notification.request.content.userInfo);
+}
+
+- (void)getDeliveredNotificationsWithCompletionHandler:(void (^)(NSArray<UNNotification *> *notifications))completionHandler;
+{}
 
 
 
