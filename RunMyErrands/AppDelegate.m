@@ -38,8 +38,8 @@
     // Parse
 //    [Parse setApplicationId:PARSE_APP_ID
 //                  clientKey:PARSE_CLIENT_KEY];
-//    
     
+
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = PARSE_APP_ID;
         configuration.clientKey = PARSE_CLIENT_KEY;
@@ -50,26 +50,16 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     
-    //Setup Notifications
-//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-//                                                    UIUserNotificationTypeBadge |
-//                                                    UIUserNotificationTypeSound);
-//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-//                                                                             categories:nil];
-//    [application registerUserNotificationSettings:settings];
-//    [application registerForRemoteNotifications];
-//    
-    
-    
     if( SYSTEM_VERSION_LESS_THAN( @"10.0" ) )
     {
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound |    UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-        
-        //if( option != nil )
-        //{
-        //    NSLog( @"registerForPushWithOptions:" );
-        //}
+        //Setup Notifications
+            UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                            UIUserNotificationTypeBadge |
+                                                            UIUserNotificationTypeSound);
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                                     categories:nil];
+            [application registerUserNotificationSettings:settings];
+            [application registerForRemoteNotifications];
     }
     else
     {
@@ -92,12 +82,6 @@
              }  
          }];  
     }
-    
-    
-    
-    
-    
-    
     
     
     //Facebook
@@ -137,19 +121,23 @@
                                                        annotation:annotation];
 }
 
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
+
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
+
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
+
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
@@ -157,9 +145,11 @@
     [FBSDKAppEvents activateApp];
 }
 
+
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
@@ -178,6 +168,7 @@
     [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
@@ -187,6 +178,7 @@
     
     [currentInstallation saveInBackground];
 }
+
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     if (error.code == 3010) {
@@ -206,6 +198,7 @@
         [self.errandManager fetchData:^(BOOL success) {
             if (success) {
                 NSLog(@"updated errands in background");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"pushUpdate" object:nil];
             }
         }];
         
@@ -222,9 +215,6 @@
 }
 
 
-
-
-
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
        willPresentNotification:(UNNotification *)notification
          withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
@@ -232,6 +222,10 @@
     NSLog( @"Handle push from foreground" );
     // custom code to handle push while app is in the foreground
     NSLog(@"%@", notification.request.content.userInfo);
+    [PFPush handlePush:notification.request.content.userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"pushUpdate" object:nil];
+    completionHandler(UNNotificationPresentationOptionNone);
+
 }
 
 
@@ -243,11 +237,5 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     // if you set a member variable in didReceiveRemoteNotification, you  will know if this is from closed or background
     NSLog(@"%@", response.notification.request.content.userInfo);
 }
-
-- (void)getDeliveredNotificationsWithCompletionHandler:(void (^)(NSArray<UNNotification *> *notifications))completionHandler;
-{}
-
-
-
 
 @end

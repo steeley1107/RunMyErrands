@@ -31,11 +31,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.tableView.allowsSelection = false;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.groupMembers = [NSMutableDictionary new];
-
+    
     self.imageCache = [NSCache new];
     self.imageCache.countLimit = 20;
     
@@ -44,7 +44,7 @@
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(loadGroups) forControlEvents:UIControlEventValueChanged];
-
+    
     [self.listActivitySpinner setHidesWhenStopped:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadGroups) name:@"pushUpdate" object:nil];
 }
@@ -91,7 +91,7 @@
     self.groups = [NSArray new];
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
-
+        
         PFRelation *relation  = [currentUser relationForKey:@"memberOfTheseGroups"];
         [[relation query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
@@ -119,7 +119,7 @@
                             [self.tableView reloadData];
                         }];
                     }
-                   // [self.tableView reloadData];
+                    // [self.tableView reloadData];
                 }
             }
             
@@ -175,7 +175,7 @@
     
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:label
                                                             attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:   10.0]];
-
+    
     
     button.hidden = NO;
     button.translatesAutoresizingMaskIntoConstraints = NO;
@@ -193,41 +193,41 @@
                                                                toItem:button
                                                             attribute:NSLayoutAttributeTop
                                                            multiplier:1.0 constant:0.0]];
-
+    
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:sectionView
                                                             attribute:NSLayoutAttributeBottom
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:button
                                                             attribute:NSLayoutAttributeBottom
                                                            multiplier:1.0 constant:0.0]];
-
+    
     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
                                                             attribute:NSLayoutAttributeTrailingMargin
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:sectionView attribute:NSLayoutAttributeTrailingMargin
                                                            multiplier:1.0 constant:-10.0]];
     /*
-    [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
-                                                            attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
-    
-    NSLayoutConstraint *buttonHeight = [NSLayoutConstraint constraintWithItem:button
-                                                                         attribute:NSLayoutAttributeHeight
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:nil
-                                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                                        multiplier:1.0
-                                                                          constant:20.0];
-    */
+     [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:button
+     attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+     
+     NSLayoutConstraint *buttonHeight = [NSLayoutConstraint constraintWithItem:button
+     attribute:NSLayoutAttributeHeight
+     relatedBy:NSLayoutRelationEqual
+     toItem:nil
+     attribute:NSLayoutAttributeNotAnAttribute
+     multiplier:1.0
+     constant:20.0];
+     */
     
     NSLayoutConstraint *buttonWidth = [NSLayoutConstraint constraintWithItem:button
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:110.0];
+                                                                   attribute:NSLayoutAttributeWidth
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:nil
+                                                                   attribute:NSLayoutAttributeNotAnAttribute
+                                                                  multiplier:1.0
+                                                                    constant:110.0];
     
-   // [sectionView addConstraint:buttonHeight];
+    // [sectionView addConstraint:buttonHeight];
     [sectionView addConstraint:buttonWidth];
     
     //send 'leave group'
@@ -265,26 +265,26 @@
                                                                toItem:button attribute:NSLayoutAttributeLeading
                                                            multiplier:1.0 constant:-20.0]];
     
-  /*  [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:leaveButton
-                                                            attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
-   
-    NSLayoutConstraint *leaveButtonHeight = [NSLayoutConstraint constraintWithItem:button
-                                                                    attribute:NSLayoutAttributeHeight
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:leaveButton
-                                                                    attribute:NSLayoutAttributeHeight
-                                                                   multiplier:1.0
-                                                                     constant:0.0];
-   */
+    /*  [sectionView addConstraint:[NSLayoutConstraint constraintWithItem:leaveButton
+     attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+     
+     NSLayoutConstraint *leaveButtonHeight = [NSLayoutConstraint constraintWithItem:button
+     attribute:NSLayoutAttributeHeight
+     relatedBy:NSLayoutRelationEqual
+     toItem:leaveButton
+     attribute:NSLayoutAttributeHeight
+     multiplier:1.0
+     constant:0.0];
+     */
     NSLayoutConstraint *leaveButtonWidth = [NSLayoutConstraint constraintWithItem:button
-                                                                   attribute:NSLayoutAttributeWidth
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:leaveButton
-                                                                   attribute:NSLayoutAttributeWidth
-                                                                  multiplier:1.0
-                                                                    constant:0.0];
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:leaveButton
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                       multiplier:1.0
+                                                                         constant:0.0];
     
-  //  [sectionView addConstraint:leaveButtonHeight];
+    //  [sectionView addConstraint:leaveButtonHeight];
     [sectionView addConstraint:leaveButtonWidth];
     
     return sectionView;
@@ -304,13 +304,13 @@
                 NSLog(@"Error: %@", error);
             } else {
                 PFUser *user = [PFUser currentUser];
-
+                
                 PFRelation *groupRelation = [object relationForKey:@"groupMembers"];
                 [groupRelation removeObject:user];
                 
                 PFRelation *memberRelation = [user relationForKey:@"memberOfTheseGroups"];
                 [memberRelation removeObject:object];
-
+                
                 [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (error != nil) {
                         NSLog(@"Error: %@", error);
@@ -323,7 +323,7 @@
                             }
                         }];
                     }
-                }];   
+                }];
             }
         }];
     }];
@@ -344,25 +344,25 @@
     
     PFUser *user = [PFUser currentUser];
     NSLog(@"%@", user.username);
-
+    
     NSString *recipients = @"mailto:?subject=Join a 'Run My Errands Group'";
     PFObject *sectionGroup = self.groups[button.tag];
     
     NSString *body = [NSString stringWithFormat:@"&body=Hi,\n\n You've been invited to join my 'Run My Errands' group.  If you haven't heard of it, 'Run My Errands' is an errands manager that you can share with your friends, co-workers or whoever!\nYou can download it for free in the App Store.  When you're set up and logged in, go to 'groups' tab -> 'join' (top left button) and input the  Group ID# below:\n\n\nGroup ID# %@\n\n\n See you soon!\n\n-Run My Errands", sectionGroup.objectId];
-
+    
     NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
-
+    
     email = [email stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-
+    
     NSURL* mailURL = [NSURL URLWithString:email];
-
+    
     if ([[UIApplication sharedApplication] canOpenURL:mailURL]) {
         [[UIApplication sharedApplication] openURL:mailURL];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     GroupListTableViewCell *cell = (GroupListTableViewCell*)[self.tableView dequeueReusableCellWithIdentifier:@"groupListCell" forIndexPath:indexPath];
     cell.nameLabel.text = @"";
     cell.leaderLabel.text = @"";
@@ -375,7 +375,7 @@
     if ([user.objectId isEqualToString:group[@"teamLeader"]]) {
         cell.leaderLabel.text = @"Lead";
     }
-
+    
     cell.profilePicture.layer.masksToBounds = YES;
     cell.profilePicture.layer.cornerRadius = cell.profilePicture.layer.frame.size.width/2;
     
@@ -385,7 +385,7 @@
     if (cachedImage) {
         //cached image exists
         dispatch_async(dispatch_get_main_queue(), ^{
-                cell.profilePicture.image = cachedImage;
+            cell.profilePicture.image = cachedImage;
         });
     } else {
         //no cached image exists
@@ -424,6 +424,7 @@
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
@@ -434,19 +435,20 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *selectedImage = info[UIImagePickerControllerOriginalImage];
-
+    
     self.profileImageView.layer.masksToBounds = YES;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2;
     self.profileImageView.image = selectedImage;
     
     NSData *imageData = UIImageJPEGRepresentation(selectedImage, 0.25);
     PFFile *imageFile = [PFFile fileWithName:@"profile.jpg" data:imageData];
+    
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         PFUser *user = [PFUser currentUser];
         if (succeeded) {
             user[@"profile_Picture"] = imageFile;
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            [self.imageCache setObject:[UIImage imageWithData:imageData] forKey:user.objectId];
+                [self.imageCache setObject:[UIImage imageWithData:imageData] forKey:user.objectId];
             }];
         } else {
             NSLog(@"Error: %@", error);
@@ -457,47 +459,47 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
