@@ -35,11 +35,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    // Parse
-//    [Parse setApplicationId:PARSE_APP_ID
-//                  clientKey:PARSE_CLIENT_KEY];
-    
-
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = PARSE_APP_ID;
         configuration.clientKey = PARSE_CLIENT_KEY;

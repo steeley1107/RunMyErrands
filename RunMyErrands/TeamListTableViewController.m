@@ -80,6 +80,7 @@
     }
     
     [self loadGroups];
+
 }
 
 - (void)dealloc
@@ -424,7 +425,6 @@
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     imagePickerController.delegate = self;
-    imagePickerController.allowsEditing = YES;
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
@@ -457,6 +457,7 @@
     }];
     
 }
+
 
 /*
  // Override to support conditional editing of the table view.
