@@ -47,12 +47,12 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         populateErrandArray()
     }
     
     //Update map with users current location;
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
             mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
@@ -65,10 +65,10 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     //Mark: MarkerInfoWindow
     
-    func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        let infoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        let infoWindow = Bundle.main.loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
         
-        marker.infoWindowAnchor = CGPointMake(0.5, -0.0)
+        marker.infoWindowAnchor = CGPoint(x: 0.5, y: -0.0)
         infoWindow.title.text = marker.title
         infoWindow.snippet.text = marker.snippet
         
@@ -92,7 +92,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
             textWidth = snippitWidth
         }
         let width:CGFloat = CGFloat(textWidth) * 7.5 + 70.0
-        infoWindow.frame = CGRectMake(x, y, width, height)
+        infoWindow.frame = CGRect(x: x, y: y, width: width, height: height)
         
         infoWindow.layoutIfNeeded()
         
@@ -162,12 +162,12 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     //Mark: - Navigation
     
-    func mapView(mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
         performSegueWithIdentifier("showDetailFromMap", sender: marker.userData as! Errand)
     }
     
     
-    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
+    override func prepare(for segue: (UIStoryboardSegue!), sender: Any!) {
         
         if (segue.identifier == "showDetailFromMap") {
             let detailVC:DetailViewController = segue!.destinationViewController as! DetailViewController
@@ -176,7 +176,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     }
     
     
-    @IBAction func mapTypeSelect(sender: UISegmentedControl) {
+    @IBAction func mapTypeSelect(_ sender: UISegmentedControl) {
 
         // Available map types: kGMSTypeNormal, kGMSTypeSatellite, kGMSTypeHybrid,
         // kGMSTypeTerrain, kGMSTypeNone

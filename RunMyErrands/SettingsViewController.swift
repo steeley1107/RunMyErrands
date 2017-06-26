@@ -47,7 +47,7 @@ class SettingsViewController: UIViewController {
         self.notifySwitch.accessibilityLabel = "Receive Notification";
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         user!["pushNotify"] = notifySwitch.on
         user!["geoRadius"] = geoRadius
         user?.saveInBackground()
@@ -72,7 +72,7 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         user = PFUser.currentUser()
 
@@ -115,7 +115,7 @@ class SettingsViewController: UIViewController {
         if (image == nil) {
             self.pictureImageView.image = UIImage(named: "runmyerrands-grey")
         } else {
-            image!.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
+            image!.getDataInBackgroundWithBlock({ (data: Data?, error: NSError?) -> Void in
                 self.pictureImageView.layer.masksToBounds = true
                 self.pictureImageView.layer.cornerRadius = self.pictureImageView.frame.size.height/2
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -131,7 +131,7 @@ class SettingsViewController: UIViewController {
         geoFenceCount.text = "\(locationManager.monitoredRegions())"
     }
 
-    @IBAction func geoFenceDistance(sender: UISegmentedControl) {
+    @IBAction func geoFenceDistance(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
         case 0:

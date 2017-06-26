@@ -45,7 +45,7 @@ class EditProfileViewController: UIViewController {
     }
     
     
-    @IBAction func homeLookup(sender: AnyObject) {
+    @IBAction func homeLookup(_ sender: AnyObject) {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
         
@@ -62,23 +62,23 @@ class EditProfileViewController: UIViewController {
     }
     
     
-    @IBAction func editProfile(sender: UIButton) {
+    @IBAction func editProfile(_ sender: UIButton) {
         user!["name"] = nameTextField.text
         user!["status"] = statusTextField.text
         user!["home"] = addressTextField.text
         
         user?.saveInBackground()
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
-    @IBAction func tapGesture(sender: UITapGestureRecognizer) {
+    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
         textField.resignFirstResponder()
         return true
@@ -89,32 +89,32 @@ class EditProfileViewController: UIViewController {
 extension EditProfileViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
-    func viewController(viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
         addressTextField.text = place.formattedAddress
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
-    func viewController(viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: NSError) {
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: NSError) {
         // TODO: handle the error.
         print("Error: ", error.description)
     }
     
     
     // User canceled the operation.
-    func wasCancelled(viewController: GMSAutocompleteViewController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     // Turn the network activity indicator on and off again.
-    func didRequestAutocompletePredictions(viewController: GMSAutocompleteViewController) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     
-    func didUpdateAutocompletePredictions(viewController: GMSAutocompleteViewController) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
 }

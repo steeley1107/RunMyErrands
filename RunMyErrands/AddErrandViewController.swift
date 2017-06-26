@@ -46,17 +46,17 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         
         //Add tool bar on top of the picker view
         let toolBar = UIToolbar()
-        toolBar.frame = CGRectMake(0,0,self.view.frame.size.width,50)
-        toolBar.barStyle = UIBarStyle.Default
+        toolBar.frame = CGRect(x: 0,y: 0,width: self.view.frame.size.width,height: 50)
+        toolBar.barStyle = UIBarStyle.default
         //Create done button
-        let barButtonDone = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AddErrandViewController.dismissPicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let barButtonDone = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(AddErrandViewController.dismissPicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         //Add button to toolbar
         toolBar.setItems([spaceButton, spaceButton, barButtonDone], animated: false)
-        toolBar.userInteractionEnabled = true
+        toolBar.isUserInteractionEnabled = true
         
         //code setup for picker view to popup when text is selected
-        categoryPickerView.frame = CGRectMake(0, 50, 100, view.bounds.height * 0.33)
+        categoryPickerView.frame = CGRect(x: 0, y: 50, width: 100, height: view.bounds.height * 0.33)
         categoryPickerView.backgroundColor = UIColor(red: 3/255.0, green: 58/255.0, blue: 105/255.0, alpha: 1.0)
         categoryPickerView.dataSource = self
         categoryPickerView.delegate = self
@@ -65,7 +65,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         categoryTextField.inputView = self.categoryPickerView;
         categoryTextField.inputAccessoryView = toolBar
         
-        groupPickerView.frame = CGRectMake(0, 50, 100, view.bounds.height * 0.33)
+        groupPickerView.frame = CGRect(x: 0, y: 50, width: 100, height: view.bounds.height * 0.33)
         groupPickerView.backgroundColor = UIColor(red: 3/255.0, green: 58/255.0, blue: 105/255.0, alpha:1.0)
         groupPickerView.dataSource = self
         groupPickerView.delegate = self
@@ -76,7 +76,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     }
     
     
-    @IBAction func saveButton(sender: AnyObject) {
+    @IBAction func saveButton(_ sender: AnyObject) {
         
         var alertControllerTitle = ""
         var alertControllerMessage = ""
@@ -102,7 +102,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             errand.isActive = false
             errand.isComplete = false
             
-            let groupChoice:NSNumber = groupPickerView.selectedRowInComponent(0)
+            let groupChoice:NSNumber = NSNumber(groupPickerView.selectedRow(inComponent: 0))
             let group:PFObject = self.groups[self.groupPickerView.selectedRowInComponent(0)] as! PFObject
             errand.group = group.objectId;
             
@@ -155,7 +155,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     
     
     //Update map with users current location;
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
             mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
@@ -166,7 +166,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     }
     
     
-    @IBAction func searchLocationButton(sender: AnyObject) {
+    @IBAction func searchLocationButton(_ sender: AnyObject) {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
         
@@ -187,12 +187,12 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     
     // MARK: - Picker Delegate Function
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1
         {
             return categoryPickerData.count
@@ -208,49 +208,49 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     }
     
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
         let tView = UILabel()
         
         tView.font = UIFont(name: "Helvetica Neue", size:20.0)
-        tView.textColor = UIColor.whiteColor()
+        tView.textColor = UIColor.white
         
-        tView.backgroundColor = UIColor.clearColor() //(red:45/255.0, green:47/255.0, blue:51/255.0, alpha:1.0)
-        tView.textAlignment = .Center
+        tView.backgroundColor = UIColor.clear //(red:45/255.0, green:47/255.0, blue:51/255.0, alpha:1.0)
+        tView.textAlignment = .center
         
         
         if pickerView.tag == 1
         {
-            self.categoryTextField.text = categoryPickerData[row].capitalizedString
+            self.categoryTextField.text = categoryPickerData[row].capitalized
         }
         else if pickerView.tag == 2
         {
-            self.groupTextField.text = groupPickerData[row].capitalizedString
+            self.groupTextField.text = (groupPickerData[row] as AnyObject).capitalized
         }
         
         // Fill the label text here
         if pickerView.tag == 1
         {
-            tView.text = categoryPickerData[row].capitalizedString
+            tView.text = categoryPickerData[row].capitalized
         }
         else if pickerView.tag == 2
         {
-            tView.text = groupPickerData[row].capitalizedString
+            tView.text = (groupPickerData[row] as AnyObject).capitalized
         }
         
         return tView;
     }
     
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView.tag == 1
         {
-            categoryTextField.text = categoryPickerData[row].capitalizedString
+            categoryTextField.text = categoryPickerData[row].capitalized
         }
         else if pickerView.tag == 2
         {
-            groupTextField.text = groupPickerData[row].capitalizedString
+            groupTextField.text = (groupPickerData[row] as AnyObject).capitalized
         }
     }
     
@@ -282,7 +282,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     }
     
     
-    func resultsController(resultsController: GMSAutocompleteResultsViewController!,
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController!,
                            didFailAutocompleteWithError error: NSError!){
         // TODO: handle the error.
         print("Error: ", error.description)
@@ -290,20 +290,20 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     
     
     // Turn the network activity indicator on and off again.
-    func didRequestAutocompletePredictionsForResultsController(resultsController: GMSAutocompleteResultsViewController!) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func didRequestAutocompletePredictionsForResultsController(_ resultsController: GMSAutocompleteResultsViewController!) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     
-    func didUpdateAutocompletePredictionsForResultsController(resultsController: GMSAutocompleteResultsViewController!) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func didUpdateAutocompletePredictionsForResultsController(_ resultsController: GMSAutocompleteResultsViewController!) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     
-    func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        let infoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        let infoWindow = Bundle.main.loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
         
-        marker.infoWindowAnchor = CGPointMake(0.5, -0.0)
+        marker.infoWindowAnchor = CGPoint(x: 0.5, y: -0.0)
         infoWindow.title.text = marker.title
         infoWindow.snippet.text = marker.snippet
         
@@ -327,7 +327,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             textWidth = snippetWidth
         }
         let width:CGFloat = CGFloat(textWidth) * 7.5 + 70.0
-        infoWindow.frame = CGRectMake(x, y, width, height)
+        infoWindow.frame = CGRect(x: x, y: y, width: width, height: height)
         
         infoWindow.layoutIfNeeded()
         
@@ -336,16 +336,16 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
     
     
     //Alert Controller for the errand manager
-    func showAlert(title: String, message: String) {
+    func showAlert(_ title: String, message: String) {
         
         // create the alert
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         
         // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         
         // show the alert
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -356,12 +356,12 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
 extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
-    func viewController(viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
         
         print("Place name: ", place.name)
         print("Place address: ", place.formattedAddress)
         print("Place attributions: ", place.attributions)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
         //add GMSPlace to Errand
         
@@ -398,23 +398,23 @@ extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
         mapView.camera = camera
     }
     
-    func viewController(viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: NSError) {
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: NSError) {
         // TODO: handle the error.
         print("Error: ", error.description)
     }
     
     // User canceled the operation.
-    func wasCancelled(viewController: GMSAutocompleteViewController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // Turn the network activity indicator on and off again.
-    func didRequestAutocompletePredictions(viewController: GMSAutocompleteViewController) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func didUpdateAutocompletePredictions(viewController: GMSAutocompleteViewController) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
 }

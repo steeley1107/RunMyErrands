@@ -12,8 +12,8 @@ class Scheduler: NSObject {
     
     //Mark: Properties
     var errandsManager = ErrandManager()
-    var currentDateTime = NSDate()
-    let calendar = NSCalendar.currentCalendar()
+    var currentDateTime = Date()
+    let calendar = Calendar.current
     var activeErrandsExpiryDuration = 12
     var completedErrandsExpiryDuration = 1
     
@@ -87,7 +87,7 @@ class Scheduler: NSObject {
     //add erpiry time to active errands.
     func CreateActiveErrandsExpiryDate() {
         
-        let expiryActiveDate = calendar.dateByAddingUnit(.Hour, value: activeErrandsExpiryDuration, toDate: currentDateTime, options: [])
+        let expiryActiveDate = (calendar as NSCalendar).date(byAdding: .hour, value: activeErrandsExpiryDuration, to: currentDateTime, options: [])
         
         //fetch errands from Parse
         errandsManager.fetchData { (success) -> () in
@@ -120,7 +120,7 @@ class Scheduler: NSObject {
     //add erpiry time to active errands.
     func CreateCompletedErrandsExpiryDate() {
         
-        let expiryCompletedDate = calendar.dateByAddingUnit(.Day, value: completedErrandsExpiryDuration, toDate: currentDateTime, options: [])
+        let expiryCompletedDate = (calendar as NSCalendar).date(byAdding: .day, value: completedErrandsExpiryDuration, to: currentDateTime, options: [])
         
         //fetch errands from Parse
         errandsManager.fetchData { (success) -> () in

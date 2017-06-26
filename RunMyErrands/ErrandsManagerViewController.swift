@@ -62,7 +62,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         //Update tableView with pulldown
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(ErrandsManagerViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.errandsTableView.addSubview(refreshControl)
         
         
@@ -70,7 +70,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         //Remove all completed errrands from active errands array.
@@ -101,7 +101,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     
     //reload errands table from pulling down on errands
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         
         for Errand in self.activeErrandArray {
             if Errand.isComplete  == true {
@@ -130,22 +130,22 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     // MARK: - Table view data source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         let count:Int = self.errandsManager.fetchNumberOfGroups() as Int
         return count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count:Int = self.errandsManager.fetchNumberOfRowsInSection(section)
         return count
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:ErrandsManagerTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ErrandsManagerTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:ErrandsManagerTableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ErrandsManagerTableViewCell
         
         //reset each cell in table.
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         
         cell.titleLabel.text = nil
         cell.subtitleLabel.text = nil
@@ -163,48 +163,48 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         
         if errand.isActive == false {
-            cell.activeLabel.hidden = true
+            cell.activeLabel.isHidden = true
         }
         else if errand.isActive == true {
-            cell.activeLabel.hidden = false
+            cell.activeLabel.isHidden = false
         }
         
         
         if ContainsErrand(activeErrandArray, errand: errand) && errand.isActive == false {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         }else {
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
         
         return cell
     }
     
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.errandsManager.fetchTitleForHeaderInSection(section)
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //After tapping highlight doesn't linger
-        errandsTableView.deselectRowAtIndexPath(indexPath, animated: true)
+        errandsTableView.deselectRow(at: indexPath, animated: true)
         
         
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
             
             let errand:Errand = errandsManager.fetchErrand(indexPath)!
             
-            if cell.accessoryType == .None {
+            if cell.accessoryType == .none {
                 
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
                 if !ContainsErrand(activeErrandArray, errand: errand) {
                     activeErrandArray.append(errand)
                 }
                 
             } else {
                 if let index = activeErrandArray.indexOf(errand) {
-                    cell.accessoryType = .None
+                    cell.accessoryType = .none
                     activeErrandArray.removeAtIndex(index)
                 }
             }
@@ -216,7 +216,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     //Mark: - Navigation
     
-    @IBAction func runErrnadsButton(sender: AnyObject) {
+    @IBAction func runErrnadsButton(_ sender: AnyObject) {
         
         //check to see if any errands have been selected
         if activeErrandArray.count == 0 {
@@ -229,14 +229,14 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             Errand.saveInBackground()
         }
         
-        performSegueWithIdentifier("ErrandsManagerMap", sender: nil)
+        performSegue(withIdentifier: "ErrandsManagerMap", sender: nil)
     }
     
     
-    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
+    override func prepare(for segue: (UIStoryboardSegue!), sender: Any!) {
         
         if (segue.identifier == "ErrandsManagerMap") {
-            let errandsManagerMapVC:ErrandsManagerMapViewController = segue!.destinationViewController as! ErrandsManagerMapViewController
+            let errandsManagerMapVC:ErrandsManagerMapViewController = segue!.destination as! ErrandsManagerMapViewController
             direction.markerArray.removeAll()
             
             for activeErrand in self.activeErrandArray {
@@ -251,7 +251,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     
     //Mark: Mode selections
-    @IBAction func travelMode(sender: UISegmentedControl) {
+    @IBAction func travelMode(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
         case 0:
@@ -271,7 +271,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     
     //Select if the errands will be round trip or if the destination will be the users home.
-    @IBAction func finalDestination(sender: UISegmentedControl) {
+    @IBAction func finalDestination(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
         case 0:
@@ -295,7 +295,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     
     //Done running errands.  Stop errands from being active.
-    @IBAction func FinishErrands(sender: AnyObject) {
+    @IBAction func FinishErrands(_ sender: AnyObject) {
         
         //Remove all errands from Map.
         direction.markerArray.removeAll()
@@ -328,7 +328,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     
     //Check for active Errands in an array of Errands.
-    func ContainsErrand(array: [Errand], errand: Errand) -> Bool {
+    func ContainsErrand(_ array: [Errand], errand: Errand) -> Bool {
         
         for activeErrand in array {
             
@@ -341,16 +341,16 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
     
     
     //Alert Controller for the errand manager
-    func showAlert(title: String, message: String) {
+    func showAlert(_ title: String, message: String) {
         
         // create the alert
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         
         // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         
         // show the alert
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     

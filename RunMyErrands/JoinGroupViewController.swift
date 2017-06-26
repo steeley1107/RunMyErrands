@@ -24,49 +24,49 @@ class JoinGroupViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func joinGroup(sender: UIButton) {
+    @IBAction func joinGroup(_ sender: UIButton) {
         if let groupID = groupIDTextField.text {
             
             let query = PFQuery(className: "Group")
-            query.getObjectInBackgroundWithId(groupID, block: { (object: PFObject?, error: NSError?) -> Void in
+            query.getObjectInBackground(withId: groupID, block: { (object: PFObject?, error: NSError?) -> Void in
                 if (error != nil) {
                     print("Error: \(error)")
                 } else {
                     //object is a 'Group'
-                    if let currentUser = PFUser.currentUser(),
+                    if let currentUser = PFUser.current(),
                         let object = object {
                         
-                        let memberRelation = object.relationForKey("groupMembers")
-                        memberRelation.addObject(currentUser)
-                        object.saveInBackgroundWithBlock({ (bool: Bool, error: NSError?) -> Void in
+                        let memberRelation = object.relation(forKey: "groupMembers")
+                        memberRelation.add(currentUser)
+                        object.saveInBackground(block: { (bool: Bool, error: NSError?) -> Void in
                             
-                            let groupRelation = currentUser.relationForKey("memberOfTheseGroups")
-                            groupRelation.addObject(object)
-                            currentUser.saveInBackgroundWithBlock({ (bool:Bool, error: NSError?) -> Void in
+                            let groupRelation = currentUser.relation(forKey: "memberOfTheseGroups")
+                            groupRelation.add(object)
+                            currentUser.saveInBackground(block: { (bool:Bool, error: NSError?) -> Void in
                                 
                                 //New Push Notifications with cloud code
                                 let setChannel = groupID
-                                let setMessage = "\(currentUser["name"].capitalizedString) has joined your '\(object["name"].capitalizedString)' group."
+                                let setMessage = "\((currentUser["name"] as AnyObject).capitalized) has joined your '\((object["name"] as AnyObject).capitalized)' group."
                                 
-                                PFCloud.callFunctionInBackground("iosPush", withParameters: ["channels": setChannel, "message":setMessage]) { (response, error) -> Void in
+                                PFCloud.callFunction(inBackground: "iosPush", withParameters: ["channels": setChannel, "message":setMessage]) { (response, error) -> Void in
                                 }
                                 
                                 
-                                self.dismissViewControllerAnimated(true, completion: nil)
-                            })
-                        })
+                                self.dismiss(animated: true, completion: nil)
+                            } as! PFBooleanResultBlock)
+                        } as! PFBooleanResultBlock)
                     }
                 }
-            })
+            } as! (PFObject?, Error?) -> Void)
         }
     }
     
     
-    @IBAction func cancel(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil);
+    @IBAction func cancel(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil);
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
         textField.resignFirstResponder()
         return true

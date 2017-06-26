@@ -21,45 +21,45 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         
-        if (PFUser.currentUser() != nil) {
-            self.performSegueWithIdentifier("showErrandList", sender: nil)
+        if (PFUser.current() != nil) {
+            self.performSegue(withIdentifier: "showErrandList", sender: nil)
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     }
     
-    @IBAction func login(sender: UIButton) {
+    @IBAction func login(_ sender: UIButton) {
         
         if let username = usernameTextField.text,
-            password = passwordTextField.text {
-                PFUser.logInWithUsernameInBackground(username.lowercaseString, password:password) {
+            let password = passwordTextField.text {
+                PFUser.logInWithUsername(inBackground: username.lowercased(), password:password) {
                     (user: PFUser?, error: NSError?) -> Void in
                     if user != nil {
                         // Go to next storyboard
-                        self.performSegueWithIdentifier("showErrandList", sender: nil)
+                        self.performSegue(withIdentifier: "showErrandList", sender: nil)
                     } else {
                         // Shake screen to indicate invalid login
                         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
                         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
                         animation.duration = 0.5
                         animation.values = [-20,20,-20,20,-10,10,-5,5,0]                    
-                        self.stackView.layer.addAnimation(animation, forKey: "transform.translation.x")
+                        self.stackView.layer.add(animation, forKey: "transform.translation.x")
                     }
-                }
+                } as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock
         }
     }
 
-    @IBAction func twitterLogin(sender: UIButton) {
+    @IBAction func twitterLogin(_ sender: UIButton) {
         
     }
     
-    @IBAction func facebookLogin(sender: UIButton) {
+    @IBAction func facebookLogin(_ sender: UIButton) {
 
         let permissions = ["public_profile","user_friends"]
         
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) {
+        PFFacebookUtils.logInInBackground(withReadPermissions: permissions) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
                 
@@ -73,22 +73,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
                 else
                 {
-                    self.performSegueWithIdentifier("showErrandList", sender: nil)
+                    self.performSegue(withIdentifier: "showErrandList", sender: nil)
                 }
             }
             else
             {
                 print("Uh oh. The user cancelled the Facebook login.")
             }
-        }
+        } as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock
     }
     
-    func getNameAndPicture(user: PFUser) {
+    func getNameAndPicture(_ user: PFUser) {
         print("User signed up and logged in through Facebook!")
         //first time user -> onboard
         
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me?fields=first_name,picture.type(large)", parameters: nil)
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+        graphRequest.start(completionHandler: { (connection, result, error) -> Void in
             
             if ((error) != nil) {
                 // Process error
@@ -96,29 +96,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             } else {
                 print("fetched user: \(result)")
 
-                if let name = result.valueForKey("first_name") as? String {
+                if let name = result.value(forKey: "first_name") as? String {
                     user["name"] = name
                     print("name is: \(name)")
                 }
 
-                if let url = result.valueForKey("picture")?.valueForKey("data")?.valueForKey("url") as? String {
+                if let url = result.value(forKey: "picture")?.value(forKey: "data")?.value(forKey: "url") as? String {
                                         
-                    let session = NSURLSession.sharedSession().dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+                    let session = URLSession.shared.dataTask(with: URL.init(string: url)!, completionHandler: { (data: Data?, response: URLResponse?, error: NSError?) -> Void in
                         if error != nil {
                             print("Error: \(error)")
                         } else {
                             if let data = data,
                                 let imageFile = PFFile(name: "profile.jpg", data: data) {
-                                    imageFile.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
+                                    imageFile.saveInBackground(block: { (bool:Bool, error:NSError?) -> Void in
                                         if bool {
                                             user["profile_Picture"] = imageFile
                                             
-                                            user.saveInBackgroundWithBlock({ (success:Bool, error: NSError?) -> Void in
+                                            user.saveInBackground(block: { (success:Bool, error: NSError?) -> Void in
                                                 if ((error) != nil) {
                                                     print("Error: \(error)")
                                                 }
                                                 print("User logged in through Facebook!")
-                                                self.performSegueWithIdentifier("showErrandList", sender: nil)
+                                                self.performSegue(withIdentifier: "showErrandList", sender: nil)
                                             })
                                         }
                                     })
@@ -131,13 +131,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
         textField.resignFirstResponder()
         return true
     }
     
-    @IBAction func tapGesture(sender: UITapGestureRecognizer) {
+    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     

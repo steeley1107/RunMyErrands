@@ -48,7 +48,7 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
     
     
     //Update map with users current location;
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
             mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
@@ -59,7 +59,7 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
     }
     
     
-    func mapView(mapView: GMSMapView, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
+    func mapView(_ mapView: GMSMapView, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
         
         mapView.clear()
         
@@ -72,7 +72,7 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
         marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
     }
     
-    @IBAction func mapTypeSelect(sender: UISegmentedControl) {
+    @IBAction func mapTypeSelect(_ sender: UISegmentedControl) {
         
         // Available map types: kGMSTypeNormal, kGMSTypeSatellite, kGMSTypeHybrid,
         // kGMSTypeTerrain, kGMSTypeNone

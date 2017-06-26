@@ -24,40 +24,40 @@ class CreateNewGroupViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func createNewGroup(sender: UIButton) {
+    @IBAction func createNewGroup(_ sender: UIButton) {
         
         if let newGroupName = self.newGroupNameTextField.text,
-            let currentUser = PFUser.currentUser() {
+            let currentUser = PFUser.current() {
                 
             let newGroup = PFObject(className: "Group")
 
             newGroup["name"] = newGroupName
             newGroup["teamLeader"] = currentUser.objectId
             
-            let memberRelation = newGroup.relationForKey("groupMembers")
+            let memberRelation = newGroup.relation(forKey: "groupMembers")
             
-            memberRelation.addObject(currentUser)
+            memberRelation.add(currentUser)
             
-            newGroup.saveInBackgroundWithBlock({ (bool: Bool, error: NSError?) -> Void in
+            newGroup.saveInBackground(block: { (bool: Bool, error: NSError?) -> Void in
                 
-                let groupRelation = currentUser.relationForKey("memberOfTheseGroups")
-                groupRelation.addObject(newGroup)
-                currentUser.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
+                let groupRelation = currentUser.relation(forKey: "memberOfTheseGroups")
+                groupRelation.add(newGroup)
+                currentUser.saveInBackground(block: { (bool:Bool, error:NSError?) -> Void in
                     //
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                })
-            })
+                    self.dismiss(animated: true, completion: nil)
+                } as! PFBooleanResultBlock)
+            } as! PFBooleanResultBlock)
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
         textField.resignFirstResponder()
         return true
     }
     
-    @IBAction func cancel(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func cancel(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

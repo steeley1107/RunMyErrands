@@ -45,7 +45,7 @@ class GeoFenceManager: NSObject {
     
     func GetDataForFence() {
         
-        guard PFUser.currentUser() != nil else {
+        guard PFUser.current() != nil else {
             return
         }
         
@@ -64,7 +64,7 @@ class GeoFenceManager: NSObject {
     
     func GetClosestErrands() {
         
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
+        PFGeoPoint.geoPointForCurrentLocation {
             (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
                 
@@ -80,7 +80,7 @@ class GeoFenceManager: NSObject {
                     // Limit 20 of the closest errands
                     query.limit = 20
                     
-                    query.findObjectsInBackgroundWithBlock({
+                    query.findObjectsInBackground(block: {
                         (errands, error) in
                         if error == nil {
                             if let errands = errands as? [Errand] {
@@ -94,19 +94,19 @@ class GeoFenceManager: NSObject {
                     })
                 }
             }
-        }
+        } as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock
     }
     
     
     
-    func trackGeoRegions(errandsArray: [Errand]) {
+    func trackGeoRegions(_ errandsArray: [Errand]) {
 
         locationManager = GeoManager.sharedManager()
         locationManager.startLocationManager()
 
         locationManager.removeAllErrandLocation()
         
-        let user = PFUser.currentUser()
+        let user = PFUser.current()
         var geoRadius:Double
         
         if let parseGeoRadius:Double = user!["geoRadius"] as? Double {

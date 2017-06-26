@@ -74,14 +74,14 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         self.mapView.addSubview(activitySpinner)
         self.mapView.bringSubviewToFront(activitySpinner)
         
-        directionsLabel.hidden = true
+        directionsLabel.isHidden = true
         
         errandsTableView.tableFooterView = UIView()
     }
     
     
     //Update map with users current location;
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
             mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
@@ -132,8 +132,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         originMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
         originMarker.title = "Start Location"
         let originString = self.directionErrand.originAddress
-        if let range = originString.rangeOfString(",") {
-            let originAddress = originString[originString.startIndex..<range.startIndex]
+        if let range = originString?.range(of: ",") {
+            let originAddress = originString?[(originString?.startIndex)!..<range.lowerBound]
             originMarker.snippet = originAddress
         }
         
@@ -144,8 +144,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
             destinationMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
             destinationMarker.title = "Home"
             let destinationString = self.directionErrand.destinationAddress
-            if let range = destinationString.rangeOfString(",") {
-                let destinationAddress = destinationString[destinationString.startIndex..<range.startIndex]
+            if let range = destinationString?.range(of: ",") {
+                let destinationAddress = destinationString?[(destinationString?.startIndex)!..<range.lowerBound]
                 destinationMarker.snippet = destinationAddress
             }
         }
@@ -196,17 +196,17 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     
     func displayRouteInfo() {
-        directionsLabel.hidden = false
+        directionsLabel.isHidden = false
         directionsLabel.text = directionErrand.totalDistance + "\n" + directionErrand.totalTravelDuration + "\n" + directionErrand.totalDuration
     }
     
     
     //Mark: MarkerInfoWindow
     
-    func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        let infoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        let infoWindow = Bundle.main.loadNibNamed("CustomInfoWindow", owner: self, options: nil)!.first! as! CustomInfoWindow
         
-        marker.infoWindowAnchor = CGPointMake(0.5, -0.0)
+        marker.infoWindowAnchor = CGPoint(x: 0.5, y: -0.0)
         infoWindow.title.text = marker.title
         infoWindow.snippet.text = marker.snippet
         var textWidth = 0
@@ -225,7 +225,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         }
         let width:CGFloat = CGFloat(textWidth) * 7.5 + 70.0
         
-        infoWindow.frame = CGRectMake(x, y, width, height)
+        infoWindow.frame = CGRect(x: x, y: y, width: width, height: height)
         infoWindow.layoutIfNeeded()
         
         //show path //
@@ -282,7 +282,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     //Mark: - Navigation
     
-    func mapView(mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
         
         if marker.userData != nil {
             performSegueWithIdentifier("showDetailFromEMan", sender: marker.userData as! Errand)
@@ -290,7 +290,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     }
     
     
-    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
+    override func prepare(for segue: (UIStoryboardSegue!), sender: Any!) {
         
         if (segue.identifier == "showDetailFromEMan") {
             let detailVC:DetailViewController = segue!.destinationViewController as! DetailViewController
@@ -301,17 +301,17 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     
     // MARK: - Table view data source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orderedMarkerArray.count
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:ErrandsManagerMapTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ErrandsManagerMapTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:ErrandsManagerMapTableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ErrandsManagerMapTableViewCell
         
         let errand:Errand = orderedMarkerArray[indexPath.row].userData as! Errand
         
@@ -325,7 +325,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         mapView.selectedMarker = nil
         let marker = orderedMarkerArray[indexPath.row]

@@ -10,31 +10,31 @@ import UIKit
 
 extension OnboardingPagerViewController : UIPageViewControllerDataSource {
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        if viewController.isKindOfClass(StepTwo) {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        if viewController.isKind(of: StepTwo.self) {
             return getStepOne()
-        } else if viewController.isKindOfClass(StepOne) {
+        } else if viewController.isKind(of: StepOne.self) {
             return getStepZero()
         } else {
             return nil
         }
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        if viewController.isKindOfClass(StepZero) {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        if viewController.isKind(of: StepZero.self) {
             return getStepOne()
-        } else if viewController.isKindOfClass(StepOne) {
+        } else if viewController.isKind(of: StepOne.self) {
             return getStepTwo()
         } else {
             return nil
         }
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return 3
     }
 }
@@ -47,9 +47,9 @@ class OnboardingPagerViewController: UIPageViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = .darkGrayColor()
+        view.backgroundColor = .darkGray
         dataSource = self
-        setViewControllers([getStepZero()], direction: .Forward, animated: false, completion: nil)
+        setViewControllers([getStepZero()], direction: .forward, animated: false, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,15 +58,15 @@ class OnboardingPagerViewController: UIPageViewController {
     }
     
     func getStepZero() -> StepZero {
-        return storyboard!.instantiateViewControllerWithIdentifier("StepZero") as! StepZero
+        return storyboard!.instantiateViewController(withIdentifier: "StepZero") as! StepZero
     }
 
     func getStepOne() -> StepOne {
-        return storyboard!.instantiateViewControllerWithIdentifier("StepOne") as! StepOne
+        return storyboard!.instantiateViewController(withIdentifier: "StepOne") as! StepOne
     }
     
     func getStepTwo() -> StepTwo {
-        return storyboard!.instantiateViewControllerWithIdentifier("StepTwo") as! StepTwo
+        return storyboard!.instantiateViewController(withIdentifier: "StepTwo") as! StepTwo
     }
 
     

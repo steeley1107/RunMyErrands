@@ -27,8 +27,8 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         passwordTextField.delegate = self
         
         //Subscribe to events to move textfields up/down when keyboard appears/disappears
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidShow:"), name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keybaordDidHide:"), name: UIKeyboardDidHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SignupViewController.keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SignupViewController.keybaordDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
         
     override func didReceiveMemoryWarning() {
@@ -36,35 +36,35 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func chooseProfilePicture(sender: UIButton) {
+    @IBAction func chooseProfilePicture(_ sender: UIButton) {
         // UIImagePickerController is a view controller that lets a user pick media from their photo library.
         let imagePickerController = UIImagePickerController()
         
         // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
+        imagePickerController.sourceType = .photoLibrary
         
         // Make sure ViewController is notified when the user picks an image.
         imagePickerController.delegate = self
         
-        presentViewController(imagePickerController, animated: true, completion: nil)
+        present(imagePickerController, animated: true, completion: nil)
     }
     
-    @IBAction func createNewUser(sender: UIButton) {
+    @IBAction func createNewUser(_ sender: UIButton) {
         
         guard self.confirmPasswordTextField.text == self.passwordTextField.text else {
-            let alertController = UIAlertController(title: "Error", message: "Passwords Must Be The Same", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Error", message: "Passwords Must Be The Same", preferredStyle: UIAlertControllerStyle.alert)
             
-            let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
             alertController.addAction(ok)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
             return
         }
         
         if usernameTextField.text != "" && passwordTextField.text != ""  {
             let user  = PFUser()
             
-            user.username = usernameTextField.text?.lowercaseString
+            user.username = usernameTextField.text?.lowercased()
             user.password = passwordTextField.text
             user["name"] = usernameTextField.text
             user["status"] = ""
@@ -77,81 +77,81 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             
             query?.whereKey("username", equalTo: user.username!)
             
-            query?.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) -> Void in
+            query?.findObjectsInBackground(block: { (objects: [PFObject]?, error: NSError?) -> Void in
                 
                 if (error == nil) {
                     
                     if let objects = objects {
                         print("object count = \(objects.count)")
                         if objects.count > 0 {
-                            let alertController = UIAlertController(title: "Error", message: "Username Already Exists", preferredStyle: UIAlertControllerStyle.Alert)
+                            let alertController = UIAlertController(title: "Error", message: "Username Already Exists", preferredStyle: UIAlertControllerStyle.alert)
                             
-                            let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                            let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
                             alertController.addAction(ok)
                             
-                            self.presentViewController(alertController, animated: true, completion: nil)
+                            self.present(alertController, animated: true, completion: nil)
                         } else {
-                            user.signUpInBackgroundWithBlock {
+                            user.signUpInBackground {
                                 (succeeded: Bool, error: NSError?) -> Void in
                                 if let error = error {
                                     print("Error: \(error)")
                                 } else {
                                     self.saveImage(user)
                                 }
-                            }
+                            } as! PFBooleanResultBlock as! PFBooleanResultBlock as! PFBooleanResultBlock as! PFBooleanResultBlock as! PFBooleanResultBlock as! PFBooleanResultBlock
                         }
                     }
                 } else {
                     print("Error: \(error)")
                 }
-            })
+            } as! ([PFObject]?, Error?) -> Void)
             
         } else {
-            let alertController = UIAlertController(title: "Error", message: "Invalid Username/Password", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "Error", message: "Invalid Username/Password", preferredStyle: UIAlertControllerStyle.alert)
             
-            let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
             alertController.addAction(ok)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 
-    func saveImage(user: PFUser) {
+    func saveImage(_ user: PFUser) {
 
             if let image = self.profileImage.image,
                 let imageData = UIImageJPEGRepresentation(image, 0.25),
                 let imageFile = PFFile(name:"profile.jpg", data:imageData) {
                     
-                    imageFile.saveInBackgroundWithBlock({ (bool: Bool, error:NSError?) -> Void in
+                    imageFile.saveInBackground(block: { (bool: Bool, error:NSError?) -> Void in
                         
                         if bool {
                             user["profile_Picture"] = imageFile
-                            user.saveInBackgroundWithBlock({ (Bool, ErrorType) -> Void in
+                            user.saveInBackground(block: { (Bool, ErrorType) -> Void in
                                 if (Bool) {
                                     print("save")
                                 } else {
                                     print("failed saving profile picture")
                                 }
-                                self.performSegueWithIdentifier("onboard", sender: nil)
+                                self.performSegue(withIdentifier: "onboard", sender: nil)
                             })
                         } else {
-                            self.performSegueWithIdentifier("onboard", sender: nil)
+                            self.performSegue(withIdentifier: "onboard", sender: nil)
                         }
-                    })
+                    } as! PFBooleanResultBlock)
             } else {
-              self.performSegueWithIdentifier("onboard", sender: nil)
+              self.performSegue(withIdentifier: "onboard", sender: nil)
             }
     }
     
-    @IBAction func cancel(sender: UIButton) {
+    @IBAction func cancel(_ sender: UIButton) {
         
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
         
     }
     
     // MARK: UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
         textField.resignFirstResponder()
         return true
@@ -159,12 +159,12 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     // MARK: UIImagePickerControllerDelegate
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         // Dismiss the picker if the user canceled.
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // The info dictionary contains multiple representations of the image, and this uses the original.
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
@@ -172,26 +172,26 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.profileImage.image = selectedImage
         
         // Dismiss the picker.
-        self.chooseProfilePicButton.hidden = true
-        dismissViewControllerAnimated(true, completion: nil)
+        self.chooseProfilePicButton.isHidden = true
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func tapGesture(sender: UITapGestureRecognizer) {
+    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
     
-    func keyboardDidShow(notification: NSNotification) {
+    func keyboardDidShow(_ notification: Notification) {
         let info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        UIView.animateWithDuration(0.1, animations: { () -> Void in
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
             self.stackHeight.constant = -(keyboardFrame.size.height + 20)
         })
     }
     
-    func keybaordDidHide(notification: NSNotification) {
-        UIView.animateWithDuration(0.1, animations: { () -> Void in
+    func keybaordDidHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
             self.stackHeight.constant = 0
         })
     }

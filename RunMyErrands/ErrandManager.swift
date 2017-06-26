@@ -12,15 +12,15 @@ import Parse
 
 @objc class ErrandManager: NSObject {
     
-    private var errandsDictionary:NSMutableDictionary!
+    fileprivate var errandsDictionary:NSMutableDictionary!
     
-    private var objectIDtoNameDictionary:NSMutableDictionary!
+    fileprivate var objectIDtoNameDictionary:NSMutableDictionary!
     
-    private let user:PFUser!
+    fileprivate let user:PFUser!
     
     override init() {
         errandsDictionary = NSMutableDictionary()
-        user = PFUser.currentUser()
+        user = PFUser.current()
         objectIDtoNameDictionary = NSMutableDictionary()
     }
     
@@ -28,7 +28,7 @@ import Parse
         return self.errandsDictionary.allKeys.count
     }
     
-    func fetchErrandsForGroup(section: NSInteger) -> [Errand]? {
+    func fetchErrandsForGroup(_ section: NSInteger) -> [Errand]? {
         
         if let groups = self.errandsDictionary.allKeys as? [String] {
             let group = groups[section]
@@ -38,7 +38,7 @@ import Parse
         }
     }
     
-    func fetchNumberOfRowsInSection(section: NSInteger) -> Int {
+    func fetchNumberOfRowsInSection(_ section: NSInteger) -> Int {
         if let errands = fetchErrandsForGroup(section) {
             return errands.count
         } else {
@@ -47,7 +47,7 @@ import Parse
     }
     
     
-    func fetchErrand(indexPath: NSIndexPath) -> Errand? {
+    func fetchErrand(_ indexPath: NSIndexPath) -> Errand? {
         if let errands = fetchErrandsForGroup(indexPath.section) {
             return errands[indexPath.row]
         } else {
@@ -55,12 +55,12 @@ import Parse
         }
     }
     
-    func fetchTitleForHeaderInSection(section: NSInteger) -> String? {
+    func fetchTitleForHeaderInSection(_ section: NSInteger) -> String? {
         
         if let groups = self.errandsDictionary.allKeys as? [String] {
             let gObjectID = groups[section]
-            let gName = self.objectIDtoNameDictionary.valueForKey(gObjectID) as! String
-            return gName.capitalizedString
+            let gName = self.objectIDtoNameDictionary.value(forKey: gObjectID) as! String
+            return gName.capitalized
         } else {
             return nil
         }
@@ -71,9 +71,9 @@ import Parse
         self.objectIDtoNameDictionary.removeAllObjects()
     }
     
-    func fetchData(completionHandler: (success: Bool) ->() ) {
-        let relation = self.user.relationForKey("memberOfTheseGroups")
-        relation.query().orderByAscending("name").findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+    func fetchData(_ completionHandler: @escaping (_ success: Bool) ->() ) {
+        let relation = self.user.relation(forKey: "memberOfTheseGroups")
+        relation.query().order(byAscending: "name").findObjectsInBackground { (objects: [PFObject]?, error: NSError?) -> Void in
             self.clearData()
             if let objects = objects {
                 for group in objects {
@@ -83,8 +83,8 @@ import Parse
                 
                 let errandsQuery = PFQuery(className: "Errand")
                 errandsQuery.whereKey("group", containedIn: self.fetchKeys())
-                errandsQuery.orderByAscending("isComplete")
-                errandsQuery.findObjectsInBackgroundWithBlock({ (errands: [PFObject]?, error: NSError?) -> Void in
+                errandsQuery.order(byAscending: "isComplete")
+                errandsQuery.findObjectsInBackground(block: { (errands: [PFObject]?, error: NSError?) -> Void in
                     if error == nil {
                         if let errands = errands as? [Errand] {
                             for errand in errands {
@@ -101,7 +101,7 @@ import Parse
             } else {
                 completionHandler(success: false)
             }
-        }
+        } as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void
     }
     
     func fetchKeys() -> [String] {
@@ -116,9 +116,9 @@ import Parse
         }
     }
     
-    func fetchIncompleteErrand(completionHandler: (success: Bool) ->() ) {
-        let relation = self.user.relationForKey("memberOfTheseGroups")
-        relation.query().orderByAscending("name").findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+    func fetchIncompleteErrand(_ completionHandler: @escaping (_ success: Bool) ->() ) {
+        let relation = self.user.relation(forKey: "memberOfTheseGroups")
+        relation.query().order(byAscending: "name").findObjectsInBackground { (objects: [PFObject]?, error: NSError?) -> Void in
             if let objects = objects {
                 for group in objects {
                     self.objectIDtoNameDictionary.setValue(group["name"] as! String, forKey: group.objectId!)
@@ -128,7 +128,7 @@ import Parse
                 let errandsQuery = PFQuery(className: "Errand")
                 errandsQuery.whereKey("group", containedIn: self.fetchKeys())
                 errandsQuery.whereKey("isComplete", equalTo: false)
-                errandsQuery.findObjectsInBackgroundWithBlock({ (errands: [PFObject]?, error: NSError?) -> Void in
+                errandsQuery.findObjectsInBackground(block: { (errands: [PFObject]?, error: NSError?) -> Void in
                     if error == nil {
                         if let errands = errands as? [Errand] {
                             for errand in errands {
@@ -145,7 +145,7 @@ import Parse
             } else {
                 completionHandler(success: false)
             }
-        }
+        } as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void
     }
     
     

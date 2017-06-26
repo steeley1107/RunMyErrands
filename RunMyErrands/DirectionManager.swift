@@ -41,7 +41,7 @@ class DirectionManager: NSObject {
     
     //Request Directions from Google.
     
-    func requestDirections(origin: CLLocationCoordinate2D!, destination: CLLocationCoordinate2D!, errandWaypoints: Array<GMSMarker>!, travelMode: TravelModes!, completionHandler: (sucess: Bool) ->()) {
+    func requestDirections(_ origin: CLLocationCoordinate2D!, destination: CLLocationCoordinate2D!, errandWaypoints: Array<GMSMarker>!, travelMode: TravelModes!, completionHandler: @escaping (_ sucess: Bool) ->()) {
         
         if let originLocation = origin {
             let originString = "\(originLocation.latitude),\(originLocation.longitude)"
@@ -80,13 +80,13 @@ class DirectionManager: NSObject {
                     directionsURLString += "&mode=" + travelModeString
                 }
                 
-                directionsURLString = directionsURLString.stringByAddingPercentEncodingWithAllowedCharacters( NSCharacterSet.URLQueryAllowedCharacterSet())!
+                directionsURLString = directionsURLString.stringByAddingPercentEncodingWithAllowedCharacters( CharacterSet.URLQueryAllowedCharacterSet())!
                 
-                let directionsURL = NSURL(string: directionsURLString)
+                let directionsURL = URL(string: directionsURLString)
                 
                 //print("url \(directionsURL)")
                 
-                let errand = NSURLSession.sharedSession().dataTaskWithURL(directionsURL!) { (data, response, error) -> Void in
+                let errand = URLSession.sharedSession().dataTaskWithURL(directionsURL!) { (data, response, error) -> Void in
                     if(error != nil) {
                         print(error)
                     }
@@ -115,7 +115,7 @@ class DirectionManager: NSObject {
     
     
     //convert JSON to directions
-    func processDirections(directions: Dictionary<NSObject, AnyObject>) {
+    func processDirections(_ directions: Dictionary<NSObject, AnyObject>) {
         guard let selected = (directions["routes"] as? Array<Dictionary<NSObject, AnyObject>>)?.first else {
             print("no first directions object")
             return
@@ -138,7 +138,7 @@ class DirectionManager: NSObject {
         
     }
     
-    func legPolyline(legNumber: Int) -> [GMSPolyline] {
+    func legPolyline(_ legNumber: Int) -> [GMSPolyline] {
         
         var routes:[GMSPolyline] = [GMSPolyline]()
         let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
@@ -164,7 +164,7 @@ class DirectionManager: NSObject {
     }
     
     //Calculate the duration and distance
-    func calculateTotalDistanceAndDuration(directions: Dictionary<NSObject, AnyObject>) {
+    func calculateTotalDistanceAndDuration(_ directions: Dictionary<NSObject, AnyObject>) {
         
         let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
         waypointOrder = self.selectedRoute["waypoint_order"] as! Array<Int>
@@ -206,7 +206,7 @@ class DirectionManager: NSObject {
     
     
     //zoom the map to the limits of the errands
-    func zoomMapLimits(origin: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, markerArray: [GMSMarker]) -> GMSCoordinateBounds {
+    func zoomMapLimits(_ origin: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, markerArray: [GMSMarker]) -> GMSCoordinateBounds {
         
         var minLat = 0.0
         var minLong = 0.0
@@ -266,7 +266,7 @@ class DirectionManager: NSObject {
     }
     
     
-    func HomeAddressValid(completion: (result: Bool) -> Void) {
+    func HomeAddressValid(_ completion: @escaping (_ result: Bool) -> Void) {
         
         let user = PFUser.currentUser()
         if let homeAddress = user!["home"] {
@@ -284,7 +284,7 @@ class DirectionManager: NSObject {
                 }
             })
         }else {
-            completion(result: false)
+            completion(false)
         }
     }
 
