@@ -42,21 +42,21 @@ class SettingsViewController: UIViewController {
         geoFenceSegment.layer.cornerRadius = 5
         geoFenceSegment.layer.masksToBounds = true
         
-        self.locationManager = GeoManager.sharedManager()
+        self.locationManager = GeoManager.shared()
         self.locationManager.startLocationManager()
         self.notifySwitch.accessibilityLabel = "Receive Notification";
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        user!["pushNotify"] = notifySwitch.on
+        user!["pushNotify"] = notifySwitch.isOn
         user!["geoRadius"] = geoRadius
         user?.saveInBackground()
         
-        let pushNotify = user!["pushNotify"].boolValue
+        let pushNotify = (user!["pushNotify"] as AnyObject).boolValue
         
         if (pushNotify != nil) {
 
-            let currentInstallation = PFInstallation.currentInstallation()
+            let currentInstallation = PFInstallation.current()
             let errandManager = ErrandManager()
             errandManager.fetchData({ (success) -> () in
                 var channels:[String]
@@ -66,7 +66,7 @@ class SettingsViewController: UIViewController {
             })
             
         } else {
-            let currentInstallation = PFInstallation.currentInstallation()
+            let currentInstallation = PFInstallation.current()
             currentInstallation.channels = []
             currentInstallation.saveInBackground()
         }
@@ -74,9 +74,9 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        user = PFUser.currentUser()
+        user = PFUser.current()
 
-        userLabel.text = user!["name"].capitalizedString
+        userLabel.text = (user!["name"] as AnyObject).capitalized
         
         if let status = user!["status"] as? String {
             if status == "" {
@@ -98,7 +98,7 @@ class SettingsViewController: UIViewController {
             addressLabel.text = "N/A"
         }
         
-        notifySwitch.on = user!["pushNotify"].boolValue
+        notifySwitch.isOn = (user!["pushNotify"] as AnyObject).boolValue
         
         geoRadius = (user!["geoRadius"] as? Int)!
         if geoRadius == kWalkingGeoRadius {
@@ -115,17 +115,17 @@ class SettingsViewController: UIViewController {
         if (image == nil) {
             self.pictureImageView.image = UIImage(named: "runmyerrands-grey")
         } else {
-            image!.getDataInBackgroundWithBlock({ (data: Data?, error: NSError?) -> Void in
+            image!.getDataInBackground(block: { (data: Data?, error: NSError?) -> Void in
                 self.pictureImageView.layer.masksToBounds = true
                 self.pictureImageView.layer.cornerRadius = self.pictureImageView.frame.size.height/2
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     if error == nil {
                         self.pictureImageView.image = UIImage(data: data!)
                     } else {
                         print("Error: \(error)")
                     }
                 })
-            })
+            } as! PFDataResultBlock)
         }
         //display the number of regions are being monitored
         geoFenceCount.text = "\(locationManager.monitoredRegions())"

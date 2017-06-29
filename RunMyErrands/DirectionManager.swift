@@ -80,29 +80,29 @@ class DirectionManager: NSObject {
                     directionsURLString += "&mode=" + travelModeString
                 }
                 
-                directionsURLString = directionsURLString.stringByAddingPercentEncodingWithAllowedCharacters( CharacterSet.URLQueryAllowedCharacterSet())!
+                directionsURLString = directionsURLString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
                 
                 let directionsURL = URL(string: directionsURLString)
                 
                 //print("url \(directionsURL)")
                 
-                let errand = URLSession.sharedSession().dataTaskWithURL(directionsURL!) { (data, response, error) -> Void in
+                let errand = URLSession.shared.dataTask(with: directionsURL!) { (data, response, error) -> Void in
                     if(error != nil) {
                         print(error)
                     }
                     
-                    let dictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as? [String : AnyObject]
+                    let dictionary = (try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [String : AnyObject]
                     
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    DispatchQueue.main.async(execute: { () -> Void in
                         
                         let status = dictionary!["status"] as! String
                         
                         //Cheak to see if google returned good data.
                         if status == "OK" {
                             
-                            self.processDirections(dictionary!)
-                            self.calculateTotalDistanceAndDuration(dictionary!)
-                            completionHandler(sucess: true)
+                            self.processDirections(dictionary! as Dictionary<NSObject, AnyObject>)
+                            self.calculateTotalDistanceAndDuration(dictionary! as Dictionary<NSObject, AnyObject>)
+                            completionHandler(true)
                         }
                         
                         print("dict \(dictionary)")
@@ -115,17 +115,17 @@ class DirectionManager: NSObject {
     
     
     //convert JSON to directions
-    func processDirections(_ directions: Dictionary<NSObject, AnyObject>) {
-        guard let selected = (directions["routes"] as? Array<Dictionary<NSObject, AnyObject>>)?.first else {
+    func processDirections(_ directions: NSDictionary) {
+        guard let selected = (directions["routes"] as? Array<NSDictionary>)?.first else {
             print("no first directions object")
             return
         }
         
-        self.selectedRoute = selected
+        self.selectedRoute = selected as Dictionary<NSObject, AnyObject>!
         
-        self.overviewPolyline = self.selectedRoute["overview_polyline"] as! Dictionary<NSObject, AnyObject>
+        self.overviewPolyline = self.selectedRoute["overview_polyline"] as! NSDictionary
         
-        let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
+        let legs = self.selectedRoute["legs"] as! Array<NSDictionary>
         
         let startLocationDictionary = legs[0]["start_location"] as! Dictionary<NSObject, AnyObject>
         self.originCoordinate = CLLocationCoordinate2DMake(startLocationDictionary["lat"] as! Double, startLocationDictionary["lng"] as! Double)
@@ -141,7 +141,7 @@ class DirectionManager: NSObject {
     func legPolyline(_ legNumber: Int) -> [GMSPolyline] {
         
         var routes:[GMSPolyline] = [GMSPolyline]()
-        let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
+        let legs = self.selectedRoute["legs"] as! Array<NSDictionary>
         
         if legNumber < legs.count {
             
@@ -268,7 +268,7 @@ class DirectionManager: NSObject {
     
     func HomeAddressValid(_ completion: @escaping (_ result: Bool) -> Void) {
         
-        let user = PFUser.currentUser()
+        let user = PFUser.current()
         if let homeAddress = user!["home"] {
             
             let destinationAddress = homeAddress as! String
@@ -278,11 +278,11 @@ class DirectionManager: NSObject {
             geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
                 
                 if let _ = placemarks?[0] {
-                    completion(result: true)
+                    completion(true)
                 }else {
-                    completion(result: false)
+                    completion(false)
                 }
-            })
+            } as! CLGeocodeCompletionHandler)
         }else {
             completion(false)
         }

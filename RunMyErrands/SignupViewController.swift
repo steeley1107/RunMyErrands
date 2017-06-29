@@ -98,7 +98,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                                 } else {
                                     self.saveImage(user)
                                 }
-                            } as! PFBooleanResultBlock as! PFBooleanResultBlock as! PFBooleanResultBlock as! PFBooleanResultBlock as! PFBooleanResultBlock as! PFBooleanResultBlock
+                            }
                         }
                     }
                 } else {

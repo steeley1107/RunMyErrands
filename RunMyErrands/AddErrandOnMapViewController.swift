@@ -31,15 +31,15 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
 
         mapView.frame = mapView.bounds
         
-        self.locationManager = GeoManager.sharedManager()
+        self.locationManager = GeoManager.shared()
         self.locationManager.startLocationManager()
         
         self.mapView.delegate = self
-        self.mapView.myLocationEnabled = true
+        self.mapView.isMyLocationEnabled = true
         
         self.errandsManager = ErrandManager()
         
-        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,8 +50,8 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
     //Update map with users current location;
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if !didFindMyLocation {
-            let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
-            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
+            let myLocation: CLLocation = change![NSKeyValueChangeKey.newKey] as! CLLocation
+            mapView.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 14.0)
             mapView.settings.myLocationButton = true
             didFindMyLocation = true
             mapView.removeObserver(self, forKeyPath: "myLocation")
@@ -59,7 +59,7 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
     }
     
     
-    func mapView(_ mapView: GMSMapView, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         
         mapView.clear()
         
@@ -69,7 +69,7 @@ class AddErrandOnMapViewController: UIViewController, CLLocationManagerDelegate,
         
         let marker = GMSMarker(position: coordinate)
         marker.map = self.mapView
-        marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+        marker.icon = GMSMarker.markerImage(with: UIColor.blue)
     }
     
     @IBAction func mapTypeSelect(_ sender: UISegmentedControl) {

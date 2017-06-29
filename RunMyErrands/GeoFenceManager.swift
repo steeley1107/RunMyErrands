@@ -64,8 +64,7 @@ class GeoFenceManager: NSObject {
     
     func GetClosestErrands() {
         
-        PFGeoPoint.geoPointForCurrentLocation {
-            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+        PFGeoPoint.geoPointForCurrentLocation { (geoPoint, error) in
             if error == nil {
                 
                 var closestErrandsArray = [Errand]()
@@ -94,14 +93,14 @@ class GeoFenceManager: NSObject {
                     })
                 }
             }
-        } as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock as! PFGeoPointResultBlock
+        }
     }
     
     
     
     func trackGeoRegions(_ errandsArray: [Errand]) {
 
-        locationManager = GeoManager.sharedManager()
+        locationManager = GeoManager.shared()
         locationManager.startLocationManager()
 
         locationManager.removeAllErrandLocation()

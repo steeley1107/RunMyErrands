@@ -51,7 +51,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         self.errandsManager = ErrandManager()
         self.activeErrandArray = []
         
-        self.locationManager = GeoManager.sharedManager()
+        self.locationManager = GeoManager.shared()
         self.locationManager.startLocationManager()
         
         self.errandsTableView.tableFooterView = UIView()
@@ -77,8 +77,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         for Errand in self.activeErrandArray {
             if Errand.isComplete  == true {
                 
-                if let index = self.activeErrandArray.indexOf(Errand) {
-                    self.activeErrandArray.removeAtIndex(index)
+                if let index = self.activeErrandArray.index(of: Errand) {
+                    self.activeErrandArray.remove(at: index)
                 }
             }
         }
@@ -95,7 +95,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         //Check if any errands have expired.
         self.scheduler.CheckActiveErrandsExpiry()
         self.scheduler.CheckCompletedErrandsExpiry()
-
+        
         
     }
     
@@ -106,8 +106,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         for Errand in self.activeErrandArray {
             if Errand.isComplete  == true {
                 
-                if let index = self.activeErrandArray.indexOf(Errand) {
-                    self.activeErrandArray.removeAtIndex(index)
+                if let index = self.activeErrandArray.index(of: Errand) {
+                    self.activeErrandArray.remove(at: index)
                 }
             }
         }
@@ -153,13 +153,13 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         cell.subtitleLabel.attributedText = nil
         cell.categoryImage.image = nil
         
-        let errand:Errand = errandsManager.fetchErrand(indexPath)!
+        let errand:Errand = errandsManager.fetchErrand(indexPath as NSIndexPath)!
         
         cell.titleLabel.text = errand.title
         cell.subtitleLabel.text = errand.subtitle
         
-        let imageName = errand.imageName(errand.category.intValue)
-        cell.categoryImage?.image = UIImage(named:imageName)
+        let imageName = errand.imageName(Int32(errand.category.intValue))
+        cell.categoryImage?.image = UIImage(named:imageName!)
         
         
         if errand.isActive == false {
@@ -193,7 +193,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         if let cell = tableView.cellForRow(at: indexPath) {
             
-            let errand:Errand = errandsManager.fetchErrand(indexPath)!
+            let errand:Errand = errandsManager.fetchErrand(indexPath as NSIndexPath)!
             
             if cell.accessoryType == .none {
                 
@@ -203,9 +203,9 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
                 }
                 
             } else {
-                if let index = activeErrandArray.indexOf(errand) {
+                if let index = activeErrandArray.index(of: errand) {
                     cell.accessoryType = .none
-                    activeErrandArray.removeAtIndex(index)
+                    activeErrandArray.remove(at: index)
                 }
             }
             
@@ -241,8 +241,8 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
             
             for activeErrand in self.activeErrandArray {
                 let marker = activeErrand.makeMarker()
-                marker.userData = activeErrand
-                direction.markerArray += [marker]
+                marker?.userData = activeErrand
+                direction.markerArray.append(marker!)
             }
             
             errandsManagerMapVC.direction = direction
@@ -307,17 +307,18 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
         
         //Save all recenlty active errands in the background
         for Errand in activeErrandArray {
-            Errand.saveInBackgroundWithBlock{(success: Bool, error: NSError?) ->Void in
+            Errand.saveInBackground(block: { (success, error) in
                 if (success) {
-                    if let index = self.activeErrandArray.indexOf(Errand) {
-                        self.activeErrandArray.removeAtIndex(index)
+                    if let index = self.activeErrandArray.index(of: Errand) {
+                        self.activeErrandArray.remove(at: index)
                     }
                     else {
                         print("problem saving errands \(error)")
                     }
                 }
             }
-        }
+        )}
+        
         //Update table after all the active Erranded are reset.
         self.errandsManager.fetchIncompleteErrand() { (success) -> () in
             if success {

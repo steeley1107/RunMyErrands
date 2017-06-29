@@ -27,12 +27,12 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.locationManager = GeoManager.sharedManager()
+        self.locationManager = GeoManager.shared()
         self.locationManager.startLocationManager()
 
         
         // Do any additional setup after loading the view.
-        user = PFUser.currentUser()
+        user = PFUser.current()
         nameTextField.text = user!["name"] as? String
         statusTextField.text = user!["status"] as? String
         addressTextField.text = user!["home"] as? String
@@ -58,7 +58,7 @@ class EditProfileViewController: UIViewController {
             let bounds = GMSCoordinateBounds(coordinate: nearLeft, coordinate: farRight)
             autocompleteController.autocompleteBounds = bounds
         }
-        self.presentViewController(autocompleteController, animated: true, completion: nil)
+        self.present(autocompleteController, animated: true, completion: nil)
     }
     
     
@@ -89,15 +89,15 @@ class EditProfileViewController: UIViewController {
 extension EditProfileViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
-    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         addressTextField.text = place.formattedAddress
         self.dismiss(animated: true, completion: nil)
     }
     
     
-    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: NSError) {
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         // TODO: handle the error.
-        print("Error: ", error.description)
+        print("Error: ", error.localizedDescription)
     }
     
     

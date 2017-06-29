@@ -29,15 +29,15 @@ class EditErrandOnMapViewController: UIViewController, CLLocationManagerDelegate
         //zoom map to the bounds of the errand
         mapView.frame = mapView.bounds
         
-        self.locationManager = GeoManager.sharedManager()
+        self.locationManager = GeoManager.shared()
         self.locationManager.startLocationManager()
         
         self.mapView.delegate = self
-        self.mapView.myLocationEnabled = true
+        self.mapView.isMyLocationEnabled = true
         
         self.errandsManager = ErrandManager()
         
-        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
         
         addMarkersToMap()
     }
@@ -54,7 +54,7 @@ class EditErrandOnMapViewController: UIViewController, CLLocationManagerDelegate
     {
         if !didFindMyLocation {
             //let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
-            mapView.camera = GMSCameraPosition.cameraWithTarget(errand.coordinate(), zoom: 14.0)
+            mapView.camera = GMSCameraPosition.camera(withTarget: errand.coordinate(), zoom: 14.0)
             mapView.settings.myLocationButton = true
             didFindMyLocation = true
             mapView.removeObserver(self, forKeyPath: "myLocation")
@@ -62,7 +62,7 @@ class EditErrandOnMapViewController: UIViewController, CLLocationManagerDelegate
     }
     
     
-    func mapView(_ mapView: GMSMapView, didTapAtCoordinate coordinate: CLLocationCoordinate2D)
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D)
     {
         mapView.clear()
         
@@ -72,7 +72,7 @@ class EditErrandOnMapViewController: UIViewController, CLLocationManagerDelegate
         
         let marker = GMSMarker(position: coordinate)
         marker.map = self.mapView
-        marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+        marker.icon = GMSMarker.markerImage(with: UIColor.blue)
     }
     
     
@@ -101,9 +101,9 @@ class EditErrandOnMapViewController: UIViewController, CLLocationManagerDelegate
     func addMarkersToMap()
     {
         let marker = errand.makeMarker()
-        marker.userData = errand
+        marker?.userData = errand
         marker.map = self.mapView
-        marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+        marker?.icon = GMSMarker.markerImage(with: UIColor.blue)
     }
     
     

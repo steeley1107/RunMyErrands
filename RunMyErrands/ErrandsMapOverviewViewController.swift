@@ -35,15 +35,15 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         
         mapView.frame = mapView.bounds
         
-        self.locationManager = GeoManager.sharedManager()
+        self.locationManager = GeoManager.shared()
         self.locationManager.startLocationManager()
         
         self.mapView.delegate = self
-        self.mapView.myLocationEnabled = true
+        self.mapView.isMyLocationEnabled = true
         
         self.errandsManager = ErrandManager()
         
-        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
         
     }
     
@@ -54,8 +54,8 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     //Update map with users current location;
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if !didFindMyLocation {
-            let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
-            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
+            let myLocation: CLLocation = change![NSKeyValueChangeKey.newKey] as! CLLocation
+            mapView.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 14.0)
             origin = myLocation.coordinate
             mapView.settings.myLocationButton = true
             didFindMyLocation = true
@@ -73,7 +73,7 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         infoWindow.snippet.text = marker.snippet
         
         let errand:Errand = marker.userData as! Errand
-        let imageName:String = errand.imageName(errand.category.intValue)
+        let imageName:String = errand.imageName(Int32(errand.category.intValue))
         infoWindow.icon.image = UIImage(named:imageName)
         
         var textWidth = 0
@@ -106,9 +106,9 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
             if Errand.isComplete == false {
                 
                 let marker = Errand.makeMarker()
-                marker.userData = Errand
+                marker?.userData = Errand
                 marker.map = self.mapView
-                marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+                marker?.icon = GMSMarker.markerImage(with: UIColor.red)
             }
         }
     }
@@ -121,12 +121,12 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         for Errand in ErrandArray {
             if Errand.isComplete == false {
                 let marker = Errand.makeMarker()
-                markerArray += [marker]
+                markerArray.append(marker!)
             }
         }
         if let origin = origin {
             let bounds =  self.directionErrand.zoomMapLimits(origin, destination: origin, markerArray: markerArray)
-            self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
+            self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50.0))
         }
     }
     
@@ -162,15 +162,15 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
     
     //Mark: - Navigation
     
-    func mapView(_ mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
-        performSegueWithIdentifier("showDetailFromMap", sender: marker.userData as! Errand)
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        performSegue(withIdentifier: "showDetailFromMap", sender: marker.userData as! Errand)
     }
     
     
     override func prepare(for segue: (UIStoryboardSegue!), sender: Any!) {
         
         if (segue.identifier == "showDetailFromMap") {
-            let detailVC:DetailViewController = segue!.destinationViewController as! DetailViewController
+            let detailVC:DetailViewController = segue!.destination as! DetailViewController
             detailVC.errand = sender as! Errand
         }
     }

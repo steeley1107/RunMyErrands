@@ -77,25 +77,25 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
     {
         //Load Errand information
         errandNameTextField.text = errand.title
-        categoryTextField.text = categoryPickerData[errand.category.integerValue]
+        categoryTextField.text = categoryPickerData[errand.category.intValue]
         descriptionTextField.text = errand.errandDescription
 
         //Capture just the 1st part of the address
-        let formattedAddress = errand.address.componentsSeparatedByString(",")
+        let formattedAddress = errand.address.components(separatedBy: ",")
         let simpleAddress: String = formattedAddress[0]
         errand.subtitle = simpleAddress
         
         //Load map with errand
         let marker = errand.makeMarker()
-        marker.userData = errand
+        marker?.userData = errand
         marker.map = self.mapView
-        marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+        marker?.icon = GMSMarker.markerImage(with: UIColor.red)
         marker.map = self.mapView
         
         //Show info window
         mapView.selectedMarker = marker
         //Centre the map around the map
-        let camera = GMSCameraPosition.cameraWithTarget(errand.coordinate(), zoom: 14)
+        let camera = GMSCameraPosition.camera(withTarget: errand.coordinate(), zoom: 14)
         mapView.camera = camera
     }
     
@@ -118,16 +118,16 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
         }
         else
         {
-            errand.title = errandNameTextField.text?.capitalizedString
-            errand.errandDescription = descriptionTextField.text?.capitalizedString
-            errand.subtitle = errand.locationName.capitalizedString
-            errand.category = categoryPickerView.selectedRowInComponent(0)
+            errand.title = errandNameTextField.text?.capitalized
+            errand.errandDescription = descriptionTextField.text?.capitalized
+            errand.subtitle = errand.locationName.capitalized
+            errand.category = categoryPickerView.selectedRow(inComponent: 0) as NSNumber
             
             errand.isActive = false
             errand.isComplete = false
             
             let groupChoice:NSNumber = NSNumber(groupPickerView.selectedRow(inComponent: 0))
-            let group:PFObject = self.groups[self.groupPickerView.selectedRowInComponent(0)] as! PFObject
+            let group:PFObject = self.groups[self.groupPickerView.selectedRow(inComponent: 0)] as! PFObject
             errand.group = group.objectId;
             
             saveErrand()
@@ -139,9 +139,9 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
         errand.saveInBackgroundWithBlock { (succeeded, error) in
             if succeeded
             {
-                let group:PFObject = self.groups[self.groupPickerView.selectedRowInComponent(0)] as! PFObject
-                let groupErrandsRelation:PFRelation = group.relationForKey("Errand")
-                groupErrandsRelation.addObject(self.errand)
+                let group:PFObject = self.groups[self.groupPickerView.selectedRow(inComponent: 0)] as! PFObject
+                let groupErrandsRelation:PFRelation = group.relation(forKey: "Errand")
+                groupErrandsRelation.add(self.errand)
                 
                 self.errand.isActive = false
                 
@@ -152,7 +152,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
                     }
                     else
                     {
-                        self.navigationController?.popViewControllerAnimated(true)
+                        self.navigationController?.popViewController(animated: true)
                     }
                 })
             }
@@ -172,8 +172,8 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
     //Update map with users current location;
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if !didFindMyLocation {
-            let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
-            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
+            let myLocation: CLLocation = change![NSKeyValueChangeKey.newKey] as! CLLocation
+            mapView.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 14.0)
             mapView.settings.myLocationButton = true
             didFindMyLocation = true
             mapView.removeObserver(self, forKeyPath: "myLocation")
@@ -190,7 +190,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
         let bounds = GMSCoordinateBounds(coordinate: visibleRegion.nearLeft, coordinate: visibleRegion.farRight)
         autocompleteController.autocompleteBounds = bounds
         
-        self.presentViewController(autocompleteController, animated: true, completion: nil)
+        self.present(autocompleteController, animated: true, completion: nil)
     }
     
     
@@ -279,18 +279,18 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
     
     func fetchGroupPickerData() {
         
-        let user = PFUser.currentUser()
-        let relation = user!.relationForKey("memberOfTheseGroups")
+        let user = PFUser.current()
+        let relation = user!.relation(forKey: "memberOfTheseGroups")
         
         relation.query().findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
+            (objects: [PFObject]?, error: Error?) -> Void in
             if error != nil {
                 // There was an error
             } else {
-                self.groups = objects!
+                self.groups = objects! as NSArray
                 for object in objects!
                 {
-                    self.groupPickerData.addObject(object["name"])
+                    self.groupPickerData.add(object["name"])
                     if self.errand.group == object.objectId
                     {
                         self.groupTextField.text = object["name"] as! String
@@ -327,7 +327,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
         infoWindow.snippet.text = marker.snippet
         
         let errand:Errand = marker.userData as! Errand
-        let imageName:String = errand.imageName(errand.category.intValue)
+        let imageName:String = errand.imageName(Int32(errand.category.intValue))
         infoWindow.icon.image = UIImage(named:imageName)
         
         var textWidth = 0
@@ -375,7 +375,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
 extension EditErrandViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
-    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWithPlace place: GMSPlace) {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
         print("Place name: ", place.name)
         print("Place address: ", place.formattedAddress)
@@ -386,14 +386,14 @@ extension EditErrandViewController: GMSAutocompleteViewControllerDelegate {
         
         errand.locationName = place.name
         errand.address = place.formattedAddress
-        errand.lattitude = place.coordinate.latitude
-        errand.longitude = place.coordinate.longitude
+        errand.lattitude = place.coordinate.latitude as NSNumber
+        errand.longitude = place.coordinate.longitude as NSNumber
         
         //Place holders??
         errand.title = place.name
         
         //Capture just the 1st part of the address
-        let formattedAddress = place.formattedAddress?.componentsSeparatedByString(",")
+        let formattedAddress = place.formattedAddress?.components(separatedBy: ",")
         let simpleAddress: String = formattedAddress![0]
         errand.subtitle = simpleAddress
         
@@ -403,9 +403,9 @@ extension EditErrandViewController: GMSAutocompleteViewControllerDelegate {
         errand.geoPoint = PFGeoPoint(latitude:errand.lattitude.doubleValue, longitude:errand.longitude.doubleValue)
         
         let marker = errand.makeMarker()
-        marker.userData = errand
+        marker?.userData = errand
         marker.map = self.mapView
-        marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+        marker?.icon = GMSMarker.markerImage(with: UIColor.red)
         
         marker.map = self.mapView
         
@@ -413,7 +413,7 @@ extension EditErrandViewController: GMSAutocompleteViewControllerDelegate {
         mapView.selectedMarker = marker
         
         //Centre the map around the map
-        let camera = GMSCameraPosition.cameraWithTarget(errand.coordinate(), zoom: 8)
+        let camera = GMSCameraPosition.camera(withTarget: errand.coordinate(), zoom: 8)
         mapView.camera = camera
     }
     

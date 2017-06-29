@@ -56,23 +56,23 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         self.errandsManager = ErrandManager()
         
-        self.locationManager = GeoManager.sharedManager()
+        self.locationManager = GeoManager.shared()
         self.locationManager.startLocationManager()
         
         self.mapView.delegate = self
-        self.mapView.myLocationEnabled = true
+        self.mapView.isMyLocationEnabled = true
         self.errandsTableView.delegate = self
         self.errandsTableView.dataSource = self
         
-        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
         
         self.mapView.addSubview(directionsLabel)
-        self.mapView.bringSubviewToFront(directionsLabel)
+        self.mapView.bringSubview(toFront: directionsLabel)
         
         //Setup Activity Spinner
         activitySpinner.hidesWhenStopped = true
         self.mapView.addSubview(activitySpinner)
-        self.mapView.bringSubviewToFront(activitySpinner)
+        self.mapView.bringSubview(toFront: activitySpinner)
         
         directionsLabel.isHidden = true
         
@@ -83,10 +83,10 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     //Update map with users current location;
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if !didFindMyLocation {
-            let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
-            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
+            let myLocation: CLLocation = change![NSKeyValueChangeKey.newKey] as! CLLocation
+            mapView.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 14.0)
             mapView.settings.myLocationButton = true
-            mapView.animateToViewingAngle(45)
+            mapView.animate(toViewingAngle: 45)
             origin = myLocation.coordinate
             getHomeLocation()
             didFindMyLocation = true
@@ -103,7 +103,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         //Check to see if the home address is valid
         directionErrand.HomeAddressValid({ (result) -> Void in
             if result == true {
-                let user = PFUser.currentUser()
+                let user = PFUser.current()
                 if let homeAddress = user!["home"] {
                     let destinationAddress = homeAddress as! String
                     let geocoder = CLGeocoder()
@@ -114,7 +114,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
                             self.destination = location!.coordinate
                             self.createRoute()
                         }
-                    })
+                    } as! CLGeocodeCompletionHandler)
                 }
                 
             }else {
@@ -129,7 +129,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         originMarker = GMSMarker(position: self.origin)
         originMarker.map = self.mapView
-        originMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
+        originMarker.icon = GMSMarker.markerImage(with: UIColor.green)
         originMarker.title = "Start Location"
         let originString = self.directionErrand.originAddress
         if let range = originString?.range(of: ",") {
@@ -141,7 +141,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
             
             destinationMarker = GMSMarker(position: self.destination)
             destinationMarker.map = self.mapView
-            destinationMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
+            destinationMarker.icon = GMSMarker.markerImage(with: UIColor.green)
             destinationMarker.title = "Home"
             let destinationString = self.directionErrand.destinationAddress
             if let range = destinationString?.range(of: ",") {
@@ -168,7 +168,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
                 
                 for marker in self.orderedMarkerArray {
                     marker.map = self.mapView
-                    marker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+                    marker.icon = GMSMarker.markerImage(with: UIColor.red)
                 }
                 
                 self.configureMapAndMarkersForRoute()
@@ -245,7 +245,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
             }
         }
         
-        if let index = orderedMarkerArray.indexOf(marker) {
+        if let index = orderedMarkerArray.index(of: marker) {
             let routes = directionErrand.legPolyline(index)
             
             for aRoute in routes {
@@ -258,13 +258,13 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         if marker.userData != nil {
             
             let errand:Errand = marker.userData as! Errand
-            let imageName:String = errand.imageName(errand.category.intValue)
+            let imageName:String = errand.imageName(Int32(errand.category.intValue))
             infoWindow.icon.image = UIImage(named:imageName)
             
             for eachMarker in orderedMarkerArray {
-                eachMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+                eachMarker.icon = GMSMarker.markerImage(with: UIColor.red)
             }
-            marker.icon = GMSMarker.markerImageWithColor(UIColor.cyanColor())
+            marker.icon = GMSMarker.markerImage(with: UIColor.cyan)
         }
         return infoWindow
     }
@@ -274,18 +274,18 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         if let origin = origin {
             let bounds =  self.directionErrand.zoomMapLimits(origin, destination: destination, markerArray: direction.markerArray)
-            self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50.0))
-            mapView.animateToViewingAngle(45)
+            self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50.0))
+            mapView.animate(toViewingAngle: 45)
         }
     }
     
     
     //Mark: - Navigation
     
-    func mapView(_ mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         
         if marker.userData != nil {
-            performSegueWithIdentifier("showDetailFromEMan", sender: marker.userData as! Errand)
+            performSegue(withIdentifier: "showDetailFromEMan", sender: marker.userData as! Errand)
         }
     }
     
@@ -293,7 +293,7 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
     override func prepare(for segue: (UIStoryboardSegue!), sender: Any!) {
         
         if (segue.identifier == "showDetailFromEMan") {
-            let detailVC:DetailViewController = segue!.destinationViewController as! DetailViewController
+            let detailVC:DetailViewController = segue!.destination as! DetailViewController
             detailVC.errand = sender as! Errand
         }
     }
@@ -318,8 +318,8 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         cell.titleLabel.text = errand.title
         cell.subtitleLabel.text = errand.subtitle
         
-        let imageName = errand.imageName(errand.category.intValue)
-        cell.categoryImage?.image = UIImage(named:imageName)
+        let imageName = errand.imageName(Int32(errand.category.intValue))
+        cell.categoryImage?.image = UIImage(named:imageName!)
         
         return cell
     }
@@ -332,11 +332,11 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
         
         for eachMarker in orderedMarkerArray {
             if eachMarker != marker {
-                eachMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+                eachMarker.icon = GMSMarker.markerImage(with: UIColor.red)
                 
             }
         }
-        marker.icon = GMSMarker.markerImageWithColor(UIColor.cyanColor())
+        marker.icon = GMSMarker.markerImage(with: UIColor.cyan)
         mapView.selectedMarker = marker
         
         //Draw polyline on map from errand to errand.

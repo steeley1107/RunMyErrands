@@ -32,7 +32,7 @@ import Parse
         
         if let groups = self.errandsDictionary.allKeys as? [String] {
             let group = groups[section]
-            return self.errandsDictionary.valueForKey(group) as? [Errand]
+            return self.errandsDictionary.value(forKey: group) as? [Errand]
         } else {
             return nil
         }
@@ -73,7 +73,7 @@ import Parse
     
     func fetchData(_ completionHandler: @escaping (_ success: Bool) ->() ) {
         let relation = self.user.relation(forKey: "memberOfTheseGroups")
-        relation.query().order(byAscending: "name").findObjectsInBackground { (objects: [PFObject]?, error: NSError?) -> Void in
+        relation.query().order(byAscending: "name").findObjectsInBackground { (objects, error) in
             self.clearData()
             if let objects = objects {
                 for group in objects {
@@ -84,25 +84,28 @@ import Parse
                 let errandsQuery = PFQuery(className: "Errand")
                 errandsQuery.whereKey("group", containedIn: self.fetchKeys())
                 errandsQuery.order(byAscending: "isComplete")
-                errandsQuery.findObjectsInBackground(block: { (errands: [PFObject]?, error: NSError?) -> Void in
+                errandsQuery.findObjectsInBackground(block: { (errands, error) in
                     if error == nil {
                         if let errands = errands as? [Errand] {
                             for errand in errands {
-                                var errandArray:Array = self.errandsDictionary.objectForKey(errand.group!) as! [Errand]
+                                var errandArray:Array = self.errandsDictionary.object(forKey: errand.group!) as! [Errand]
                                 errandArray.append(errand)
                                 self.errandsDictionary.setValue(errandArray, forKey: errand.group!)
                             }
-                            completionHandler(success: true)
+                            completionHandler(true)
                         }
                     } else {
-                        completionHandler(success: false)
+                        completionHandler(false)
                     }
+                    
                 })
+                
             } else {
-                completionHandler(success: false)
+                completionHandler(false)
             }
-        } as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void
+        }
     }
+    
     
     func fetchKeys() -> [String] {
         return self.objectIDtoNameDictionary.allKeys as! [String]
@@ -118,7 +121,7 @@ import Parse
     
     func fetchIncompleteErrand(_ completionHandler: @escaping (_ success: Bool) ->() ) {
         let relation = self.user.relation(forKey: "memberOfTheseGroups")
-        relation.query().order(byAscending: "name").findObjectsInBackground { (objects: [PFObject]?, error: NSError?) -> Void in
+        relation.query().order(byAscending: "name").findObjectsInBackground { (objects, error) in
             if let objects = objects {
                 for group in objects {
                     self.objectIDtoNameDictionary.setValue(group["name"] as! String, forKey: group.objectId!)
@@ -128,24 +131,24 @@ import Parse
                 let errandsQuery = PFQuery(className: "Errand")
                 errandsQuery.whereKey("group", containedIn: self.fetchKeys())
                 errandsQuery.whereKey("isComplete", equalTo: false)
-                errandsQuery.findObjectsInBackground(block: { (errands: [PFObject]?, error: NSError?) -> Void in
+                errandsQuery.findObjectsInBackground(block: { (errands, error) in
                     if error == nil {
                         if let errands = errands as? [Errand] {
                             for errand in errands {
-                                var errandArray:Array = self.errandsDictionary.objectForKey(errand.group!) as! [Errand]
+                                var errandArray:Array = self.errandsDictionary.object(forKey: errand.group!) as! [Errand]
                                 errandArray.append(errand)
                                 self.errandsDictionary.setValue(errandArray, forKey: errand.group!)
                             }
-                            completionHandler(success: true)
+                            completionHandler(true)
                         }
                     } else {
-                        completionHandler(success: false)
+                        completionHandler(false)
                     }
                 })
             } else {
-                completionHandler(success: false)
+                completionHandler(false)
             }
-        } as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void as! ([PFObject]?, Error?) -> Void
+        }
     }
     
     
