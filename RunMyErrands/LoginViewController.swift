@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let username = usernameTextField.text,
             let password = passwordTextField.text {
                 PFUser.logInWithUsername(inBackground: username.lowercased(), password:password) {
-                    (user: PFUser?, error: NSError?) -> Void in
+                    (user: PFUser?, error: Error?) -> Void in
                     if user != nil {
                         // Go to next storyboard
                         self.performSegue(withIdentifier: "showErrandList", sender: nil)
@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         animation.values = [-20,20,-20,20,-10,10,-5,5,0]                    
                         self.stackView.layer.add(animation, forKey: "transform.translation.x")
                     }
-                } as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock
+                }
         }
     }
 
@@ -60,7 +60,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let permissions = ["public_profile","user_friends"]
         
         PFFacebookUtils.logInInBackground(withReadPermissions: permissions) {
-            (user: PFUser?, error: NSError?) -> Void in
+            (user: PFUser?, error: Error?) -> Void in
             if let user = user {
                 
                 if user.isNew
@@ -80,7 +80,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             {
                 print("Uh oh. The user cancelled the Facebook login.")
             }
-        } as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock as! PFUserResultBlock
+        }
     }
     
     func getNameAndPicture(_ user: PFUser) {
@@ -96,24 +96,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             } else {
                 print("fetched user: \(result)")
 
-                if let name = result.value(forKey: "first_name") as? String {
+                
+                let data:[String:AnyObject] = result as! [String : AnyObject]
+                if let name = data["first_name"] {
                     user["name"] = name
                     print("name is: \(name)")
                 }
 
-                if let url = result.value(forKey: "picture")?.value(forKey: "data")?.value(forKey: "url") as? String {
+                let userInfo = result as? [String: Any]
+                if let url = ((userInfo?["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
                                         
-                    let session = URLSession.shared.dataTask(with: URL.init(string: url)!, completionHandler: { (data: Data?, response: URLResponse?, error: NSError?) -> Void in
+                    let session = URLSession.shared.dataTask(with: URL.init(string: url)!, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
                         if error != nil {
                             print("Error: \(error)")
                         } else {
                             if let data = data,
                                 let imageFile = PFFile(name: "profile.jpg", data: data) {
-                                    imageFile.saveInBackground(block: { (bool:Bool, error:NSError?) -> Void in
+                                    imageFile.saveInBackground(block: { (bool:Bool, error:Error?) -> Void in
                                         if bool {
                                             user["profile_Picture"] = imageFile
                                             
-                                            user.saveInBackground(block: { (success:Bool, error: NSError?) -> Void in
+                                            user.saveInBackground(block: { (success:Bool, error: Error?) -> Void in
                                                 if ((error) != nil) {
                                                     print("Error: \(error)")
                                                 }

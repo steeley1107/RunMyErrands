@@ -92,7 +92,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                             self.present(alertController, animated: true, completion: nil)
                         } else {
                             user.signUpInBackground {
-                                (succeeded: Bool, error: NSError?) -> Void in
+                                (succeeded: Bool, error: Error?) -> Void in
                                 if let error = error {
                                     print("Error: \(error)")
                                 } else {

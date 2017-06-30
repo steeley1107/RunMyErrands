@@ -100,10 +100,11 @@ class EditErrandOnMapViewController: UIViewController, CLLocationManagerDelegate
     
     func addMarkersToMap()
     {
-        let marker = errand.makeMarker()
-        marker?.userData = errand
+        var marker = GMSMarker()
+        marker = errand.makeMarker()
+        marker.userData = errand
         marker.map = self.mapView
-        marker?.icon = GMSMarker.markerImage(with: UIColor.blue)
+        marker.icon = GMSMarker.markerImage(with: UIColor.blue)
     }
     
     

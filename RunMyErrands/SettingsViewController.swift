@@ -115,7 +115,7 @@ class SettingsViewController: UIViewController {
         if (image == nil) {
             self.pictureImageView.image = UIImage(named: "runmyerrands-grey")
         } else {
-            image!.getDataInBackground(block: { (data: Data?, error: NSError?) -> Void in
+            image!.getDataInBackground(block: { (data: Data?, error: Error?) -> Void in
                 self.pictureImageView.layer.masksToBounds = true
                 self.pictureImageView.layer.cornerRadius = self.pictureImageView.frame.size.height/2
                 DispatchQueue.main.async(execute: { () -> Void in
@@ -125,7 +125,7 @@ class SettingsViewController: UIViewController {
                         print("Error: \(error)")
                     }
                 })
-            } as! PFDataResultBlock)
+            })
         }
         //display the number of regions are being monitored
         geoFenceCount.text = "\(locationManager.monitoredRegions())"

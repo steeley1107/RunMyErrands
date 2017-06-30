@@ -105,10 +105,11 @@ class ErrandsMapOverviewViewController: UIViewController, CLLocationManagerDeleg
         for Errand in ErrandArray {
             if Errand.isComplete == false {
                 
-                let marker = Errand.makeMarker()
-                marker?.userData = Errand
+                var marker = GMSMarker()
+                marker = Errand.makeMarker()
+                marker.userData = Errand
                 marker.map = self.mapView
-                marker?.icon = GMSMarker.markerImage(with: UIColor.red)
+                marker.icon = GMSMarker.markerImage(with: UIColor.red)
             }
         }
     }

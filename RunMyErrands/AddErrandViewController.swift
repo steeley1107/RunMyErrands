@@ -102,7 +102,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             errand.isActive = false
             errand.isComplete = false
             
-            let groupChoice:NSNumber = NSNumber(groupPickerView.selectedRow(inComponent: 0))
+            let groupChoice:NSNumber = NSNumber(value: groupPickerView.selectedRow(inComponent: 0))
             let group:PFObject = self.groups[self.groupPickerView.selectedRow(inComponent: 0)] as! PFObject
             errand.group = group.objectId;
             
@@ -121,7 +121,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
                 
                 self.errand.isActive = false
                 
-                group.saveInBackgroundWithBlock({ (succeeded, error) in
+                group.saveInBackground(block: { (succeeded, error) -> Void in
                     if succeeded == false
                     {
                         print("Error \(error)")
@@ -149,7 +149,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         //Set silent push notification        
         //New Push Notifications with cloud code
         let setChannel = self.errand.group
-        PFCloud.callFunctionInBackground(inBackground: "silentPush", withParameters: ["channels": setChannel,"deviceType":"ios"]) { (response, error) -> Void in
+        PFCloud.callFunction(inBackground: "silentPush", withParameters: ["channels": setChannel,"deviceType":"ios"]) { (response, error) -> Void in
         }
     }
     
@@ -267,15 +267,15 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         let user = PFUser.current()
         let relation = user!.relation(forKey: "memberOfTheseGroups")
         
-        relation.query().findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
+        relation.query().findObjectsInBackground {
+            (objects: [PFObject]?, error: Error?) -> Void in
             if error != nil {
                 // There was an error
             } else {
-                self.groups = objects!
+                self.groups = objects! as NSArray
                 for object in objects!
                 {
-                    self.groupPickerData.addObject(object["name"])
+                    self.groupPickerData.add(object["name"])
                 }
             }
         }
@@ -383,10 +383,11 @@ extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
         errand.setCoordinate(place.coordinate)
         errand.geoPoint = PFGeoPoint(latitude:errand.lattitude.doubleValue, longitude:errand.longitude.doubleValue)
         
-        let marker = errand.makeMarker()
-        marker?.userData = errand
+        var marker = GMSMarker()
+        marker = errand.makeMarker()
+        marker.userData = errand
         marker.map = self.mapView
-        marker?.icon = GMSMarker.markerImage(with: UIColor.red)
+        marker.icon = GMSMarker.markerImage(with: UIColor.red)
         
         marker.map = self.mapView
         
@@ -398,9 +399,9 @@ extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
         mapView.camera = camera
     }
     
-    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: NSError) {
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         // TODO: handle the error.
-        print("Error: ", error.description)
+        print("Error: ", error.localizedDescription)
     }
     
     // User canceled the operation.

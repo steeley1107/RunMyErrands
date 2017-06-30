@@ -86,10 +86,11 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
         errand.subtitle = simpleAddress
         
         //Load map with errand
-        let marker = errand.makeMarker()
-        marker?.userData = errand
+        var marker = GMSMarker()
+        marker = errand.makeMarker()
+        marker.userData = errand
         marker.map = self.mapView
-        marker?.icon = GMSMarker.markerImage(with: UIColor.red)
+        marker.icon = GMSMarker.markerImage(with: UIColor.red)
         marker.map = self.mapView
         
         //Show info window
@@ -126,7 +127,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
             errand.isActive = false
             errand.isComplete = false
             
-            let groupChoice:NSNumber = NSNumber(groupPickerView.selectedRow(inComponent: 0))
+            let groupChoice:NSNumber = NSNumber(value: groupPickerView.selectedRow(inComponent: 0))
             let group:PFObject = self.groups[self.groupPickerView.selectedRow(inComponent: 0)] as! PFObject
             errand.group = group.objectId;
             
@@ -136,7 +137,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
     
     
     func saveErrand() {
-        errand.saveInBackgroundWithBlock { (succeeded, error) in
+        errand.saveInBackground { (succeeded, error) in
             if succeeded
             {
                 let group:PFObject = self.groups[self.groupPickerView.selectedRow(inComponent: 0)] as! PFObject
@@ -145,7 +146,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
                 
                 self.errand.isActive = false
                 
-                group.saveInBackgroundWithBlock({ (succeeded, error) in
+                group.saveInBackground(block: { (succeeded, error) in
                     if succeeded == false
                     {
                         print("Error \(error)")
@@ -282,7 +283,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
         let user = PFUser.current()
         let relation = user!.relation(forKey: "memberOfTheseGroups")
         
-        relation.query().findObjectsInBackgroundWithBlock {
+        relation.query().findObjectsInBackground {
             (objects: [PFObject]?, error: Error?) -> Void in
             if error != nil {
                 // There was an error
@@ -402,12 +403,13 @@ extension EditErrandViewController: GMSAutocompleteViewControllerDelegate {
         errand.setCoordinate(place.coordinate)
         errand.geoPoint = PFGeoPoint(latitude:errand.lattitude.doubleValue, longitude:errand.longitude.doubleValue)
         
-        let marker = errand.makeMarker()
-        marker?.userData = errand
-        marker.map = self.mapView
-        marker?.icon = GMSMarker.markerImage(with: UIColor.red)
+        var marker = GMSMarker();
+        marker = errand.makeMarker()
+        marker.userData = errand
+        marker.map = mapView
+        marker.icon = GMSMarker.markerImage(with: UIColor.red)
         
-        marker.map = self.mapView
+        marker.map = mapView
         
         //Show info window
         mapView.selectedMarker = marker
@@ -417,9 +419,9 @@ extension EditErrandViewController: GMSAutocompleteViewControllerDelegate {
         mapView.camera = camera
     }
     
-    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: NSError) {
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         // TODO: handle the error.
-        print("Error: ", error.description)
+        print("Error: ", error.localizedDescription)
     }
     
     // User canceled the operation.

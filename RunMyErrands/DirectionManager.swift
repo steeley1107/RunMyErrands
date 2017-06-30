@@ -21,9 +21,9 @@ class DirectionManager: NSObject {
     //Mark: Properties
     
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
-    var selectedRoute: Dictionary<NSObject, AnyObject>!
+    var selectedRoute: Dictionary<String, AnyObject>!
     var waypointOrder: Array<Int>!
-    var overviewPolyline: Dictionary<NSObject, AnyObject>!
+    var overviewPolyline: Dictionary<String, AnyObject>!
     var originCoordinate: CLLocationCoordinate2D!
     var destinationCoordinate: CLLocationCoordinate2D!
     var originAddress: String!
@@ -100,8 +100,8 @@ class DirectionManager: NSObject {
                         //Cheak to see if google returned good data.
                         if status == "OK" {
                             
-                            self.processDirections(dictionary! as Dictionary<NSObject, AnyObject>)
-                            self.calculateTotalDistanceAndDuration(dictionary! as Dictionary<NSObject, AnyObject>)
+                            self.processDirections(dictionary! as Dictionary<String, AnyObject>)
+                            self.calculateTotalDistanceAndDuration(dictionary! as Dictionary<String, AnyObject>)
                             completionHandler(true)
                         }
                         
@@ -115,22 +115,22 @@ class DirectionManager: NSObject {
     
     
     //convert JSON to directions
-    func processDirections(_ directions: NSDictionary) {
-        guard let selected = (directions["routes"] as? Array<NSDictionary>)?.first else {
+    func processDirections(_ directions: Dictionary<String, AnyObject>) {
+        guard let selected = (directions["routes"] as? Array<Dictionary<String, AnyObject>>)?.first else {
             print("no first directions object")
             return
         }
         
-        self.selectedRoute = selected as Dictionary<NSObject, AnyObject>!
+        self.selectedRoute = selected
         
-        self.overviewPolyline = self.selectedRoute["overview_polyline"] as! NSDictionary
+        self.overviewPolyline = self.selectedRoute["overview_polyline"] as! Dictionary<String, AnyObject>
         
-        let legs = self.selectedRoute["legs"] as! Array<NSDictionary>
+        let legs = self.selectedRoute["legs"] as! Array<Dictionary<String, AnyObject>>
         
-        let startLocationDictionary = legs[0]["start_location"] as! Dictionary<NSObject, AnyObject>
+        let startLocationDictionary = legs[0]["start_location"] as! Dictionary<String, AnyObject>
         self.originCoordinate = CLLocationCoordinate2DMake(startLocationDictionary["lat"] as! Double, startLocationDictionary["lng"] as! Double)
         
-        let endLocationDictionary = legs[legs.count - 1]["end_location"] as! Dictionary<NSObject, AnyObject>
+        let endLocationDictionary = legs[legs.count - 1]["end_location"] as! Dictionary<String, AnyObject>
         self.destinationCoordinate = CLLocationCoordinate2DMake(endLocationDictionary["lat"] as! Double, endLocationDictionary["lng"] as! Double)
         
         self.originAddress = legs[0]["start_address"] as! String
@@ -141,21 +141,21 @@ class DirectionManager: NSObject {
     func legPolyline(_ legNumber: Int) -> [GMSPolyline] {
         
         var routes:[GMSPolyline] = [GMSPolyline]()
-        let legs = self.selectedRoute["legs"] as! Array<NSDictionary>
+        let legs = self.selectedRoute["legs"] as! Array<Dictionary<String, AnyObject>>
         
         if legNumber < legs.count {
             
-            let steps = legs[legNumber]["steps"] as! Array<Dictionary<NSObject, AnyObject>>
+            let steps = legs[legNumber]["steps"] as! Array<Dictionary<String, AnyObject>>
             
             for step in steps {
                 
-                let polyline = step["polyline"] as! Dictionary<NSObject, AnyObject>
+                let polyline = step["polyline"] as! Dictionary<String, AnyObject>
                 let points = polyline["points"] as! String
                 
                 let path: GMSPath = GMSPath(fromEncodedPath: points)!
                 let routePolyline1 = GMSPolyline(path: path)
                 routePolyline1.strokeWidth = 2.0
-                routePolyline1.strokeColor = UIColor.greenColor()
+                routePolyline1.strokeColor = UIColor.green
                 
                 routes += [routePolyline1]
             }
@@ -164,9 +164,9 @@ class DirectionManager: NSObject {
     }
     
     //Calculate the duration and distance
-    func calculateTotalDistanceAndDuration(_ directions: Dictionary<NSObject, AnyObject>) {
+    func calculateTotalDistanceAndDuration(_ directions: Dictionary<String, AnyObject>) {
         
-        let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
+        let legs = self.selectedRoute["legs"] as! Array<Dictionary<String, AnyObject>>
         waypointOrder = self.selectedRoute["waypoint_order"] as! Array<Int>
         
         totalDistanceInMeters = 0
@@ -175,8 +175,8 @@ class DirectionManager: NSObject {
         totalDurationInSeconds = 0
         
         for leg in legs {
-            totalDistanceInMeters += (leg["distance"] as! Dictionary<NSObject, AnyObject>)["value"] as! UInt
-            totalTravelDurationInSeconds += (leg["duration"] as! Dictionary<NSObject, AnyObject>)["value"] as! UInt
+            totalDistanceInMeters += (leg["distance"] as! Dictionary<String, AnyObject>)["value"] as! UInt
+            totalTravelDurationInSeconds += (leg["duration"] as! Dictionary<String, AnyObject>)["value"] as! UInt
         }
         
         totalErrandsInSeconds = (errandDuration * UInt(waypointOrder.count))
