@@ -38,15 +38,15 @@ class CreateNewGroupViewController: UIViewController, UITextFieldDelegate {
             
             memberRelation.add(currentUser)
             
-            newGroup.saveInBackground(block: { (bool: Bool, error: NSError?) -> Void in
+            newGroup.saveInBackground(block: { (bool: Bool, error: Error?) -> Void in
                 
                 let groupRelation = currentUser.relation(forKey: "memberOfTheseGroups")
                 groupRelation.add(newGroup)
-                currentUser.saveInBackground(block: { (bool:Bool, error:NSError?) -> Void in
+                currentUser.saveInBackground(block: { (bool:Bool, error:Error?) -> Void in
                     //
                     self.dismiss(animated: true, completion: nil)
-                } as! PFBooleanResultBlock)
-            } as! PFBooleanResultBlock)
+                })
+            })
         }
     }
     

@@ -92,9 +92,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
             if ((error) != nil) {
                 // Process error
-                print("Error: \(error)")
+                print("Error: \(String(describing: error))")
             } else {
-                print("fetched user: \(result)")
+                print("fetched user: \(String(describing: result))")
 
                 
                 let data:[String:AnyObject] = result as! [String : AnyObject]
@@ -108,7 +108,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                         
                     let session = URLSession.shared.dataTask(with: URL.init(string: url)!, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
                         if error != nil {
-                            print("Error: \(error)")
+                            print("Error: \(String(describing: error))")
                         } else {
                             if let data = data,
                                 let imageFile = PFFile(name: "profile.jpg", data: data) {
@@ -118,7 +118,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                             
                                             user.saveInBackground(block: { (success:Bool, error: Error?) -> Void in
                                                 if ((error) != nil) {
-                                                    print("Error: \(error)")
+                                                    print("Error: \(String(describing: error))")
                                                 }
                                                 print("User logged in through Facebook!")
                                                 self.performSegue(withIdentifier: "showErrandList", sender: nil)

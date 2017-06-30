@@ -313,7 +313,7 @@ class ErrandsManagerViewController: UIViewController, UITableViewDelegate, UITab
                         self.activeErrandArray.remove(at: index)
                     }
                     else {
-                        print("problem saving errands \(error)")
+                        print("problem saving errands \(String(describing: error))")
                     }
                 }
             }

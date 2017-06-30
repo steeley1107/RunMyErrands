@@ -127,7 +127,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
             errand.isActive = false
             errand.isComplete = false
             
-            let groupChoice:NSNumber = NSNumber(value: groupPickerView.selectedRow(inComponent: 0))
+            //let groupChoice:NSNumber = NSNumber(value: groupPickerView.selectedRow(inComponent: 0))
             let group:PFObject = self.groups[self.groupPickerView.selectedRow(inComponent: 0)] as! PFObject
             errand.group = group.objectId;
             
@@ -149,7 +149,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
                 group.saveInBackground(block: { (succeeded, error) in
                     if succeeded == false
                     {
-                        print("Error \(error)")
+                        print("Error \(String(describing: error))")
                     }
                     else
                     {
@@ -294,7 +294,7 @@ class EditErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVi
                     self.groupPickerData.add(object["name"])
                     if self.errand.group == object.objectId
                     {
-                        self.groupTextField.text = object["name"] as! String
+                        self.groupTextField.text = object["name"] as? String
                     }
                 }
             }
@@ -379,8 +379,8 @@ extension EditErrandViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
         print("Place name: ", place.name)
-        print("Place address: ", place.formattedAddress)
-        print("Place attributions: ", place.attributions)
+        print("Place address: ", place.formattedAddress!)
+        print("Place attributions: ", place.attributions!)
         self.dismiss(animated: true, completion: nil)
         
         //add GMSPlace to Errand

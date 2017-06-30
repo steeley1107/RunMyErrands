@@ -108,13 +108,13 @@ class ErrandsManagerMapViewController: UIViewController, UITableViewDelegate, UI
                     let destinationAddress = homeAddress as! String
                     let geocoder = CLGeocoder()
                     
-                    geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+                    geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: Error?) -> Void in
                         if let placemark = placemarks?[0] {
                             let location = placemark.location
                             self.destination = location!.coordinate
                             self.createRoute()
                         }
-                    } as! CLGeocodeCompletionHandler)
+                    })
                 }
                 
             }else {

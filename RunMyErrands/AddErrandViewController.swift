@@ -102,7 +102,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
             errand.isActive = false
             errand.isComplete = false
             
-            let groupChoice:NSNumber = NSNumber(value: groupPickerView.selectedRow(inComponent: 0))
+           //let groupChoice:NSNumber = NSNumber(value: groupPickerView.selectedRow(inComponent: 0))
             let group:PFObject = self.groups[self.groupPickerView.selectedRow(inComponent: 0)] as! PFObject
             errand.group = group.objectId;
             
@@ -124,7 +124,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
                 group.saveInBackground(block: { (succeeded, error) -> Void in
                     if succeeded == false
                     {
-                        print("Error \(error)")
+                        print("Error \(String(describing: error))")
                     }
                     else
                     {
@@ -149,7 +149,7 @@ class AddErrandViewController: UIViewController, GMSMapViewDelegate, UIPickerVie
         //Set silent push notification        
         //New Push Notifications with cloud code
         let setChannel = self.errand.group
-        PFCloud.callFunction(inBackground: "silentPush", withParameters: ["channels": setChannel,"deviceType":"ios"]) { (response, error) -> Void in
+        PFCloud.callFunction(inBackground: "silentPush", withParameters: ["channels": setChannel!,"deviceType":"ios"]) { (response, error) -> Void in
         }
     }
     
@@ -359,8 +359,8 @@ extension AddErrandViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
         print("Place name: ", place.name)
-        print("Place address: ", place.formattedAddress)
-        print("Place attributions: ", place.attributions)
+        print("Place address: ", place.formattedAddress!)
+        print("Place attributions: ", place.attributions!)
         self.dismiss(animated: true, completion: nil)
         
         //add GMSPlace to Errand

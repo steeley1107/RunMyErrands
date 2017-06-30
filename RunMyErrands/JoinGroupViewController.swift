@@ -28,9 +28,9 @@ class JoinGroupViewController: UIViewController, UITextFieldDelegate {
         if let groupID = groupIDTextField.text {
             
             let query = PFQuery(className: "Group")
-            query.getObjectInBackground(withId: groupID, block: { (object: PFObject?, error: NSError?) -> Void in
+            query.getObjectInBackground(withId: groupID, block: { (object: PFObject?, error: Error?) -> Void in
                 if (error != nil) {
-                    print("Error: \(error)")
+                    print("Error: \(String(describing: error))")
                 } else {
                     //object is a 'Group'
                     if let currentUser = PFUser.current(),
@@ -38,11 +38,11 @@ class JoinGroupViewController: UIViewController, UITextFieldDelegate {
                         
                         let memberRelation = object.relation(forKey: "groupMembers")
                         memberRelation.add(currentUser)
-                        object.saveInBackground(block: { (bool: Bool, error: NSError?) -> Void in
+                        object.saveInBackground(block: { (bool: Bool, error: Error?) -> Void in
                             
                             let groupRelation = currentUser.relation(forKey: "memberOfTheseGroups")
                             groupRelation.add(object)
-                            currentUser.saveInBackground(block: { (bool:Bool, error: NSError?) -> Void in
+                            currentUser.saveInBackground(block: { (bool:Bool, error: Error?) -> Void in
                                 
                                 //New Push Notifications with cloud code
                                 let setChannel = groupID
@@ -53,11 +53,11 @@ class JoinGroupViewController: UIViewController, UITextFieldDelegate {
                                 
                                 
                                 self.dismiss(animated: true, completion: nil)
-                            } as! PFBooleanResultBlock)
-                        } as! PFBooleanResultBlock)
+                            })
+                        })
                     }
                 }
-            } as! (PFObject?, Error?) -> Void)
+            })
         }
     }
     

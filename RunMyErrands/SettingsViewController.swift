@@ -122,7 +122,7 @@ class SettingsViewController: UIViewController {
                     if error == nil {
                         self.pictureImageView.image = UIImage(data: data!)
                     } else {
-                        print("Error: \(error)")
+                        print("Error: \(String(describing: error))")
                     }
                 })
             })

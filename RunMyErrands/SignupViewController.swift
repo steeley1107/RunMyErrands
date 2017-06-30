@@ -77,7 +77,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             
             query?.whereKey("username", equalTo: user.username!)
             
-            query?.findObjectsInBackground(block: { (objects: [PFObject]?, error: NSError?) -> Void in
+            query?.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) -> Void in
                 
                 if (error == nil) {
                     
@@ -102,9 +102,9 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                         }
                     }
                 } else {
-                    print("Error: \(error)")
+                    print("Error: \(String(describing: error))")
                 }
-            } as! ([PFObject]?, Error?) -> Void)
+            })
             
         } else {
             let alertController = UIAlertController(title: "Error", message: "Invalid Username/Password", preferredStyle: UIAlertControllerStyle.alert)
@@ -122,7 +122,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                 let imageData = UIImageJPEGRepresentation(image, 0.25),
                 let imageFile = PFFile(name:"profile.jpg", data:imageData) {
                     
-                    imageFile.saveInBackground(block: { (bool: Bool, error:NSError?) -> Void in
+                    imageFile.saveInBackground(block: { (bool: Bool, error:Error?) -> Void in
                         
                         if bool {
                             user["profile_Picture"] = imageFile
@@ -137,7 +137,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                         } else {
                             self.performSegue(withIdentifier: "onboard", sender: nil)
                         }
-                    } as! PFBooleanResultBlock)
+                    })
             } else {
               self.performSegue(withIdentifier: "onboard", sender: nil)
             }

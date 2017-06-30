@@ -88,7 +88,7 @@ class DirectionManager: NSObject {
                 
                 let errand = URLSession.shared.dataTask(with: directionsURL!) { (data, response, error) -> Void in
                     if(error != nil) {
-                        print(error)
+                        print(error!)
                     }
                     
                     let dictionary = (try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [String : AnyObject]
@@ -105,7 +105,7 @@ class DirectionManager: NSObject {
                             completionHandler(true)
                         }
                         
-                        print("dict \(dictionary)")
+                        print("dict \(String(describing: dictionary))")
                     })
                 }
                 errand.resume()
@@ -275,14 +275,14 @@ class DirectionManager: NSObject {
             
             let geocoder = CLGeocoder()
             
-            geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+            geocoder.geocodeAddressString(destinationAddress, completionHandler: {(placemarks: [CLPlacemark]?, error: Error?) -> Void in
                 
                 if let _ = placemarks?[0] {
                     completion(true)
                 }else {
                     completion(false)
                 }
-            } as! CLGeocodeCompletionHandler)
+            })
         }else {
             completion(false)
         }
